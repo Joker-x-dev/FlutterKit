@@ -66,8 +66,8 @@ lib/
 
 ### 环境要求
 
-- Flutter SDK: >= 3.7.2
-- Dart SDK: >= 3.7.2
+- Flutter SDK: >= 3.38
+- Dart SDK: >= 3.10
 
 ### 安装依赖
 
@@ -131,7 +131,7 @@ flutter run --release
 ### Android 打包
 
 ```bash
-# 生成 APK
+# 生成 arm64 APK
 flutter build apk --release --obfuscate --split-debug-info=./debug_info --target-platform android-arm64 
 ```
 

@@ -5,7 +5,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=3.9.0 <4.0.0"
-  flutter: ">=3.35.0"
+  flutter: ">=3.38.0"
 
 dependencies:
   flutter:
@@ -15,7 +15,7 @@ dependencies:
   get: ^4.7.2
 
   # Tencent Design Flutter 组件库 https://pub.dev/packages/tdesign_flutter
-  tdesign_flutter: ^0.2.5
+  tdesign_flutter: ^0.2.6
 
   # 屏幕适配工具 https://pub.dev/packages/flutter_screenutil
   flutter_screenutil: ^5.9.3
@@ -27,10 +27,10 @@ dependencies:
   json_annotation: ^4.9.0
 
   # Retrofit 网络请求库 https://pub.dev/packages/retrofit
-  retrofit: ^4.7.3
+  retrofit: ^4.9.0
 
   # svg框架 https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.2.1
+  flutter_svg: ^2.2.2
 
   # 持久化存储库 https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.5.3
@@ -39,7 +39,7 @@ dependencies:
   easy_refresh: ^3.4.0
 
   # 页面动画 https://pub.dev/packages/animations
-  animations: ^2.1.0
+  animations: ^2.1.1
 
   # 加载弹窗 和 Toast https://pub.dev/packages/bot_toast
   bot_toast: ^4.1.3
@@ -60,10 +60,10 @@ dev_dependencies:
   json_serializable: ^6.11.1
 
   # Retrofit 代码生成库 https://pub.dev/packages/retrofit_generator
-  retrofit_generator: ^10.0.6
+  retrofit_generator: ^10.1.4
 
   # 构建工具 https://pub.dev/packages/build_runner
-  build_runner: ^2.9.0
+  build_runner: ^2.10.3
 
   # dio网络请求日志工具 https://pub.dev/packages/pretty_dio_logger
   pretty_dio_logger: ^1.4.0
