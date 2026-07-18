@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+/// 当前 GetX 构建上下文
 BuildContext get _context => Get.context!;
 
 //==================== 基础间距 ====================
@@ -102,6 +103,12 @@ EdgeInsets get pagePadding => EdgeInsets.symmetric(
   horizontal: spaceHorizontalLarge,
   vertical: spaceVerticalLarge,
 );
+
+/// 页面垂直边距(垂直16dp)
+///
+/// 适用于由组件提供水平边距的页面内容，例如卡片模式的 [TDCellGroup]。
+EdgeInsets get pageVerticalPadding =>
+    EdgeInsets.symmetric(vertical: spaceVerticalLarge);
 
 /// 卡片标准内边距(16dp)
 EdgeInsets get cardPadding => EdgeInsets.all(spacePaddingLarge);

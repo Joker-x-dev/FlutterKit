@@ -11,6 +11,7 @@ Auth _$AuthFromJson(Map<String, dynamic> json) => Auth(
   refreshToken: json['refreshToken'] as String? ?? '',
   expire: (json['expire'] as num?)?.toInt() ?? 0,
   refreshExpire: (json['refreshExpire'] as num?)?.toInt() ?? 0,
+  createdAt: (json['createdAt'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$AuthToJson(Auth instance) => <String, dynamic>{
@@ -18,4 +19,5 @@ Map<String, dynamic> _$AuthToJson(Auth instance) => <String, dynamic>{
   'refreshToken': instance.refreshToken,
   'expire': instance.expire,
   'refreshExpire': instance.refreshExpire,
+  'createdAt': instance.createdAt,
 };

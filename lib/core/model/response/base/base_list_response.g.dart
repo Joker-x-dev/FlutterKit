@@ -11,10 +11,9 @@ BaseListResponse<T> _$BaseListResponseFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) => BaseListResponse<T>(
   list: (json['list'] as List<dynamic>?)?.map(fromJsonT).toList(),
-  pagination:
-      json['pagination'] == null
-          ? null
-          : PageMeta.fromJson(json['pagination'] as Map<String, dynamic>),
+  pagination: json['pagination'] == null
+      ? null
+      : PageMeta.fromJson(json['pagination'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$BaseListResponseToJson<T>(

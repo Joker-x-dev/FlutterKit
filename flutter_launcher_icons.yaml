@@ -1,0 +1,41 @@
+# FlutterKit 应用图标生成配置。
+# 官方文档：https://pub.dev/packages/flutter_launcher_icons
+# 生成源图位于 assets/dev/，不作为 Flutter 运行时资源打包。
+
+flutter_launcher_icons:
+  # Android 默认启动器图标。
+  android: true
+
+  # iOS AppIcon 图标集。
+  ios: true
+
+  # 图标源图。建议使用 1024×1024 的正方形 PNG。
+  image_path: "assets/dev/app_icon.png"
+
+  # iOS 图标源图，包含透明安全边距。
+  image_path_ios: "assets/dev/app_icon_ios.png"
+
+  # Android 最低 SDK 版本。
+  min_sdk_android: 21
+
+  # iOS 图标不保留 Alpha 通道；透明像素填充为白色。
+  remove_alpha_ios: true
+  background_color_ios: "#FFFFFF"
+
+  # Web favicon、PWA 图标与浏览器主题色。
+  web:
+    generate: true
+    image_path: "assets/dev/app_icon.png"
+    background_color: "#FFFFFF"
+    theme_color: "#465CFF"
+
+  # Windows ICO 图标，允许范围为 48～256。
+  windows:
+    generate: true
+    image_path: "assets/dev/app_icon.png"
+    icon_size: 256
+
+  # macOS AppIcon 图标集。
+  macos:
+    generate: true
+    image_path: "assets/dev/app_icon.png"

@@ -1,3 +1,6 @@
+/// Design System 扩展统一导出入口
+library;
+
 export 'widget/gesture_extension.dart';
 export 'widget/scroll_extension.dart';
 export 'widget/row_extension.dart';
@@ -5,6 +8,7 @@ export 'widget/column_extension.dart';
 export 'widget/stack_extension.dart';
 export 'widget/wrap_extension.dart';
 export 'widget/list_view_extension.dart';
+export 'widget/grid_view_extension.dart';
 export 'widget/text_extension.dart';
 export 'widget/text_span_extension.dart';
 export 'widget/padding_extension.dart';

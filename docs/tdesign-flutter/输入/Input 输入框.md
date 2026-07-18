@@ -1,0 +1,992 @@
+# Input 输入框
+
+> 用于在预设的一组选项中执行单项选择，并呈现选择结果。
+
+> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/input)
+> 归档时间：2026-07-16T07:37:59.655Z
+
+## 示例
+
+![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+
+### 引入
+
+在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+
+```dart
+import 'package:tdesign_flutter/tdesign_flutter.dart';
+```
+
+### 代码演示
+
+[td_input_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_input_page.dart)
+
+#### 1 组件类型
+
+基础输入框
+
+```
+  Widget _basicTypeBasic(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: 'Label Text',
+          controller: controller[0],
+          hintText: 'Please enter text',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[0].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeRequire(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '标签文字',
+          required: true,
+          controller: controller[1],
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[1].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeOptional(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '标签文字',
+          controller: controller[2],
+          hintText: '请输入文字(选填)',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[2].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypePureInput(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          controller: controller[3],
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[3].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeAdditionalDesc(BuildContext context) {
+    return TDInput(
+      type: TDInputType.normal,
+      leftLabel: '标签文字',
+      controller: controller[4],
+      hintText: '请输入文字',
+      additionInfo: '辅助说明',
+      onChanged: (text) {
+        setState(() {});
+      },
+      onClearTap: () {
+        controller[4].clear();
+        setState(() {});
+      },
+    );
+  }
+```
+
+带字数限制输入框
+
+```
+  Widget _basicTypeTextLimit(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          type: TDInputType.normal,
+          leftLabel: '标签文字',
+          controller: controller[5],
+          hintText: '请输入文字',
+          maxLength: 10,
+          additionInfo: '最大输入10个字符',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[5].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeTextLimitChinese2(BuildContext context) {
+    return TDInput(
+      type: TDInputType.normal,
+      leftLabel: '标签文字',
+      controller: controller[6],
+      hintText: '请输入文字',
+      inputFormatters: [Chinese2Formatter(10)],
+      additionInfo: '最大输入10个字符，汉字算两个',
+      onChanged: (text) {
+        setState(() {});
+      },
+      onClearTap: () {
+        controller[6].clear();
+        setState(() {});
+      },
+    );
+  }
+```
+
+带操作输入框
+
+```
+  Widget _basicTypeWithHandleIconOne(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '标签文字',
+          controller: controller[7],
+          hintText: '请输入文字',
+          rightBtn: Icon(
+            TDIcons.error_circle_filled,
+            color: TDTheme.of(context).textColorPlaceholder,
+          ),
+          onBtnTap: () {
+            TDToast.showText('点击右侧按钮', context: context);
+          },
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[7].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeWithHandleIconTwo(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '标签文字',
+          controller: controller[8],
+          hintText: '请输入文字',
+          rightBtn: Container(
+            alignment: Alignment.center,
+            width: 73,
+            height: 28,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: TDTheme.of(context).brandNormalColor,
+            ),
+            child: const TDButton(
+              text: '操作按钮',
+              size: TDButtonSize.extraSmall,
+              theme: TDButtonTheme.primary,
+            ),
+          ),
+          onBtnTap: () {
+            TDToast.showText('点击操作按钮', context: context);
+          },
+          needClear: false,
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeWithHandleIconThree(BuildContext context) {
+    return TDInput(
+      leftLabel: '标签文字',
+      controller: controller[9],
+      hintText: '请输入文字',
+      rightBtn: Icon(
+        TDIcons.user_avatar,
+        color: TDTheme.of(context).textColorPlaceholder,
+      ),
+      onBtnTap: () {
+        TDToast.showText('点击操作按钮', context: context);
+      },
+      onChanged: (text) {
+        setState(() {});
+      },
+      onClearTap: () {
+        controller[9].clear();
+        setState(() {});
+      },
+    );
+  }
+```
+
+带图标输入框
+
+```
+  Widget _basicTypeWithLeftIconLeftLabel(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftIcon: const Icon(TDIcons.app),
+          leftLabel: '标签文字',
+          controller: controller[10],
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[10].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _basicTypeWithLeftIcon(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftIcon: const Icon(TDIcons.app),
+          controller: controller[11],
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[11].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+特定类型输入框
+
+```
+  Widget _specialTypePassword(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          type: TDInputType.normal,
+          controller: controller[12],
+          obscureText: !browseOn,
+          leftLabel: '输入密码',
+          hintText: '请输入密码',
+          rightBtn: browseOn
+              ? Icon(
+                  TDIcons.browse,
+                  color: TDTheme.of(context).textColorPlaceholder,
+                )
+              : Icon(
+                  TDIcons.browse_off,
+                  color: TDTheme.of(context).textColorPlaceholder,
+                ),
+          onBtnTap: () {
+            setState(() {
+              browseOn = !browseOn;
+            });
+          },
+          needClear: false,
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _specialTypeVerifyCode(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          type: TDInputType.normal,
+          size: TDInputSize.small,
+          controller: controller[13],
+          leftLabel: '验证码',
+          hintText: '输入验证码',
+          rightBtn: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 0.5,
+                height: 24,
+                color: TDTheme.of(context).componentBorderColor,
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Image.network(
+                'https://img2018.cnblogs.com/blog/736399/202001/736399-20200108170302307-1377487770.jpg',
+                width: 72,
+                height: 36,
+              )
+            ],
+          ),
+          needClear: false,
+          onBtnTap: () {
+            TDToast.showText('点击更换验证码', context: context);
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _specialTypePhoneNumber(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          type: TDInputType.normal,
+          controller: controller[14],
+          leftLabel: '手机号',
+          hintText: '输入手机号',
+          rightBtn: SizedBox(
+            width: 98,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Container(
+                    width: 0.5,
+                    height: 24,
+                    color: TDTheme.of(context).componentBorderColor,
+                  ),
+                ),
+                _countdownTime > 0
+                    ? TDText(
+                        '${countDownText}(${_countdownTime}秒)',
+                        textColor: TDTheme.of(context).textDisabledColor,
+                      )
+                    : TDText(confirmText,
+                        textColor: TDTheme.of(context).brandNormalColor),
+              ],
+            ),
+          ),
+          needClear: false,
+          onBtnTap: () {
+            if (_countdownTime == 0) {
+              TDToast.showText('点击了发送验证码', context: context);
+              setState(() {
+                _countdownTime = 60;
+              });
+              startCountdownTimer();
+            }
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _specialTypePrice(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          type: TDInputType.special,
+          controller: controller[15],
+          leftLabel: '价格',
+          hintText: '0.00',
+          textAlign: TextAlign.end,
+          rightWidget:
+              TDText('元', textColor: TDTheme.of(context).textColorPrimary),
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _specialTypeNumber(BuildContext context) {
+    return TDInput(
+      type: TDInputType.special,
+      controller: controller[16],
+      leftLabel: '数量',
+      hintText: '填写个数',
+      textAlign: TextAlign.end,
+      rightWidget: TDText('个', textColor: TDTheme.of(context).textColorPrimary),
+    );
+  }
+```
+
+自适应高度输入框
+
+```
+  Widget _autoHeightInput(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '地址',
+          controller: controller[27],
+          hintText: '请输入地址，高度自适应',
+          maxLines: null,
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[27].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _specialTypeNumber(BuildContext context) {
+    return TDInput(
+      type: TDInputType.special,
+      controller: controller[16],
+      leftLabel: '数量',
+      hintText: '填写个数',
+      textAlign: TextAlign.end,
+      rightWidget: TDText('个', textColor: TDTheme.of(context).textColorPrimary),
+    );
+  }
+```
+
+
+```
+  Widget _specialTypePasswordWithPaste(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          type: TDInputType.normal,
+          controller: controller[27],
+          obscureText: true,
+          enableInteractiveSelection: true,
+          leftLabel: '密码复制粘贴',
+          hintText: '此密码框允许长按复制粘贴',
+          contextMenuBuilder: (context, editableTextState) {
+            final List buttonItems =
+                editableTextState.contextMenuButtonItems;
+            if (!buttonItems.any((item) => item.type == ContextMenuButtonType.copy)) {
+              buttonItems.insert(0, ContextMenuButtonItem(
+                onPressed: () {
+                  final selection = editableTextState.textEditingValue.selection;
+                  final text = editableTextState.textEditingValue.text;
+                  if (selection.isValid && !selection.isCollapsed) {
+                    final selectedText = text.substring(selection.start, selection.end);
+                    Clipboard.setData(ClipboardData(text: selectedText));
+                  } else {
+                    // 如果没有选中文本，则复制全部
+                    Clipboard.setData(ClipboardData(text: text));
+                  }
+                  editableTextState.hideToolbar();
+                },
+                type: ContextMenuButtonType.copy,
+              ));
+            }
+            return AdaptiveTextSelectionToolbar.buttonItems(
+              anchors: editableTextState.contextMenuAnchors,
+              buttonItems: buttonItems,
+            );
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+      ],
+    );
+  }
+```
+
+
+```
+暂无演示代码
+```
+
+#### 1 组件状态
+
+输入框状态
+
+```
+  Widget _inputStatusAdditionInfo(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '标签文字',
+          controller: controller[17],
+          hintText: '请输入文字',
+          additionInfo: '错误提示说明',
+          additionInfoColor: TDTheme.of(context).errorColor6,
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[17].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _inputStatusReadOnly(BuildContext context) {
+    return TDInput(
+      leftLabel: '标签文字',
+      readOnly: true,
+      // 不可编辑文字 则不必带入controller
+      hintText: '不可编辑文字',
+    );
+  }
+```
+
+信息超长状态
+
+```
+  Widget _inputStatusLongLabel(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftInfoWidth: 80,
+          spacer: TDInputSpacer(iconLabelSpace: 4),
+          leftLabel: '标签超长时最多十个字',
+          controller: controller[18],
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[18].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _inputStatusLongInput(BuildContext context) {
+    return TDInput(
+      type: TDInputType.normal,
+      leftLabel: '标签文字',
+      controller: controller[19],
+      hintText: '输入文字超长不超过两行输入文字超长不超过两行',
+      hintTextStyle: TextStyle(
+        color: TDTheme.of(context).textColorPrimary,
+      ),
+      maxLines: 2,
+    );
+  }
+```
+
+#### 1 组件样式
+
+内容位置
+
+```
+  Widget _contentLeft(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '左对齐',
+          controller: controller[23],
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[23].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _contentCenter(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '居中',
+          controller: controller[24],
+          contentAlignment: TextAlign.center,
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[24].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+
+```
+  Widget _contentRight(BuildContext context) {
+    return Column(
+      children: [
+        TDInput(
+          leftLabel: '右对齐',
+          controller: controller[25],
+          contentAlignment: TextAlign.end,
+          hintText: '请输入文字',
+          onChanged: (text) {
+            setState(() {});
+          },
+          onClearTap: () {
+            controller[25].clear();
+            setState(() {});
+          },
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ],
+    );
+  }
+```
+
+竖排样式
+
+```
+  Widget _verticalStyle(BuildContext context) {
+    return TDInput(
+      spacer: TDInputSpacer(iconLabelSpace: 0),
+      type: TDInputType.twoLine,
+      leftLabel: '标签文字',
+      controller: controller[20],
+      hintText: '请输入文字',
+      rightBtn: Icon(
+        TDIcons.error_circle_filled,
+        color: TDTheme.of(context).textColorPlaceholder,
+      ),
+      onBtnTap: () {
+        TDToast.showText('点击右侧按钮', context: context);
+      },
+      onChanged: (text) {
+        setState(() {});
+      },
+      onClearTap: () {
+        controller[20].clear();
+        setState(() {});
+      },
+    );
+  }
+```
+
+非通栏样式
+
+```
+  Widget _cardStyle(BuildContext context) {
+    return TDInput(
+      type: TDInputType.cardStyle,
+      width: MediaQuery.of(context).size.width - 32,
+      leftLabel: '标签文字',
+      controller: controller[21],
+      hintText: '请输入文字',
+      onChanged: (text) {
+        setState(() {});
+      },
+      onClearTap: () {
+        controller[21].clear();
+        setState(() {});
+      },
+    );
+  }
+```
+
+标签外置样式
+
+```
+  Widget _labelOutStyle(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.only(top: 16, bottom: 24),
+      width: MediaQuery.of(context).size.width,
+      child: TDInput(
+        type: TDInputType.cardStyle,
+        cardStyle: TDCardStyle.topText,
+        width: MediaQuery.of(context).size.width - 32,
+        cardStyleTopText: '标签文字',
+        controller: controller[22],
+        hintText: '请输入文字',
+        rightBtn: Icon(
+          TDIcons.error_circle_filled,
+          color: TDTheme.of(context).textColorPlaceholder,
+        ),
+        onBtnTap: () {
+          TDToast.showText('点击右侧按钮', context: context);
+        },
+        onChanged: (text) {
+          setState(() {});
+        },
+        onClearTap: () {
+          controller[22].clear();
+          setState(() {});
+        },
+      ),
+    );
+  }
+```
+
+自定义样式输入框
+
+```
+  Widget _customStyle(BuildContext context) {
+    return TDInput(
+      leftLabel: '标签文字',
+      controller: controller[26],
+      backgroundColor: TDTheme.of(context).grayColor12,
+      leftLabelStyle: TextStyle(color: TDTheme.of(context).fontWhColor1),
+      textStyle: TextStyle(color: TDTheme.of(context).fontWhColor1),
+      hintText: '请输入文字',
+      hintTextStyle: TextStyle(color: TDTheme.of(context).fontWhColor3),
+      onChanged: (text) {
+        setState(() {});
+      },
+      clearBtnColor: TDTheme.of(context).fontWhColor3,
+      onClearTap: () {
+        controller[26].clear();
+        setState(() {});
+      },
+    );
+  }
+```
+
+## API
+
+1. [TDInput](#tdinput)
+
+#### TDInput
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| additionInfo | String? | '' | 错误提示信息 |
+| additionInfoColor | Color? | - | 错误提示颜色 |
+| autofocus | bool | false | 是否自动获取焦点 |
+| backgroundColor | Color? | - | 输入框背景色 |
+| cardStyle | TDCardStyle? | - | 卡片默认样式 |
+| cardStyleBottomText | String? | - | 卡片模式下方文字 |
+| cardStyleTopText | String? | - | 卡片模式上方文字 |
+| clearBtnColor | Color? | - | 右侧删除按钮颜色 |
+| clearIconSize | double? | - | 清除按钮图标大小 |
+| contentAlignment | TextAlign | TextAlign.start | 内容对齐方向 |
+| contentPadding | EdgeInsetsGeometry? | - | textInput内边距 |
+| contextMenuBuilder | EditableTextContextMenuBuilder? | - | 自定义上下文菜单构建器 |
+| controller | TextEditingController? | - | controller 用户获取或者赋值输入内容 |
+| cursorColor | Color? | - | 游标颜色 |
+| decoration | Decoration? | - | 输入框样式 |
+| enableInteractiveSelection | bool? | - | 是否启用交互式选择 |
+| focusNode | FocusNode? | - | 获取或者取消焦点使用 |
+| hintText | String? | - | 提示文案 |
+| hintTextStyle | TextStyle? | - | 提示文本颜色，默认为文本颜色 |
+| inputAction | TextInputAction? | - | 键盘动作类型 |
+| inputDecoration | InputDecoration? | - | 自定义输入框样式，默认圆角 |
+| inputFormatters | List? | - | 显示输入内容，如限制长度(LengthLimitingTextInputFormatter(6)) |
+| inputType | TextInputType? | - | 键盘类型，数字、字母 |
+| key |  | - |  |
+| labelWidget | Widget? | - | leftLabel右侧组件，支持自定义 |
+| leftContentSpace | double? | - | 输入框内容左侧间距 |
+| leftIcon | Widget? | - | 带图标的输入框 |
+| leftInfoWidth | double? | - | 输入框左侧的宽度（输入框有16dp的左侧padding，因而左侧部分不用考虑这16dp） |
+| leftLabel | String? | - | 输入框左侧文案 |
+| leftLabelSpace | double? | - | 输入框左侧文案间距 |
+| leftLabelStyle | TextStyle? | - | 左侧标签样式 设置该值是若出现像素溢出，请设置letterSpacing: 0 |
+| maxLength | int? | 500 | 最大字数限制 |
+| maxLines | int? | 1 | 最大输入行数 |
+| needClear | bool | true | 是否需要右侧按钮变为删除 |
+| obscureText | bool | false | 是否隐藏输入的文字，一般用在密码输入框中 |
+| onBtnTap | GestureTapCallback? | - | 右侧按钮点击 |
+| onChanged | ValueChanged? | - | 输入文本变化时回调 |
+| onClearTap | GestureTapCallback? | - | 右侧删除点击 |
+| onEditingComplete | VoidCallback? | - | 点击键盘完成按钮时触发的回调 |
+| onSubmitted | ValueChanged? | - | 点击键盘完成按钮时触发的回调, 参数值为输入的内容 |
+| onTapOutside | TapRegionCallback? | - | 点击输入框外部区域回调 |
+| readOnly | bool | false | 是否只读 |
+| required | bool? | - | 是否必填标志（红色*） |
+| rightBtn | Widget? | - | 右侧按钮 |
+| rightWidget | Widget? | - | 右侧自定义组件 特殊类型时生效 |
+| selectionControls | TextSelectionControls? | - | 自定义选择控制器 |
+| showBottomDivider | bool | true | 是否展示底部分割线 |
+| size | TDInputSize | TDInputSize.large | 输入框规格 |
+| spacer | TDInputSpacer | - | 组件各模块间间距 |
+| textAlign | TextAlign? | - | 文字对齐方向 |
+| textInputBackgroundColor | Color? | - | 文本框背景色 |
+| textStyle | TextStyle? | - | 文本颜色 |
+| type | TDInputType | TDInputType.normal | 输入框类型 |
+| width | double? | - | 输入框宽度(TDCardStyle时必须设置该参数) |
+
+## 设计指南
+
+1. [何时使用](#何时使用)
+2. [组件搭配使用](#组件搭配使用)
+3. [常见用法](#常见用法)
+4. [推荐/慎用示例](#推荐-慎用示例)
+5. [相似组件](#相似组件)
+
+#### 何时使用
+
+需要进行文字输入，且需填写的字数较少时使用。
+
+#### 组件搭配使用
+
+###### 呈现在单元格中，可与按钮组件相结合，点击按钮触发相关功能。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-1.png)
+
+#### 常见用法
+
+###### 通常使用在表单中进行文字填写，填写状态下可在右侧显示清空输入的按钮，供用户快速清空已输入的内容。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-2.png)
+
+---
+
+###### 当需要进行较复杂的内容填写，如验证码等，可使用特定类型输入框，结合按钮、图形等辅助元素帮助用户完成流程。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-3.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-4.png)
+
+#### 推荐/慎用示例
+
+###### 标签、占位符文本简明扼要地描述用户需要输入的内容，标签超过10个字时请考虑使用其它展示方式。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-5.png)
+![](https://tdesign.gtimg.com/site/doc/good.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-6.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+---
+
+###### 当需要输入较长的复杂内容时，建议使用多行文本框输入。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/input/input-7.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+#### 相似组件
+
+| 组件名 | 何时使用 |
+| --- | --- |
+| [搜索框](<Search 搜索框.md>) | 当需要从海量信息中准确提取准确的内容时使用。 |

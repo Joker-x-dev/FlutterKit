@@ -32,7 +32,7 @@ extension DataListViewExtension<T> on List<T> {
   /// [reverse] 是否反向滚动，默认为 false
   /// [controller] 滚动控制器
   /// [primary] 是否为主滚动视图
-  /// [physics] 滚动物理效果，默认为 iOS 风格的弹性滚动
+  /// [physics] 滚动物理效果；为空时遵循当前平台默认行为
   /// [shrinkWrap] 是否根据内容收缩包装
   /// [padding] 内边距
   /// [itemExtent] 每个项目的固定高度
@@ -74,7 +74,7 @@ extension DataListViewExtension<T> on List<T> {
     bool reverse = false,
     ScrollController? controller,
     bool? primary,
-    ScrollPhysics? physics = const BouncingScrollPhysics(),
+    ScrollPhysics? physics,
     bool shrinkWrap = false,
     EdgeInsetsGeometry? padding,
     double? itemExtent,
@@ -121,7 +121,7 @@ extension DataListViewExtension<T> on List<T> {
   /// [reverse] 是否反向滚动，默认为 false
   /// [controller] 滚动控制器
   /// [primary] 是否为主滚动视图
-  /// [physics] 滚动物理效果，默认为 iOS 风格的弹性滚动
+  /// [physics] 滚动物理效果；为空时遵循当前平台默认行为
   /// [shrinkWrap] 是否根据内容收缩包装
   /// [padding] 内边距
   /// [addAutomaticKeepAlives] 是否自动保持子组件活跃状态
@@ -159,7 +159,7 @@ extension DataListViewExtension<T> on List<T> {
     bool reverse = false,
     ScrollController? controller,
     bool? primary,
-    ScrollPhysics? physics = const BouncingScrollPhysics(),
+    ScrollPhysics? physics,
     bool shrinkWrap = false,
     EdgeInsetsGeometry? padding,
     bool addAutomaticKeepAlives = true,
@@ -197,14 +197,14 @@ extension DataListViewExtension<T> on List<T> {
 
   /// 将数据列表转换为 ListView.builder
   ///
-  /// 这个方法提供了更灵活的构建方式，允许在 itemBuilder 中手动访问数据项
+  /// 提供更灵活的构建方式，允许在 itemBuilder 中手动访问数据项
   ///
   /// [itemBuilder] 构建每个列表项的函数，接收 context 和 index 参数
   /// [scrollDirection] 滚动方向，默认为垂直
   /// [reverse] 是否反向滚动，默认为 false
   /// [controller] 滚动控制器
   /// [primary] 是否为主滚动视图
-  /// [physics] 滚动物理效果，默认为 iOS 风格的弹性滚动
+  /// [physics] 滚动物理效果；为空时遵循当前平台默认行为
   /// [shrinkWrap] 是否根据内容收缩包装
   /// [padding] 内边距
   /// [itemExtent] 每个项目的固定高度
@@ -247,7 +247,7 @@ extension DataListViewExtension<T> on List<T> {
     bool reverse = false,
     ScrollController? controller,
     bool? primary,
-    ScrollPhysics? physics = const BouncingScrollPhysics(),
+    ScrollPhysics? physics,
     bool shrinkWrap = false,
     EdgeInsetsGeometry? padding,
     double? itemExtent,

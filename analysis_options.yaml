@@ -5,28 +5,82 @@
 # IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
 # invoked from the command line by running `flutter analyze`.
 
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
+# Flutter 官方推荐 lint 集合
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  enable-experiment:
-    - dot-shorthands
+  # 排除自动生成的文件，避免对生成代码进行无意义检查
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+
+  # 严格类型模式：减少隐式 dynamic、raw type 与类型推断缺失
+  language:
+    strict-casts: true
+    strict-raw-types: true
+    strict-inference: true
+
+  # 将部分关键问题提升为 error
+  errors:
+    missing_required_param: error
+    missing_return: error
+    invalid_assignment: warning
+    invalid_null_aware_operator: warning
 
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
+  # 在 flutter_lints 基础上补充对脚手架核心代码影响最大的规则。
+  # 过于风格化或现有扩展代码中大量存在的规则暂未开启，避免无意义噪音。
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # 类型安全与 API 设计
+    always_declare_return_types: true
+    type_annotate_public_apis: true
+    avoid_dynamic_calls: true
+    avoid_catches_without_on_clauses: true
+    avoid_returning_null_for_void: true
+    avoid_return_types_on_setters: true
+    avoid_shadowing_type_parameters: true
+    avoid_type_to_string: true
+    cancel_subscriptions: true
+    close_sinks: true
+    no_runtimeType_toString: true
+    throw_in_finally: true
+    tighten_type_of_initializing_formals: true
+    unawaited_futures: true
+    use_to_and_as_if_applicable: true
+
+    # 代码质量
+    annotate_overrides: false
+    avoid_implementing_value_types: true
+    avoid_private_typedef_functions: true
+    avoid_slow_async_io: true
+    avoid_unused_constructor_parameters: false
+    leading_newlines_in_multiline_strings: true
+    missing_whitespace_between_adjacent_strings: true
+    no_adjacent_strings_in_list: true
+    only_throw_errors: true
+    overridden_fields: false
+    parameter_assignments: true
+    prefer_asserts_in_initializer_lists: true
+    prefer_const_constructors_in_immutables: false
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    prefer_null_aware_method_calls: true
+    recursive_getters: true
+    unnecessary_await_in_return: true
+    unnecessary_breaks: true
+    unnecessary_getters_setters: true
+    unnecessary_null_aware_assignments: true
+    unnecessary_null_checks: true
+    unnecessary_null_in_if_null_operators: true
+    unnecessary_nullable_for_final_variable_declarations: true
+    unnecessary_overrides: true
+    unnecessary_statements: true
+    unnecessary_to_list_in_spreads: true
+    use_named_constants: true
+    use_rethrow_when_possible: true
+    use_super_parameters: false
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

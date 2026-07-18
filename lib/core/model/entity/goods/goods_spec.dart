@@ -32,6 +32,17 @@ class GoodsSpec {
   /// 更新时间
   final String? updateTime;
 
+  /// 创建商品规格模型
+  ///
+  /// [id] 规格 ID。
+  /// [goodsId] 所属商品 ID。
+  /// [name] 规格名称。
+  /// [price] 规格价格。
+  /// [stock] 规格库存。
+  /// [sortNum] 规格排序值。
+  /// [images] 可选规格图片列表。
+  /// [createTime] 可选创建时间。
+  /// [updateTime] 可选更新时间。
   const GoodsSpec({
     this.id = 0,
     this.goodsId = 0,
@@ -44,10 +55,16 @@ class GoodsSpec {
     this.updateTime,
   });
 
-  /// 从 JSON 创建实例
+  /// 从 JSON 创建商品规格模型
+  ///
+  /// [json] 商品规格 JSON 数据。
+  ///
+  /// 返回解析后的 [GoodsSpec]。
   factory GoodsSpec.fromJson(Map<String, dynamic> json) =>
       _$GoodsSpecFromJson(json);
 
-  /// 转换为 JSON
+  /// 将商品规格模型转换为 JSON
+  ///
+  /// 返回当前商品规格的 JSON 数据。
   Map<String, dynamic> toJson() => _$GoodsSpecToJson(this);
 }

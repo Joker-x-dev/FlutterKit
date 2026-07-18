@@ -1,0 +1,314 @@
+# Textarea 多行文本框
+
+> 用于多行文本信息输入。
+
+> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/textarea)
+> 归档时间：2026-07-16T07:37:59.655Z
+
+## 示例
+
+![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+
+### 引入
+
+在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+
+```dart
+import 'package:tdesign_flutter/tdesign_flutter.dart';
+```
+
+### 代码演示
+
+[td_textarea_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_textarea_page.dart)
+
+#### 1 组件类型
+
+基础多文本输入框
+
+```
+  Widget _basicType(BuildContext context) {
+    return TDTextarea(
+      controller: controller[0],
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      onChanged: (value) {
+        setState(() {});
+      },
+    );
+  }
+```
+
+带标题多文本输入框
+
+```
+  Widget _basicTypeByTitle(BuildContext context) {
+    return TDTextarea(
+      controller: controller[1],
+      label: '标签文字',
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      onChanged: (value) {},
+    );
+  }
+```
+
+自动增高多文本输入框
+
+```
+  Widget _autoHeightType(BuildContext context) {
+    return TDTextarea(
+      controller: controller[2],
+      hintText: '请输入文字',
+      minLines: 1,
+      onChanged: (value) {},
+    );
+  }
+```
+
+设置字符数限制
+
+```
+  Widget _maxLengthType(BuildContext context) {
+    return TDTextarea(
+      controller: controller[3],
+      label: '标签文字',
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      maxLength: 500,
+      indicator: true,
+      onChanged: (value) {},
+    );
+  }
+```
+
+#### 1 组件状态
+
+禁用状态
+
+```
+  Widget _disabledState(BuildContext context) {
+    return TDTextarea(
+      controller: controller[4],
+      label: '标签文字',
+      hintText: '不可编辑文字',
+      maxLines: 4,
+      minLines: 4,
+      readOnly: true,
+      onChanged: (value) {},
+    );
+  }
+```
+
+#### 1 组件样式
+
+竖排样式
+
+```
+  Widget _verticalStyle(BuildContext context) {
+    return TDTextarea(
+      controller: controller[5],
+      label: '标签文字',
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      maxLength: 500,
+      indicator: true,
+      layout: TDTextareaLayout.vertical,
+      onChanged: (value) {},
+    );
+  }
+```
+
+卡片样式
+
+```
+  Widget _cardStyle(BuildContext context) {
+    return TDTextarea(
+      controller: controller[6],
+      label: '标签文字',
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      maxLength: 500,
+      indicator: true,
+      decoration: BoxDecoration(
+        color: TDTheme.of(context).bgColorContainer,
+        borderRadius:
+            BorderRadius.circular(TDTheme.of(context).radiusExtraLarge),
+      ),
+      margin: EdgeInsets.only(
+          right: TDTheme.of(context).spacer16,
+          left: TDTheme.of(context).spacer16),
+      onChanged: (value) {},
+    );
+  }
+```
+
+#### 1 特殊样式
+
+标签外置输入框
+
+```
+  Widget _extensionStyle(BuildContext context) {
+    return TDTextarea(
+      controller: controller[7],
+      label: '标签文字',
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      maxLength: 500,
+      indicator: true,
+      layout: TDTextareaLayout.vertical,
+      bordered: true,
+      onChanged: (value) {},
+    );
+  }
+```
+
+自定义标题
+
+```
+  Widget _setLabel(BuildContext context) {
+    return TDTextarea(
+      controller: controller[9],
+      label: '地址信息',
+      // labelWidth: 100,
+      labelIcon: Icon(
+        TDIcons.location,
+        size: 20,
+        color: TDTheme.of(context).textColorPrimary,
+      ),
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      maxLength: 500,
+      indicator: true,
+      onChanged: (value) {},
+    );
+  }
+```
+
+必填和辅助说明
+
+```
+  Widget _setStatus(BuildContext context) {
+    return TDTextarea(
+      controller: controller[10],
+      label: '标签文字',
+      hintText: '请输入文字',
+      maxLines: 4,
+      minLines: 4,
+      maxLength: 500,
+      indicator: true,
+      layout: TDTextareaLayout.vertical,
+      required: true,
+      additionInfo: '辅助说明',
+      onChanged: (value) {},
+    );
+  }
+```
+
+## API
+
+1. [TDTextarea](#tdtextarea)
+
+#### TDTextarea
+
+##### 简介
+
+用于多行文本信息输入
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| additionInfo | String? | '' | 错误提示信息 |
+| additionInfoColor | Color? | - | 错误提示颜色 |
+| allowInputOverMax | bool? | false | 超出[maxLength]之后是否还允许输入 |
+| autofocus | bool? | false | 是否自动获取焦点 |
+| autosize | bool? | - | 是否自动增高，值为 true 时，[maxLines]不生效 |
+| backgroundColor | Color? | - | 输入框背景色 |
+| bordered | bool? | - | 是否显示外边框 |
+| controller | TextEditingController? | - | controller 用户获取或者赋值输入内容 |
+| cursorColor | Color? | - | 游标颜色 |
+| decoration | Decoration? | - | 输入框样式(包括标签) |
+| focusNode | FocusNode? | - | 获取或者取消焦点使用 |
+| hintText | String? | - | 提示文案 |
+| hintTextStyle | TextStyle? | - | 提示文本颜色，默认为文本颜色 |
+| indicator | bool? | false | 否显示文本计数器，如 0/140（必须设置maxLength） |
+| inputDecoration | InputDecoration? | - | 自定义输入框TextField组件样式 |
+| inputFormatters | List? | - | 显示输入内容，如限制长度(LengthLimitingTextInputFormatter(6)) |
+| inputType | TextInputType? | - | 键盘类型，数字、字母 |
+| key |  | - |  |
+| label | String? | - | 输入框标题 |
+| labelIcon | Widget? | - | 输入框标题图标 |
+| labelStyle | TextStyle? | - | 左侧标签文本样式 |
+| labelWidget | Widget? | - | label组件，支持自定义 |
+| labelWidth | double? | - | 输入框标题宽度 |
+| layout | TDTextareaLayout? | TDTextareaLayout.horizontal | 标题输入框布局方式。可选项：vertical/horizontal |
+| margin | EdgeInsetsGeometry? | - | 外边距 |
+| maxLength | int? | - | 最大字数限制 |
+| maxLengthEnforcement | MaxLengthEnforcement? | - | 如何执行输入长度限制 |
+| maxLines | int? | - | 最大输入行数 |
+| minLines | int? | 4 | 最小输入行数 |
+| onChanged | ValueChanged? | - | 输入文本变化时回调 |
+| onEditingComplete | VoidCallback? | - | 点击键盘完成按钮时触发的回调 |
+| onSubmitted | ValueChanged? | - | 点击键盘完成按钮时触发的回调, 参数值为输入的内容 |
+| padding | EdgeInsetsGeometry? | - | 内边距 |
+| readOnly | bool? | false | 是否只读 |
+| required | bool? | - | 是否必填标志（红色*） |
+| showBottomDivider | bool? | true | 边框外部下划线 |
+| size | TDInputSize? | TDInputSize.large | 输入框规格 |
+| textAlign | TextAlign? | - | 文字对齐方向 |
+| textareaDecoration | Decoration? | - | 输入框样式(不包括标签) |
+| textInputBackgroundColor | Color? | - | 文本框背景色 |
+| textStyle | TextStyle? | - | 文本颜色 |
+| width | double? | - | 输入框宽度 |
+
+## 设计指南
+
+1. [何时使用](#何时使用)
+2. [常见用法](#常见用法)
+3. [推荐/慎用示例](#推荐-慎用示例)
+4. [相似组件](#相似组件)
+
+#### 何时使用
+
+需要进行文字输入，且需填写的字数较多时使用。
+
+#### 常见用法
+
+###### 常见于表单、内容发布的场景中，用于输入较长的文本内容。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/textarea/textarea-1.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/textarea/textarea-2.png)
+
+#### 推荐/慎用示例
+
+###### 尽量避免输入过于复杂的文本内容，考虑将内容拆分，让用户分步输入。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/textarea/textarea-3.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/textarea/textarea-4.png)
+![](https://tdesign.gtimg.com/site/doc/good.png)
+
+---
+
+###### 建议根据待输入的内容决定多行文本框的高度。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/textarea/textarea-5.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/textarea/textarea-6.png)
+![](https://tdesign.gtimg.com/site/doc/good.png)
+
+#### 相似组件
+
+| 组件名 | 何时使用 |
+| --- | --- |
+| [输入框](<Input 输入框.md>) | 需要进行文字输入，且需填写的字数较少时使用。 |

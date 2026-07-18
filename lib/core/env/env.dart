@@ -1,75 +1,62 @@
 import 'package:flutter/foundation.dart';
 
-import '../util/storage/storage_util.dart';
-import 'env_config.dart';
-import 'urls.dart';
+import 'env_dev.dart';
+import 'env_pre.dart';
+import 'env_prod.dart';
+import 'env_test.dart';
 
-class Env {
-  /// 当前环境
-  static String currEnv = getCurrentEnvironment(str: EnvConfig.dev);
+/// 环境配置管理
+///
+/// 环境参数直接通过 [EnvDev]、[EnvTest]、[EnvPre]、[EnvProd] 维护，
+/// 当前环境由构建命令通过 `--dart-define=ENV=xxx` 注入。
+abstract final class Env {
+  /// 禁止实例化环境配置管理类
+  Env._();
 
-  /// 获取当前环境
-  /// 如果是release 直接返回 prod
-  /// 可以设置默认值 不设置默认 dev ,既有缓存和默认值 优先缓存
-  /// 1: dev 开发环境
-  /// 2: test 测试环境
-  /// 3: pre 测试环境
-  /// 4: prod 正式环境
-  static String getCurrentEnvironment({String str = EnvConfig.dev}) {
-    if (kReleaseMode) return EnvConfig.prod;
+  /// 开发环境标识
+  static const String dev = 'dev';
 
-    /// 取出缓存字段
-    int environment = StorageUtil.getInt("environment");
-    if (environment == 0) {
-      return str;
-    } else if (environment == 1) {
-      return EnvConfig.dev;
-    } else if (environment == 2) {
-      return EnvConfig.test;
-    } else if (environment == 3) {
-      return EnvConfig.pre;
-    } else {
-      return EnvConfig.prod;
-    }
-  }
+  /// 测试环境标识
+  static const String test = 'test';
 
-  /// 获取对应环境的配置
-  /// [env] 可选|指定环境
-  static EnvConfig getEnvConfig({String env = EnvConfig.dev}) {
-    switch (env) {
-      case EnvConfig.test:
-        return _testConfig;
-      case EnvConfig.pre:
-        return _preConfig;
-      case EnvConfig.prod:
-        return _prodConfig;
-      default:
-        return _devConfig;
-    }
-  }
+  /// 预生产环境标识
+  static const String pre = 'pre';
 
-  /// 开发环境配置项
-  static final EnvConfig _devConfig = EnvConfig(baseUrl: Urls.devBaseUrl);
+  /// 生产环境标识
+  static const String prod = 'prod';
 
-  /// 测试环境配置项
-  static final EnvConfig _testConfig = EnvConfig(baseUrl: Urls.testBaseUrl);
-
-  /// 预生产环境配置项
-  static final EnvConfig _preConfig = EnvConfig(baseUrl: Urls.preBaseUrl);
-
-  /// 生产环境配置项
-  static final EnvConfig _prodConfig = EnvConfig(
-    baseUrl: Urls.prodBaseUrl,
-    isDebug: false,
+  /// 当前构建模式
+  ///
+  /// 通过 `flutter run --dart-define=ENV=prod` 或 IDE 启动配置注入，
+  /// Release 构建默认使用 [EnvProd.flavor]，其他构建默认使用 [EnvDev.flavor]。
+  static const String flavor = String.fromEnvironment(
+    'ENV',
+    defaultValue: kReleaseMode ? EnvProd.flavor : EnvDev.flavor,
   );
 
-  ///获取当前域名
-  static String getCurrentBaseUrl() {
-    return getEnvConfig(env: currEnv).baseUrl;
+  /// 当前环境的基础域名
+  static String get baseUrl {
+    return switch (flavor) {
+      EnvProd.flavor => EnvProd.baseUrl,
+      EnvPre.flavor => EnvPre.baseUrl,
+      EnvTest.flavor => EnvTest.baseUrl,
+      EnvDev.flavor => EnvDev.baseUrl,
+      _ => throw StateError('不支持的环境标识: $flavor'),
+    };
   }
 
-  ///是否不是正式环境
-  static bool isNotProductionEnv() {
-    return getCurrentBaseUrl() != Urls.prodBaseUrl;
-  }
+  /// 是否开发环境
+  static bool get isDev => flavor == dev;
+
+  /// 是否测试环境
+  static bool get isTest => flavor == test;
+
+  /// 是否预生产环境
+  static bool get isPre => flavor == pre;
+
+  /// 是否生产环境
+  static bool get isProd => flavor == prod;
+
+  /// 是否不是正式环境
+  static bool get isNotProduction => !isProd;
 }

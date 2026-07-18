@@ -2,19 +2,31 @@ import 'package:get/get.dart';
 
 /// 网络请求状态管理类
 class BaseNetworkState {
-  /// 定义网络状态，方便子控制器使用
-  var uiState = NetState.loading.obs;
+  /// 构造函数
+  ///
+  /// [requestErrorToast] 请求失败以后是否显示 toast
+  /// [firstLoad] 是否进入页面就进行加载
+  /// [requestSetStatus] 每次加载前是否设置为加载状态，一般配合列表使用
+  BaseNetworkState({
+    this.requestErrorToast = true,
+    this.firstLoad = true,
+    this.requestSetStatus = true,
+  });
 
-  /// 请求失败以后是否显示toast
-  final bool requestErrorToast = true;
+  /// 定义网络状态，方便子控制器使用
+  final Rx<NetState> uiState = NetState.loading.obs;
+
+  /// 请求失败以后是否显示 toast
+  final bool requestErrorToast;
 
   /// 是否进入页面就进行加载
-  final bool firstLoad = true;
+  final bool firstLoad;
 
-  /// 每次加载前是否设置为加载状态 一般配合base_list使用
-  final bool requestSetStatus = true;
+  /// 每次加载前是否设置为加载状态，一般配合 base_list 使用
+  final bool requestSetStatus;
 }
 
+/// 网络页面展示状态
 enum NetState {
   /// 加载状态
   loading,

@@ -1,0 +1,917 @@
+# Calendar 日历
+
+> 按照日历形式展示数据或日期的容器。
+
+> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/calendar)
+> 归档时间：2026-07-16T07:37:59.655Z
+
+## 示例
+
+![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+
+### 引入
+
+在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+
+```dart
+import 'package:tdesign_flutter/tdesign_flutter.dart';
+```
+
+### 代码演示
+
+[td_calendar_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_calendar_page.dart)
+
+#### 1 组件类型
+
+```
+Widget _buildSimple(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final selected = ValueNotifier>(
+      [DateTime.now().millisecondsSinceEpoch + 30 * 24 * 60 * 60 * 1000]);
+  return ValueListenableBuilder(
+    valueListenable: selected,
+    builder: (context, value, child) {
+      final date = DateTime.fromMillisecondsSinceEpoch(value[0]);
+      return TDCellGroup(
+        cells: [
+          TDCell(
+            title: '单个选择日历',
+            arrow: true,
+            note: '${date.year}-${date.month}-${date.day}',
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                onConfirm: (value) {
+                  print('onConfirm：$value');
+                  selected.value = value;
+                },
+                onClose: () {
+                  print('onClose');
+                },
+                child: TDCalendar(
+                  title: '请选择日期',
+                  value: value,
+                  height: size.height * 0.6 + 176,
+                  onCellClick: (value, type, tdate) {
+                    print('onCellClick: $value');
+                  },
+                  onCellLongPress: (value, type, tdate) {
+                    print('onCellLongPress: $value');
+                  },
+                  onHeaderClick: (index, week) {
+                    print('onHeaderClick: $week');
+                  },
+                  onChange: (value) {
+                    print('onChange: $value');
+                  },
+                ),
+              );
+            },
+          ),
+          TDCell(
+            title: '多个选择日历',
+            arrow: true,
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                child: TDCalendar(
+                  title: '请选择日期',
+                  type: CalendarType.multiple,
+                  value: [DateTime.now().millisecondsSinceEpoch],
+                  height: size.height * 0.6 + 176,
+                ),
+              );
+            },
+          ),
+          TDCell(
+            title: '区间选择日历',
+            arrow: true,
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                child: TDCalendar(
+                  title: '请选择日期区间',
+                  type: CalendarType.range,
+                  value: [
+                    DateTime.now().millisecondsSinceEpoch,
+                    DateTime.now()
+                        .add(const Duration(days: 6))
+                        .millisecondsSinceEpoch,
+                  ],
+                  height: size.height * 0.6 + 176,
+                ),
+              );
+            },
+          ),
+          TDCell(
+            title: '单个选择日历和时间',
+            arrow: true,
+            note:
+                '${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}',
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                onConfirm: (value) {
+                  print('onConfirm:$value');
+                  selected.value = value;
+                },
+                onClose: () {
+                  print('onClose');
+                },
+                child: TDCalendar(
+                  title: '请选择日期和时间',
+                  value: value,
+                  height: size.height * 0.92,
+                  useTimePicker: true,
+                  // pickerHeight: 100,
+                  // pickerItemCount: 2,
+                  onCellClick: (value, type, tdate) {
+                    print('onCellClick: $value');
+                  },
+                  onCellLongPress: (value, type, tdate) {
+                    print('onCellLongPress: $value');
+                  },
+                  onHeaderClick: (index, week) {
+                    print('onHeaderClick: $week');
+                  },
+                  onChange: (value) {
+                    print('onChange: $value');
+                  },
+                ),
+              );
+            },
+          ),
+          TDCell(
+            title: '区间选择日历和时间',
+            arrow: true,
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                onConfirm: (value) {
+                  print('onConfirm: $value');
+                },
+                onClose: () {
+                  print('onClose');
+                },
+                child: TDCalendar(
+                  title: '请选择日期和时间区间',
+                  height: size.height * 0.92,
+                  type: CalendarType.range,
+                  value: [
+                    DateTime.now().millisecondsSinceEpoch,
+                    DateTime.now()
+                        .add(const Duration(days: 3))
+                        .millisecondsSinceEpoch,
+                  ],
+                  useTimePicker: true,
+                  onCellClick: (value, type, tdate) {
+                    print('onCellClick: $value');
+                  },
+                  onCellLongPress: (value, type, tdate) {
+                    print('onCellLongPress: $value');
+                  },
+                  onHeaderClick: (index, week) {
+                    print('onHeaderClick: $week');
+                  },
+                  onChange: (value) {
+                    print('onChange: $value');
+                  },
+                ),
+              );
+            },
+          ),
+          TDCell(
+            title: '添加锚点',
+            arrow: true,
+            note: '${date.year}-${date.month}-${date.day}',
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                onConfirm: (value) {
+                  print('onConfirm：$value');
+                  selected.value = value;
+                },
+                onClose: () {
+                  print('onClose');
+                },
+                child: TDCalendar(
+                  title: '请选择日期',
+                  minDate: DateTime(2022, 1, 1).millisecondsSinceEpoch,
+                  maxDate: DateTime(2028, 2, 15).millisecondsSinceEpoch,
+                  anchorDate: DateTime(2026, 5),
+                  value: value,
+                  height: size.height * 0.6 + 176,
+                  onCellClick: (value, type, tdate) {
+                    print('onCellClick: $value');
+                  },
+                  onCellLongPress: (value, type, tdate) {
+                    print('onCellLongPress: $value');
+                  },
+                  onHeaderClick: (index, week) {
+                    print('onHeaderClick: $week');
+                  },
+                  onChange: (value) {
+                    print('onChange: $value');
+                  },
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+```
+
+#### 1 组件样式
+
+可以自由定义想要的风格
+
+```
+Widget _buildStyle(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  const map = {
+    1: '初一',
+    2: '初二',
+    3: '初三',
+    14: '情人节',
+    15: '元宵节',
+  };
+  return TDCellGroup(
+    cells: [
+      TDCell(
+        title: '自定义文案',
+        arrow: true,
+        onClick: (cell) {
+          TDCalendarPopup(
+            context,
+            visible: true,
+            child: TDCalendar(
+              title: '请选择日期',
+              height: size.height * 0.6 + 176,
+              minDate: DateTime(2022, 1, 1).millisecondsSinceEpoch,
+              maxDate: DateTime(2022, 2, 15).millisecondsSinceEpoch,
+              format: (day) {
+                day?.suffix = '¥60';
+                if (day?.date.month == 2) {
+                  if (map.keys.contains(day?.date.day)) {
+                    day?.suffix = '¥100';
+                    day?.prefix = map[day.date.day];
+                    day?.style = TextStyle(
+                      fontSize: TDTheme.of(context).fontTitleMedium?.size,
+                      height: TDTheme.of(context).fontTitleMedium?.height,
+                      fontWeight:
+                          TDTheme.of(context).fontTitleMedium?.fontWeight,
+                      color: TDTheme.of(context).errorColor6,
+                    );
+                    if (day?.typeNotifier.value == DateSelectType.selected) {
+                      day?.style = day.style
+                          ?.copyWith(color: TDTheme.of(context).fontWhColor1);
+                    }
+                  }
+                }
+                return null;
+              },
+            ),
+          );
+        },
+      ),
+      TDCell(
+        title: '自定义按钮',
+        arrow: true,
+        onClick: (cell) {
+          late final TDCalendarPopup calendar;
+          calendar = TDCalendarPopup(
+            context,
+            visible: true,
+            confirmBtn: Padding(
+              padding:
+                  EdgeInsets.symmetric(vertical: TDTheme.of(context).spacer16),
+              child: TDButton(
+                theme: TDButtonTheme.danger,
+                shape: TDButtonShape.round,
+                text: 'ok',
+                isBlock: true,
+                size: TDButtonSize.large,
+                onTap: () {
+                  print(calendar.selected);
+                  calendar.close();
+                },
+              ),
+            ),
+            child: TDCalendar(
+              title: '请选择日期',
+              value: [DateTime.now().millisecondsSinceEpoch],
+              height: size.height * 0.6 + 176,
+            ),
+          );
+        },
+      ),
+      TDCell(
+        title: '自定义日期区间',
+        arrow: true,
+        onClick: (cell) {
+          TDCalendarPopup(
+            context,
+            visible: true,
+            child: TDCalendar(
+              title: '请选择日期',
+              minDate: DateTime(2000, 1, 1).millisecondsSinceEpoch,
+              maxDate: DateTime(3000, 1, 1).millisecondsSinceEpoch,
+              value: [DateTime(2024, 10, 1).millisecondsSinceEpoch],
+              height: size.height * 0.6 + 176,
+            ),
+          );
+        },
+      ),
+    ],
+  );
+}
+```
+
+
+```
+Widget _buildStyle(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  const map = {
+    1: '初一',
+    2: '初二',
+    3: '初三',
+    14: '情人节',
+    15: '元宵节',
+  };
+  return TDCellGroup(
+    cells: [
+      TDCell(
+        title: '自定义文案',
+        arrow: true,
+        onClick: (cell) {
+          TDCalendarPopup(
+            context,
+            visible: true,
+            child: TDCalendar(
+              title: '请选择日期',
+              height: size.height * 0.6 + 176,
+              minDate: DateTime(2022, 1, 1).millisecondsSinceEpoch,
+              maxDate: DateTime(2022, 2, 15).millisecondsSinceEpoch,
+              format: (day) {
+                day?.suffix = '¥60';
+                if (day?.date.month == 2) {
+                  if (map.keys.contains(day?.date.day)) {
+                    day?.suffix = '¥100';
+                    day?.prefix = map[day.date.day];
+                    day?.style = TextStyle(
+                      fontSize: TDTheme.of(context).fontTitleMedium?.size,
+                      height: TDTheme.of(context).fontTitleMedium?.height,
+                      fontWeight:
+                          TDTheme.of(context).fontTitleMedium?.fontWeight,
+                      color: TDTheme.of(context).errorColor6,
+                    );
+                    if (day?.typeNotifier.value == DateSelectType.selected) {
+                      day?.style = day.style
+                          ?.copyWith(color: TDTheme.of(context).fontWhColor1);
+                    }
+                  }
+                }
+                return null;
+              },
+            ),
+          );
+        },
+      ),
+      TDCell(
+        title: '自定义按钮',
+        arrow: true,
+        onClick: (cell) {
+          late final TDCalendarPopup calendar;
+          calendar = TDCalendarPopup(
+            context,
+            visible: true,
+            confirmBtn: Padding(
+              padding:
+                  EdgeInsets.symmetric(vertical: TDTheme.of(context).spacer16),
+              child: TDButton(
+                theme: TDButtonTheme.danger,
+                shape: TDButtonShape.round,
+                text: 'ok',
+                isBlock: true,
+                size: TDButtonSize.large,
+                onTap: () {
+                  print(calendar.selected);
+                  calendar.close();
+                },
+              ),
+            ),
+            child: TDCalendar(
+              title: '请选择日期',
+              value: [DateTime.now().millisecondsSinceEpoch],
+              height: size.height * 0.6 + 176,
+            ),
+          );
+        },
+      ),
+      TDCell(
+        title: '自定义日期区间',
+        arrow: true,
+        onClick: (cell) {
+          TDCalendarPopup(
+            context,
+            visible: true,
+            child: TDCalendar(
+              title: '请选择日期',
+              minDate: DateTime(2000, 1, 1).millisecondsSinceEpoch,
+              maxDate: DateTime(3000, 1, 1).millisecondsSinceEpoch,
+              value: [DateTime(2024, 10, 1).millisecondsSinceEpoch],
+              height: size.height * 0.6 + 176,
+            ),
+          );
+        },
+      ),
+    ],
+  );
+}
+```
+
+自定义日期单元格
+
+```
+Widget _buildCustomCell(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final selected = ValueNotifier>(
+      [DateTime.now().millisecondsSinceEpoch + 30 * 24 * 60 * 60 * 1000]);
+  return ValueListenableBuilder(
+    valueListenable: selected,
+    builder: (context, value, child) {
+      final date = DateTime.fromMillisecondsSinceEpoch(value[0]);
+      return TDCellGroup(
+        cells: [
+          TDCell(
+            title: '自定义日期单元格',
+            arrow: true,
+            note: '${date.year}-${date.month}-${date.day}',
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                onConfirm: (value) {
+                  print('onConfirm:$value');
+                  selected.value = value;
+                },
+                onClose: () {
+                  print('onClose');
+                },
+                child: TDCalendar(
+                    title: '请选择日期',
+                    value: value,
+                    cellHeight: 80,
+                    height: size.height * 0.6 + 176,
+                    onCellClick: (value, type, tdate) {
+                      print('onCellClick: $value');
+                    },
+                    onCellLongPress: (value, type, tdate) {
+                      print('onCellLongPress: $value');
+                    },
+                    onHeaderClick: (index, week) {
+                      print('onHeaderClick: $week');
+                    },
+                    onChange: (value) {
+                      print('onChange: $value');
+                    },
+                    cellWidget: (context, tdate, selectType) {
+                      final today = DateTime.now();
+                      //当前日期的自定义实现
+                      if (tdate.date.millisecondsSinceEpoch ==
+                              DateTime(today.year, today.month, today.day)
+                                  .millisecondsSinceEpoch &&
+                          selectType != DateSelectType.selected) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: TDTheme.of(context).brandColor4,
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          constraints: const BoxConstraints(
+                              minWidth: 0, // 最小宽度为0
+                              maxWidth: double.infinity, // 最大宽度无限
+                              minHeight: 0, // 最小高度为0
+                              maxHeight: double.infinity),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('今天',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                            ],
+                          ),
+                        );
+                      }
+                      if (selectType == DateSelectType.selected) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: TDTheme.of(context).successColor8,
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          constraints: const BoxConstraints(
+                              minWidth: 0, // 最小宽度为0
+                              maxWidth: double.infinity, // 最大宽度无限
+                              minHeight: 0, // 最小高度为0
+                              maxHeight: double.infinity),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('${tdate.date.day}',
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                              const Text('文案文案',
+                                  style: TextStyle(
+                                      fontSize: 6, color: Colors.white)),
+                              const Text('自定义',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white)),
+                            ],
+                          ),
+                        );
+                      }
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('${tdate.date.day}',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          const Text('文案文案', style: TextStyle(fontSize: 8)),
+                          const Text('自定义', style: TextStyle(fontSize: 8)),
+                        ],
+                      );
+                    }),
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+```
+
+
+```
+Widget _buildCustomCell(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final selected = ValueNotifier>(
+      [DateTime.now().millisecondsSinceEpoch + 30 * 24 * 60 * 60 * 1000]);
+  return ValueListenableBuilder(
+    valueListenable: selected,
+    builder: (context, value, child) {
+      final date = DateTime.fromMillisecondsSinceEpoch(value[0]);
+      return TDCellGroup(
+        cells: [
+          TDCell(
+            title: '自定义日期单元格',
+            arrow: true,
+            note: '${date.year}-${date.month}-${date.day}',
+            onClick: (cell) {
+              TDCalendarPopup(
+                context,
+                visible: true,
+                onConfirm: (value) {
+                  print('onConfirm:$value');
+                  selected.value = value;
+                },
+                onClose: () {
+                  print('onClose');
+                },
+                child: TDCalendar(
+                    title: '请选择日期',
+                    value: value,
+                    cellHeight: 80,
+                    height: size.height * 0.6 + 176,
+                    onCellClick: (value, type, tdate) {
+                      print('onCellClick: $value');
+                    },
+                    onCellLongPress: (value, type, tdate) {
+                      print('onCellLongPress: $value');
+                    },
+                    onHeaderClick: (index, week) {
+                      print('onHeaderClick: $week');
+                    },
+                    onChange: (value) {
+                      print('onChange: $value');
+                    },
+                    cellWidget: (context, tdate, selectType) {
+                      final today = DateTime.now();
+                      //当前日期的自定义实现
+                      if (tdate.date.millisecondsSinceEpoch ==
+                              DateTime(today.year, today.month, today.day)
+                                  .millisecondsSinceEpoch &&
+                          selectType != DateSelectType.selected) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: TDTheme.of(context).brandColor4,
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          constraints: const BoxConstraints(
+                              minWidth: 0, // 最小宽度为0
+                              maxWidth: double.infinity, // 最大宽度无限
+                              minHeight: 0, // 最小高度为0
+                              maxHeight: double.infinity),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('今天',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                            ],
+                          ),
+                        );
+                      }
+                      if (selectType == DateSelectType.selected) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: TDTheme.of(context).successColor8,
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          constraints: const BoxConstraints(
+                              minWidth: 0, // 最小宽度为0
+                              maxWidth: double.infinity, // 最大宽度无限
+                              minHeight: 0, // 最小高度为0
+                              maxHeight: double.infinity),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('${tdate.date.day}',
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                              const Text('文案文案',
+                                  style: TextStyle(
+                                      fontSize: 6, color: Colors.white)),
+                              const Text('自定义',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white)),
+                            ],
+                          ),
+                        );
+                      }
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('${tdate.date.day}',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          const Text('文案文案', style: TextStyle(fontSize: 8)),
+                          const Text('自定义', style: TextStyle(fontSize: 8)),
+                        ],
+                      );
+                    }),
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+```
+
+不使用Popup
+
+```
+Widget _buildBlock(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final selected = ValueNotifier>(
+    [DateTime.now().millisecondsSinceEpoch + 30 * 24 * 60 * 60 * 1000],
+  );
+  return Column(
+    // spacing: TDTheme.of(context).spacer16,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        // spacing: TDTheme.of(context).spacer16,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TDButton(
+            text: '加一个月',
+            theme: TDButtonTheme.primary,
+            onTap: () {
+              selected.value = [selected.value[0] + 30 * 24 * 60 * 60 * 1000];
+            },
+          ),
+          const SizedBox(width: 16),
+          TDButton(
+            text: '减一个月',
+            theme: TDButtonTheme.primary,
+            onTap: () {
+              selected.value = [selected.value[0] - 30 * 24 * 60 * 60 * 1000];
+            },
+          ),
+        ],
+      ),
+      const SizedBox(height: 16),
+      ValueListenableBuilder(
+        valueListenable: selected,
+        builder: (context, value, child) {
+          return TDCalendar(
+            title: '请选择日期',
+            value: value,
+            height: size.height * 0.6 + 176,
+            animateTo: true,
+            // 不使用popup时，useSafeArea无效
+            useSafeArea: true,
+          );
+        },
+      ),
+    ],
+  );
+}
+```
+
+
+```
+Widget _buildBlock(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final selected = ValueNotifier>(
+    [DateTime.now().millisecondsSinceEpoch + 30 * 24 * 60 * 60 * 1000],
+  );
+  return Column(
+    // spacing: TDTheme.of(context).spacer16,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        // spacing: TDTheme.of(context).spacer16,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TDButton(
+            text: '加一个月',
+            theme: TDButtonTheme.primary,
+            onTap: () {
+              selected.value = [selected.value[0] + 30 * 24 * 60 * 60 * 1000];
+            },
+          ),
+          const SizedBox(width: 16),
+          TDButton(
+            text: '减一个月',
+            theme: TDButtonTheme.primary,
+            onTap: () {
+              selected.value = [selected.value[0] - 30 * 24 * 60 * 60 * 1000];
+            },
+          ),
+        ],
+      ),
+      const SizedBox(height: 16),
+      ValueListenableBuilder(
+        valueListenable: selected,
+        builder: (context, value, child) {
+          return TDCalendar(
+            title: '请选择日期',
+            value: value,
+            height: size.height * 0.6 + 176,
+            animateTo: true,
+            // 不使用popup时，useSafeArea无效
+            useSafeArea: true,
+          );
+        },
+      ),
+    ],
+  );
+}
+```
+
+## API
+
+1. [TDCalendarPopup](#tdcalendarpopup)
+2. [TDCalendarStyle](#tdcalendarstyle)
+3. [TDCalendar](#tdcalendar)
+
+#### TDCalendarPopup
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| autoClose | bool? | true | 自动关闭；在点击关闭按钮、确认按钮、遮罩层时自动关闭 |
+| builder | CalendarBuilder? | - | 控件构建器，优先级高于[child] |
+| child | TDCalendar? | - | 日历控件 |
+| confirmBtn | Widget? | - | 自定义确认按钮 |
+| context | BuildContext | context | 上下文 |
+| onClose | VoidCallback? | - | 关闭时触发 |
+| onConfirm | void Function(List value)? | - | 点击确认按钮时触发 |
+| top | double? | - | 距离顶部的距离 |
+| visible | bool? | - | 默认是否显示日历 |
+
+#### TDCalendarStyle
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| cellDecoration | BoxDecoration? | - | 日期decoration |
+| cellPrefixStyle | TextStyle? | - | 日期前面的字符串的样式 |
+| cellStyle | TextStyle? | - | 日期样式 |
+| cellSuffixStyle | TextStyle? | - | 日期后面的字符串的样式 |
+| centreColor | Color? | - | 日期范围内背景样式 |
+| decoration |  | - |  |
+| monthTitleStyle | TextStyle? | - | body区域 年月文字样式 |
+| titleCloseColor | Color? | - | header区域 关闭图标的颜色 |
+| titleMaxLine | int? | - | header区域 [TDCalendar.title]的行数 |
+| titleStyle | TextStyle? | - | header区域 [TDCalendar.title]的样式 |
+| weekdayStyle | TextStyle? | - | header区域 周 文字样式 |
+
+##### 工厂构造方法
+
+| 名称 | 说明 |
+| --- | --- |
+| TDCalendarStyle.cellStyle | 日期样式 |
+| TDCalendarStyle.generateStyle | 生成默认样式 |
+
+#### TDCalendar
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| anchorDate | DateTime? | - | 锚点日期 |
+| animateTo | bool? | false | 动画滚动到指定位置 |
+| cellHeight | double? | 60 | 日期高度 |
+| cellWidget | Widget? Function(BuildContext context, TDate tdate, DateSelectType selectType)? | - | 自定义日期单元格组件 |
+| displayFormat | String? | 'year month' | 年月显示格式，`year`表示年，`month`表示月，如`year month`表示年在前、月在后、中间隔一个空格 |
+| firstDayOfWeek | int? | 0 | 第一天从星期几开始，默认 0 = 周日 |
+| format | CalendarFormat? | - | 用于格式化日期的函数，可定义日期前后的显示内容和日期样式 |
+| height | double? | - | 高度 |
+| isTimeUnit | bool? | true | 是否显示时间单位 |
+| key |  | - |  |
+| maxDate | int? | - | 最大可选的日期（fromMillisecondsSinceEpoch），不传则默认半年后 |
+| minDate | int? | - | 最小可选的日期（fromMillisecondsSinceEpoch），不传则默认今天 |
+| monthTitleBuilder | Widget Function(BuildContext context, DateTime monthDate)? | - | 月标题构建器 |
+| monthTitleHeight | double? | 22 | 月标题高度 |
+| onCellClick | void Function(int value, DateSelectType type, TDate tdate)? | - | 点击日期时触发 |
+| onCellLongPress | void Function(int value, DateSelectType type, TDate tdate)? | - | 长安日期时触发 |
+| onChange | void Function(List value)? | - | 选中值变化时触发 |
+| onHeaderClick | void Function(int index, String week)? | - | 点击周时触发 |
+| onMonthChange | ValueChanged? | - | 月份变化时触发 |
+| pickerHeight | double? | 178 | 时间选择器List的视窗高度 |
+| pickerItemCount | int? | 3 | 选择器List视窗中item个数，pickerHeight / pickerItemCount即item高度 |
+| style | TDCalendarStyle? | - | 自定义样式 |
+| timePickerModel | List? | - | 自定义时间选择器 |
+| title | String? | - | 标题 |
+| titleWidget | Widget? | - | 标题组件 |
+| type | CalendarType? | CalendarType.single | 日历的选择类型，single = 单选；multiple = 多选；range = 区间选择 |
+| useSafeArea | bool? | true | 是否使用安全区域，默认true |
+| useTimePicker | bool? | false | 是否显示时间选择器 |
+| value | List? | - | 当前选择的日期（fromMillisecondsSinceEpoch），不传则默认今天，当 type = single 时数组长度为1 |
+| width | double? | - | 宽度 |
+
+## 设计指南
+
+1. [何时使用](#何时使用)
+2. [组件搭配使用](#组件搭配使用)
+3. [推荐/慎用](#推荐-慎用)
+4. [相似组件](#相似组件)
+
+#### 何时使用
+
+需要在页面间跳转、返回，或需承载少量辅助功能时使用。
+
+#### 组件搭配使用
+
+###### 通常和[单元格](<../数据展示/Cell 单元格.md>)搭配使用，点击后唤起日历。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/calendar/calendar-1.png)
+
+#### 推荐/慎用
+
+###### 日期与描述结合时，通常与价格结合，不建议描述过长、或承载过复杂的信息。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/calendar/calendar-2.png)
+![](https://tdesign.gtimg.com/site/doc/good.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/calendar/calendar-3.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+---
+
+###### 区间选择尽量使用在较短时间的场景中，当涉及的时间通常在数月、数年的长度时，建议使用其它方式让用户输入。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/calendar/calendar-4.png)
+![](https://tdesign.gtimg.com/site/doc/good.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/calendar/calendar-5.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+#### 相似组件
+
+| 组件名 | 何时使用 |
+| --- | --- |
+| [时间选择器](<DateTimePicker 时间选择器.md>) | 在表单中需要输入单个日期或时间时使用。 |

@@ -16,16 +16,16 @@ Goods _$GoodsFromJson(Map<String, dynamic> json) => Goods(
   price: (json['price'] as num?)?.toInt() ?? 0,
   sold: (json['sold'] as num?)?.toInt() ?? 0,
   content: json['content'] as String?,
-  contentPics:
-      (json['contentPics'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  contentPics: (json['contentPics'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
   recommend: json['recommend'] as bool? ?? false,
   featured: json['featured'] as bool? ?? false,
   status: (json['status'] as num?)?.toInt() ?? 0,
   sortNum: (json['sortNum'] as num?)?.toInt() ?? 0,
-  specs:
-      (json['specs'] as List<dynamic>?)
-          ?.map((e) => GoodsSpec.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  specs: (json['specs'] as List<dynamic>?)
+      ?.map((e) => GoodsSpec.fromJson(e as Map<String, dynamic>))
+      .toList(),
   createTime: json['createTime'] as String?,
   updateTime: json['updateTime'] as String?,
 );

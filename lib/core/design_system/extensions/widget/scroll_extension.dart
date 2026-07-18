@@ -2,15 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 /// Widget 滚动扩展
-/// 
+///
 /// 提供各种滚动相关的扩展方法，包括：
 /// - 基础滚动配置
 /// - 不同滚动物理效果
 /// - 滚动控制器设置
 /// - 自定义滚动配置
-/// 
-/// 作者: Assistant
-/// 创建时间: 2024
 extension ScrollExtension on Widget {
   /// 基础滚动容器
   ///

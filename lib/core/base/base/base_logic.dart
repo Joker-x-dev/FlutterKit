@@ -1,16 +1,11 @@
 import 'package:get/get.dart';
 
-abstract class BaseLogic extends SuperController {
+/// 基础业务逻辑控制器
+///
+/// 统一承载 GetX 生命周期并提供页面数据初始化入口。
+abstract class BaseLogic extends SuperController<dynamic> {
   /// 其他页面传递过来的参数
   final dynamic args = Get.arguments;
-
-  /// 其他页面传递过来的 id (假如有)
-  dynamic get id {
-    if (args is Map<String, dynamic>) {
-      return args["id"];
-    }
-    return null;
-  }
 
   /// 当控制器准备就绪时调用此方法
   /// 通常用于初始化数据
@@ -21,7 +16,7 @@ abstract class BaseLogic extends SuperController {
   }
 
   /// 当控制器从视图树中分离时调用此方法
-  /// 可以在这里进行资源释放等操作
+  /// 适用于释放与视图树关联的资源
   @override
   void onDetached() {}
 

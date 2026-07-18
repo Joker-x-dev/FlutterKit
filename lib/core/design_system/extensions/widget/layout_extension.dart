@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 /// Widget 布局相关扩展
 /// 提供对齐、弹性布局、定位、安全区域等布局方法
-///
-/// @author
 extension LayoutExtension on Widget {
   /// 设置 Widget 的对齐方式
   ///
@@ -434,16 +432,11 @@ extension LayoutExtension on Widget {
     return Offstage(offstage: offstage, child: this);
   }
 
-
-
   /// 忽略语义
   ///
   /// [excluding] 是否排除语义，默认为 true
   /// 返回排除语义的 Widget
   Widget ignoringSemantics({bool excluding = true}) {
-    return ExcludeSemantics(
-      excluding: excluding,
-      child: this,
-    );
+    return ExcludeSemantics(excluding: excluding, child: this);
   }
 }

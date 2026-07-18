@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+/// 当前 GetX 构建上下文
 BuildContext get _context => Get.context!;
 
 //==================== 圆角 ====================

@@ -8,10 +8,10 @@ import 'main_routes.dart';
 class MainPages {
   MainPages._();
 
-  static final routes = [
+  static final List<GetPage<void>> routes = [
     GetPage(
       name: MainRoutes.main,
-      page: () => const MainView(),
+      page: () => MainView(),
       binding: MainBinding(),
     ),
   ];

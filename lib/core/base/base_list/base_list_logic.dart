@@ -5,27 +5,27 @@ import '../../model/response/base/base_list_response.dart';
 import '../../model/response/base/base_response.dart';
 import '../../util/common/common_util.dart';
 import '../base_network/base_network_logic.dart';
-import '../base_network/base_network_state.dart';
 import 'base_list_state.dart';
 
-/// 列表base类 主要是对列表进行封装
+/// 列表 base 类，主要是对列表进行封装
 abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
   /// 列表状态
-  late final BaseListState<T> listState;
+  BaseListState<T> get listState => networkState as BaseListState<T>;
 
   /// 构造函数，确保只创建一个实例
-  BaseListLogic() : super(state: BaseListState<T>()) {
-    listState = networkState as BaseListState<T>;
-  }
+  BaseListLogic() : super(state: BaseListState<T>());
 
-  /// 重写 apiRequest，让其返回 Future<BaseResponse<BaseListResponse<T>>>
+  /// 子类重写此 getter 返回列表请求接口
   @override
-  Future<BaseResponse<BaseListResponse<T>>> Function()? get apiRequest => null;
+  Future<BaseResponse<BaseListResponse<T>>> Function()? get apiRequest;
 
+  /// 处理分页请求成功结果
+  ///
+  /// [data] 分页响应数据。
   @override
   void requestOk(BaseListResponse<T>? data) {
     final record = data?.list ?? [];
-    if (CommonUtil.isNull(record)) {
+    if (CommonUtil.isBlank(record)) {
       return updateListPageStatusEmpty();
     }
 
@@ -38,9 +38,12 @@ abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
     }
     // 数据处理方法，让子类有机会修改数据
     processDataList(listState.dataList);
-    // 如果已经到了最后一页，也设置 noMoreData 为 true
-    final totalPages =
-        (data!.pagination!.total! / data.pagination!.size!).ceil();
+
+    // 计算总页数，避免对后端字段强解包
+    final total = data?.pagination?.total ?? 0;
+    final size = data?.pagination?.size ?? listState.pageSize;
+    final totalPages = size > 0 ? (total / size).ceil() : 0;
+
     if (listState.currentPage >= totalPages || totalPages == 0) {
       listState.noMoreData = true;
       setRefreshStatusNoMore();
@@ -50,14 +53,23 @@ abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
   }
 
   /// 处理数据列表的方法（可被子类覆盖实现）
-  /// 默认情况下什么都不做，子类可以在这里修改列表中的具体值
+  ///
+  /// [list] 当前分页数据列表。
+  /// 默认不修改数据，子类可覆盖并转换列表内容
   void processDataList(List<T> list) {}
 
+  /// 处理列表请求失败状态
+  ///
+  /// [message] 格式化后的错误信息。
+  /// [error] 原始异常对象。
   @override
-  void requestError() {
-    // 就只有数据为空的情况下加载失败才会显示错误页面
-    // 为了不影响下拉刷新加载失败 才会这么做
-    if (CommonUtil.isNull(listState.dataList)) super.setStatusError();
+  void onRequestError(String message, dynamic error) {
+    super.onRequestError(message, error);
+    // 请求失败时结束刷新动画，避免下拉刷新/上拉加载卡住
+    if (listState.dataList.isEmpty) {
+      super.setStatusError();
+    }
+    setRefreshStatusFailed();
   }
 
   /// 刷新数据
@@ -72,7 +84,7 @@ abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
   /// 加载更多数据
   Future<void> loadMore() async {
     if (listState.noMoreData) {
-      IndicatorState? footerState = listState.easyRefreshController.footerState;
+      final footerState = listState.easyRefreshController.footerState;
       final state = footerState?.result;
       if (state != null && state == IndicatorResult.none) {
         // 只有在没有状态的情况下才设置状态
@@ -85,6 +97,7 @@ abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
     await loadData();
   }
 
+  /// 初始化分页请求参数
   @override
   void onInit() {
     super.onInit();
@@ -101,7 +114,7 @@ abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
     };
   }
 
-  /// 设置列表页面状态为空 子类可重写
+  /// 设置列表页面状态为空，子类可重写
   void updateListPageStatusEmpty() {
     super.setStatusEmpty();
   }
@@ -127,13 +140,19 @@ abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
   }
 
   /// 设置刷新控制器状态
+  ///
+  /// [status] 目标刷新状态。
+  /// [force] 是否强制结束当前刷新动作。
   void setRefreshStatus(IndicatorResult status, bool force) {
     listState.easyRefreshController.finishLoad(status, force);
   }
 
-  /// 设置伪造数据 可以设置延迟 单位毫秒
+  /// 设置伪造数据，可以设置延迟，单位毫秒
+  ///
+  /// [fakeRecords] 待写入的伪造数据列表。
+  /// [delay] 模拟请求延迟，单位为毫秒。
   Future<void> setFakeData(List<T> fakeRecords, {int delay = 300}) async {
-    await Future.delayed(Duration(milliseconds: delay));
+    await Future<void>.delayed(Duration(milliseconds: delay));
     listState.dataList.assignAll(fakeRecords);
     listState.noMoreData = true;
     setRefreshStatusNoMore();

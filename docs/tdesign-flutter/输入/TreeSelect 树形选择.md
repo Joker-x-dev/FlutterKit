@@ -1,0 +1,226 @@
+# TreeSelect 树形选择
+
+> 适用于选择树形的数据结构
+
+> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/tree-select)
+> 归档时间：2026-07-16T07:37:59.655Z
+
+## 示例
+
+![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+
+### 引入
+
+在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+
+```dart
+import 'package:tdesign_flutter/tdesign_flutter.dart';
+```
+
+### 代码演示
+
+[td_tree_select_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_tree_select_page.dart)
+
+#### 1 组件类型
+
+基础树形选择
+
+```
+  Widget _buildDefaultTreeSelect(BuildContext context) {
+    var options = [];
+
+    for (var i = 1; i <= 10; i++) {
+      options.add(TDSelectOption(label: '选项$i', value: i, children: []));
+
+      for (var j = 1; j <= 10; j++) {
+        options[i - 1].children.add(TDSelectOption(
+              label: '选项$i.$j',
+              value: i * 10 + j,
+              children: [],
+            ));
+      }
+    }
+
+    return TDTreeSelect(
+      options: options,
+      defaultValue: values1,
+      onChange: (val, level) {
+        print('$val, $level');
+      },
+    );
+  }
+```
+
+多选树形选择
+
+```
+  Widget _buildMultipleTreeSelect(BuildContext context) {
+    var options = [];
+
+    for (var i = 1; i <= 10; i++) {
+      options.add(TDSelectOption(label: '选项$i', value: i, children: []));
+
+      for (var j = 1; j <= 10; j++) {
+        options[i - 1].children.add(
+            TDSelectOption(label: '选项$i.$j', value: i * 10 + j, children: []));
+      }
+    }
+
+    return TDTreeSelect(
+      options: options,
+      defaultValue: values2,
+      multiple: true,
+      onChange: (val, level) {
+        print('$val, $level');
+      },
+    );
+  }
+```
+
+异步加载(问题1)
+
+```
+  Widget _buildAsyncTreeSelect(BuildContext context) {
+    return TDTreeSelect(
+      options: asyncOptions,
+      defaultValue: asyncValues,
+      onChange: (val, level) {
+        print('Async change: $val, level: $level');
+        if (level == 1 && val.isNotEmpty) {
+          var firstVal = val[0];
+          var index = asyncOptions.indexWhere((element) => element.value == firstVal);
+          if (index != -1 && asyncOptions[index].children.isEmpty) {
+             // 模拟异步加载
+             Future.delayed(const Duration(seconds: 1), () {
+               if(mounted) {
+                 setState(() {
+                   asyncOptions[index].children = [
+                     TDSelectOption(label: '异步加载二级-1', value: 101),
+                     TDSelectOption(label: '异步加载二级-2', value: 102),
+                   ];
+                 });
+               }
+             });
+          }
+        }
+      },
+    );
+  }
+```
+
+String类型ID(问题3)
+
+```
+  Widget _buildStringValueTreeSelect(BuildContext context) {
+    return TDTreeSelect(
+      options: stringOptions,
+      defaultValue: stringValues,
+      onChange: (val, level) {
+        print('String ID change: $val, level: $level');
+      },
+    );
+  }
+```
+
+#### 1 组件状态
+
+三级树形选择(长文字问题2)
+
+```
+  Widget _buildThirdTreeSelect(BuildContext context) {
+    var options = [];
+    for (var i = 1; i <= 3; i++) {
+      options.add(TDSelectOption(
+        label: '${i == 1 ? '超长一级选项名称超长一级选项名称' : '选项$i'}',
+        value: i,
+        maxLines: 2,
+        //columnWidth: i == 1 ? 106 : null,
+        children: [],
+      ));
+
+      for (var j = 1; j <= 3; j++) {
+        options[i - 1].children.add(TDSelectOption(
+              label: '${j == 1 ? '特别长的二级选项特别长的二级选项特别长的二级选项' : '选项$i.$j'}',
+              value: i * 10 + j,
+              maxLines: 2,
+              columnWidth: j == 1 ? 180 : null,
+              children: [],
+            ));
+
+        for (var k = 1; k <= 3; k++) {
+          options[i - 1].children[j - 1].children.add(TDSelectOption(
+                label:
+                    '${k == 1 ? '非常长的三级选项名称非常长的三级选项名称非常长的三级选项名称' : '选项$i.$j.$k'}',
+                value: i * 100 + j * 10 + k,
+                maxLines: 2,
+                //columnWidth: k == 1 ? 102 : null,
+              ));
+        }
+      }
+    }
+    return TDTreeSelect(
+      options: options,
+      defaultValue: values3,
+      onChange: (val, level) {
+        print('$val, $level');
+      },
+    );
+  }
+```
+
+## API
+
+1. [TDSelectOption](#tdselectoption)
+2. [TDTreeSelect](#tdtreeselect)
+
+#### TDSelectOption
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| children | List | const [] | 子选项 |
+| columnWidth | double? | - | 自定义宽度，允许用户指定每个选项的宽度 |
+| label | String | - | 标签 |
+| maxLines | int | 1 | 最大显示行数 |
+| multiple | bool | false | 当前子项支持多选 |
+| value | dynamic | - | 值 |
+
+#### TDTreeSelect
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| defaultValue | List | const [] | 初始值，对应options中的value值 |
+| height | double | 336 | 高度 |
+| key |  | - |  |
+| multiple | bool | false | 支持多选 |
+| onChange | TDTreeSelectChangeEvent? | - | 选中值发生变化 |
+| options | List | const [] | 展示的选项列表 |
+| outwardCornerRadius | double | 9 | 一级菜单选中项的外弯折圆角半径，默认为 9 |
+| style | TDTreeSelectStyle | TDTreeSelectStyle.normal | 一级菜单样式 |
+
+## 设计指南
+
+1. [何时使用](#何时使用)
+2. [推荐/慎用示例](#推荐-慎用示例)
+3. [相似组件](#相似组件)
+
+#### 何时使用
+
+当一组选项由2-3个层级构成，且每个层级有大量的选项需要用户逐级选择时使用。
+
+#### 推荐/慎用示例
+
+###### 级联选择器的层级不宜超过3层，层级过多时应调整数据结构或改用级联选择器。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/tree-select/tree-select-1.png)
+![](https://tdesign.gtimg.com/site/doc/bad.png)
+
+#### 相似组件
+
+| 组件名 | 何时使用 |
+| --- | --- |
+| [选择器](<Picker 选择器.md>) | 当需要在有限的空间展示大量选项供用户选择时，或一组选项由递进层级构成，需要用户逐级选择使用时。 |
+| [级联选择器](<Cascader 级联选择器.md>) | 当一组选项由递进层级构成，且有每个层级有大量的选项需要用户逐级选择使用时。 |

@@ -1,11 +1,11 @@
 {
-    "name": "td_flutter_getx_template",
-    "short_name": "td_flutter_getx_template",
+    "name": "FlutterKit",
+    "short_name": "FlutterKit",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFFFFF",
+    "theme_color": "#465CFF",
+    "description": "基于 GetX 与 TDesign 的 Flutter 项目脚手架。",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

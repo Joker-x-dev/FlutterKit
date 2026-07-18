@@ -1,0 +1,25 @@
+import 'package:flutter_kit/core/base/base_refresh/base_refresh_logic.dart';
+import 'package:flutter_kit/core/data/repository/goods_repository.dart';
+import 'package:flutter_kit/core/model/entity/goods/goods.dart';
+import 'package:flutter_kit/core/model/response/base/base_response.dart';
+
+import '../states/base_refresh_demo_state.dart';
+
+/// BaseRefresh 示例页 Logic
+///
+/// 使用 [BaseRefreshLogic] 加载商品详情。
+class BaseRefreshDemoLogic extends BaseRefreshLogic<Goods> {
+  /// BaseRefresh 示例页状态
+  final BaseRefreshDemoState baseRefreshDemoState = BaseRefreshDemoState();
+
+  /// 商品详情请求
+  @override
+  Future<BaseResponse<Goods>> Function()? get apiRequest =>
+      () => GoodsRepository().getGoodsInfo(1);
+
+  /// 保存商品详情请求结果
+  ///
+  /// [data] 商品详情数据。
+  @override
+  void requestOk(Goods data) => baseRefreshDemoState.goods.value = data;
+}

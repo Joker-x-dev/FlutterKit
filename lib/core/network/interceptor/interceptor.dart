@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 
+import '../../config/app_config.dart';
 import '../../util/log/log_util.dart';
 import '../exception/error_exception.dart';
 
 /// 请求拦截
+///
+/// 统一处理 HTTP 状态码错误和业务错误码，异常响应通过 [handler.reject] 抛出，
+/// 供上层 [RequestHelper] 或业务代码统一捕获。
 class HttpInterceptor extends Interceptor {
   /// 请求前
   @override
@@ -13,9 +17,23 @@ class HttpInterceptor extends Interceptor {
 
   /// 请求后
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     // 统一处理响应
-    _handleResponse(response);
+    final error = _handleResponse(response);
+    if (error != null) {
+      LogUtil.e('错误代码: ${error.code}, 错误信息: ${error.message}');
+      return handler.reject(
+        DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          type: DioExceptionType.badResponse,
+          error: error,
+        ),
+      );
+    }
     return handler.next(response);
   }
 
@@ -26,26 +44,32 @@ class HttpInterceptor extends Interceptor {
   }
 
   /// 统一返回处理
-  void _handleResponse(Response response) {
-    // 检查状态码
+  ///
+  /// [response] Dio 响应数据。
+  ///
+  /// 返回 null 表示响应正常，否则返回格式化后的错误对象
+  BaseError? _handleResponse(Response<dynamic> response) {
+    // 检查 HTTP 状态码
     if (response.statusCode != 200) {
-      final error = CustomErrorHandler.handle(
+      return CustomErrorHandler.handle(
         DioException(
           requestOptions: response.requestOptions,
           response: response,
         ),
       );
-      LogUtil.e('错误代码: ${error.code}, 错误信息: ${error.message}');
-    } else {
-      final responseData = response.data;
-      // 使用 CustomErrorHandler 处理业务错误
-      final businessError = CustomErrorHandler.handleBusinessError(
-        responseData,
-      );
-      if (businessError.code == 200) return;
-      if (businessError.code == 401) {
-        // 401 登录过期等触发
-      }
     }
+
+    final responseData = response.data;
+    if (responseData is! Map<String, dynamic>) return null;
+
+    // 处理业务错误
+    final businessError = CustomErrorHandler.handleBusinessError(responseData);
+    if (businessError.code == AppConfig.successCode) return null;
+
+    if (businessError.code == 401) {
+      // 认证失效响应由上层登录状态管理统一处理
+    }
+
+    return businessError;
   }
 }

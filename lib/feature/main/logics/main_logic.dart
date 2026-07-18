@@ -1,64 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:td_flutter_getx_template/core/base/base/base_logic.dart';
+import 'package:flutter_kit/core/base/base/base_logic.dart';
 
 import '../states/main_state.dart';
-import '../views/base_demo_view.dart';
-import '../views/network_demo_view.dart';
-import '../views/theme_demo_view.dart';
-import '../views/utils_demo_view.dart';
 
+/// 主页面 Logic
+///
+/// 管理主导航选中状态与页面切换交互。
 class MainLogic extends BaseLogic {
+  /// 主页面状态
   final MainState mainState = MainState();
 
-  /// 页面列表
-  final List<Widget> pageList = [
-    const BaseDemoView(),
-    const NetworkDemoView(),
-    const UtilsDemoView(),
-    const ThemeDemoView(),
-  ];
-
+  /// 初始化主页面控制器
   @override
   void onInit() {
     super.onInit();
-    init();
+    _initializePageController();
   }
 
-  init() {
+  /// 初始化页面控制器
+  void _initializePageController() {
     mainState.pageController = PageController(
       initialPage: mainState.pageIndex.value,
     );
   }
 
-  /// 底部导航栏点击
-  tabBarClick(int index) {
+  /// 处理主导航选中事件
+  ///
+  /// [index] 目标页面下标。
+  void onNavigationSelected(int index) {
     mainState.isAnimating.value = true;
-    setPageIndex(index);
-    setPageView(index);
+    _setPageIndex(index);
+    _animateToPage(index);
   }
 
-  /// pageView改变
-  pageViewChange(int index) {
-    // 根据标志判断是手动滚动还是动画滚动
+  /// 处理 PageView 页面变化
+  ///
+  /// [index] 当前页面下标。
+  void onPageChanged(int index) {
+    // 动画期间忽略途经页面，手动滑动时直接同步导航状态
     if (!mainState.isAnimating.value) {
-      setPageIndex(index);
+      _setPageIndex(index);
       mainState.isAnimating.value = false;
       return;
     }
 
     if (mainState.pageIndex.value == index && mainState.isAnimating.value) {
-      setPageIndex(index);
+      _setPageIndex(index);
       mainState.isAnimating.value = false;
     }
   }
 
   /// 设置页面下标
-  setPageIndex(int index) {
+  void _setPageIndex(int index) {
     mainState.pageIndex.value = index;
   }
 
-  /// 设置页面
-  setPageView(int index) {
+  /// 动画切换到目标页面
+  void _animateToPage(int index) {
     mainState.pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
@@ -66,6 +64,7 @@ class MainLogic extends BaseLogic {
     );
   }
 
+  /// 释放页面控制器
   @override
   void onClose() {
     mainState.pageController.dispose();

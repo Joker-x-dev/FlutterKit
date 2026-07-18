@@ -1,74 +1,99 @@
-import 'package:alice/alice.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:td_flutter_getx_template/res/json_res.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
-import 'core/util/storage/storage_util.dart';
+import 'bootstrap/app_initializer.dart';
+import 'bootstrap/debug_network_initializer.dart';
+import 'bootstrap/locale_initializer.dart';
+import 'bootstrap/service_initializer.dart';
+import 'bootstrap/storage_initializer.dart';
+import 'bootstrap/system_ui_initializer.dart';
+import 'bootstrap/theme_initializer.dart';
+import 'core/data/repository/locale_store_repository.dart';
+import 'core/data/repository/theme_store_repository.dart';
 
+/// 应用全局入口配置
+///
+/// 负责聚合所有 [AppInitializer] 并按顺序执行，避免初始化逻辑集中在本类中
 class Application {
+  Application._();
+
   /// 主题 - 使用响应式变量
   static final Rx<TDThemeData> themeData = TDThemeData.defaultData().obs;
 
-  /// Alice 网络请求调试工具
-  static late Alice alice;
+  /// 主题模式 - 默认跟随系统
+  static final Rx<ThemeMode> themeMode = ThemeMode.system.obs;
+
+  /// 主题颜色名称 - 默认主题
+  static final RxString themeColorName = 'theme'.obs;
+
+  /// 应用语言 - 默认简体中文
+  static final Rx<Locale> locale = const Locale('zh', 'CN').obs;
+
+  /// 初始化器列表，按顺序执行
+  ///
+  /// 测试时可替换为 mock 实现
+  static List<AppInitializer> initializers = [
+    SystemUiInitializer(),
+    StorageInitializer(),
+    LocaleInitializer(),
+    DebugNetworkInitializer(),
+    ServiceInitializer(),
+    ThemeInitializer(),
+  ];
 
   /// 页面初始化
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    /// 系统UI样式配置
-    setSystemUIOverlayStyle();
-
-    /// 初始化全局存储
-    await StorageUtil.init();
-
-    /// 仅在调试模式下初始化 Alice
-    initAlice();
-
-    /// 设置主题
-    await setTheme();
-
-    /// 通知需要更新
-    return Future.value();
-  }
-
-  ///设置系统ui样式
-  static setSystemUIOverlayStyle() {
-    // 设置导航栏颜色
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(
-        // 导航栏背景色
-        statusBarColor: Colors.transparent,
-        // 导航栏颜色
-        statusBarIconBrightness: Brightness.dark,
-        // 适配安卓小横条
-        systemNavigationBarColor: Colors.transparent,
-      ),
-    );
-  }
-
-  /// 设置主题样式
-  static setTheme() async {
-    // 主题配置
-    TDTheme.needMultiTheme();
-    var jsonString = await rootBundle.loadString(JsonRes.theme);
-    themeData.value = TDThemeData.fromJson('theme', jsonString)!;
+    for (final initializer in initializers) {
+      await initializer.init();
+    }
   }
 
   /// 更新主题
-  static void updateTheme(TDThemeData newTheme) {
+  ///
+  /// [newTheme] 目标主题配置。
+  /// [colorName] 可选主题颜色名称。
+  static void updateTheme(TDThemeData newTheme, {String? colorName}) {
     themeData.value = newTheme;
+    if (colorName != null) {
+      themeColorName.value = colorName;
+    }
   }
 
-  /// 初始化 Alice
-  static initAlice() {
-    // 仅在调试模式下初始化 Alice
-    if (kDebugMode) {
-      alice = Alice();
-      alice.setNavigatorKey(Get.key);
-    }
+  /// 更新主题颜色并持久化
+  ///
+  /// [newTheme] 目标主题配置。
+  /// [colorName] 主题颜色预设名称。
+  static Future<void> updateThemeColor(
+    TDThemeData newTheme,
+    String colorName,
+  ) async {
+    updateTheme(newTheme, colorName: colorName);
+    await ThemeStoreRepository().saveThemeColorName(colorName);
+  }
+
+  /// 更新主题模式并持久化
+  ///
+  /// [mode] 目标主题模式
+  static Future<void> updateThemeMode(ThemeMode mode) async {
+    themeMode.value = mode;
+    await ThemeStoreRepository().saveThemeModeIndex(mode.index);
+  }
+
+  /// 更新应用语言并持久化
+  ///
+  /// [newLocale] 目标应用语言。
+  static Future<void> updateLocale(Locale newLocale) {
+    // 同步国际化语言，确保后续组件重建时 `.tr` 读取目标语言
+    Get.locale = newLocale;
+    locale.value = newLocale;
+    final localeTag = '${newLocale.languageCode}_${newLocale.countryCode}';
+    // 刷新未直接监听语言状态的存量路由页面
+    unawaited(Get.forceAppUpdate());
+    return LocaleStoreRepository().saveLocaleTag(localeTag);
   }
 }

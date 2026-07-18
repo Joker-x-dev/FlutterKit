@@ -1,8 +1,3 @@
-/// Stack 布局扩展
-///
-/// 为 List<Widget> 提供便捷的 Stack 布局转换方法
-/// 支持层叠布局的各种配置选项
-
 import 'package:flutter/material.dart';
 
 /// Stack 布局扩展

@@ -1,5 +1,7 @@
+import 'auth/auth_pages.dart';
+import 'demo/demo_pages.dart';
 import 'main/main_pages.dart';
-import 'base/base_pages.dart';
+import 'user/user_pages.dart';
 
 /// 应用页面配置
 class AppPages {
@@ -10,7 +12,13 @@ class AppPages {
     // 主页模块
     ...MainPages.routes,
 
-    // Base 模块
-    ...BasePages.routes,
+    // Demo 模块
+    ...DemoPages.routes,
+
+    // Auth 模块
+    ...AuthPages.routes,
+
+    // User 模块
+    ...UserPages.routes,
   ];
 }

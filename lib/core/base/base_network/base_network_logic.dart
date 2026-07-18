@@ -1,59 +1,83 @@
 import '../../model/response/base/base_response.dart';
-import '../../network/result/result_handler.dart';
-import '../../util/common/common_util.dart';
+import '../../result/error_formatter.dart';
+import '../../result/request_helper.dart';
 import '../../util/log/log_util.dart';
 import '../base/base_logic.dart';
 import 'base_network_state.dart';
 
-/// 公共控制器 主要是对网络请求进行封装
-class BaseNetworkLogic<T> extends BaseLogic {
+/// 公共控制器，主要是对网络请求进行封装
+abstract class BaseNetworkLogic<T> extends BaseLogic {
   /// 状态
   final BaseNetworkState networkState;
 
   /// 构造函数，允许注入自定义状态
-  BaseNetworkLogic({BaseNetworkState? state}) 
-      : networkState = state ?? BaseNetworkState();
+  BaseNetworkLogic({BaseNetworkState? state})
+    : networkState = state ?? BaseNetworkState();
 
-  /// 要请求的 api 接口 子类重写实现（用于不带参数的请求）
-  late final Future<BaseResponse<T>> Function()? apiRequest = null;
+  /// 子类重写此 getter 返回实际请求的 api 接口
+  ///
+  /// 返回 null 表示当前控制器没有网络请求
+  Future<BaseResponse<T>> Function()? get apiRequest;
 
   /// 请求前的回调
   void beforeRequest() {}
 
   /// 请求成功后的回调
+  ///
+  /// [data] 请求返回的业务数据。
   void requestOk(T data) {}
 
   /// 请求失败后的回调
+  ///
+  /// 如需统一处理失败状态，请重写 [onRequestError]
   void requestError() {}
+
+  /// 请求失败时的统一处理入口
+  ///
+  /// [message] 格式化后的错误信息
+  /// [error] 原始异常对象
+  void onRequestError(String message, dynamic error) {
+    requestError();
+  }
 
   /// 进行网络请求
   Future<void> loadData() async {
-    // 如果没有提供apiRequest或者apiRequestParams，则直接返回
-    if (CommonUtil.isNull(apiRequest)) return;
+    final request = apiRequest;
+    if (request == null) return;
 
-    // 进行网络请求
-    await ApiHandler.handleFull(
-      api: apiRequest!(),
-      showErrorToast: true,
-      onStart: () {
-        if (networkState.requestSetStatus) setStatusLoad();
-        beforeRequest();
-      },
-      onSuccess: (data) {
-        setStatusSuccess();
-        requestOk(data as T);
-      },
-      onError: (message, error) {
-        // 记录错误信息 - 使用格式化后的错误消息
-        LogUtil.e('请求错误: $message');
-        if (error != null) {
-          LogUtil.e('错误详情: $error');
-        }
+    String? errorMessage;
+    dynamic originalError;
 
-        if (networkState.requestSetStatus) setStatusError();
-        requestError();
-      },
-    );
+    try {
+      final data = await RequestHelper.repository<T>(request())
+          .start(() {
+            if (networkState.requestSetStatus) setStatusLoad();
+            beforeRequest();
+          })
+          .toast(networkState.requestErrorToast)
+          .error((message, error) {
+            errorMessage = message;
+            originalError = error;
+          })
+          .execute();
+
+      setStatusSuccess();
+      requestOk(data as T);
+    } on Object catch (error, stackTrace) {
+      final message =
+          errorMessage ?? ErrorFormatter.formatError(error, stackTrace);
+
+      // 记录错误信息 - 使用格式化后的错误消息
+      LogUtil.e('请求错误: $message');
+      if (originalError != null) {
+        LogUtil.e('错误详情: $originalError');
+      } else {
+        LogUtil.e('错误详情: $error');
+      }
+
+      if (networkState.requestSetStatus) setStatusError();
+      onRequestError(message, originalError ?? error);
+    }
   }
 
   /// 设置状态为加载
@@ -76,6 +100,7 @@ class BaseNetworkLogic<T> extends BaseLogic {
     networkState.uiState.value = NetState.emptyData;
   }
 
+  /// 根据首次加载配置初始化网络数据
   @override
   void initData() {
     if (networkState.uiState.value != NetState.loading ||

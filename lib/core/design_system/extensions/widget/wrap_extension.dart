@@ -1,8 +1,3 @@
-/// Wrap 布局扩展
-///
-/// 为 List<Widget> 提供便捷的 Wrap 布局转换方法
-/// 支持自动换行的流式布局配置选项
-
 import 'package:flutter/material.dart';
 
 /// Wrap 布局扩展

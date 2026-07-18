@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// 提供简洁实用的手势动画效果，支持链式调用
 /// 使用 Flutter 原生状态管理，无第三方依赖
 ///
-/// 
+///
 extension AnimatedGestureExtension on Widget {
   /// 简单动画点击效果
   ///
@@ -22,10 +22,7 @@ extension AnimatedGestureExtension on Widget {
   /// ).animatedTap(() => print('点击了'));
   /// ```
   Widget animatedTap(VoidCallback onTap) {
-    return _AnimatedTapWidget(
-      onTap: onTap,
-      child: this,
-    );
+    return _AnimatedTapWidget(onTap: onTap, child: this);
   }
 
   /// 动画水波纹点击效果
@@ -69,9 +66,9 @@ extension AnimatedGestureExtension on Widget {
     );
   }
 
-  /// 组合水波纹和缩放效果（替代原 tapScale）
+  /// 组合水波纹和缩放效果
   ///
-  /// 同时提供水波纹点击效果和缩放动画，模拟原始 styled_widget 的 tapScale 行为
+  /// 同时提供水波纹点击反馈和按压缩放动画
   ///
   /// 参数：
   /// - [onTap] 点击回调函数
@@ -124,10 +121,7 @@ extension AnimatedGestureExtension on Widget {
   /// ).animatedLongPress(() => print('长按了'));
   /// ```
   Widget animatedLongPress(VoidCallback onLongPress) {
-    return GestureDetector(
-      onLongPress: onLongPress,
-      child: this,
-    );
+    return GestureDetector(onLongPress: onLongPress, child: this);
   }
 
   /// 动画双击效果
@@ -146,10 +140,7 @@ extension AnimatedGestureExtension on Widget {
   /// ).animatedDoubleTap(() => print('双击了'));
   /// ```
   Widget animatedDoubleTap(VoidCallback onDoubleTap) {
-    return GestureDetector(
-      onDoubleTap: onDoubleTap,
-      child: this,
-    );
+    return GestureDetector(onDoubleTap: onDoubleTap, child: this);
   }
 
   /// 动画悬停效果
@@ -185,33 +176,59 @@ extension AnimatedGestureExtension on Widget {
       child: this,
     );
   }
-
 }
 
 /// 内部使用的动画点击组件
 class _AnimatedTapWidget extends StatefulWidget {
+  /// 点击回调
   final VoidCallback onTap;
+
+  /// 应用点击动画的子组件
   final Widget child;
 
-  const _AnimatedTapWidget({
-    required this.onTap,
-    required this.child,
-  });
+  /// 创建动画点击组件
+  ///
+  /// [onTap] 点击完成回调。
+  /// [child] 应用动画的子组件。
+  const _AnimatedTapWidget({required this.onTap, required this.child});
 
+  /// 创建动画点击组件状态
   @override
   State<_AnimatedTapWidget> createState() => _AnimatedTapWidgetState();
 }
 
 /// 组合水波纹和缩放效果的 Widget
 class _AnimatedTapScaleWidget extends StatefulWidget {
+  /// 应用点击动画的子组件
   final Widget child;
+
+  /// 点击回调
   final VoidCallback onTap;
+
+  /// 水波纹颜色
   final Color? splashColor;
+
+  /// 高亮颜色
   final Color? highlightColor;
+
+  /// 水波纹边框圆角
   final BorderRadius? borderRadius;
+
+  /// 按下状态缩放比例
   final double scaleValue;
+
+  /// 缩放动画时长
   final Duration duration;
 
+  /// 创建水波纹缩放组件
+  ///
+  /// [child] 应用动画的子组件。
+  /// [onTap] 点击完成回调。
+  /// [splashColor] 水波纹颜色。
+  /// [highlightColor] 高亮颜色。
+  /// [borderRadius] 水波纹边框圆角。
+  /// [scaleValue] 按下状态缩放比例。
+  /// [duration] 缩放动画时长。
   const _AnimatedTapScaleWidget({
     required this.child,
     required this.onTap,
@@ -222,15 +239,22 @@ class _AnimatedTapScaleWidget extends StatefulWidget {
     this.duration = const Duration(milliseconds: 100),
   });
 
+  /// 创建水波纹缩放组件状态
   @override
-  State<_AnimatedTapScaleWidget> createState() => _AnimatedTapScaleWidgetState();
+  State<_AnimatedTapScaleWidget> createState() =>
+      _AnimatedTapScaleWidgetState();
 }
 
+/// 动画点击组件状态
 class _AnimatedTapWidgetState extends State<_AnimatedTapWidget>
     with SingleTickerProviderStateMixin {
+  /// 点击缩放动画控制器
   late AnimationController _controller;
+
+  /// 点击缩放动画
   late Animation<double> _scaleAnimation;
 
+  /// 初始化点击缩放动画
   @override
   void initState() {
     super.initState();
@@ -241,31 +265,39 @@ class _AnimatedTapWidgetState extends State<_AnimatedTapWidget>
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.95,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
+  /// 释放点击缩放动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 处理指针按下事件
+  ///
+  /// [details] 指针按下详情。
   void _onTapDown(TapDownDetails details) {
     _controller.forward();
   }
 
+  /// 处理指针抬起事件并触发点击回调
+  ///
+  /// [details] 指针抬起详情。
   void _onTapUp(TapUpDetails details) {
     _controller.reverse();
     widget.onTap();
   }
 
+  /// 处理点击取消事件
   void _onTapCancel() {
     _controller.reverse();
   }
 
+  /// 构建点击缩放组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -285,46 +317,56 @@ class _AnimatedTapWidgetState extends State<_AnimatedTapWidget>
   }
 }
 
+/// 水波纹缩放组件状态
 class _AnimatedTapScaleWidgetState extends State<_AnimatedTapScaleWidget>
     with SingleTickerProviderStateMixin {
+  /// 缩放动画控制器
   late AnimationController _controller;
+
+  /// 缩放动画
   late Animation<double> _scaleAnimation;
 
+  /// 初始化水波纹缩放动画
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: widget.scaleValue,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
+  /// 释放缩放动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 处理指针按下事件
+  ///
+  /// [details] 指针按下详情。
   void _onTapDown(TapDownDetails details) {
     _controller.forward();
   }
 
+  /// 处理指针抬起事件并触发点击回调
+  ///
+  /// [details] 指针抬起详情。
   void _onTapUp(TapUpDetails details) {
     _controller.reverse();
     widget.onTap();
   }
 
+  /// 处理点击取消事件
   void _onTapCancel() {
     _controller.reverse();
   }
 
+  /// 构建水波纹缩放组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -333,7 +375,7 @@ class _AnimatedTapScaleWidgetState extends State<_AnimatedTapScaleWidget>
         onTapDown: _onTapDown,
         onTapUp: _onTapUp,
         onTapCancel: _onTapCancel,
-        onTap: () {}, // 空实现，实际逻辑在 onTapUp 中处理
+        onTap: () {}, // 点击回调由 onTapUp 统一触发
         splashColor: widget.splashColor,
         highlightColor: widget.highlightColor,
         borderRadius: widget.borderRadius,
@@ -353,11 +395,24 @@ class _AnimatedTapScaleWidgetState extends State<_AnimatedTapScaleWidget>
 
 /// 内部使用的悬停动画组件
 class _AnimatedHoverWidget extends StatefulWidget {
+  /// 悬停状态缩放比例
   final double scale;
+
+  /// 悬停动画时长
   final Duration duration;
+
+  /// 悬停动画曲线
   final Curve curve;
+
+  /// 应用悬停动画的子组件
   final Widget child;
 
+  /// 创建悬停动画组件
+  ///
+  /// [scale] 悬停状态缩放比例。
+  /// [duration] 悬停动画时长。
+  /// [curve] 悬停动画曲线。
+  /// [child] 应用动画的子组件。
   const _AnimatedHoverWidget({
     required this.scale,
     required this.duration,
@@ -365,38 +420,42 @@ class _AnimatedHoverWidget extends StatefulWidget {
     required this.child,
   });
 
+  /// 创建悬停动画组件状态
   @override
   State<_AnimatedHoverWidget> createState() => _AnimatedHoverWidgetState();
 }
 
+/// 悬停动画组件状态
 class _AnimatedHoverWidgetState extends State<_AnimatedHoverWidget>
     with SingleTickerProviderStateMixin {
+  /// 悬停动画控制器
   late AnimationController _controller;
+
+  /// 悬停缩放动画
   late Animation<double> _scaleAnimation;
+
+  /// 鼠标是否处于悬停状态
   bool _isHovering = false;
 
+  /// 初始化悬停缩放动画
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: widget.scale,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: widget.curve,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
   }
 
+  /// 释放悬停动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 处理鼠标进入事件
   void _onEnter() {
     if (!_isHovering) {
       _isHovering = true;
@@ -404,6 +463,7 @@ class _AnimatedHoverWidgetState extends State<_AnimatedHoverWidget>
     }
   }
 
+  /// 处理鼠标离开事件
   void _onExit() {
     if (_isHovering) {
       _isHovering = false;
@@ -411,6 +471,9 @@ class _AnimatedHoverWidgetState extends State<_AnimatedHoverWidget>
     }
   }
 
+  /// 构建悬停缩放组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return MouseRegion(

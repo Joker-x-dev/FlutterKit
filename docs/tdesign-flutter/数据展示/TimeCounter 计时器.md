@@ -1,0 +1,527 @@
+# TimeCounter 计时器
+
+> 用于实时展示计时数值。
+
+> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/time-counter)
+> 归档时间：2026-07-16T07:37:59.655Z
+
+## 示例
+
+![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+
+### 引入
+
+在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+
+```dart
+import 'package:tdesign_flutter/tdesign_flutter.dart';
+```
+
+### 代码演示
+
+[td_time-counter_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_time-counter_page.dart)
+
+#### 1 组件类型
+
+时分秒
+
+```
+TDTimeCounter _buildSimple(BuildContext context) {
+  return const TDTimeCounter(time: 60 * 60 * 1000);
+}
+```
+
+带毫秒
+
+```
+TDTimeCounter _buildMillisecondSimple(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    millisecond: true,
+  );
+}
+```
+
+正向计时
+
+```
+TDTimeCounter _buildUpSimple(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    millisecond: true,
+    direction: TDTimeCounterDirection.up,
+  );
+}
+```
+
+带方形底
+
+```
+TDTimeCounter _buildSquareSimple(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+带圆形底
+
+```
+TDTimeCounter _buildRoundSimple(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+带单位
+
+```
+TDTimeCounter _buildUnitSimple(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+无底色带单位
+
+```
+TDTimeCounter _buildCustomUnitSimple(BuildContext context) {
+  var style = TDTimeCounterStyle.generateStyle(context);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+#### 1 组件尺寸
+
+纯数字
+
+```
+TDTimeCounter _buildSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+  );
+}
+```
+
+带方形底
+
+```
+TDTimeCounter _buildSquareSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildSquareMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildSquareLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildSquareSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildSquareMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildSquareLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+    theme: TDTimeCounterTheme.square,
+  );
+}
+```
+
+带圆形底
+
+```
+TDTimeCounter _buildRoundSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildRoundMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildRoundLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildRoundSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildRoundMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildRoundLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+    theme: TDTimeCounterTheme.round,
+  );
+}
+```
+
+带单位
+
+```
+TDTimeCounter _buildUnitSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildUnitMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildUnitLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildUnitSmallSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.small,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildUnitMediumSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.medium,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildUnitLargeSize(BuildContext context) {
+  return const TDTimeCounter(
+    time: 60 * 60 * 1000,
+    size: TDTimeCounterSize.large,
+    theme: TDTimeCounterTheme.square,
+    splitWithUnit: true,
+  );
+}
+```
+
+无底色带单位
+
+```
+TDTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
+  var style =
+      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.small);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
+  var style =
+      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.medium);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
+  var style =
+      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.large);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
+  var style =
+      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.small);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
+  var style =
+      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.medium);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+
+```
+TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
+  var style =
+      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.large);
+  style.timeColor = TDTheme.of(context).errorNormalColor;
+  return TDTimeCounter(
+    time: 60 * 60 * 1000,
+    splitWithUnit: true,
+    style: style,
+  );
+}
+```
+
+## API
+
+1. [TDTimeCounter](#tdtimecounter)
+2. [TDTimeCounterController](#tdtimecountercontroller)
+3. [TDTimeCounterStyle](#tdtimecounterstyle)
+
+#### TDTimeCounter
+
+##### 简介
+
+计时组件
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| autoStart | bool | true | 是否自动开始倒计时 |
+| content | dynamic | 'default' | 'default' / Widget Function(int time) / Widget |
+| controller | TDTimeCounterController? | - | 控制器，可控制开始/暂停/继续/重置 |
+| direction | TDTimeCounterDirection | TDTimeCounterDirection.down | 计时方向，默认倒计时 |
+| format | String | 'HH:mm:ss' | 时间格式，DD-日，HH-时，mm-分，ss-秒，SSS-毫秒（分隔符必须为长度为1的非空格的字符） |
+| key |  | - |  |
+| millisecond | bool | false | 是否开启毫秒级渲染 |
+| onChange | Function(int time)? | - | 时间变化时触发回调 |
+| onFinish | VoidCallback? | - | 计时结束时触发回调 |
+| size | TDTimeCounterSize | TDTimeCounterSize.medium | 尺寸 |
+| splitWithUnit | bool | false | 使用时间单位分割 |
+| style | TDTimeCounterStyle? | - | 自定义样式，有则优先用它，没有则根据size和theme选取 |
+| theme | TDTimeCounterTheme | TDTimeCounterTheme.defaultTheme | 风格 |
+| time | int | - | 必需；计时时长，单位毫秒 |
+
+#### TDTimeCounterController
+
+##### 简介
+
+倒计时组件控制器，可控制开始(`start()`)/暂停(`pause()`)/继续(`resume()`)/重置(`reset([int? time])`)
+
+#### TDTimeCounterStyle
+
+##### 简介
+
+计时组件样式
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| space | double? | - | 时间与分隔符的间隔 |
+| splitColor | Color? | - | 分隔符字体颜色 |
+| splitFontHeight | double? | - | 分隔符字体行高 |
+| splitFontSize | double? | - | 分隔符字体尺寸 |
+| splitFontWeight | FontWeight? | - | 分隔符字体粗细 |
+| timeBox | BoxDecoration? | - | 时间容器装饰 |
+| timeColor | Color? | - | 时间字体颜色 |
+| timeFontFamily | FontFamily? | - | 时间字体 |
+| timeFontHeight | double? | - | 时间字体行高 |
+| timeFontSize | double? | - | 时间字体尺寸 |
+| timeFontWeight | FontWeight? | - | 时间字体粗细 |
+| timeHeight | double? | - | 时间容器高度 |
+| timeMargin | EdgeInsets? | - | 时间容器外边距 |
+| timePadding | EdgeInsets? | - | 时间容器内边距 |
+| timeWidth | double? | - | 时间容器宽度 |
+
+##### 工厂构造方法
+
+| 名称 | 说明 |
+| --- | --- |
+| TDTimeCounterStyle.generateStyle | 生成默认样式 |

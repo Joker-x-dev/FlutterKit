@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import '../base/base_logic.dart';
 import 'base_tab_state.dart';
 
+/// 基础 Tab 页面 Logic
+///
+/// 统一管理 TabController、PageController 和页面切换动画状态。
 abstract class BaseTabLogic extends BaseLogic with GetTickerProviderStateMixin {
   /// Tab状态管理
   final BaseTabState tabState = BaseTabState();
@@ -11,6 +14,7 @@ abstract class BaseTabLogic extends BaseLogic with GetTickerProviderStateMixin {
   /// tabs 标签列表，子类必须实现
   List<String> get tabList;
 
+  /// 初始化 Tab 与 PageView 控制器
   @override
   void onInit() {
     super.onInit();
@@ -20,6 +24,7 @@ abstract class BaseTabLogic extends BaseLogic with GetTickerProviderStateMixin {
     tabState.pageController = PageController(initialPage: 0);
   }
 
+  /// 释放 Tab 控制器
   @override
   void onClose() {
     super.onClose();
@@ -27,6 +32,8 @@ abstract class BaseTabLogic extends BaseLogic with GetTickerProviderStateMixin {
   }
 
   /// tab点击/改变
+  ///
+  /// [index] 目标 Tab 下标。
   void tabChange(int index) {
     tabState.isAnimating.value = true;
     setPageIndex(index);
@@ -34,6 +41,8 @@ abstract class BaseTabLogic extends BaseLogic with GetTickerProviderStateMixin {
   }
 
   /// pageView改变
+  ///
+  /// [index] 当前 PageView 页面下标。
   void pageViewChange(int index) {
     // 根据标志判断是手动滚动还是动画滚动
     if (!tabState.isAnimating.value) {
@@ -49,12 +58,16 @@ abstract class BaseTabLogic extends BaseLogic with GetTickerProviderStateMixin {
   }
 
   /// 设置页面下标
-  setPageIndex(int index) {
+  ///
+  /// [index] 目标 Tab 下标。
+  void setPageIndex(int index) {
     tabState.tabController!.index = index;
   }
 
   /// 设置页面
-  setPageView(index) {
+  ///
+  /// [index] 目标 PageView 页面下标。
+  void setPageView(int index) {
     tabState.pageController?.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),

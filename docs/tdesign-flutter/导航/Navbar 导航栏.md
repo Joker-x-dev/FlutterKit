@@ -1,0 +1,339 @@
+# Navbar 导航栏
+
+> 用于不同页面之间切换或者跳转，位于内容区的上方，系统状态栏的下方。
+
+> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/navbar)
+> 归档时间：2026-07-16T07:37:59.655Z
+
+## 示例
+
+![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+
+### 引入
+
+在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+
+```dart
+import 'package:tdesign_flutter/tdesign_flutter.dart';
+```
+
+### 代码演示
+
+[td_navbar_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_navbar_page.dart)
+
+#### 1 组件类型
+
+基础H5导航栏
+
+```
+  Widget _baseH5Navbar(BuildContext context) {
+    return const TDNavBar(
+      height: 48,
+      titleFontWeight: FontWeight.w600,
+      title: titleText,
+      screenAdaptation: false,
+      useDefaultBack: true,
+    );
+  }
+```
+
+
+```
+  Widget _leftMultiAction(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: TDNavBar(
+          height: 48,
+          title: titleText,
+          titleFontWeight: FontWeight.w600,
+          screenAdaptation: false,
+          useDefaultBack: true,
+          leftBarItems: [
+            TDNavBarItem(icon: TDIcons.close, iconSize: 24),
+          ],
+          rightBarItems: [
+            TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+          ]),
+    );
+  }
+```
+
+
+```
+  Widget _rightMultiAction(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: TDNavBar(
+          height: 48,
+          title: titleText,
+          titleFontWeight: FontWeight.w600,
+          screenAdaptation: false,
+          useDefaultBack: true,
+          rightBarItems: [
+            TDNavBarItem(
+              icon: TDIcons.home,
+              iconSize: 24,
+            ),
+            TDNavBarItem(
+              icon: TDIcons.ellipsis,
+              iconSize: 24,
+            )
+          ]),
+    );
+  }
+```
+
+带搜索导航栏
+
+```
+  Widget _searchNavbar(BuildContext context) {
+    return TDNavBar(
+        useDefaultBack: false,
+        screenAdaptation: false,
+        centerTitle: false,
+        titleMargin: 0,
+        titleWidget: TDSearchBar(
+          needCancel: false,
+          autoHeight: true,
+          padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+          placeHolder: '搜索预设文案',
+          mediumStyle: true,
+          style: TDSearchStyle.round,
+          onTextChanged: (String text) {
+            print('input：$text');
+          },
+        ),
+        rightBarItems: [
+          TDNavBarItem(icon: TDIcons.home, iconSize: 24),
+          TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+        ]);
+  }
+```
+
+带图片导航栏
+
+```
+  Widget _logoNavbar(BuildContext context) {
+    return TDNavBar(
+        useDefaultBack: false,
+        screenAdaptation: false,
+        centerTitle: false,
+        titleMargin: 0,
+        titleWidget: const TDImage(
+          assetUrl: 'assets/img/td_brand.png',
+          width: 102,
+          height: 24,
+        ),
+        rightBarItems: [
+          TDNavBarItem(icon: TDIcons.home, iconSize: 24),
+          TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+        ]);
+  }
+```
+
+#### 1 组件样式
+
+标题对齐
+
+```
+  Widget _titleCenterNavbar(BuildContext context) {
+    return TDNavBar(
+        height: 48,
+        title: titleText,
+        titleFontWeight: FontWeight.w600,
+        screenAdaptation: false,
+        useDefaultBack: true,
+        rightBarItems: [
+          TDNavBarItem(icon: TDIcons.home, iconSize: 24),
+          TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+        ]);
+  }
+```
+
+
+```
+  Widget _titleLeftNavbar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: TDNavBar(
+          height: 48,
+          title: titleText,
+          titleFontWeight: FontWeight.w600,
+          centerTitle: false,
+          titleMargin: 0,
+          screenAdaptation: false,
+          useDefaultBack: true,
+          rightBarItems: [
+            TDNavBarItem(icon: TDIcons.home, iconSize: 24),
+            TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+          ]),
+    );
+  }
+```
+
+标题尺寸
+
+```
+  Widget _titleNormalNavbar(BuildContext context) {
+    return TDNavBar(
+        height: 48,
+        title: titleText,
+        titleFontWeight: FontWeight.w600,
+        screenAdaptation: false,
+        useDefaultBack: true,
+        rightBarItems: [
+          TDNavBarItem(icon: TDIcons.home, iconSize: 24),
+          TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+        ]);
+  }
+```
+
+
+```
+  Widget _titleBelowNavbar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: TDNavBar(
+          height: 104,
+          title: '返回',
+          titleColor: TDTheme.of(context).textColorPrimary,
+          belowTitleWidget: SizedBox(
+            height: 56,
+            child: TDText(
+              titleText,
+              font: Font(size: 28, lineHeight: 52),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          titleFont: Font(size: 16, lineHeight: 24),
+          centerTitle: false,
+          titleMargin: 0,
+          screenAdaptation: false,
+          useDefaultBack: false,
+          leftBarItems: [
+            TDNavBarItem(icon: TDIcons.chevron_left, iconSize: 24),
+          ],
+          rightBarItems: [
+            TDNavBarItem(icon: TDIcons.home, iconSize: 24),
+            TDNavBarItem(icon: TDIcons.ellipsis, iconSize: 24)
+          ]),
+    );
+  }
+```
+
+自定义颜色
+
+```
+  Widget _setBgColorNavbar(BuildContext context) {
+    return TDNavBar(
+        height: 48,
+        title: titleText,
+        titleColor: Colors.white,
+        backgroundColor: TDTheme.of(context).brandNormalColor,
+        titleFontWeight: FontWeight.w600,
+        useDefaultBack: false,
+        screenAdaptation: false,
+        leftBarItems: [
+          TDNavBarItem(
+              icon: TDIcons.chevron_left,
+              iconSize: 24,
+              iconColor: Colors.white),
+        ],
+        rightBarItems: [
+          TDNavBarItem(
+              icon: TDIcons.home, iconSize: 24, iconColor: Colors.white),
+          TDNavBarItem(
+              icon: TDIcons.ellipsis, iconSize: 24, iconColor: Colors.white)
+        ]);
+  }
+```
+
+## API
+
+1. [TDNavBar](#tdnavbar)
+2. [TDNavBarItem](#tdnavbaritem)
+
+#### TDNavBar
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| backgroundColor | Color? | - | 背景颜色 |
+| backIconColor | Color? | - | 左边返回图标颜色 |
+| belowTitleWidget | Widget? | - | belowTitleWidget navbar 下方的 widget |
+| border | TDNavBarItemBorder? | - | 边框 |
+| boxShadow | List? | - | 底部阴影 |
+| centerTitle | bool | true | 标题是否居中 |
+| flexibleSpace | Widget? | - | 固定背景 |
+| height | double | 48 | 高度 |
+| key |  | - |  |
+| leftBarItems | List? | - | 左边操作项 |
+| onBack | VoidCallback? | - | 返回事件 |
+| opacity | double | 1.0 | 透明度 |
+| padding | EdgeInsetsGeometry? | - | 内部填充 |
+| rightBarItems | List? | - | 右边操作项 |
+| screenAdaptation | bool | true | 是否进行屏幕适配，默认 true |
+| title | String? | - | 标题文案 |
+| titleColor | Color? | - | 标题颜色 |
+| titleFont | Font? | - | 标题字体尺寸 |
+| titleFontFamily | FontFamily? | - | 标题字体样式 |
+| titleFontWeight | FontWeight? | FontWeight.w500 | 标题字体粗细 |
+| titleMargin | double | 16 | 中间文案左右两边间距 |
+| titleWidget | Widget? | - | 标题控件，优先级高于 title 文案 |
+| useBorderStyle | bool | false | 是否使用边框模式 |
+| useDefaultBack | bool | true | 是否使用默认的返回 |
+
+#### TDNavBarItem
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| action | TDBarItemAction? | - | 操作回调 |
+| customWidget | Widget? | - | 自定义组件，优先级高于 icon，可以是任意 Widget |
+| icon | IconData? | - | 图标 |
+| iconColor | Color? | - | 图标颜色 |
+| iconSize | double? | 24.0 | 图标尺寸 |
+| iconWidget | Widget? | - | 图标组件，优先级高于 icon |
+| padding | EdgeInsetsGeometry? | - |  |
+
+## 设计指南
+
+1. [何时使用](#何时使用)
+2. [组件搭配使用](#组件搭配使用)
+3. [常见用法](#常见用法)
+
+#### 何时使用
+
+需要在页面间跳转、返回，或需承载少量辅助功能时使用。
+
+#### 组件搭配使用
+
+###### 带图标的导航栏与[抽屉](<Drawer 抽屉.md>)、[动作面板](<../反馈/ActionSheet 动作面板.md>)组合使用，用于唤起一组操作或功能。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/navbar/navbar-1.png)
+
+---
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/navbar/navbar-2.png)
+
+#### 常见用法
+
+###### 通常用来承载页面标题和返回操作，点击跳转回到上一个打开的页面。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/navbar/navbar-3.png)
+
+---
+
+###### 在应用内，通常用来承载搜索、扫码等功能性高频操作。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/navbar/navbar-4.png)
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/navbar/navbar-5.png)
+
+---
+
+###### 在需要定位的场景，通常结合当前定位进行、所在城市等进行展示并提供切换的能力。
+
+![](https://tdesign.gtimg.com/site/design/mobile-guide/navbar/navbar-6.png)

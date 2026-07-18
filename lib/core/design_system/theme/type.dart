@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+/// 当前 GetX 构建上下文
 BuildContext get _context => Get.context!;
 
 /// 超大号显示文字 (64/72)，用于特别重要的页面标题，活动页大标题

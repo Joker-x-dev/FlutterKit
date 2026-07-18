@@ -5,15 +5,15 @@ import '../base_network/base_network_state.dart';
 
 /// 列表状态管理类
 class BaseListState<T> extends BaseNetworkState {
-  @override
-  bool get requestSetStatus => false;
+  /// 列表页加载时不应把整页设置为 loading，由 EasyRefresh 自身控制
+  BaseListState() : super(requestSetStatus: false);
 
   /// 刷新控制器
   EasyRefreshController easyRefreshController = EasyRefreshController(
     controlFinishLoad: true,
   );
 
-  /// 单页最大数量 子类可通过重写修改
+  /// 单页最大数量，子类可通过重写修改
   int pageSize = 20;
 
   /// 当前页数

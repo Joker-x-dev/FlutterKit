@@ -1,49 +1,79 @@
-name: td_flutter_getx_template
+# 项目名称
+name: flutter_kit
+# 项目描述
 description: "基于 GetX + TDesign 的 Flutter 项目模板，整合常用功能和开发实践"
 publish_to: 'none'
+# 项目版本 1.0.0 是版本号 1 是构建版本号
 version: 1.0.0+1
 
+# 项目依赖的 Flutter 和 Dart 版本
 environment:
   sdk: ">=3.9.0 <4.0.0"
   flutter: ">=3.38.0"
 
+# 项目依赖
 dependencies:
   flutter:
     sdk: flutter
 
   # GetX 框架 https://pub.dev/packages/get
-  get: ^4.7.2
+  get: ^4.7.3
 
   # Tencent Design Flutter 组件库 https://pub.dev/packages/tdesign_flutter
-  tdesign_flutter: ^0.2.6
+  # 组件文档地址 https://tdesign.tencent.com/flutter/getting-started
+  # 注意：官方 0.2.7 在 Flutter 3.44+ 会因 IconData 被标记为 final 而无法编译
+  # 临时方案见：https://github.com/Tencent/tdesign-flutter/issues/943
+  # 待官方发版后可取消下方本地缓存补丁，直接升级版本
+  tdesign_flutter: ^0.2.7
 
   # 屏幕适配工具 https://pub.dev/packages/flutter_screenutil
   flutter_screenutil: ^5.9.3
 
   # 网络请求库 https://pub.dev/packages/dio
-  dio: ^5.9.0
+  dio: ^5.10.0
 
   # JSON 序列化工具类库 https://pub.dev/packages/json_annotation
-  json_annotation: ^4.9.0
+  json_annotation: ^4.12.0
 
   # Retrofit 网络请求库 https://pub.dev/packages/retrofit
-  retrofit: ^4.9.0
+  retrofit: ^4.9.2
 
   # svg框架 https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.2.2
+  flutter_svg: ^2.3.0
 
   # 持久化存储库 https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.5
 
-  # 下拉刷新 上拉加载 https://pub.dev/packages/easy_refresh
-  easy_refresh: ^3.4.0
+  # SQLite 本地数据库 https://pub.dev/packages/sqflite
+  sqflite: ^2.4.3
+
+  # 路径处理 https://pub.dev/packages/path
+  path: ^1.9.1
+
+  # 跨平台打开外部链接 https://pub.dev/packages/url_launcher
+  url_launcher: ^6.3.2
+
+  # 下拉刷新 上拉加载  https://pub.dev/packages/easy_refresh
+  easy_refresh: ^3.5.1
 
   # 页面动画 https://pub.dev/packages/animations
-  animations: ^2.1.1
+  animations: ^2.2.0
 
   # 加载弹窗 和 Toast https://pub.dev/packages/bot_toast
   bot_toast: ^4.1.3
 
+  # 网络请求通知栏拦截器（调试模式使用）https://pub.dev/packages/alice
+  # 文档 https://jhomlala.github.io/alice/#/README
+  alice: ^1.0.0
+  alice_dio: ^1.0.7
+
+  # dio网络请求日志工具（调试模式使用）https://pub.dev/packages/pretty_dio_logger
+  pretty_dio_logger: ^1.4.0
+
+  # 日志记录工具 https://pub.dev/packages/logger
+  logger: ^2.7.0
+
+# 开发环境依赖
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,30 +81,46 @@ dev_dependencies:
   # Flutter 代码风格检查 https://pub.dev/packages/flutter_lints
   flutter_lints: ^6.0.0
 
-  # 网络请求通知栏拦截器 https://pub.dev/packages/alice
-  # 文档 https://jhomlala.github.io/alice/#/README
-  alice: ^1.0.0
-  alice_dio: ^1.0.7
-
   # JSON 序列化工具 https://pub.dev/packages/json_serializable
-  json_serializable: ^6.11.1
+  json_serializable: ^6.14.0
 
   # Retrofit 代码生成库 https://pub.dev/packages/retrofit_generator
-  retrofit_generator: ^10.1.4
+  retrofit_generator: ^10.2.7
 
   # 构建工具 https://pub.dev/packages/build_runner
-  build_runner: ^2.10.3
+  build_runner: ^2.15.0
 
-  # dio网络请求日志工具 https://pub.dev/packages/pretty_dio_logger
-  pretty_dio_logger: ^1.4.0
+  # 资源代码生成器，根据 pubspec.yaml 中 assets/fonts/colors 生成类型安全的资源访问类
+  # 地址：https://pub.dev/packages/flutter_gen
+  flutter_gen_runner: ^5.14.1
 
-  # 日志记录工具 https://pub.dev/packages/logger
-  logger: ^2.6.2
+  # 应用图标生成器，覆盖 Android、iOS、Web、Windows 与 macOS 图标资源
+  # 地址：https://pub.dev/packages/flutter_launcher_icons
+  flutter_launcher_icons: ^0.14.4
 
+  # 原生启动页生成器，覆盖 Android、iOS 与 Web 启动页资源
+  # 地址：https://pub.dev/packages/flutter_native_splash
+  flutter_native_splash: ^2.4.8
+
+# FlutterGen 资源配置，根据 pubspec.yaml 中声明的 assets/fonts/colors 生成类型安全的资源访问类
+# 地址：https://pub.dev/packages/flutter_gen
+flutter_gen:
+  output: lib/generated/
+  line_length: 100
+
+  # 根据项目实际依赖启用集成，生成对应资源的便捷访问方法
+  integrations:
+    image: true
+    flutter_svg: true
+    lottie: true
+
+# Flutter 配置
 flutter:
+  # 是否使用 Material 设计
   uses-material-design: true
+  # 资源文件
   assets:
-#    - assets/image/
+    - assets/image/
     - assets/icon/
     - assets/json/
 #    - assets/theme/ 开发时的主题配置 不打包到生产

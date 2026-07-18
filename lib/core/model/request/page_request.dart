@@ -11,15 +11,22 @@ class PageRequest {
   /// 每页大小
   final int size;
 
-  const PageRequest({
-    this.page = 1,
-    this.size = 10,
-  });
+  /// 创建通用分页请求
+  ///
+  /// [page] 页码。
+  /// [size] 每页数量。
+  const PageRequest({this.page = 1, this.size = 10});
 
-  /// 从 JSON 创建实例
+  /// 从 JSON 创建通用分页请求
+  ///
+  /// [json] 分页请求 JSON 数据。
+  ///
+  /// 返回解析后的 [PageRequest]。
   factory PageRequest.fromJson(Map<String, dynamic> json) =>
       _$PageRequestFromJson(json);
 
-  /// 转换为 JSON
+  /// 将通用分页请求转换为 JSON
+  ///
+  /// 返回当前分页请求的 JSON 数据。
   Map<String, dynamic> toJson() => _$PageRequestToJson(this);
 }

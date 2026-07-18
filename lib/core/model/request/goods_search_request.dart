@@ -31,6 +31,18 @@ class GoodsSearchRequest extends PageRequest {
   /// 精选
   final bool? featured;
 
+  /// 创建商品搜索分页请求
+  ///
+  /// [page] 页码。
+  /// [size] 每页数量。
+  /// [typeId] 可选商品分类 ID 列表。
+  /// [minPrice] 可选最低价格。
+  /// [maxPrice] 可选最高价格。
+  /// [keyWord] 可选搜索关键词。
+  /// [order] 可选排序字段。
+  /// [sort] 可选排序方向。
+  /// [recommend] 可选推荐筛选条件。
+  /// [featured] 可选精选筛选条件。
   const GoodsSearchRequest({
     super.page = 1,
     super.size = 10,
@@ -44,10 +56,16 @@ class GoodsSearchRequest extends PageRequest {
     this.featured,
   });
 
-  /// 从 JSON 创建实例
+  /// 从 JSON 创建商品搜索分页请求
+  ///
+  /// [json] 商品搜索请求 JSON 数据。
+  ///
+  /// 返回解析后的 [GoodsSearchRequest]。
   factory GoodsSearchRequest.fromJson(Map<String, dynamic> json) =>
       _$GoodsSearchRequestFromJson(json);
 
-  /// 转换为 JSON
+  /// 将商品搜索分页请求转换为 JSON
+  ///
+  /// 返回当前请求参数的 JSON 数据。
   Map<String, dynamic> toJson() => _$GoodsSearchRequestToJson(this);
 }

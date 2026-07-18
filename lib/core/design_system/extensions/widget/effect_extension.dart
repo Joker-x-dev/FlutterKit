@@ -5,18 +5,15 @@ import 'dart:ui';
 /// 提供透明度、模糊、水波纹、发光等视觉效果
 extension EffectExtension on Widget {
   /// 设置透明度
-  /// 
+  ///
   /// [opacity] 透明度值（0.0 到 1.0）
   /// [alwaysIncludeSemantics] 是否始终包含语义信息
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().opacity(0.5)
   /// ```
-  Widget opacity(
-    double opacity, {
-    bool alwaysIncludeSemantics = false,
-  }) {
+  Widget opacity(double opacity, {bool alwaysIncludeSemantics = false}) {
     return Opacity(
       opacity: opacity.clamp(0.0, 1.0),
       alwaysIncludeSemantics: alwaysIncludeSemantics,
@@ -24,14 +21,12 @@ extension EffectExtension on Widget {
     );
   }
 
-
-
   /// 背景模糊效果
-  /// 
+  ///
   /// [sigmaX] X 轴模糊程度
   /// [sigmaY] Y 轴模糊程度
   /// [tileMode] 平铺模式
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().backgroundBlur(sigmaX: 5, sigmaY: 5)
@@ -52,11 +47,11 @@ extension EffectExtension on Widget {
   }
 
   /// 图像模糊效果
-  /// 
+  ///
   /// [sigmaX] X 轴模糊程度
   /// [sigmaY] Y 轴模糊程度
   /// [tileMode] 平铺模式
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Image.asset('image.png').blur(sigmaX: 3, sigmaY: 3)
@@ -77,7 +72,7 @@ extension EffectExtension on Widget {
   }
 
   /// 水波纹点击效果
-  /// 
+  ///
   /// [key] Widget key
   /// [focusColor] 焦点颜色
   /// [hoverColor] 悬停颜色
@@ -92,7 +87,7 @@ extension EffectExtension on Widget {
   /// [canRequestFocus] 可请求焦点
   /// [autoFocus] 自动焦点
   /// [enable] 启用状态
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().ripple(
@@ -115,47 +110,43 @@ extension EffectExtension on Widget {
     bool canRequestFocus = true,
     bool autoFocus = false,
     bool enable = true,
-  }) =>
-      enable
-          ? Builder(
-              key: key,
-              builder: (BuildContext context) {
-                // 查找祖先 GestureDetector 以获取 onTap 回调
-                GestureDetector? gestures =
-                    context.findAncestorWidgetOfExactType<GestureDetector>();
-                return Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    focusColor: focusColor,
-                    hoverColor: hoverColor,
-                    highlightColor: highlightColor,
-                    splashColor: splashColor,
-                    splashFactory: splashFactory,
-                    radius: radius,
-                    customBorder: customBorder,
-                    enableFeedback: enableFeedback,
-                    excludeFromSemantics: excludeFromSemantics,
-                    focusNode: focusNode,
-                    canRequestFocus: canRequestFocus,
-                    autofocus: autoFocus,
-                    onTap: gestures?.onTap,
-                    child: this,
-                  ),
-                );
-              },
-            )
-          : Builder(
-              key: key,
-              builder: (context) => this,
+  }) => enable
+      ? Builder(
+          key: key,
+          builder: (BuildContext context) {
+            // 查找祖先 GestureDetector 以获取 onTap 回调
+            GestureDetector? gestures = context
+                .findAncestorWidgetOfExactType<GestureDetector>();
+            return Material(
+              color: Colors.transparent,
+              child: InkWell(
+                focusColor: focusColor,
+                hoverColor: hoverColor,
+                highlightColor: highlightColor,
+                splashColor: splashColor,
+                splashFactory: splashFactory,
+                radius: radius,
+                customBorder: customBorder,
+                enableFeedback: enableFeedback,
+                excludeFromSemantics: excludeFromSemantics,
+                focusNode: focusNode,
+                canRequestFocus: canRequestFocus,
+                autofocus: autoFocus,
+                onTap: gestures?.onTap,
+                child: this,
+              ),
             );
+          },
+        )
+      : Builder(key: key, builder: (context) => this);
 
   /// 发光效果
-  /// 
+  ///
   /// [color] 发光颜色
   /// [blurRadius] 模糊半径
   /// [spreadRadius] 扩散半径
   /// [offset] 偏移量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().glow(
@@ -186,11 +177,11 @@ extension EffectExtension on Widget {
   }
 
   /// 彩色发光效果
-  /// 
+  ///
   /// [colors] 发光颜色列表
   /// [blurRadius] 模糊半径
   /// [spreadRadius] 扩散半径
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().multiGlow(
@@ -206,11 +197,13 @@ extension EffectExtension on Widget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: colors
-            .map((color) => BoxShadow(
-                  color: color,
-                  blurRadius: blurRadius,
-                  spreadRadius: spreadRadius,
-                ))
+            .map(
+              (color) => BoxShadow(
+                color: color,
+                blurRadius: blurRadius,
+                spreadRadius: spreadRadius,
+              ),
+            )
             .toList(),
       ),
       child: this,
@@ -218,12 +211,12 @@ extension EffectExtension on Widget {
   }
 
   /// 霓虹灯效果
-  /// 
+  ///
   /// [color] 霓虹灯颜色
   /// [blurRadius] 模糊半径
   /// [spreadRadius] 扩散半径
   /// [strokeWidth] 描边宽度
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Text('Neon').neon(
@@ -261,10 +254,7 @@ extension EffectExtension on Widget {
         // 内发光
         Container(
           decoration: BoxDecoration(
-            border: Border.all(
-              color: color,
-              width: strokeWidth,
-            ),
+            border: Border.all(color: color, width: strokeWidth),
             boxShadow: [
               BoxShadow(
                 color: color.withValues(alpha: 0.6),
@@ -280,10 +270,10 @@ extension EffectExtension on Widget {
   }
 
   /// 渐变遮罩效果
-  /// 
+  ///
   /// [gradient] 渐变
   /// [blendMode] 混合模式
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Image.asset('image.png').gradientMask(
@@ -304,16 +294,14 @@ extension EffectExtension on Widget {
   }
 
   /// 彩虹渐变遮罩
-  /// 
+  ///
   /// [blendMode] 混合模式
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Text('Rainbow').rainbowMask()
   /// ```
-  Widget rainbowMask({
-    BlendMode blendMode = BlendMode.srcIn,
-  }) {
+  Widget rainbowMask({BlendMode blendMode = BlendMode.srcIn}) {
     return gradientMask(
       const LinearGradient(
         colors: [
@@ -331,11 +319,11 @@ extension EffectExtension on Widget {
   }
 
   /// 闪烁效果
-  /// 
+  ///
   /// [duration] 闪烁周期
   /// [minOpacity] 最小透明度
   /// [maxOpacity] 最大透明度
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().shimmer(
@@ -358,11 +346,11 @@ extension EffectExtension on Widget {
   }
 
   /// 脉冲效果
-  /// 
+  ///
   /// [duration] 脉冲周期
   /// [minScale] 最小缩放
   /// [maxScale] 最大缩放
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().pulse(
@@ -385,11 +373,11 @@ extension EffectExtension on Widget {
   }
 
   /// 呼吸效果（透明度变化）
-  /// 
+  ///
   /// [duration] 呼吸周期
   /// [minOpacity] 最小透明度
   /// [maxOpacity] 最大透明度
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().breathe(
@@ -412,10 +400,10 @@ extension EffectExtension on Widget {
   }
 
   /// 抖动效果
-  /// 
+  ///
   /// [duration] 抖动周期
   /// [offset] 抖动偏移量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().shake(
@@ -427,21 +415,30 @@ extension EffectExtension on Widget {
     Duration duration = const Duration(milliseconds: 500),
     double offset = 5.0,
   }) {
-    return _ShakeWidget(
-      duration: duration,
-      offset: offset,
-      child: this,
-    );
+    return _ShakeWidget(duration: duration, offset: offset, child: this);
   }
 }
 
 /// 闪烁效果 Widget
 class _ShimmerWidget extends StatefulWidget {
+  /// 应用闪烁效果的子组件
   final Widget child;
+
+  /// 闪烁动画周期
   final Duration duration;
+
+  /// 最小透明度
   final double minOpacity;
+
+  /// 最大透明度
   final double maxOpacity;
 
+  /// 创建闪烁效果组件
+  ///
+  /// [child] 应用效果的子组件。
+  /// [duration] 闪烁动画周期。
+  /// [minOpacity] 最小透明度。
+  /// [maxOpacity] 最大透明度。
   const _ShimmerWidget({
     required this.child,
     required this.duration,
@@ -449,47 +446,48 @@ class _ShimmerWidget extends StatefulWidget {
     required this.maxOpacity,
   });
 
+  /// 创建闪烁效果组件状态
   @override
   State<_ShimmerWidget> createState() => _ShimmerWidgetState();
 }
 
+/// 闪烁效果组件状态
 class _ShimmerWidgetState extends State<_ShimmerWidget>
     with SingleTickerProviderStateMixin {
+  /// 闪烁动画控制器
   late AnimationController _controller;
+
+  /// 透明度动画
   late Animation<double> _animation;
 
+  /// 初始化循环闪烁动画
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _animation = Tween<double>(
       begin: widget.minOpacity,
       end: widget.maxOpacity,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _controller.repeat(reverse: true);
   }
 
+  /// 释放闪烁动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 构建闪烁效果组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Opacity(
-          opacity: _animation.value,
-          child: widget.child,
-        );
+        return Opacity(opacity: _animation.value, child: widget.child);
       },
     );
   }
@@ -497,11 +495,24 @@ class _ShimmerWidgetState extends State<_ShimmerWidget>
 
 /// 脉冲效果 Widget
 class _PulseWidget extends StatefulWidget {
+  /// 应用脉冲效果的子组件
   final Widget child;
+
+  /// 脉冲动画周期
   final Duration duration;
+
+  /// 最小缩放比例
   final double minScale;
+
+  /// 最大缩放比例
   final double maxScale;
 
+  /// 创建脉冲效果组件
+  ///
+  /// [child] 应用效果的子组件。
+  /// [duration] 脉冲动画周期。
+  /// [minScale] 最小缩放比例。
+  /// [maxScale] 最大缩放比例。
   const _PulseWidget({
     required this.child,
     required this.duration,
@@ -509,47 +520,48 @@ class _PulseWidget extends StatefulWidget {
     required this.maxScale,
   });
 
+  /// 创建脉冲效果组件状态
   @override
   State<_PulseWidget> createState() => _PulseWidgetState();
 }
 
+/// 脉冲效果组件状态
 class _PulseWidgetState extends State<_PulseWidget>
     with SingleTickerProviderStateMixin {
+  /// 脉冲动画控制器
   late AnimationController _controller;
+
+  /// 缩放动画
   late Animation<double> _animation;
 
+  /// 初始化循环脉冲动画
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _animation = Tween<double>(
       begin: widget.minScale,
       end: widget.maxScale,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _controller.repeat(reverse: true);
   }
 
+  /// 释放脉冲动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 构建脉冲效果组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Transform.scale(
-          scale: _animation.value,
-          child: widget.child,
-        );
+        return Transform.scale(scale: _animation.value, child: widget.child);
       },
     );
   }
@@ -557,11 +569,24 @@ class _PulseWidgetState extends State<_PulseWidget>
 
 /// 呼吸效果 Widget
 class _BreatheWidget extends StatefulWidget {
+  /// 应用呼吸效果的子组件
   final Widget child;
+
+  /// 呼吸动画周期
   final Duration duration;
+
+  /// 最小透明度
   final double minOpacity;
+
+  /// 最大透明度
   final double maxOpacity;
 
+  /// 创建呼吸效果组件
+  ///
+  /// [child] 应用效果的子组件。
+  /// [duration] 呼吸动画周期。
+  /// [minOpacity] 最小透明度。
+  /// [maxOpacity] 最大透明度。
   const _BreatheWidget({
     required this.child,
     required this.duration,
@@ -569,47 +594,48 @@ class _BreatheWidget extends StatefulWidget {
     required this.maxOpacity,
   });
 
+  /// 创建呼吸效果组件状态
   @override
   State<_BreatheWidget> createState() => _BreatheWidgetState();
 }
 
+/// 呼吸效果组件状态
 class _BreatheWidgetState extends State<_BreatheWidget>
     with SingleTickerProviderStateMixin {
+  /// 呼吸动画控制器
   late AnimationController _controller;
+
+  /// 透明度动画
   late Animation<double> _animation;
 
+  /// 初始化循环呼吸动画
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _animation = Tween<double>(
       begin: widget.minOpacity,
       end: widget.maxOpacity,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _controller.repeat(reverse: true);
   }
 
+  /// 释放呼吸动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 构建呼吸效果组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Opacity(
-          opacity: _animation.value,
-          child: widget.child,
-        );
+        return Opacity(opacity: _animation.value, child: widget.child);
       },
     );
   }
@@ -617,48 +643,62 @@ class _BreatheWidgetState extends State<_BreatheWidget>
 
 /// 抖动效果 Widget
 class _ShakeWidget extends StatefulWidget {
+  /// 应用抖动效果的子组件
   final Widget child;
+
+  /// 抖动动画周期
   final Duration duration;
+
+  /// 水平抖动偏移量
   final double offset;
 
+  /// 创建抖动效果组件
+  ///
+  /// [child] 应用效果的子组件。
+  /// [duration] 抖动动画周期。
+  /// [offset] 水平抖动偏移量。
   const _ShakeWidget({
     required this.child,
     required this.duration,
     required this.offset,
   });
 
+  /// 创建抖动效果组件状态
   @override
   State<_ShakeWidget> createState() => _ShakeWidgetState();
 }
 
+/// 抖动效果组件状态
 class _ShakeWidgetState extends State<_ShakeWidget>
     with SingleTickerProviderStateMixin {
+  /// 抖动动画控制器
   late AnimationController _controller;
+
+  /// 水平位移动画
   late Animation<double> _animation;
 
+  /// 初始化循环抖动动画
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
     _animation = Tween<double>(
       begin: -widget.offset,
       end: widget.offset,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticIn,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticIn));
     _controller.repeat(reverse: true);
   }
 
+  /// 释放抖动动画控制器
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// 构建抖动效果组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(

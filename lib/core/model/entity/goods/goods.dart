@@ -8,7 +8,6 @@ part 'goods.g.dart';
 /// 商品模型
 @JsonSerializable()
 class Goods extends BaseEntity {
-
   /// 类型ID
   final int typeId;
 
@@ -51,6 +50,25 @@ class Goods extends BaseEntity {
   /// 规格
   final List<GoodsSpec>? specs;
 
+  /// 创建商品模型
+  ///
+  /// [id] 商品 ID。
+  /// [typeId] 商品分类 ID。
+  /// [title] 商品标题。
+  /// [subTitle] 可选商品副标题。
+  /// [mainPic] 商品主图地址。
+  /// [pics] 可选商品图片列表。
+  /// [price] 商品价格。
+  /// [sold] 商品销量。
+  /// [content] 可选详情富文本。
+  /// [contentPics] 可选详情图片列表。
+  /// [recommend] 是否推荐。
+  /// [featured] 是否精选。
+  /// [status] 商品状态。
+  /// [sortNum] 商品排序值。
+  /// [specs] 可选商品规格列表。
+  /// [createTime] 可选创建时间。
+  /// [updateTime] 可选更新时间。
   const Goods({
     super.id = 0,
     this.typeId = 0,
@@ -71,9 +89,15 @@ class Goods extends BaseEntity {
     super.updateTime,
   });
 
-  /// 从 JSON 创建实例
+  /// 从 JSON 创建商品模型
+  ///
+  /// [json] 商品 JSON 数据。
+  ///
+  /// 返回解析后的 [Goods]。
   factory Goods.fromJson(Map<String, dynamic> json) => _$GoodsFromJson(json);
 
-  /// 转换为 JSON
+  /// 将商品模型转换为 JSON
+  ///
+  /// 返回当前商品的 JSON 数据。
   Map<String, dynamic> toJson() => _$GoodsToJson(this);
 }

@@ -2,22 +2,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 /// Widget 装饰扩展
-/// 
+///
 /// 提供便捷的装饰设置方法，包括背景、渐变、圆角、边框、阴影等
 extension DecorationExtension on Widget {
   /// 设置背景颜色
-  /// 
+  ///
   /// [color] - 背景颜色
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundColor(Colors.blue)
   /// ```
-  Widget backgroundColor(
-    Color color, {
-    Key? key,
-  }) {
+  Widget backgroundColor(Color color, {Key? key}) {
     return DecoratedBox(
       key: key,
       decoration: BoxDecoration(color: color),
@@ -26,10 +23,10 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置背景图片
-  /// 
+  ///
   /// [image] - 背景图片
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundImage(
@@ -39,10 +36,7 @@ extension DecorationExtension on Widget {
   ///   ),
   /// )
   /// ```
-  Widget backgroundImage(
-    DecorationImage image, {
-    Key? key,
-  }) {
+  Widget backgroundImage(DecorationImage image, {Key? key}) {
     return DecoratedBox(
       key: key,
       decoration: BoxDecoration(image: image),
@@ -51,10 +45,10 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置背景渐变
-  /// 
+  ///
   /// [gradient] - 渐变对象
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundGradient(
@@ -63,10 +57,7 @@ extension DecorationExtension on Widget {
   ///   ),
   /// )
   /// ```
-  Widget backgroundGradient(
-    Gradient gradient, {
-    Key? key,
-  }) {
+  Widget backgroundGradient(Gradient gradient, {Key? key}) {
     return DecoratedBox(
       key: key,
       decoration: BoxDecoration(gradient: gradient),
@@ -75,7 +66,7 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置线性渐变背景
-  /// 
+  ///
   /// [begin] - 渐变起始位置
   /// [end] - 渐变结束位置
   /// [colors] - 渐变颜色列表
@@ -83,7 +74,7 @@ extension DecorationExtension on Widget {
   /// [tileMode] - 平铺模式
   /// [transform] - 渐变变换
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundLinearGradient(
@@ -118,7 +109,7 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置径向渐变背景
-  /// 
+  ///
   /// [center] - 渐变中心位置
   /// [radius] - 渐变半径
   /// [colors] - 渐变颜色列表
@@ -128,7 +119,7 @@ extension DecorationExtension on Widget {
   /// [focalRadius] - 焦点半径
   /// [transform] - 渐变变换
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundRadialGradient(
@@ -167,7 +158,7 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置扫描渐变背景
-  /// 
+  ///
   /// [center] - 渐变中心位置
   /// [startAngle] - 起始角度
   /// [endAngle] - 结束角度
@@ -176,7 +167,7 @@ extension DecorationExtension on Widget {
   /// [tileMode] - 平铺模式
   /// [transform] - 渐变变换
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundSweepGradient(
@@ -212,18 +203,15 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置背景混合模式
-  /// 
+  ///
   /// [blendMode] - 混合模式
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').backgroundBlendMode(BlendMode.multiply)
   /// ```
-  Widget backgroundBlendMode(
-    BlendMode blendMode, {
-    Key? key,
-  }) {
+  Widget backgroundBlendMode(BlendMode blendMode, {Key? key}) {
     return DecoratedBox(
       key: key,
       decoration: BoxDecoration(backgroundBlendMode: blendMode),
@@ -232,14 +220,14 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置圆角
-  /// 
+  ///
   /// [all] - 所有角的圆角半径
   /// [topLeft] - 左上角圆角半径
   /// [topRight] - 右上角圆角半径
   /// [bottomLeft] - 左下角圆角半径
   /// [bottomRight] - 右下角圆角半径
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello')
@@ -269,14 +257,14 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置方向性圆角（支持 RTL 布局）
-  /// 
+  ///
   /// [all] - 所有角的圆角半径
   /// [topStart] - 顶部起始角圆角半径
   /// [topEnd] - 顶部结束角圆角半径
   /// [bottomStart] - 底部起始角圆角半径
   /// [bottomEnd] - 底部结束角圆角半径
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello')
@@ -306,7 +294,7 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置边框
-  /// 
+  ///
   /// [all] - 所有边的边框宽度
   /// [left] - 左边框宽度
   /// [right] - 右边框宽度
@@ -315,7 +303,7 @@ extension DecorationExtension on Widget {
   /// [color] - 边框颜色
   /// [style] - 边框样式
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').border(
@@ -343,13 +331,21 @@ extension DecorationExtension on Widget {
               : BorderSide(color: color, width: left ?? all ?? 0, style: style),
           right: (right ?? all) == null
               ? BorderSide.none
-              : BorderSide(color: color, width: right ?? all ?? 0, style: style),
+              : BorderSide(
+                  color: color,
+                  width: right ?? all ?? 0,
+                  style: style,
+                ),
           top: (top ?? all) == null
               ? BorderSide.none
               : BorderSide(color: color, width: top ?? all ?? 0, style: style),
           bottom: (bottom ?? all) == null
               ? BorderSide.none
-              : BorderSide(color: color, width: bottom ?? all ?? 0, style: style),
+              : BorderSide(
+                  color: color,
+                  width: bottom ?? all ?? 0,
+                  style: style,
+                ),
         ),
       ),
       child: this,
@@ -357,10 +353,10 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置盒阴影
-  /// 
+  ///
   /// [boxShadow] - 阴影列表
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').boxShadow([
@@ -371,10 +367,7 @@ extension DecorationExtension on Widget {
   ///   ),
   /// ])
   /// ```
-  Widget boxShadow(
-    List<BoxShadow> boxShadow, {
-    Key? key,
-  }) {
+  Widget boxShadow(List<BoxShadow> boxShadow, {Key? key}) {
     return DecoratedBox(
       key: key,
       decoration: BoxDecoration(boxShadow: boxShadow),
@@ -383,12 +376,12 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置阴影效果
-  /// 
+  ///
   /// [elevation] - 阴影高度
   /// [borderRadius] - 边框圆角
   /// [shadowColor] - 阴影颜色
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').elevation(
@@ -414,13 +407,13 @@ extension DecorationExtension on Widget {
   }
 
   /// 设置拟物化效果
-  /// 
+  ///
   /// [elevation] - 阴影高度
   /// [borderRadius] - 边框圆角
   /// [backgroundColor] - 背景颜色
   /// [curve] - 曲线强度
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').neumorphism(
@@ -438,7 +431,13 @@ extension DecorationExtension on Widget {
   }) {
     double offset = elevation / 2;
     int colorOffset = (40 * curve).toInt();
-    
+
+    /// 将 RGB 通道值限制在有效范围内
+    ///
+    /// [color] 原始颜色通道值。
+    /// [colorOffset] 颜色通道偏移量。
+    ///
+    /// 返回 `0` 到 `255` 范围内的颜色通道值。
     int adjustColor(int color, int colorOffset) {
       int colorVal = color + colorOffset;
       if (colorVal > 255) return 255;
@@ -454,15 +453,33 @@ extension DecorationExtension on Widget {
           end: Alignment.bottomRight,
           colors: [
             Color.fromRGBO(
-              adjustColor((backgroundColor.r * 255.0).round() & 0xff, colorOffset),
-              adjustColor((backgroundColor.g * 255.0).round() & 0xff, colorOffset),
-              adjustColor((backgroundColor.b * 255.0).round() & 0xff, colorOffset),
+              adjustColor(
+                (backgroundColor.r * 255.0).round() & 0xff,
+                colorOffset,
+              ),
+              adjustColor(
+                (backgroundColor.g * 255.0).round() & 0xff,
+                colorOffset,
+              ),
+              adjustColor(
+                (backgroundColor.b * 255.0).round() & 0xff,
+                colorOffset,
+              ),
               1.0,
             ),
             Color.fromRGBO(
-              adjustColor((backgroundColor.r * 255.0).round() & 0xff, -colorOffset),
-              adjustColor((backgroundColor.g * 255.0).round() & 0xff, -colorOffset),
-              adjustColor((backgroundColor.b * 255.0).round() & 0xff, -colorOffset),
+              adjustColor(
+                (backgroundColor.r * 255.0).round() & 0xff,
+                -colorOffset,
+              ),
+              adjustColor(
+                (backgroundColor.g * 255.0).round() & 0xff,
+                -colorOffset,
+              ),
+              adjustColor(
+                (backgroundColor.b * 255.0).round() & 0xff,
+                -colorOffset,
+              ),
               1.0,
             ),
           ],
@@ -486,7 +503,7 @@ extension DecorationExtension on Widget {
   }
 
   /// 综合装饰设置
-  /// 
+  ///
   /// [color] - 背景颜色
   /// [image] - 背景图片
   /// [border] - 边框
@@ -497,7 +514,7 @@ extension DecorationExtension on Widget {
   /// [shape] - 形状
   /// [position] - 装饰位置
   /// [key] - Widget 的键
-  /// 
+  ///
   /// 示例：
   /// ```dart
   /// Text('Hello').decorated(

@@ -1,23 +1,5 @@
 import 'package:get/get.dart';
 
-/// 路由工具类 - 提供可复用的路由操作方法
-///
-/// 这个工具类包含了常用的路由操作函数，可以在项目中任何地方使用
-/// 所有方法都是静态的，无需实例化即可调用
-///
-/// **新功能特性：**
-/// - 支持传递任意类型的参数（不仅限于Map类型）
-/// - 提供类型安全的参数获取方法
-/// - 向后兼容现有的Map类型参数
-/// - 支持对象实例、基本类型等多种参数类型
-///
-/// **参数类型支持：**
-/// - Map<String, dynamic> - 传统键值对参数
-/// - 对象实例 - 如 User、Product 等自定义类型
-/// - 基本类型 - String、int、bool 等
-/// - 集合类型 - List、Set 等
-/// - 任意自定义类型
-
 /// 跳转到指定页面
 ///
 /// **功能：** 通用的页面跳转方法，支持传递任意类型参数和泛型返回值
@@ -31,7 +13,7 @@ import 'package:get/get.dart';
 ///   - 目标页面可通过 Get.arguments 获取
 ///
 /// **返回值：**
-/// - Future<T?>? 页面返回的结果，类型由泛型 T 指定
+/// - `Future<T?>?` 页面返回的结果，类型由泛型 T 指定
 /// - 当页面关闭时会返回相应的值
 ///
 /// **示例：**
@@ -41,7 +23,7 @@ import 'package:get/get.dart';
 ///
 /// // 带Map参数跳转
 /// toPage('/user-details', arguments: {'userId': '123'});
-/// FaultCard
+///
 /// // 传递对象实例
 /// final user = User(id: '123', name: 'John');
 /// toPage('/profile', arguments: user);
@@ -53,7 +35,22 @@ import 'package:get/get.dart';
 /// final result = await toPage<String>('/profile');
 /// ```
 Future<T?>? toPage<T>(String routeName, {dynamic arguments}) {
-  return Get.toNamed<T>(routeName, arguments: arguments);
+  // GetX 命名路由统一生成 GetPageRoute<dynamic>，导航阶段使用 dynamic
+  // 避免 Flutter Navigator 将动态路由强制转换为 Route<T?> 时抛出类型异常
+  final Future<dynamic>? navigation = Get.toNamed<dynamic>(
+    routeName,
+    arguments: arguments,
+  );
+
+  return navigation?.then<T?>((dynamic result) {
+    if (result == null) {
+      return null;
+    }
+    if (result is T) {
+      return result;
+    }
+    throw StateError('路由 $routeName 返回类型 ${result.runtimeType} 与期望类型 $T 不匹配');
+  });
 }
 
 /// 返回上一页
@@ -184,7 +181,7 @@ dynamic getRawArguments() {
 /// **功能：** 获取当前页面接收到的Map类型参数数据
 ///
 /// **返回值：**
-/// - Map<String, dynamic>? 参数映射表
+/// - `Map<String, dynamic>?` 参数映射表
 /// - 如果没有参数或参数不是Map类型则返回 null
 /// - 包含页面跳转时传递的所有键值对
 ///
@@ -250,7 +247,7 @@ T? getTypedArguments<T>() {
   final args = getRawArguments();
   try {
     return args is T ? args : null;
-  } catch (e) {
+  } on Exception catch (_) {
     return null;
   }
 }
@@ -441,8 +438,8 @@ bool isCurrentRoute(String routeName) {
 /// ```
 void safeBack({String? fallbackRoute}) {
   if (canPop() ?? false) {
-    back();
+    back<void>();
   } else if (fallbackRoute != null) {
-    Get.offAllNamed(fallbackRoute);
+    Get.offAllNamed<void>(fallbackRoute);
   }
 }

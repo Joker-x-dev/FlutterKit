@@ -1,0 +1,33 @@
+# FlutterKit 原生启动页生成配置。
+# 官方文档：https://pub.dev/packages/flutter_native_splash
+# 生成源图位于 assets/dev/，不作为 Flutter 运行时资源打包。
+
+flutter_native_splash:
+  # 原生启动页生成平台。
+  android: true
+  ios: true
+  web: true
+
+  # 启动页背景色；color 与 background_image 二选一。
+  color: "#FFFFFF"
+  color_dark: "#121212"
+
+  # Android 12 以下、iOS 与 Web 共用的中心图。
+  # 图片使用 PNG，并按 4x 像素密度准备。
+  image: "assets/dev/splash.png"
+  image_dark: "assets/dev/splash.png"
+
+  # 中心图展示方式。
+  android_gravity: center
+  ios_content_mode: center
+  web_image_mode: center
+
+  # Android 12+ 启动页配置。
+  android_12:
+    # Android 12+ 窗口背景色。
+    color: "#FFFFFF"
+    color_dark: "#121212"
+
+    # 无图标背景时使用 1152×1152 透明 PNG；重要内容位于直径 768 的中心圆内。
+    image: "assets/dev/splash_android_12.png"
+    image_dark: "assets/dev/splash_android_12.png"

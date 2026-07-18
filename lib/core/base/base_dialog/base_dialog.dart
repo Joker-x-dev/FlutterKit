@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:td_flutter_getx_template/core/design_system/extensions/extensions.dart';
-import 'package:td_flutter_getx_template/core/design_system/theme/size.dart';
+import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
+import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../design_system/theme/app_theme.dart';
+import '../../design_system/theme/shape.dart';
 import '../../util/common/common_util.dart';
 import '../../util/size/size_util.dart';
 
+/// 基础底部弹窗
+///
+/// 统一提供弹窗导航栏、内容区域、底部操作区和安全区域处理。
 abstract class BaseDialog extends StatelessWidget {
+  /// 创建基础底部弹窗
   const BaseDialog({super.key});
 
   /// 标题
@@ -34,15 +40,20 @@ abstract class BaseDialog extends StatelessWidget {
       title: title,
       screenAdaptation: false,
       useDefaultBack: false,
-      height: 56,
+      height: spacer48,
       belowTitleWidget: const TDDivider(),
       rightBarItems: close
           ? [
               TDNavBarItem(
-                iconWidget: Icon(Icons.close, size: 28)
-                    .ripple()
-                    .clipRadius(4)
-                    .gestures(onTap: () => CommonUtil.closePop()),
+                iconWidget:
+                    Icon(
+                          Icons.close,
+                          size: spacer24,
+                          color: AppTheme.of(Get.context!).textPrimary,
+                        )
+                        .ripple()
+                        .clipRadius(radiusSmall)
+                        .gestures(onTap: () => CommonUtil.closePop()),
               ),
             ]
           : null,
@@ -50,32 +61,44 @@ abstract class BaseDialog extends StatelessWidget {
   }
 
   /// 设置主视图内容 (子类必须实现)
-  List<Widget> body();
+  ///
+  /// [context] 当前构建上下文。
+  List<Widget> body(BuildContext context);
 
   /// 底部导航栏内容 子类可根据需求重写
-  Widget? bottom() => null;
+  ///
+  /// [context] 当前构建上下文。
+  Widget? bottom(BuildContext context) => null;
 
   /// 弹窗初始化 子类可根据需求重写
   void init() {}
 
   /// 展示dialog
-  Future<void> show() async {
-    return await Get.bottomSheet(
+  Future<void> show() {
+    final appTheme = AppTheme.of(Get.context!);
+    return Get.bottomSheet(
       // 设置是否可通过点击外部关闭
       isDismissible: isDismissible,
       // 设置是否可以通过向下滑动关闭
       enableDrag: enableDrag,
       // 设置为可滚动
       isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+      backgroundColor: appTheme.backgroundContainer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(radiusExtraLarge),
+        ),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       this,
     );
   }
 
+  /// 构建底部弹窗内容
+  ///
+  /// [context] 当前构建上下文。
+  ///
+  /// 返回受屏幕安全区域和最大高度约束的弹窗内容。
   @override
   Widget build(BuildContext context) {
     // 初始化弹窗
@@ -99,9 +122,11 @@ abstract class BaseDialog extends StatelessWidget {
     Widget dialogContent =
         [
               if (CommonUtil.isNotNull(head())) head()!,
-              body().toColumn().scrollable(padding: pagePadding).flexible(),
-              if (CommonUtil.isNotNull(bottom()))
-                bottom()!.pad(bottom: bottomPadding),
+              body(
+                context,
+              ).toColumn().scrollable(padding: pagePadding).flexible(),
+              if (CommonUtil.isNotNull(bottom(context)))
+                bottom(context)!.pad(bottom: bottomPadding),
             ]
             .toColumn(mainAxisSize: MainAxisSize.min)
             .constrained(maxHeight: maxHeight);

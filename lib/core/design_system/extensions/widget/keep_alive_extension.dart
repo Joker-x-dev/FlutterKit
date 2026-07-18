@@ -44,21 +44,30 @@ class KeepAliveWrapper extends StatefulWidget {
     this.keepAlive = true,
   });
 
+  /// 需要保持状态的子组件
   final Widget child;
+
+  /// 是否保持子组件状态存活
   final bool keepAlive;
 
+  /// 创建状态保存包装器状态
   @override
   State<KeepAliveWrapper> createState() => _KeepAliveWrapperState();
 }
 
+/// 状态保存包装器状态
 class _KeepAliveWrapperState extends State<KeepAliveWrapper>
     with AutomaticKeepAliveClientMixin {
+  /// 构建保持状态的子组件
+  ///
+  /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return widget.child;
   }
 
+  /// 当前组件是否需要保持状态存活
   @override
   bool get wantKeepAlive => widget.keepAlive;
 }

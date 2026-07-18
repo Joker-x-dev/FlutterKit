@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 /// Icon 图标扩展
 /// 提供图标相关的链式调用方法
-///
-/// @author
 extension IconExtension on Icon {
   /// 设置图标大小
   ///
