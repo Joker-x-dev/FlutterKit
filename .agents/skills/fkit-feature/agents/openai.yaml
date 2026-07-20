@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Feature"
+  short_description: "创建和重构 FlutterKit 业务模块、页面及分层结构"
+  default_prompt: "使用 $fkit-feature 创建一个符合 FlutterKit 架构规范的业务页面。"

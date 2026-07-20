@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Navigation"
+  short_description: "配置 FlutterKit 路由、导航、参数、结果与守卫"
+  default_prompt: "使用 $fkit-nav 为这个页面接入模块化导航。"

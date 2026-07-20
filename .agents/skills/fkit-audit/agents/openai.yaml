@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Audit"
+  short_description: "审查 FlutterKit 架构、UI、注释、预览与测试质量"
+  default_prompt: "使用 $fkit-audit 全面检查当前模块并给出证据化结果。"

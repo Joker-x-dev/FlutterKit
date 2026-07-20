@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Native"
+  short_description: "管理 FlutterKit 多端图标、启动页、资源生成和构建"
+  default_prompt: "使用 $fkit-native 处理这个原生资源或多端构建任务。"

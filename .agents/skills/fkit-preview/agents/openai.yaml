@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Preview"
+  short_description: "添加和修复 FlutterKit 页面与组件响应式预览"
+  default_prompt: "使用 $fkit-preview 为当前页面和组件补充可用预览。"

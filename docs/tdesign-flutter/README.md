@@ -3,6 +3,13 @@
 > 来源：[https://tdesign.tencent.com/flutter/getting-started](https://tdesign.tencent.com/flutter/getting-started)
 > 归档时间：2026-07-16T07:37:59.655Z
 
+## FlutterKit 使用约定
+
+- 本目录用于查询当前归档版本的 TDesign Flutter 组件参数、示例和全局配置；具体组件优先从下方分类索引进入。
+- FlutterKit 的页面结构、语义颜色、间距、圆角、深色模式和链式扩展不由官方组件文档决定。编写布局先阅读[完整布局规范与扩展](../../lib/core/design_system/README.md)，再查阅[设计系统](../flutter-kit/框架核心/design-system.md)、[主题系统](../flutter-kit/框架核心/theme.md)、[深色模式](../flutter-kit/框架核心/dark-mode.md)与[Widget 链式扩展](../flutter-kit/框架核心/widget-extensions.md)。
+- 业务页面优先组合现有 `TD*` 组件，不根据 TDesign Web、Vue、React 或其他版本文档猜测 Dart API。
+- 本地归档与当前依赖源码不一致时，以 `pubspec.lock` 锁定版本的 Dart 声明为准，并同步更新归档文档。
+
 ## 开始
 
 - [快速开始](<开始/快速开始.md>)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Data"
+  short_description: "实现 FlutterKit 模型、数据源、仓库与请求链路"
+  default_prompt: "使用 $fkit-data 为这个功能实现完整的数据访问链路。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit Setup"
+  short_description: "初始化 FlutterKit 应用名称、包名与多端品牌资源"
+  default_prompt: "使用 $fkit-setup 将这个 FlutterKit 脚手架初始化为新的应用项目。"

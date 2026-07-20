@@ -1,0 +1,4 @@
+interface:
+  display_name: "FKit UI"
+  short_description: "使用 TDesign 和项目扩展实现统一响应式界面"
+  default_prompt: "使用 $fkit-ui 按 FlutterKit 设计系统实现这个页面布局。"
