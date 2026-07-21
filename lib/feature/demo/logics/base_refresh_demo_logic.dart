@@ -12,10 +12,17 @@ class BaseRefreshDemoLogic extends BaseRefreshLogic<Goods> {
   /// BaseRefresh 示例页状态
   final BaseRefreshDemoState baseRefreshDemoState = BaseRefreshDemoState();
 
+  /// 刷新父类复用页面声明的 State
+  @override
+  BaseRefreshDemoState get refreshState => baseRefreshDemoState;
+
+  /// 商品数据仓库
+  final GoodsRepository _goodsRepository = GoodsRepository();
+
   /// 商品详情请求
   @override
   Future<BaseResponse<Goods>> Function()? get apiRequest =>
-      () => GoodsRepository().getGoodsInfo(1);
+      () => _goodsRepository.getGoodsInfo(1);
 
   /// 保存商品详情请求结果
   ///

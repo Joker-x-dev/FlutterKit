@@ -165,15 +165,28 @@ class GoodsRepository {
 ## Logic 使用示例
 
 ```dart
+/// 网络详情页面状态。
+class NetworkDemoState extends BaseNetworkState {
+  /// 请求成功后的商品详情。
+  final Rx<Goods> goods = Goods().obs;
+}
+
 /// 网络详情 Logic 只依赖仓库，并将请求交给网络父类。
 class NetworkDemoLogic extends BaseNetworkLogic<Goods> {
   /// 页面自己的展示状态。
   final NetworkDemoState networkDemoState = NetworkDemoState();
 
+  /// 网络父类复用页面声明的 State。
+  @override
+  NetworkDemoState get networkState => networkDemoState;
+
+  /// 商品数据仓库。
+  final GoodsRepository _goodsRepository = GoodsRepository();
+
   @override
   Future<BaseResponse<Goods>> Function()? get apiRequest =>
       // 父类在 initData / 重试时调用这个函数创建新请求。
-      () => GoodsRepository().getGoodsInfo(1);
+      () => _goodsRepository.getGoodsInfo(1);
 
   @override
   void requestOk(Goods data) {
@@ -188,18 +201,28 @@ class NetworkDemoLogic extends BaseNetworkLogic<Goods> {
 文件：`lib/feature/demo/logics/network_list_demo_logic.dart`
 
 ```dart
+/// 网络分页列表状态。
+class NetworkListDemoState extends BaseListState<Goods> {
+  /// 示例接口每页请求 15 条商品。
+  @override
+  int get pageSize => 15;
+}
+
 /// 分页列表 Logic 将父类页码转换为明确请求模型。
 class NetworkListDemoLogic extends BaseListLogic<Goods> {
+  /// 分页列表页面状态。
+  final NetworkListDemoState networkListDemoState = NetworkListDemoState();
+
+  /// 分页父类复用页面声明的 State。
   @override
-  void onInit() {
-    // 父类生成 pageParams 前设置单页大小。
-    listState.pageSize = 15;
-    super.onInit();
-  }
+  NetworkListDemoState get listState => networkListDemoState;
+
+  /// 商品数据仓库。
+  final GoodsRepository _goodsRepository = GoodsRepository();
 
   @override
   Future<BaseResponse<BaseListResponse<Goods>>> Function()? get apiRequest =>
-      () => GoodsRepository().getGoodsPage(
+      () => _goodsRepository.getGoodsPage(
         // Retrofit 的 @Body 接收 GoodsSearchRequest。
         GoodsSearchRequest(
           page: listState.currentPage,

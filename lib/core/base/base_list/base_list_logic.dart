@@ -9,11 +9,15 @@ import 'base_list_state.dart';
 
 /// 列表 base 类，主要是对列表进行封装
 abstract class BaseListLogic<T> extends BaseNetworkLogic<BaseListResponse<T>> {
-  /// 列表状态
-  BaseListState<T> get listState => networkState as BaseListState<T>;
+  /// 默认分页列表 State，仅在业务 Logic 未重写 [listState] 时创建
+  late final BaseListState<T> _listState = BaseListState<T>();
 
-  /// 构造函数，确保只创建一个实例
-  BaseListLogic() : super(state: BaseListState<T>());
+  /// 列表状态
+  BaseListState<T> get listState => _listState;
+
+  /// 网络父类复用分页列表 State，保证请求状态与分页状态属于同一对象
+  @override
+  BaseListState<T> get networkState => listState;
 
   /// 子类重写此 getter 返回列表请求接口
   @override

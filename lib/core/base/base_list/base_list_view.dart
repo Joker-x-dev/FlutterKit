@@ -27,13 +27,13 @@ abstract class BaseListView<T extends BaseListLogic<E>, E>
 
   /// 构建分页列表成功状态内容
   ///
-  /// [controller] 当前列表 Logic。
+  /// [logic] 当前列表 Logic。
   @override
-  Widget bodyContent(T controller) {
+  Widget bodyContent(T logic) {
     return EasyRefresh(
-      controller: controller.listState.easyRefreshController,
-      onRefresh: () => controller.refresh(),
-      onLoad: () => controller.loadMore(),
+      controller: logic.listState.easyRefreshController,
+      onRefresh: () => logic.refresh(),
+      onLoad: () => logic.loadMore(),
       header: ClassicHeader(
         armedText: CommonKeys.refreshHeaderArmed.tr,
         readyText: CommonKeys.refreshHeaderReady.tr,
@@ -60,7 +60,7 @@ abstract class BaseListView<T extends BaseListLogic<E>, E>
 
   /// 使用 ListView 构建列表内容，子类可覆盖为其他列表布局
   Widget builderItemWidget() {
-    return controller.listState.dataList.toListViewSeparated(
+    return logic.listState.dataList.toListViewSeparated(
       padding: listItemPadding,
       separatorBuilder: (context, index) => const SpaceVerticalLarge(),
       itemBuilder: (context, index, item) => itemWidget(item, index),

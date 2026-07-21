@@ -12,10 +12,17 @@ class NetworkDemoLogic extends BaseNetworkLogic<Goods> {
   /// 网络请求示例页状态
   final NetworkDemoState networkDemoState = NetworkDemoState();
 
+  /// 网络父类复用页面声明的 State
+  @override
+  NetworkDemoState get networkState => networkDemoState;
+
+  /// 商品数据仓库
+  final GoodsRepository _goodsRepository = GoodsRepository();
+
   /// 商品详情请求
   @override
   Future<BaseResponse<Goods>> Function()? get apiRequest =>
-      () => GoodsRepository().getGoodsInfo(1);
+      () => _goodsRepository.getGoodsInfo(1);
 
   /// 保存商品详情请求结果
   ///

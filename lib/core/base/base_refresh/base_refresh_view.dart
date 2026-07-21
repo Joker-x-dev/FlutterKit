@@ -20,17 +20,17 @@ abstract class BaseRefreshView<T extends BaseRefreshLogic<dynamic>>
 
   /// 子类重写此方法传递视图内容
   ///
-  /// [controller] 当前刷新 Logic。
-  List<Widget> pageContent(T controller);
+  /// [logic] 当前刷新 Logic。
+  List<Widget> pageContent(T logic);
 
   /// 构建刷新页面成功状态内容
   ///
-  /// [controller] 当前刷新 Logic。
+  /// [logic] 当前刷新 Logic。
   @override
-  Widget bodyContent(T controller) {
+  Widget bodyContent(T logic) {
     return EasyRefresh(
-      controller: controller.refreshState.easyRefreshController,
-      onRefresh: () => controller.refresh(),
+      controller: logic.refreshState.easyRefreshController,
+      onRefresh: () => logic.refresh(),
       header: ClassicHeader(
         armedText: CommonKeys.refreshHeaderArmed.tr,
         readyText: CommonKeys.refreshHeaderReady.tr,
@@ -41,7 +41,7 @@ abstract class BaseRefreshView<T extends BaseRefreshLogic<dynamic>>
         noMoreText: CommonKeys.refreshHeaderNoMore.tr,
         dragText: CommonKeys.refreshHeaderDrag.tr,
       ),
-      child: pageContent(controller).toListView(
+      child: pageContent(logic).toListView(
         padding: listItemPadding,
         itemBuilder: (context, index, item) => item,
       ),

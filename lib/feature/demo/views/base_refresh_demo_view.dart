@@ -28,10 +28,10 @@ class BaseRefreshDemoView extends BaseRefreshView<BaseRefreshDemoLogic> {
 
   /// 构建商品详情内容
   ///
-  /// [controller] BaseRefresh 示例页 Logic。
+  /// [logic] BaseRefresh 示例页 Logic。
   @override
-  List<Widget> pageContent(BaseRefreshDemoLogic controller) {
-    final Goods goods = controller.baseRefreshDemoState.goods.value;
+  List<Widget> pageContent(BaseRefreshDemoLogic logic) {
+    final Goods goods = logic.baseRefreshDemoState.goods.value;
     return [GoodsDetailContent(goods: goods)];
   }
 }

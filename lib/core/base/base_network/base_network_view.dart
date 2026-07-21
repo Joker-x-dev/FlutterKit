@@ -13,8 +13,9 @@ import 'base_network_state.dart';
 
 /// 网络状态内容构建器
 ///
-/// [baseState] 当前网络请求 Logic。
-typedef BodyBuilder = Widget Function(BaseNetworkLogic<dynamic> baseState);
+/// [logic] 当前网络请求 Logic。
+typedef BodyBuilder<T extends BaseNetworkLogic<dynamic>> =
+    Widget Function(T logic);
 
 /// 基础网络状态页面
 ///
@@ -31,26 +32,23 @@ abstract class BaseNetworkView<T extends BaseNetworkLogic<dynamic>>
 
   /// 抽象方法，子类负责实现，用于返回成功状态下的布局
   ///
-  /// [controller] 当前网络 Logic。
-  Widget bodyContent(T controller);
+  /// [logic] 当前网络 Logic。
+  Widget bodyContent(T logic);
 
   /// 主视图 子类可重写
   @override
   Widget body() {
-    return commonView(controller, (baseState) {
-      // 调用子类实现的方法
-      return bodyContent(controller);
-    });
+    return commonView(logic, bodyContent);
   }
 
   /// 创建页面主视图
   ///
-  /// [controller] 当前网络 Logic。
+  /// [logic] 当前网络 Logic。
   /// [builder] 成功状态内容构建器。
-  Widget commonView(T controller, BodyBuilder builder) {
+  Widget commonView(T logic, BodyBuilder<T> builder) {
     return Obx(() {
       // 根据当前状态返回相应的 Widget
-      Widget child = _getWidgetForCurrentState(controller, builder);
+      Widget child = _getWidgetForCurrentState(logic, builder);
 
       // 如果不需要动画，直接返回
       if (!showAnimation) return child;
@@ -77,18 +75,18 @@ abstract class BaseNetworkView<T extends BaseNetworkLogic<dynamic>>
 
   /// 根据当前状态返回相应的 Widget
   ///
-  /// [controller] 当前网络 Logic。
+  /// [logic] 当前网络 Logic。
   /// [builder] 成功状态内容构建器。
-  Widget _getWidgetForCurrentState(T controller, BodyBuilder builder) {
-    switch (controller.networkState.uiState.value) {
+  Widget _getWidgetForCurrentState(T logic, BodyBuilder<T> builder) {
+    switch (logic.networkState.uiState.value) {
       case NetState.loading:
         return loadWidget();
       case NetState.emptyData:
         return emptyWidget();
       case NetState.error:
-        return failWidget(controller);
+        return failWidget(logic);
       case NetState.dataSuccess:
-        return builder(controller);
+        return builder(logic);
     }
   }
 
@@ -99,8 +97,8 @@ abstract class BaseNetworkView<T extends BaseNetworkLogic<dynamic>>
 
   /// 错误视图 子类可重写
   ///
-  /// [controller] 当前网络 Logic。
-  Widget failWidget(T controller) {
+  /// [logic] 当前网络 Logic。
+  Widget failWidget(T logic) {
     return empty(CommonKeys.baseNetworkError.tr, Assets.icon.emptyError.path);
   }
 
@@ -111,8 +109,8 @@ abstract class BaseNetworkView<T extends BaseNetworkLogic<dynamic>>
   Widget empty(String emptyText, String imgPath) {
     return TDEmpty(
       onTapEvent: () {
-        controller.loadData();
-        controller.setStatusLoad();
+        logic.loadData();
+        logic.setStatusLoad();
       },
       operationText: CommonKeys.baseNetworkReload.tr,
       type: TDEmptyType.operation,

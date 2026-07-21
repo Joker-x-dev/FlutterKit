@@ -10,7 +10,7 @@
 
 | 成员 | 默认值 | 说明 |
 | --- | --- | --- |
-| `pageSize` | `20` | 单页数量，可在 `onInit()`、`super.onInit()` 前修改 |
+| `pageSize` | `20` | 单页数量，由业务 State 重写 getter 配置 |
 | `currentPage` | `1` | 当前请求页码 |
 | `pageParams` | `{pageSize, pageNum}` | 调用 `updatePageParams()` 后生成的基础参数 |
 | `dataList` | 空 `RxList<E>` | 当前已加载的数据 |
@@ -31,18 +31,28 @@
 ## 基于 NetworkListDemo 的完整示例
 
 ```dart
+/// 商品分页列表状态。
+class NetworkListDemoState extends BaseListState<Goods> {
+  /// 示例接口每页请求 15 条商品。
+  @override
+  int get pageSize => 15;
+}
+
 /// 商品分页列表 Logic。
 class NetworkListDemoLogic extends BaseListLogic<Goods> {
+  /// 商品分页页面状态。
+  final NetworkListDemoState networkListDemoState = NetworkListDemoState();
+
+  /// 分页父类复用页面声明的 State。
   @override
-  void onInit() {
-    // 在父类生成 pageParams 前设置单页数量，保证首次请求使用 15。
-    listState.pageSize = 15;
-    super.onInit();
-  }
+  NetworkListDemoState get listState => networkListDemoState;
+
+  /// 商品数据仓库，页面生命周期内复用同一数据入口。
+  final GoodsRepository _goodsRepository = GoodsRepository();
 
   @override
   Future<BaseResponse<BaseListResponse<Goods>>> Function()? get apiRequest =>
-      () => GoodsRepository().getGoodsPage(
+      () => _goodsRepository.getGoodsPage(
         // 请求参数始终取父类维护的当前页与页大小。
         GoodsSearchRequest(
           page: listState.currentPage,
@@ -89,7 +99,7 @@ Widget previewNetworkListDemoView() {
 ## 注意事项
 
 - 不要在 `requestOk()` 中自行执行 `finishLoad()`，除非完整理解父类状态机；默认实现已处理。
-- 改变 `pageSize` 后必须在 `super.onInit()` 前设置，或手工调用 `updatePageParams()`。
+- 自定义 `pageSize` 时在业务 State 中重写 getter，并让业务 Logic 重写 `listState` 返回该 State；不要在 `onInit()` 中修改分页配置。
 - 后端 `total`、`size` 缺失时父类会安全处理并视为无更多数据；接口模型应尽量完整返回分页字段。
 
 ## 关联阅读

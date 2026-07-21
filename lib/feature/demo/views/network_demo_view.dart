@@ -29,11 +29,11 @@ class NetworkDemoView extends BaseNetworkView<NetworkDemoLogic> {
 
   /// 构建商品详情内容
   ///
-  /// [controller] 网络请求示例页 Logic。
+  /// [logic] 网络请求示例页 Logic。
   @override
-  Widget bodyContent(NetworkDemoLogic controller) {
+  Widget bodyContent(NetworkDemoLogic logic) {
     return Obx(() {
-      final goods = controller.networkDemoState.goods.value;
+      final goods = logic.networkDemoState.goods.value;
       return GoodsDetailContent(
         goods: goods,
       ).scrollable(padding: listItemPadding);

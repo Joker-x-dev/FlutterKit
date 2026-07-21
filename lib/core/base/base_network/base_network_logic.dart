@@ -7,12 +7,11 @@ import 'base_network_state.dart';
 
 /// 公共控制器，主要是对网络请求进行封装
 abstract class BaseNetworkLogic<T> extends BaseLogic {
-  /// 状态
-  final BaseNetworkState networkState;
+  /// 默认网络页面 State，仅在业务 Logic 未重写 [networkState] 时创建
+  late final BaseNetworkState _networkState = BaseNetworkState();
 
-  /// 构造函数，允许注入自定义状态
-  BaseNetworkLogic({BaseNetworkState? state})
-    : networkState = state ?? BaseNetworkState();
+  /// 网络页面 State，业务 Logic 可重写并返回自身声明的 State
+  BaseNetworkState get networkState => _networkState;
 
   /// 子类重写此 getter 返回实际请求的 api 接口
   ///
@@ -61,8 +60,11 @@ abstract class BaseNetworkLogic<T> extends BaseLogic {
           })
           .execute();
 
-      setStatusSuccess();
+      final NetState stateBeforeRequestOk = networkState.uiState.value;
       requestOk(data as T);
+      if (networkState.uiState.value == stateBeforeRequestOk) {
+        setStatusSuccess();
+      }
     } on Object catch (error, stackTrace) {
       final message =
           errorMessage ?? ErrorFormatter.formatError(error, stackTrace);

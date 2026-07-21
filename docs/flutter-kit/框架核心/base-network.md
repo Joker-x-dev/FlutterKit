@@ -9,7 +9,7 @@ initData()
   → loadData()
   → RequestHelper.repository(apiRequest())
   → start(beforeRequest) → toast → error → execute
-  ├─ 成功：setStatusSuccess() → requestOk(data)
+  ├─ 成功：requestOk(data) → 未切换其他状态时 setStatusSuccess()
   └─ 失败：记录格式化错误 → setStatusError() → onRequestError()
 
 BaseNetworkView.commonView()
@@ -24,9 +24,9 @@ BaseNetworkView.commonView()
 | 参数或字段 | 默认值 | 说明 |
 | --- | --- | --- |
 | `uiState` | `NetState.loading` | 当前网络展示状态，使用 `Rx` 自动驱动 View |
-| `requestErrorToast` | `true` | `RequestHelper` 失败时是否显示 Toast |
-| `firstLoad` | `true` | 初次 `initData()` 是否自动执行请求 |
-| `requestSetStatus` | `true` | 每次请求前是否先置为 loading；列表/刷新会关闭它 |
+| `requestErrorToast` | `true` | `RequestHelper` 失败时是否显示 Toast，业务 State 可重写 |
+| `firstLoad` | `true` | 初次 `initData()` 是否自动执行请求，业务 State 可重写 |
+| `requestSetStatus` | `true` | 每次请求前是否先置为 loading，列表/刷新 State 已重写为 `false` |
 | `NetState.loading` | — | 展示 `TDLoading` |
 | `NetState.error` | — | 展示错误缺省页与重试按钮 |
 | `NetState.emptyData` | — | 展示空数据缺省页 |
@@ -48,35 +48,42 @@ BaseNetworkView.commonView()
 
 | 重写点 | 默认行为 | 用途 |
 | --- | --- | --- |
-| `bodyContent(T controller)` | 必须实现 | `dataSuccess` 时的内容 |
+| `bodyContent(T logic)` | 必须实现 | `dataSuccess` 时的内容 |
 | `loadWidget()` | 大号 `TDLoading` | 自定义加载页 |
 | `emptyWidget()` | 默认空数据 `TDEmpty` | 自定义空数据页 |
-| `failWidget(T controller)` | 默认错误 `TDEmpty` | 自定义错误页 |
+| `failWidget(T logic)` | 默认错误 `TDEmpty` | 自定义错误页 |
 | `showAnimation` | `true` | 关闭状态切换动画 |
 
 ## 基于 NetworkDemo 的完整示例
 
 ```dart
 /// 商品详情页面的展示状态。
-class NetworkDemoState {
-  /// 请求成功后保存商品；初始值为空，避免 View 在加载中访问空对象。
-  final Rxn<Goods> goods = Rxn<Goods>();
+class NetworkDemoState extends BaseNetworkState {
+  /// 请求成功后保存商品详情。
+  final Rx<Goods> goods = Goods().obs;
 }
 
 /// 单条商品详情请求 Logic。
 class NetworkDemoLogic extends BaseNetworkLogic<Goods> {
   /// 页面展示状态。
-  final NetworkDemoState state = NetworkDemoState();
+  final NetworkDemoState networkDemoState = NetworkDemoState();
+
+  /// 网络父类复用页面声明的 State。
+  @override
+  NetworkDemoState get networkState => networkDemoState;
+
+  /// 商品数据仓库，页面生命周期内复用同一数据入口。
+  final GoodsRepository _goodsRepository = GoodsRepository();
 
   /// BaseNetworkLogic 在 initData 中调用该请求。
   @override
   Future<BaseResponse<Goods>> Function()? get apiRequest =>
-      () => GoodsRepository().getGoodsInfo(1);
+      () => _goodsRepository.getGoodsInfo(1);
 
-  /// 请求成功后写入 State；父类随后会让页面进入 dataSuccess。
+  /// 请求成功后先写入 State，父类再让页面进入 dataSuccess。
   @override
   void requestOk(Goods data) {
-    state.goods.value = data;
+    networkDemoState.goods.value = data;
   }
 }
 
@@ -88,10 +95,10 @@ class NetworkDemoView extends BaseNetworkView<NetworkDemoLogic> {
   String? get navTitle => '网络请求';
 
   @override
-  Widget bodyContent(NetworkDemoLogic controller) {
+  Widget bodyContent(NetworkDemoLogic logic) {
     return Obx(() {
-      // 仅在 dataSuccess 后读取数据；业务可按自身约束处理空值。
-      final Goods goods = controller.state.goods.value!;
+      // 仅在 dataSuccess 后读取商品详情。
+      final Goods goods = logic.networkDemoState.goods.value;
       return GoodsDetailContent(goods: goods);
     });
   }
@@ -100,12 +107,12 @@ class NetworkDemoView extends BaseNetworkView<NetworkDemoLogic> {
 
 ## 空数据与重试
 
-接口成功但业务列表为空时，Logic 应明确调用 `setStatusEmpty()`；不要把空数据当成网络异常。失败页内置的操作按钮会依次执行 `controller.loadData()` 与 `controller.setStatusLoad()`，因此无需在 View 中再实现一次重试逻辑。
+接口成功但业务列表为空时，Logic 应明确调用 `setStatusEmpty()`；不要把空数据当成网络异常。失败页内置的操作按钮会依次执行 `logic.loadData()` 与 `logic.setStatusLoad()`，因此无需在 View 中再实现一次重试逻辑。
 
 ## 注意事项
 
 - `apiRequest` 返回的是函数，不是已执行的 Future，确保每次重试都会产生新请求。
-- `requestOk()` 的调用发生在 `setStatusSuccess()` 之后；若需要展示空页面，在 `requestOk()` 中调用 `setStatusEmpty()` 覆盖成功状态。
+- `requestOk()` 先写入业务 State，再由父类切换成功状态；若回调调用 `setStatusEmpty()` 等方法，父类会保留回调指定的状态。
 - 列表和刷新页面不应直接继承此 View 来手写 `EasyRefresh`，应使用 [BaseList](./base-list.md) 或 [BaseRefresh](./base-refresh.md)。
 
 ## 关联阅读

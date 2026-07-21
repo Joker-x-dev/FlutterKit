@@ -19,7 +19,7 @@
 | `refreshState` | `BaseRefreshState` | `networkState` 的具体类型 getter |
 | `easyRefreshController` | `controlFinishLoad: true` | EasyRefresh 控制器 |
 | `refresh()` | `loadData()` | 下拉动作执行的一次新请求 |
-| `pageContent(T controller)` | 必须实现 | 返回页面内容 Widget 列表 |
+| `pageContent(T logic)` | 必须实现 | 返回页面内容 Widget 列表 |
 
 `BaseRefreshState` 将 `requestSetStatus` 设为 `false`，使下拉时保留已显示内容，由 EasyRefresh Header 表达刷新进行中状态。网络失败行为仍遵循 `BaseNetworkLogic`：失败页只会在当前页面没有保留成功状态时使用。
 
@@ -27,25 +27,32 @@
 
 ```dart
 /// 可刷新的商品详情状态。
-class BaseRefreshDemoState {
+class BaseRefreshDemoState extends BaseRefreshState {
   /// 当前详情；请求成功后替换，页面通过 Obx 刷新内容。
-  final Rxn<Goods> goods = Rxn<Goods>();
+  final Rx<Goods> goods = Goods().obs;
 }
 
 /// 商品详情刷新 Logic。
 class BaseRefreshDemoLogic extends BaseRefreshLogic<Goods> {
   /// 详情页状态。
-  final BaseRefreshDemoState state = BaseRefreshDemoState();
+  final BaseRefreshDemoState baseRefreshDemoState = BaseRefreshDemoState();
+
+  /// 刷新父类复用页面声明的 State。
+  @override
+  BaseRefreshDemoState get refreshState => baseRefreshDemoState;
+
+  /// 商品数据仓库，页面生命周期内复用同一数据入口。
+  final GoodsRepository _goodsRepository = GoodsRepository();
 
   @override
   Future<BaseResponse<Goods>> Function()? get apiRequest =>
       // 每次下拉都创建一条新的详情请求。
-      () => GoodsRepository().getGoodsInfo(1);
+      () => _goodsRepository.getGoodsInfo(1);
 
   @override
   void requestOk(Goods data) {
     // 写入新数据后，已显示页面不会闪回全屏 loading。
-    state.goods.value = data;
+    baseRefreshDemoState.goods.value = data;
   }
 }
 
@@ -57,8 +64,8 @@ class BaseRefreshDemoView extends BaseRefreshView<BaseRefreshDemoLogic> {
   String? get navTitle => '下拉刷新';
 
   @override
-  List<Widget> pageContent(BaseRefreshDemoLogic controller) {
-    final Goods goods = controller.state.goods.value!;
+  List<Widget> pageContent(BaseRefreshDemoLogic logic) {
+    final Goods goods = logic.baseRefreshDemoState.goods.value;
     // BaseRefreshView 将列表包装为可滚动的 EasyRefresh 内容。
     return [GoodsDetailContent(goods: goods)];
   }
