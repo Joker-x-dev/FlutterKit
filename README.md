@@ -166,8 +166,8 @@ lib/
 
 ### 环境要求
 
-- Flutter SDK：`>= 3.38.0`
-- Dart SDK：`>= 3.9.0 < 4.0.0`
+- Flutter SDK：`>= 3.47.0`
+- Dart SDK：`^3.13.7`
 - Android Studio / IntelliJ IDEA / Visual Studio Code
 
 ### 安装与运行

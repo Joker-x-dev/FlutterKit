@@ -8,8 +8,8 @@ version: 1.0.0+1
 
 # 项目依赖的 Flutter 和 Dart 版本
 environment:
-  sdk: ">=3.9.0 <4.0.0"
-  flutter: ">=3.38.0"
+  sdk: ^3.13.7
+  flutter: ">=3.47.0"
 
 # 项目依赖
 dependencies:
@@ -21,59 +21,57 @@ dependencies:
 
   # Tencent Design Flutter 组件库 https://pub.dev/packages/tdesign_flutter
   # 组件文档地址 https://tdesign.tencent.com/flutter/getting-started
-  # 注意：官方 0.2.7 在 Flutter 3.44+ 会因 IconData 被标记为 final 而无法编译
-  # 临时方案见：https://github.com/Tencent/tdesign-flutter/issues/943
-  # 待官方发版后可取消下方本地缓存补丁，直接升级版本
-  tdesign_flutter: ^0.2.7
+  tdesign_flutter: ^1.1.0
 
   # 屏幕适配工具 https://pub.dev/packages/flutter_screenutil
   flutter_screenutil: ^5.9.3
 
   # 网络请求库 https://pub.dev/packages/dio
-  dio: ^5.10.0
+  dio: ^5.11.1
 
   # JSON 序列化工具类库 https://pub.dev/packages/json_annotation
   json_annotation: ^4.12.0
 
   # Retrofit 网络请求库 https://pub.dev/packages/retrofit
-  retrofit: ^4.9.2
+  retrofit: ^4.10.0
 
   # svg框架 https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.3.0
+  flutter_svg: ^2.3.2
 
   # 持久化存储库 https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.5.5
+  shared_preferences: ^2.5.6
 
   # SQLite 本地数据库 https://pub.dev/packages/sqflite
-  sqflite: ^2.4.3
+  sqflite: ^2.4.5
 
   # 路径处理 https://pub.dev/packages/path
   path: ^1.9.1
 
   # 跨平台打开外部链接 https://pub.dev/packages/url_launcher
-  url_launcher: ^6.3.2
+  url_launcher: ^6.3.3
 
   # 下拉刷新 上拉加载  https://pub.dev/packages/easy_refresh
-  easy_refresh: ^3.5.1
+  easy_refresh: ^3.4.0
 
   # 页面动画 https://pub.dev/packages/animations
-  animations: ^2.2.0
+  animations: ^3.0.0
 
   # 加载弹窗 和 Toast https://pub.dev/packages/bot_toast
   bot_toast: ^4.1.3
 
   # 网络请求通知栏拦截器（调试模式使用）https://pub.dev/packages/alice
   # 文档 https://jhomlala.github.io/alice/#/README
-  alice: ^1.0.0
-  alice_dio: ^1.0.7
+  alice: ^2.0.0
+  alice_dio: ^1.3.4
 
   # dio网络请求日志工具（调试模式使用）https://pub.dev/packages/pretty_dio_logger
   pretty_dio_logger: ^1.4.0
 
   # 日志记录工具 https://pub.dev/packages/logger
-  logger: ^2.7.0
+  logger: ^2.8.0
 
 # 开发环境依赖
+  vector_graphics: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -82,17 +80,17 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
   # JSON 序列化工具 https://pub.dev/packages/json_serializable
-  json_serializable: ^6.14.0
+  json_serializable: ^6.15.2
 
   # Retrofit 代码生成库 https://pub.dev/packages/retrofit_generator
-  retrofit_generator: ^10.2.7
+  retrofit_generator: ^10.3.2
 
   # 构建工具 https://pub.dev/packages/build_runner
-  build_runner: ^2.15.0
+  build_runner: ^2.16.2
 
   # 资源代码生成器，根据 pubspec.yaml 中 assets/fonts/colors 生成类型安全的资源访问类
   # 地址：https://pub.dev/packages/flutter_gen
-  flutter_gen_runner: ^5.14.1
+  flutter_gen_runner: ^5.15.0
 
   # 应用图标生成器，覆盖 Android、iOS、Web、Windows 与 macOS 图标资源
   # 地址：https://pub.dev/packages/flutter_launcher_icons
@@ -104,7 +102,7 @@ dev_dependencies:
 
   # SQLite 桌面测试运行时，用于验证真实建表与 CRUD 行为
   # 地址：https://pub.dev/packages/sqflite_common_ffi
-  sqflite_common_ffi: ^2.4.2
+  sqflite_common_ffi: ^2.4.5
 
 # FlutterGen 资源配置，根据 pubspec.yaml 中声明的 assets/fonts/colors 生成类型安全的资源访问类
 # 地址：https://pub.dev/packages/flutter_gen

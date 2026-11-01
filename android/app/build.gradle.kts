@@ -6,10 +6,12 @@ plugins {
 
 android {
     namespace = "com.joker.flutterkit"
-    compileSdk = flutter.compileSdkVersion
+    // permission_handler_android 要求编译 SDK 不低于 37，高于 Flutter 默认的 36
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        // java.time 等新 API 在低版本 Android 上依赖核心库脱糖
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -17,8 +19,14 @@ android {
 
     defaultConfig {
         applicationId = "com.joker.flutterkit"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
+        // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
+        // is added automatically by Flutter. (https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)
+        // You can force using the value of versionCode by specifying the `-P force-version-code-ignoring-abi=true`
+        // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
@@ -29,7 +37,6 @@ android {
     }
 
     buildTypes {
-
         debug {
             // debug 下的签名配置
             signingConfig = signingConfigs.getByName("debug")
@@ -53,7 +60,7 @@ android {
     }
 
     // 打包选项 - 排除不必要的文件
-    packagingOptions {
+    packaging {
         resources {
             excludes += setOf(
                 "META-INF/DEPENDENCIES",
