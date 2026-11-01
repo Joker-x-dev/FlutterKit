@@ -2,8 +2,8 @@
 
 > 用于展示App的版权声明、联系信息、重要页面链接和其他相关内容等信息。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/footer)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Footer 页脚](https://tdesign.tencent.com/flutter/components/footer)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,8 +27,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildFooter(BuildContext context) {
-    return const TDFooter(
-      TDFooterType.text,
+    return const TFooter(
+      TFooterType.text,
       text: 'Copyright © 2019-2023 TDesign.All Rights Reserved.',
     );
   }
@@ -38,13 +38,13 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSingleLinkFooter(BuildContext context) {
-    return TDFooter(
-      TDFooterType.link,
+    return TFooter(
+      TFooterType.link,
       links: [
-        TDLink(
+        TLink(
           label: '底部链接',
-          style: TDLinkStyle.primary,
-          type: TDLinkType.withSuffixIcon,
+          style: TLinkStyle.primary,
+          type: TLinkType.withSuffixIcon,
           uri: Uri.parse('https://example.com'),
           linkClick: (link) {
             print('点击了链接 $link');
@@ -59,20 +59,20 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildLinksFooter(BuildContext context) {
-    return TDFooter(
-      TDFooterType.link,
+    return TFooter(
+      TFooterType.link,
       links: [
-        TDLink(
+        TLink(
           label: '底部链接1',
-          style: TDLinkStyle.primary,
+          style: TLinkStyle.primary,
           uri: Uri.parse('https://example.com'),
           linkClick: (link) {
             print('点击了链接1 $link');
           },
         ),
-        TDLink(
+        TLink(
           label: '底部链接2',
-          style: TDLinkStyle.primary,
+          style: TLinkStyle.primary,
           uri: Uri.parse('https://example.com'),
           linkClick: (link) {
             print('点击了链接2 $link');
@@ -88,9 +88,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildBrandFooter(BuildContext context) {
-    return const TDFooter(
-      TDFooterType.brand,
-      logo: 'assets/img/td_brand.png',
+    return const TFooter(
+      TFooterType.brand,
+      logo: 'assets/img/t_brand.png',
       width: 204,
     );
   }
@@ -98,21 +98,32 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDFooter](#tdfooter)
+1. [TFooter](#tfooter)
+2. [TFooterType](#tfootertype)
 
-#### TDFooter
+#### TFooter
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| type | TFooterType | - | 样式 |
 | height | double? | - | 自定义图片高 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | links | List | const [] | 链接 |
 | logo | String? | - | 品牌图片 |
 | text | String | '' | 文字 |
-| type | TDFooterType | type | 样式 |
 | width | double? | - | 自定义图片宽 |
+
+#### TFooterType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| text | 文字样式 |
+| link | 链接样式 |
+| brand | 品牌样式 |
 
 ## 设计指南
 
@@ -146,7 +157,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ###### 用于承载网站导航。
 
-![](https://tdesign.gtimg.com/site/design/mobile-guide/Ffooter/footer-4.png)
+![](https://tdesign.gtimg.com/site/design/mobile-guide/footer/footer-4.png)
 
 ---
 

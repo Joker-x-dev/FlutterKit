@@ -2,8 +2,8 @@
 
 > 反馈结果状态。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/result)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Result 结果](https://tdesign.tencent.com/flutter/components/result)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -26,80 +26,80 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 基础结果
 
 ```
-  TDResult _buildBasicResultSuccess(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultSuccess(BuildContext context) {
+    return const TResult(
       title: '成功状态',
-      theme: TDResultTheme.success,
+      theme: TResultTheme.success,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultError(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultError(BuildContext context) {
+    return const TResult(
       title: '失败状态',
-      theme: TDResultTheme.error,
+      theme: TResultTheme.error,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultWarning(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultWarning(BuildContext context) {
+    return const TResult(
       title: '警示状态',
-      theme: TDResultTheme.warning,
+      theme: TResultTheme.warning,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultDefault(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultDefault(BuildContext context) {
+    return const TResult(
       title: '默认状态',
-      theme: TDResultTheme.defaultTheme,
+      theme: TResultTheme.defaultTheme,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultSuccess(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultSuccess(BuildContext context) {
+    return const TResult(
       title: '成功状态',
-      theme: TDResultTheme.success,
+      theme: TResultTheme.success,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultError(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultError(BuildContext context) {
+    return const TResult(
       title: '失败状态',
-      theme: TDResultTheme.error,
+      theme: TResultTheme.error,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultWarning(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultWarning(BuildContext context) {
+    return const TResult(
       title: '警示状态',
-      theme: TDResultTheme.warning,
+      theme: TResultTheme.warning,
     );
   }
 ```
 
 
 ```
-  TDResult _buildBasicResultDefault(BuildContext context) {
-    return const TDResult(
+  TResult _buildBasicResultDefault(BuildContext context) {
+    return const TResult(
       title: '默认状态',
-      theme: TDResultTheme.defaultTheme,
+      theme: TResultTheme.defaultTheme,
     );
   }
 ```
@@ -107,10 +107,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 带描述的结果
 
 ```
-  TDResult _buildResultWithDescriptionSuccess(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionSuccess(BuildContext context) {
+    return const TResult(
       title: '成功状态',
-      theme: TDResultTheme.success,
+      theme: TResultTheme.success,
       description: '描述文字',
     );
   }
@@ -118,10 +118,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionError(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionError(BuildContext context) {
+    return const TResult(
       title: '失败状态',
-      theme: TDResultTheme.error,
+      theme: TResultTheme.error,
       description: '描述文字',
     );
   }
@@ -129,10 +129,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionWarning(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionWarning(BuildContext context) {
+    return const TResult(
       title: '警示状态',
-      theme: TDResultTheme.warning,
+      theme: TResultTheme.warning,
       description: '描述文字',
     );
   }
@@ -140,10 +140,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionDefault(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionDefault(BuildContext context) {
+    return const TResult(
       title: '默认状态',
-      theme: TDResultTheme.defaultTheme,
+      theme: TResultTheme.defaultTheme,
       description: '描述文字',
     );
   }
@@ -151,10 +151,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionSuccess(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionSuccess(BuildContext context) {
+    return const TResult(
       title: '成功状态',
-      theme: TDResultTheme.success,
+      theme: TResultTheme.success,
       description: '描述文字',
     );
   }
@@ -162,10 +162,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionError(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionError(BuildContext context) {
+    return const TResult(
       title: '失败状态',
-      theme: TDResultTheme.error,
+      theme: TResultTheme.error,
       description: '描述文字',
     );
   }
@@ -173,10 +173,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionWarning(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionWarning(BuildContext context) {
+    return const TResult(
       title: '警示状态',
-      theme: TDResultTheme.warning,
+      theme: TResultTheme.warning,
       description: '描述文字',
     );
   }
@@ -184,10 +184,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 
 ```
-  TDResult _buildResultWithDescriptionDefault(BuildContext context) {
-    return const TDResult(
+  TResult _buildResultWithDescriptionDefault(BuildContext context) {
+    return const TResult(
       title: '默认状态',
-      theme: TDResultTheme.defaultTheme,
+      theme: TResultTheme.defaultTheme,
       description: '描述文字',
     );
   }
@@ -196,8 +196,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 自定义结果
 
 ```
-  TDResult _buildCustomResultContent(BuildContext context) {
-    return TDResult(
+  TResult _buildCustomResultContent(BuildContext context) {
+    return TResult(
       title: '自定义结果',
       icon: Image.asset('assets/img/illustration.png'),
       description: '描述文字',
@@ -213,9 +213,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDResult](#tdresult)
+1. [TResult](#tresult)
+2. [TResultTheme](#tresulttheme)
 
-#### TDResult
+#### TResult
 
 ##### 默认构造方法
 
@@ -223,10 +224,21 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | --- | --- | --- | --- |
 | description | String? | - | 描述文本，用于提供额外信息 |
 | icon | Widget? | - | 图标组件，用于在结果中显示一个图标 |
-| key |  | - |  |
-| theme | TDResultTheme | TDResultTheme.defaultTheme | 主题样式，默认主题样式为defaultTheme |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| theme | TResultTheme | TResultTheme.defaultTheme | 主题样式，默认主题样式为defaultTheme |
 | title | String | '' | 标题文本，显示结果的主要信息，默认标题为空字符串 |
 | titleStyle | TextStyle? | - | 自定义字体样式，用于设置标题文本的样式 |
+
+#### TResultTheme
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| defaultTheme | - |
+| success | - |
+| warning | - |
+| error | - |
 
 ## 设计指南
 

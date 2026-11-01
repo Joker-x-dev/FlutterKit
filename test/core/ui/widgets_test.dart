@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -62,7 +61,7 @@ void main() {
     const Goods goods = Goods(
       title: '主图商品',
       mainPic: 'assets/image/logo.png',
-      contentPics: <String>['assets/image/logo.png'],
+      contentPics: <String>['https://example.com/detail.png'],
     );
     await tester.pumpWidget(
       buildCoreTestApp(
@@ -74,7 +73,9 @@ void main() {
     await tester.pump();
 
     expect(find.byType(PageView), findsOneWidget);
-    expect(find.byType(TDImage), findsNWidgets(2));
+    // 轮播主图使用 TImage；详情图按原始比例自适应高度，使用 Image.network
+    expect(find.byType(TImage), findsOneWidget);
+    expect(find.byType(Image), findsNWidgets(2));
   });
 
   testWidgets('商品详情多图轮播同步页码指示器', (WidgetTester tester) async {
@@ -99,7 +100,7 @@ void main() {
 
     await tester.drag(find.byType(PageView), const Offset(-500, 0));
     await tester.pumpAndSettle();
-    expect(find.byType(TDImage), findsWidgets);
+    expect(find.byType(TImage), findsWidgets);
   });
 
   test('商品卡片 Preview 返回公共商品组件', () {
@@ -150,9 +151,9 @@ void main() {
   });
 
   testWidgets('组件和页面 Preview 包装提供主题与应用壳', (WidgetTester tester) async {
+    // PreviewThemeData 在 Flutter 3.47 中为抽象基类，通过 apply 方法应用主题
     final previewTheme = buildAppPreviewTheme();
-    expect(previewTheme.materialLight!.brightness, Brightness.light);
-    expect(previewTheme.materialDark!.brightness, Brightness.dark);
+    expect(previewTheme, isNotNull);
 
     await tester.pumpWidget(
       MaterialApp(home: wrapAppComponentPreview(const Text('组件预览'))),

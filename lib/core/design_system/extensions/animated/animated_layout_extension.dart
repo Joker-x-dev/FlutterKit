@@ -305,7 +305,7 @@ extension AnimatedLayoutExtension on Widget {
   /// ```dart
   /// Text('Hello')
   ///   .animate(Duration(milliseconds: 300))
-  ///   .animatedAlign(alignment: Alignment.topRight)
+  ///   .animatedAlign(alignment: .topRight)
   /// ```
   ///
   /// 返回带有对齐动画的 Widget

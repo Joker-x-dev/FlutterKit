@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_kit/application.dart';
 import 'package:flutter_kit/core/base/base/base_logic.dart';
 import 'package:flutter_kit/core/design_system/theme/theme_color_preset.dart';
@@ -72,7 +71,7 @@ class ThemeDemoLogic extends BaseLogic {
   /// [preset] 主题颜色预设。
   ///
   /// 返回解析后的主题配置，资源无效时返回 `null`。
-  static Future<TDThemeData?> _loadPresetThemeData(ThemeColorPreset preset) =>
+  static Future<TThemeData?> _loadPresetThemeData(ThemeColorPreset preset) =>
       preset.loadThemeData();
 }
 
@@ -82,4 +81,4 @@ class ThemeDemoLogic extends BaseLogic {
 ///
 /// 返回解析后的主题配置，资源无效时返回 `null`。
 typedef ThemeDemoDataLoader =
-    Future<TDThemeData?> Function(ThemeColorPreset preset);
+    Future<TThemeData?> Function(ThemeColorPreset preset);

@@ -3,6 +3,7 @@ library;
 
 export 'widget/gesture_extension.dart';
 export 'widget/scroll_extension.dart';
+export 'widget/sliver_extension.dart';
 export 'widget/row_extension.dart';
 export 'widget/column_extension.dart';
 export 'widget/stack_extension.dart';
@@ -21,6 +22,7 @@ export 'widget/effect_extension.dart';
 export 'widget/utility_extension.dart';
 export 'widget/icon_extension.dart';
 export 'widget/keep_alive_extension.dart';
+export 'animated/animated_builder_extension.dart';
 export 'animated/animation_context.dart';
 export 'animated/animated_layout_extension.dart';
 export 'animated/animated_decoration_extension.dart';

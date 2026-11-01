@@ -1,139 +1,66 @@
 # Icon 图标
 
-> Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。
+> TDesign Flutter 提供一套符合 TDesign 设计规范的图标库，通过 TIcon 组件展示。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/icon)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Icon 图标](https://tdesign.tencent.com/flutter/components/icon)
+> 归档时间：2026-10-30T16:00:00+08:00
 
-## 示例
+## 代码演示
 
-![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
+Web 预览用于体验交互效果；设备端运行方式见[快速开始](<../开始/快速开始.md>)。
 
-### 引入
-
-在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
+### 基础用法
 
 ```dart
-import 'package:tdesign_flutter/tdesign_flutter.dart';
+// 使用 TIcon + TIcons
+TIcon(TIcons.add, size: 24, color: TTheme.of(context).brandNormalColor)
+
+// 使用 Flutter 原生 Icon（推荐在业务中使用）
+const Icon(Icons.add, size: 24)
 ```
 
-### 代码演示
+### 图标列表
 
-[td_icon_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_icon_page.dart)
-
-#### 1 icon示例
-
-icon数量: 2114
-
-```
-  Widget _showAllIcons(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            alignment: Alignment.topLeft,
-            child: const Wrap(
-              children: [
-                TDText('筛选Icon请前往TDesign官网(长按网址可复制):'),
-                SelectableText(
-                    'https://tdesign.tencent.com/icons')
-              ],
-            ),
-          ),
-          TDSearchBar(
-            action: '搜索',
-            onActionClick: (text) {
-              setState(() {
-                iconList = [];
-                isLoading = true;
-              });
-              Future.delayed(const Duration(milliseconds: 30), () {
-                var list = [];
-                TDIcons.all.forEach((key, value) {
-                  if (value.name.contains(text)) {
-                    list.add(value);
-                  }
-                });
-                setState(() {
-                  iconList = list;
-                  isLoading = false;
-                });
-              });
-            },
-            onClearClick: (_) {
-              setState(() {
-                iconList = TDIcons.all.values;
-              });
-            },
-          ),
-          TDCell(
-            title: '显示边框',
-            noteWidget: TDSwitch(
-              isOn: showBorder,
-              onChanged: (value) {
-                setState(() {
-                  showBorder = value;
-                });
-                return value;
-              },
-            ),
-          ),
-          Builder(builder: (context) {
-            if (iconList.isEmpty) {
-              return Container(
-                height: 300,
-                alignment: Alignment.center,
-                child:
-                    isLoading ? const TDText('加载中...') : const TDText('暂无内容'),
-              );
-            }
-
-            var width = MediaQuery.of(context).size.width * 0.4;
-
-            return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: SingleChildScrollView(
-                  child: Wrap(
-                      spacing: 16,
-                      runSpacing: 18,
-                      children: iconList.map((item) {
-                        return SizedBox(
-                          width: width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: showBorder
-                                      ? TDTheme.of(context).brandDisabledColor
-                                      : Colors.transparent,
-                                ),
-                                child: Icon(item, size: 32),
-                              ),
-                              TDText(item.name)
-                            ],
-                          ),
-                        );
-                      }).toList()),
-                ));
-          })
-        ],
-      ),
-    );
-  }
+```dart
+// 查看所有可用图标
+TIcons.allIconsMap
 ```
 
-## API
+## TIcon
 
-1. [TDIcons](#tdicons)
+| 参数 | 类型 | 默认值 | 说明 | 必传 |
+| --- | --- | --- | --- | --- |
+| icon | TIcons | - | 图标常量，从 tdesign_flutter_icons 包导入 |
+| size | double? | 24 | 图标尺寸，默认 24dp |
+| color | Color? | - | 图标颜色 |
 
-#### TDIcons
+## TIcons
 
-##### 工厂构造方法
+TDesign Flutter 图标常量集合，导入方式：
 
-| 名称 | 说明 |
+```dart
+import 'package:tdesign_flutter_icons/tdesign_flutter_icons.dart';
+```
+
+常用图标常量：
+
+| 常量 | 说明 |
 | --- | --- |
-| TDIcons._ | 私有构造方法，不支持外部创建，仅提供静态常量给外部使用 |
+| TIcons.add | 添加 |
+| TIcons.close | 关闭 |
+| TIcons.check | 确认 |
+| TIcons.arrow_back | 返回 |
+| TIcons.search | 搜索 |
+| TIcons.more | 更多 |
+| TIcons.settings | 设置 |
+| TIcons.home | 首页 |
+| TIcons.user | 用户 |
+
+## 何时使用
+
+在按钮、导航栏、标签等组件中需要展示图标语义时使用。
+
+## 相似组件
+
+- [Button 按钮](<../基础/Button 按钮.md>)：按钮可携带图标。
+- [NavBar 导航栏](<../导航/Navbar 导航栏.md>)：导航栏操作项可使用图标。

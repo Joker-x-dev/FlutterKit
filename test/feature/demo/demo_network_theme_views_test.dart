@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -95,7 +94,7 @@ void main() {
     logic.isLoading.value = true;
     await tester.pump();
     expect(find.text('发起请求...'), findsOneWidget);
-    expect(tester.widget<TDButton>(find.byType(TDButton)).disabled, isTrue);
+    expect(tester.widget<TButton>(find.byType(TButton)).onPressed, isNull);
 
     logic.isLoading.value = false;
     logic.errorMessage.value = '页面请求失败';
@@ -163,7 +162,7 @@ void main() {
     expect(find.text('绿色主题'), findsOneWidget);
     expect(find.text('红色主题'), findsOneWidget);
     expect(find.text('蓝色主题'), findsOneWidget);
-    expect(find.byIcon(TDIcons.check), findsWidgets);
+    expect(find.byIcon(TIcons.check), findsWidgets);
   });
 
   testWidgets('主题页面交互切换语言、跟随系统、模式和颜色', (tester) async {
@@ -179,9 +178,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(Application.locale.value.languageCode, 'en');
 
-    final themeSwitch = tester.widget<TDSwitch>(find.byType(TDSwitch));
-    expect(themeSwitch.isOn, isTrue);
-    expect(themeSwitch.onChanged?.call(false), isTrue);
+    final themeSwitch = tester.widget<TSwitch>(find.byType(TSwitch));
+    expect(themeSwitch.value, isTrue);
+    expect(() => themeSwitch.onChanged?.call(false), returnsNormally);
     await tester.pumpAndSettle();
     expect(Application.themeMode.value, ThemeMode.light);
 
@@ -220,7 +219,7 @@ void main() {
     );
 
     expect(find.text('深色模式'), findsOneWidget);
-    expect(find.byIcon(TDIcons.check), findsWidgets);
+    expect(find.byIcon(TIcons.check), findsWidgets);
   });
 
   testWidgets('所有 Demo 页面 Preview 返回注入状态的对应 View', (tester) async {
@@ -284,6 +283,6 @@ void _resetApplicationState() {
   Application.locale.value = const Locale('zh', 'CN');
   Application.themeMode.value = ThemeMode.system;
   Application.themeColorName.value = ThemeColorPreset.defaultTheme.name;
-  Application.themeData.value = TDThemeData.defaultData();
+  Application.themeData.value = TThemeData.defaultData();
   Get.locale = const Locale('zh', 'CN');
 }

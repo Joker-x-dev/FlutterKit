@@ -1,5 +1,4 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return Obx(() {
           /// 主题配置 - 响应式获取
-          final TDThemeData themeData = Application.themeData.value;
+          final TThemeData themeData = Application.themeData.value;
           final themeMode = Application.themeMode.value;
           final locale = Application.locale.value;
 

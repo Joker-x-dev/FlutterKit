@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -273,6 +272,6 @@ void _resetApplicationState() {
   Application.locale.value = const Locale('zh', 'CN');
   Application.themeMode.value = ThemeMode.system;
   Application.themeColorName.value = 'theme';
-  Application.themeData.value = TDThemeData.defaultData();
+  Application.themeData.value = TThemeData.defaultData();
   Get.locale = const Locale('zh', 'CN');
 }

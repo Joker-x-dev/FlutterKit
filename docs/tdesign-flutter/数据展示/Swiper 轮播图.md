@@ -1,7 +1,7 @@
 # Swiper 轮播图
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/swiper)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Swiper 轮播图](https://tdesign.tencent.com/flutter/components/swiper)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -32,10 +32,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       loop: true,
       pagination: const SwiperPagination(
         alignment: Alignment.bottomCenter,
-        builder: TDSwiperPagination.dots,
+        builder: TSwiperPagination.dots,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -53,10 +53,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       loop: true,
       pagination: const SwiperPagination(
         alignment: Alignment.bottomCenter,
-        builder: TDSwiperPagination.dotsBar,
+        builder: TSwiperPagination.dotsBar,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -75,10 +75,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       scrollDirection: Axis.vertical,
       pagination: const SwiperPagination(
         alignment: Alignment.bottomCenter,
-        builder: TDSwiperPagination.fraction,
+        builder: TSwiperPagination.fraction,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -96,10 +96,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       loop: false,
       pagination: const SwiperPagination(
         alignment: Alignment.center,
-        builder: TDSwiperPagination.controls,
+        builder: TSwiperPagination.controls,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -117,13 +117,13 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       autoplay: true,
       itemCount: 6,
       loop: true,
-      transformer: TDPageTransformer.margin(),
+      transformer: TPageTransformer.margin(),
       pagination: const SwiperPagination(
         alignment: Alignment.center,
-        builder: TDSwiperPagination.dots,
+        builder: TSwiperPagination.dots,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -141,13 +141,13 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       autoplay: true,
       itemCount: 6,
       loop: true,
-      transformer: TDPageTransformer.scaleAndFade(),
+      transformer: TPageTransformer.scaleAndFade(),
       pagination: const SwiperPagination(
         alignment: Alignment.center,
-        builder: TDSwiperPagination.dots,
+        builder: TSwiperPagination.dots,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -167,10 +167,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       loop: true,
       pagination: const SwiperPagination(
         alignment: Alignment.bottomCenter,
-        builder: TDSwiperPagination.dots,
+        builder: TSwiperPagination.dots,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -189,10 +189,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       outer: true,
       pagination: const SwiperPagination(
         alignment: Alignment.bottomCenter,
-        builder: TDSwiperPagination.dots,
+        builder: TSwiperPagination.dots,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -211,10 +211,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
       scrollDirection: Axis.vertical,
       pagination: const SwiperPagination(
         alignment: Alignment.centerRight,
-        builder: TDSwiperPagination.dots,
+        builder: TSwiperPagination.dots,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return const TDImage(
+        return const TImage(
           assetUrl: 'assets/img/image.png',
         );
       },
@@ -224,31 +224,10 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
 ## API
 
-1. [TDPageTransformer](#tdpagetransformer)
-2. [TDSwiperPagination](#tdswiperpagination)
+1. [TSwiperPagination](#tswiperpagination)
+2. [TPageTransformer](#tpagetransformer)
 
-#### TDPageTransformer
-
-##### 简介
-
-TD默认PageTransformer
-
-##### 默认构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| fade | double? | - | 淡化比例 |
-| margin | double? | - | 左右间隔 |
-| scale | double? | - | 缩放比例 |
-
-##### 工厂构造方法
-
-| 名称 | 说明 |
-| --- | --- |
-| TDPageTransformer.margin | 普通margin的卡片式 |
-| TDPageTransformer.scaleAndFade | 缩放或透明的卡片式 |
-
-#### TDSwiperPagination
+#### TSwiperPagination
 
 ##### 简介
 
@@ -258,10 +237,52 @@ TDesign风格的Swiper指示器样式，与flutter_swiper的Swiper结合使用
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| alignment | Alignment? | - | 当 scrollDirection== Axis.horizontal 时，默认Alignment.bottomCenter |
-| builder | SwiperPlugin | TDSwiperPagination.dots | 具体样式 |
-| key | Key? | - |  |
+| alignment | Alignment? | - | 当 scrollDirection== Axis.horizontal 时，默认Alignment.bottomCenter 当 scrollDirection== Axis.vertical 时，默认Alignment.centerRight |
+| builder | SwiperPlugin | TSwiperPagination.dots | 具体样式 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | margin | EdgeInsetsGeometry | const EdgeInsets.all(10.0) | 指示器和container之间的距离 |
+
+##### 静态成员
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| controls | SwiperPlugin | - | 箭头样式 |
+| dots | SwiperPlugin | - | 圆点样式 |
+| dotsBar | SwiperPlugin | - | 圆角矩形 + 圆点样式 默认宽度20，高度6 |
+| fraction | SwiperPlugin | - | 数字样式 |
+
+#### TPageTransformer
+
+##### 简介
+
+TD默认PageTransformer
+
+##### 工厂构造方法
+
+###### TPageTransformer.margin
+
+普通margin的卡片式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| margin | double? | 6.0 | 左右间隔 |
+
+###### TPageTransformer.scaleAndFade
+
+缩放或透明的卡片式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| fade | double? | 1 | 淡化比例 |
+| scale | double? | 0.8 | 缩放比例 |
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| fade | double? | - | 淡化比例 |
+| margin | double? | - | 左右间隔 |
+| scale | double? | - | 缩放比例 |
 
 ## 设计指南
 

@@ -41,7 +41,7 @@ class GoodsListView extends BaseView<GoodsListLogic> {
   @override
   Widget body() {
     // 仅标题区域订阅 Rx，页面其他静态部分无需重建。
-    return Obx(() => Center(child: TDText(logic.state.title.value)));
+    return Obx(() => Center(child: TText(logic.state.title.value)));
   }
 }
 ```

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -24,9 +23,6 @@ abstract class BaseView<T> extends GetView<T> {
   /// 当前页面 Logic
   T get logic => controller;
 
-  /// 当前页面应用主题
-  AppTheme get appTheme => AppTheme.of(Get.context!);
-
   /// 设置标题文字
   final String? navTitle = null;
 
@@ -40,7 +36,7 @@ abstract class BaseView<T> extends GetView<T> {
   final Widget? navBottomWidget = null;
 
   /// 设置右边按钮数组
-  final List<TDNavBarItem>? rightBarItems = null;
+  final List<TNavBarItem>? rightBarItems = null;
 
   /// 是否隐藏导航栏
   final bool isHiddenNav = false;
@@ -61,24 +57,31 @@ abstract class BaseView<T> extends GetView<T> {
   bool get keepAlive => false;
 
   /// 导航栏 子类可根据需求重写
+  ///
+  /// 底部区域构建在 [TNavBar] 之外：1.1.0 移除了 per-instance 的 padding 参数，
+  /// belowTitleWidget 会落在 [TNavBarThemeData.padding] 内，下拉筛选栏与 TabBar
+  /// 因此比遮罩窄一条边距。
   PreferredSizeWidget? head() {
     if (isHiddenNav) return null;
-    return TDNavBar(
-      leftBarItems: navBackBtn
-          ? useDefaultBack
-                ? [
-                    TDNavBarItem(
-                      iconWidget: BackButton(color: appTheme.textPrimary),
-                    ),
-                  ]
-                : null
-          : null,
-      padding: EdgeInsets.zero,
-      title: navTitle,
-      height: navHeight,
-      useDefaultBack: false,
-      rightBarItems: rightBarItems,
-      belowTitleWidget: navBottomWidget,
+    return PreferredSize(
+      preferredSize: Size.fromHeight(navHeight),
+      child: Builder(
+        builder: (BuildContext context) {
+          final double safeTop = MediaQuery.paddingOf(context).top;
+          return <Widget>[
+                TNavBar(
+                  title: TText(navTitle ?? ''),
+                  height: navHeight,
+                  useDefaultBack: navBackBtn && useDefaultBack,
+                  useSafeArea: true,
+                  actions: rightBarItems,
+                ).expanded(),
+                ?navBottomWidget,
+              ]
+              .toColumn(crossAxisAlignment: .stretch)
+              .tight(height: safeTop + navHeight);
+        },
+      ),
     );
   }
 

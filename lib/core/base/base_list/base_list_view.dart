@@ -61,7 +61,7 @@ abstract class BaseListView<T extends BaseListLogic<E>, E>
   /// 使用 ListView 构建列表内容，子类可覆盖为其他列表布局
   Widget builderItemWidget() {
     return logic.listState.dataList.toListViewSeparated(
-      padding: listItemPadding,
+      padding: listItemPaddingWithInset,
       separatorBuilder: (context, index) => const SpaceVerticalLarge(),
       itemBuilder: (context, index, item) => itemWidget(item, index),
     );

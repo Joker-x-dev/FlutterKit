@@ -91,9 +91,8 @@ void main() {
       final Widget legacyScope = legacy.AnimationExtension(
         const SizedBox(key: ValueKey<String>('旧入口')),
       ).animate(const Duration(milliseconds: 510), curve: Curves.bounceIn);
-      final Widget child = canonical.AnimatedLayoutExtension(
-        legacyScope,
-      ).animatedPadding(all: 9);
+      final Widget child = canonical.AnimatedLayoutExtension(legacyScope)
+          .animatedPadding(all: 9);
 
       await pumpExtensionTestApp(tester, child);
 
@@ -114,9 +113,8 @@ void main() {
             duration: const Duration(milliseconds: 700),
             curve: Curves.fastOutSlowIn,
           );
-      final Widget child = canonical.AnimatedLayoutExtension(
-        replacedScope,
-      ).animatedPadding(all: 4);
+      final Widget child = canonical.AnimatedLayoutExtension(replacedScope)
+          .animatedPadding(all: 4);
 
       await pumpExtensionTestApp(tester, child);
 
@@ -128,9 +126,8 @@ void main() {
     });
 
     testWidgets('缺少动画配置时给出明确错误', (tester) async {
-      final Widget child = canonical.AnimatedLayoutExtension(
-        const SizedBox(),
-      ).animatedPadding(all: 8);
+      final Widget child = canonical.AnimatedLayoutExtension(const SizedBox())
+          .animatedPadding(all: 8);
 
       await pumpExtensionTestApp(tester, child);
 
@@ -143,21 +140,17 @@ void main() {
   group('通用动画兼容层', () {
     testWidgets('命名参数兼容入口支持装饰约束变换和边距', (tester) async {
       Widget child = const SizedBox(key: ValueKey<String>('兼容内容'));
-      child = compatibility.AnimatedWidgetExtension(
-        child,
-      ).animatedDecoration(const BoxDecoration(color: Colors.red));
+      child = compatibility.AnimatedWidgetExtension(child)
+          .animatedDecoration(const BoxDecoration(color: Colors.red));
       child = compatibility.AnimatedWidgetExtension(child).animatedConstraints(
         const BoxConstraints.tightFor(width: 40, height: 30),
       );
-      child = compatibility.AnimatedWidgetExtension(
-        child,
-      ).animatedTransform(Matrix4.translationValues(5, 6, 0));
-      child = compatibility.AnimatedWidgetExtension(
-        child,
-      ).animatedPadding(const EdgeInsets.all(7));
-      child = compatibility.AnimatedWidgetExtension(
-        child,
-      ).animatedMargin(const EdgeInsets.all(8));
+      child = compatibility.AnimatedWidgetExtension(child)
+          .animatedTransform(Matrix4.translationValues(5, 6, 0));
+      child = compatibility.AnimatedWidgetExtension(child)
+          .animatedPadding(const EdgeInsets.all(7));
+      child = compatibility.AnimatedWidgetExtension(child)
+          .animatedMargin(const EdgeInsets.all(8));
       child = compatibility.AnimatedWidgetExtension(child).animate(
         duration: const Duration(milliseconds: 420),
         curve: Curves.easeOut,
@@ -179,7 +172,7 @@ void main() {
       final Widget child = compatibility.AnimatedWidgetExtension(scope)
           .animatedDecoration(
             const BoxDecoration(color: Colors.green),
-            position: DecorationPosition.foreground,
+            position: .foreground,
           );
 
       await pumpExtensionTestApp(tester, child);

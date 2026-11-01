@@ -64,13 +64,13 @@ FlutterKit 是面向 Android、iOS、macOS、Linux、Windows 和 Web 的 Flutter
 - 所有业务 UI 优先组合 TDesign 组件，并使用 `AppTheme`、设计系统语义常量、`Space` 和现有链式扩展；禁止硬编码颜色、间距、圆角、阴影或重复封装已有组件。
 - 新建或修改布局前必须阅读[完整布局规范与扩展文档](lib/core/design_system/README.md)，并检查[扩展统一导出文件](lib/core/design_system/extensions/extensions.dart)与 `lib/core/design_system/extensions/widget/` 下的真实方法签名，确认现有扩展无法满足后才能新增。
 - 组件属性先查[TDesign 完整组件列表](docs/tdesign-flutter/README.md)及具体组件页面，不得按 Web、Vue、React 或旧版本 API 猜测 Dart 参数。
-- 主题值只能在已建立主题上下文的 build 流程读取，不得在全局或静态字段中缓存 `TDTheme.of`、`AppTheme.of` 及依赖它们的尺寸/形状 getter。
+- 主题值只能在已建立主题上下文的 build 流程读取，不得在全局或静态字段中缓存 `context.tTheme`、`AppTheme.of` 及依赖它们的尺寸/形状 getter。
 - 链式扩展的包装顺序会改变布局、背景、裁剪和点击范围；修改复杂链式 UI 前先阅读 Widget/动画扩展专题。
 - 新增完整页面默认提供 `@ResponsivePreview()`；模块组件提供 `@WidgetPreview()`。预览函数位于当前源码文件末尾，注入 Logic；网络页面写入静态 Preview Data 并设置成功状态，禁止真实请求。
 
 ### UI 开发固定检查顺序
 
-1. 在 TDesign 组件列表中确认是否已有对应组件，优先组合现有 `TD*` 组件。
+1. 在 TDesign 组件列表中确认是否已有对应组件，优先组合现有 `T*` 组件。
 2. 在完整布局规范和 `extensions.dart` 中确认是否已有布局、间距、装饰、裁剪、滚动、手势、文本、变换或动画扩展。
 3. 查阅具体组件页面和扩展实现，确认当前版本的构造参数、返回类型、包装顺序和约束行为。
 4. 使用项目主题语义与响应式能力完成组合，再补充页面或组件 Preview。

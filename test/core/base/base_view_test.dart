@@ -1,10 +1,10 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import 'package:flutter_kit/core/base/base/base_view.dart';
+import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/base/base_list/base_list_logic.dart';
 import 'package:flutter_kit/core/base/base_list/base_list_view.dart';
 import 'package:flutter_kit/core/base/base_network/base_network_logic.dart';
@@ -37,16 +37,20 @@ void main() {
       buildCoreTestApp(home: const _DefaultHeadView(logic: Object())),
     );
 
-    expect(find.byType(TDNavBar), findsOneWidget);
-    expect(find.byType(BackButton), findsOneWidget);
+    expect(find.byType(TNavBar), findsOneWidget);
+    expect(find.byIcon(TIcons.chevron_left), findsOneWidget);
     expect(find.text('默认导航正文'), findsOneWidget);
+
+    final TNavBar navBar = tester.widget<TNavBar>(find.byType(TNavBar));
+    expect(navBar.useSafeArea, isTrue);
+    expect(navBar.useDefaultBack, isTrue);
   });
 
   testWidgets('BaseNetworkView 展示加载、空、错误和成功状态', (WidgetTester tester) async {
     final _NetworkViewLogic logic = _NetworkViewLogic();
     await tester.pumpWidget(buildCoreTestApp(home: _NetworkView(logic: logic)));
 
-    expect(find.text('加载中…'), findsOneWidget);
+    expect(find.byType(TLoading), findsOneWidget);
 
     logic.setStatusEmpty();
     await tester.pumpAndSettle();
@@ -87,6 +91,24 @@ void main() {
     final EasyRefresh refresh = tester.widget(find.byType(EasyRefresh));
     await refresh.onRefresh?.call();
     await refresh.onLoad?.call();
+
+    await tester.pumpWidget(const SizedBox());
+    logic.listState.easyRefreshController.dispose();
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('列表内容末端叠加底部安全区', (WidgetTester tester) async {
+    tester.view.padding = const FakeViewPadding(bottom: 96);
+    addTearDown(tester.view.resetPadding);
+    final _ListViewLogic logic = _ListViewLogic()
+      ..listState.dataList.assignAll(<int>[1])
+      ..setStatusSuccess();
+    await tester.pumpWidget(buildCoreTestApp(home: _ListView(logic: logic)));
+
+    final ListView list = tester.widget<ListView>(find.byType(ListView).first);
+    // 测试视图 pixelRatio 为 3，96 物理像素对应 32 逻辑像素
+    expect((list.padding as EdgeInsets).bottom, listItemPadding.bottom + 32);
 
     await tester.pumpWidget(const SizedBox());
     logic.listState.easyRefreshController.dispose();

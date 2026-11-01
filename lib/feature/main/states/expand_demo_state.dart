@@ -14,13 +14,19 @@ class ExpandDemoState {
     DemoItem(
       title: MainKeys.demoScreenAdapt,
       description: MainKeys.demoScreenAdaptDesc,
-      icon: TDIcons.desktop,
+      icon: TIcons.desktop,
       action: DemoAction.screenAdapt,
+    ),
+    DemoItem(
+      title: DemoKeys.titleNestedScrollDemo,
+      description: DemoKeys.nestedScrollDemoDesc,
+      icon: TIcons.user_avatar,
+      action: DemoAction.nestedScrollDemo,
     ),
     DemoItem(
       title: DemoKeys.titleThemeDemo,
       description: DemoKeys.languageThemeDesc,
-      icon: TDIcons.setting,
+      icon: TIcons.setting,
       action: DemoAction.theme,
     ),
   ];

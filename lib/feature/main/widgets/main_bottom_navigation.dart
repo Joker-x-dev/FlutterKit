@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/application.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -40,13 +39,11 @@ class MainBottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final String localeTag = Application.locale.value.toLanguageTag();
-      final AppTheme appTheme = AppTheme.of(context);
-      return TDBottomTabBar(
+      return TTabBar(
         key: ValueKey<String>(localeTag),
-        barHeight: 60,
-        TDBottomTabBarBasicType.iconText,
-        currentIndex: currentIndex,
-        componentType: TDBottomTabBarComponentType.normal,
+        type: TTabBarType.iconText,
+        value: currentIndex,
+        onChanged: onSelected,
         navigationTabs: items
             .map(
               (MainNavigationItem item) =>
@@ -63,15 +60,15 @@ class MainBottomNavigation extends StatelessWidget {
   /// [selectedColor] 选中状态颜色。
   ///
   /// 返回 TDesign 底部导航选项。
-  TDBottomTabBarTabConfig _buildNavigationItem(
+  TTabBarItemConfig _buildNavigationItem(
     MainNavigationItem item, {
     required Color selectedColor,
   }) {
-    return TDBottomTabBarTabConfig(
+    return TTabBarItemConfig(
       tabText: item.localizedLabel,
       selectedIcon: Icon(item.selectedIcon, color: selectedColor),
       unselectedIcon: Icon(item.icon),
-      onTap: () => onSelected(item.index),
+      onTap: () {},
     );
   }
 }

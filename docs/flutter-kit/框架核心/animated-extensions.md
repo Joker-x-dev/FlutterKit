@@ -6,6 +6,7 @@
 
 | 分类 | 常用 API | 动画实现 |
 | --- | --- | --- |
+| 监听构建 | `listenable.animatedBuilder` | `AnimatedBuilder` |
 | 动画上下文 | `animate(duration:, curve:)` | 通过内部 InheritedWidget 传递时长与曲线 |
 | 布局 | `animatedPadding`、`animatedMargin`、`animatedConstraints` | `AnimatedPadding`、`AnimatedContainer`、约束 Tween |
 | 装饰 | `animatedDecoration`、`animatedBorderRadius`、`animatedBackgroundColor`、`animatedElevation` | `DecorationTween`、`AnimatedContainer`、`AnimatedPhysicalModel` |
@@ -14,6 +15,21 @@
 | 手势 | `animatedTap`、`animatedRipple`、`animatedTapScale`、`animatedHover` | 内部 StatefulWidget、`AnimationController`、InkWell |
 | 图标 | `animatedIcon`、`animatedIconColor`、`animatedIconSize` | 自定义隐式动画 Icon |
 | 文本 | `animatedText`、`animatedTextColor`、`animatedTextSize`、`animatedTextStyle` | 自定义隐式动画 Text |
+
+## 监听构建
+
+`animatedBuilder()` 直接扩展 [Listenable]，适用于 `AnimationController`、
+`ScrollController` 等连续状态驱动的局部重建。`child` 保留原生
+`AnimatedBuilder` 的缓存语义，不随监听值变化的子树应通过该参数传入。
+
+```dart
+scrollController.animatedBuilder(
+  child: const StaticHeader(),
+  builder: (context, child) {
+    return child!.translateY(scrollController.offset);
+  },
+);
+```
 
 ## 组合方式
 
@@ -44,7 +60,7 @@ widget
 
 ```dart
 /// 根据选中状态动画化卡片的背景、边距和缩放。
-Widget buildSelectableCard(bool selected, AppTheme theme) {
+Widget buildSelectableCard(bool selected) {
   return const Text('选择主题')
       // 内边距扩展使用命名尺寸参数，状态变化时会补间到新值。
       .animatedPadding(
@@ -52,7 +68,9 @@ Widget buildSelectableCard(bool selected, AppTheme theme) {
       )
       .animatedDecoration(
         BoxDecoration(
-          color: selected ? theme.primaryLight : theme.backgroundContainer,
+          color: selected
+              ? appTheme.primaryLight
+              : appTheme.backgroundContainer,
           borderRadius: BorderRadius.circular(radiusLarge),
         ),
       )
@@ -68,10 +86,10 @@ Widget buildSelectableCard(bool selected, AppTheme theme) {
 
 ```dart
 /// 为完整操作区域提供按下缩放反馈。
-Widget buildAnimatedAction(VoidCallback onTap, AppTheme theme) {
+Widget buildAnimatedAction(VoidCallback onTap) {
   return const Text('保存')
       .padAll(spacePaddingLarge)
-      .backgroundColor(theme.primary)
+      .backgroundColor(appTheme.primary)
       .clipRadius(radiusDefault)
       // 内部组件持有 AnimationController，并在松手时触发业务回调。
       .animatedTapScale(onTap, duration: const Duration(milliseconds: 100));
@@ -82,11 +100,11 @@ Widget buildAnimatedAction(VoidCallback onTap, AppTheme theme) {
 
 ```dart
 /// 主题状态变化时平滑过渡标题颜色与字号。
-Widget buildAnimatedTitle(bool active, AppTheme theme) {
+Widget buildAnimatedTitle(bool active) {
   return Text(active ? '已启用' : '未启用')
       // Text 扩展只替换文本样式相关字段，不改变语义内容。
       .animatedTextColor(
-        active ? theme.primary : theme.textSecondary,
+        active ? appTheme.primary : appTheme.textSecondary,
         duration: const Duration(milliseconds: 180),
       )
       .animatedTextSize(

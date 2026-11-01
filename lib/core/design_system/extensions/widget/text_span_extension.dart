@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,8 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了新样式的 TextSpan
   TextSpan textStyle(TextStyle style) {
     return copyWith(
-      style: this.style?.copyWith(
+      style:
+          this.style?.copyWith(
             background: style.background,
             backgroundColor: style.backgroundColor,
             color: style.color,
@@ -66,9 +68,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回粗体样式的 TextSpan
   TextSpan bold() {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontWeight: .bold),
     );
   }
 
@@ -77,9 +77,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回斜体样式的 TextSpan
   TextSpan italic() {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontStyle: FontStyle.italic,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontStyle: FontStyle.italic),
     );
   }
 
@@ -89,9 +87,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了字体粗细的 TextSpan
   TextSpan fontWeight(FontWeight fontWeight) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontWeight: fontWeight,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontWeight: fontWeight),
     );
   }
 
@@ -101,9 +97,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了字体大小的 TextSpan
   TextSpan fontSize(double size) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontSize: size,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontSize: size),
     );
   }
 
@@ -113,9 +107,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了字体家族的 TextSpan
   TextSpan fontFamily(String font) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontFamily: font,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontFamily: font),
     );
   }
 
@@ -125,9 +117,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了字母间距的 TextSpan
   TextSpan letterSpacing(double space) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        letterSpacing: space,
-      ),
+      style: (style ?? const TextStyle()).copyWith(letterSpacing: space),
     );
   }
 
@@ -137,9 +127,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了单词间距的 TextSpan
   TextSpan wordSpacing(double space) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        wordSpacing: space,
-      ),
+      style: (style ?? const TextStyle()).copyWith(wordSpacing: space),
     );
   }
 
@@ -156,13 +144,7 @@ extension TextSpanExtension on TextSpan {
   }) {
     return copyWith(
       style: (style ?? const TextStyle()).copyWith(
-        shadows: [
-          Shadow(
-            color: color,
-            blurRadius: blurRadius,
-            offset: offset,
-          ),
-        ],
+        shadows: [Shadow(color: color, blurRadius: blurRadius, offset: offset)],
       ),
     );
   }
@@ -195,11 +177,9 @@ extension TextSpanExtension on TextSpan {
       blurRadius: elevation,
       offset: Offset(sin(angle) * elevation, cos(angle) * elevation),
     );
-    
+
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        shadows: [shadow],
-      ),
+      style: (style ?? const TextStyle()).copyWith(shadows: [shadow]),
     );
   }
 
@@ -208,11 +188,7 @@ extension TextSpanExtension on TextSpan {
   /// [color] 文本颜色
   /// 返回应用了颜色的 TextSpan
   TextSpan textColor(Color color) {
-    return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        color: color,
-      ),
-    );
+    return copyWith(style: (style ?? const TextStyle()).copyWith(color: color));
   }
 
   /// 设置文本基线
@@ -221,9 +197,7 @@ extension TextSpanExtension on TextSpan {
   /// 返回应用了文本基线的 TextSpan
   TextSpan textBaseline(TextBaseline textBaseline) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        textBaseline: textBaseline,
-      ),
+      style: (style ?? const TextStyle()).copyWith(textBaseline: textBaseline),
     );
   }
 }

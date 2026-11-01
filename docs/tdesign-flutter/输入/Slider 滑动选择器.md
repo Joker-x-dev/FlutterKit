@@ -2,8 +2,8 @@
 
 > 用于选择横轴上的数值、区间、档位。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/slider)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Slider 滑动选择器](https://tdesign.tencent.com/flutter/components/slider)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,8 +27,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSingleHandle(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         min: 0,
         max: 100,
@@ -43,8 +43,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDoubleHandle(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         min: 0,
         max: 100,
@@ -59,8 +59,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSingleHandleWithNumber(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         showThumbValue: true,
         scaleFormatter: (value) => value.toInt().toString(),
@@ -79,8 +79,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDoubleHandleWithNumber(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         showThumbValue: true,
         min: 0,
@@ -99,8 +99,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSingleHandleWithScale(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         showScaleValue: true,
         divisions: 5,
@@ -118,8 +118,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDoubleHandleWithScale(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         showScaleValue: true,
         divisions: 5,
@@ -139,8 +139,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDisableSingleHandle(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         min: 0,
         max: 100,
@@ -155,8 +155,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDisableDoubleHandleWithNumber(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         showThumbValue: true,
         min: 0,
@@ -173,8 +173,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDisableDoubleHandleWithScale(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData(
         context: context,
         showScaleValue: true,
         divisions: 5,
@@ -212,8 +212,8 @@ onTap
                       'Tap at (${tapOffset!.dx.toStringAsFixed(0)}, ${tapOffset!.dy.toStringAsFixed(0)})'),
               ],
             ),
-            TDSlider(
-              sliderThemeData: TDSliderThemeData(
+            TSlider(
+              sliderThemeData: TSliderThemeData(
                   context: context, min: 0, max: 100, showThumbValue: true),
               leftLabel: '0',
               rightLabel: '100',
@@ -268,8 +268,8 @@ onTap
           },
         ),
         const SizedBox(height: 10),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData(
               context: context, min: 0, max: 100, showThumbValue: true),
           leftLabel: '0',
           rightLabel: '100',
@@ -314,8 +314,8 @@ onThumbTextTap
               ],
             ),
             const SizedBox(height: 10),
-            TDSlider(
-              sliderThemeData: TDSliderThemeData(
+            TSlider(
+              sliderThemeData: TSliderThemeData(
                 context: context,
                 min: 0,
                 max: 100,
@@ -374,8 +374,8 @@ onThumbTextTap
           },
         ),
         const SizedBox(height: 10),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData(
             context: context,
             min: 0,
             max: 100,
@@ -405,8 +405,8 @@ onThumbTextTap
 
 ```
   Widget _buildCapsuleSingleHandleWithNumber(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData.capsule(
+    return TSlider(
+      sliderThemeData: TSliderThemeData.capsule(
         context: context,
         showThumbValue: true,
         min: 0,
@@ -422,8 +422,8 @@ onThumbTextTap
 
 ```
   Widget _buildCapsuleDoubleHandle(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData.capsule(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData.capsule(
         context: context,
         min: 0,
         max: 100,
@@ -438,8 +438,8 @@ onThumbTextTap
 
 ```
   Widget _buildCapsuleSingleHandle(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData.capsule(
+    return TSlider(
+      sliderThemeData: TSliderThemeData.capsule(
         context: context,
         min: 0,
         max: 100,
@@ -456,8 +456,8 @@ onThumbTextTap
 
 ```
   Widget _buildCapsuleDoubleHandleWithNumber(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData.capsule(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData.capsule(
         context: context,
         showThumbValue: true,
         min: 0,
@@ -475,8 +475,8 @@ onThumbTextTap
 
 ```
   Widget _buildCapsuleSingleHandleWithScale(BuildContext context) {
-    return TDSlider(
-      sliderThemeData: TDSliderThemeData.capsule(
+    return TSlider(
+      sliderThemeData: TSliderThemeData.capsule(
         context: context,
         showScaleValue: true,
         divisions: 5,
@@ -484,8 +484,8 @@ onThumbTextTap
         max: 100,
         scaleFormatter: (value) => value.toInt().toString(),
       )..updateSliderThemeData((data) => data.copyWith(
-          // activeTickMarkColor: TDTheme.of(context).componentBorderColor,
-          // inactiveTickMarkColor: TDTheme.of(context).componentStrokeColor,
+          // activeTickMarkColor: TTheme.of(context).componentBorderColor,
+          // inactiveTickMarkColor: TTheme.of(context).componentStrokeColor,
           )),
       value: 60,
       onChanged: (value) {},
@@ -496,8 +496,8 @@ onThumbTextTap
 
 ```
   Widget _buildCapsuleDoubleHandleWithScale(BuildContext context) {
-    return TDRangeSlider(
-      sliderThemeData: TDSliderThemeData.capsule(
+    return TRangeSlider(
+      sliderThemeData: TSliderThemeData.capsule(
         context: context,
         showScaleValue: true,
         divisions: 5,
@@ -505,8 +505,8 @@ onThumbTextTap
         max: 100,
         scaleFormatter: (value) => value.toInt().toString(),
       )..updateSliderThemeData((data) => data.copyWith(
-          // activeTickMarkColor: TDTheme.of(context).bgColorComponent,
-          // inactiveTickMarkColor: TDTheme.of(context).bgColorComponent,
+          // activeTickMarkColor: TTheme.of(context).bgColorComponent,
+          // inactiveTickMarkColor: TTheme.of(context).bgColorComponent,
           )),
       value: const RangeValues(20, 60),
       onChanged: (value) {},
@@ -521,8 +521,8 @@ onThumbTextTap
     return Column(
       // spacing: 16,
       children: [
-        TDSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             showThumbValue: true,
             min: 0,
@@ -532,8 +532,8 @@ onThumbTextTap
           value: 40,
         ),
         const SizedBox(height: 16),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             min: 0,
             max: 100,
@@ -542,8 +542,8 @@ onThumbTextTap
           value: const RangeValues(20, 60),
         ),
         const SizedBox(height: 16),
-        TDSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             min: 0,
             max: 100,
@@ -554,8 +554,8 @@ onThumbTextTap
           value: 40,
         ),
         const SizedBox(height: 16),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             min: 0,
             max: 100,
@@ -567,8 +567,8 @@ onThumbTextTap
           rightLabel: '100',
         ),
         const SizedBox(height: 16),
-        TDSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             showScaleValue: true,
             divisions: 5,
@@ -576,14 +576,14 @@ onThumbTextTap
             max: 100,
             scaleFormatter: (value) => value.toInt().toString(),
           )..updateSliderThemeData((data) => data.copyWith(
-                activeTickMarkColor: TDTheme.of(context).componentStrokeColor,
-                inactiveTickMarkColor: TDTheme.of(context).componentStrokeColor,
+                activeTickMarkColor: TTheme.of(context).componentStrokeColor,
+                inactiveTickMarkColor: TTheme.of(context).componentStrokeColor,
               )),
           value: 60,
         ),
         const SizedBox(height: 16),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             showScaleValue: true,
             divisions: 5,
@@ -591,8 +591,8 @@ onThumbTextTap
             max: 100,
             scaleFormatter: (value) => value.toInt().toString(),
           )..updateSliderThemeData((data) => data.copyWith(
-                activeTickMarkColor: TDTheme.of(context).bgColorComponentActive,
-                inactiveTickMarkColor: TDTheme.of(context).bgColorComponent,
+                activeTickMarkColor: TTheme.of(context).bgColorComponentActive,
+                inactiveTickMarkColor: TTheme.of(context).bgColorComponent,
               )),
           value: const RangeValues(20, 60),
         )
@@ -608,8 +608,8 @@ onThumbTextTap
     return Column(
       // spacing: 16,
       children: [
-        TDSlider(
-          sliderThemeData: TDSliderThemeData(
+        TSlider(
+          sliderThemeData: TSliderThemeData(
             context: context,
             min: 0,
             max: 100,
@@ -620,8 +620,8 @@ onThumbTextTap
           onChanged: (value) {},
         ),
         const SizedBox(height: 16),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             context: context,
             min: 0,
             max: 100,
@@ -643,8 +643,8 @@ onThumbTextTap
     return Column(
       // spacing: 16,
       children: [
-        TDSlider(
-          sliderThemeData: TDSliderThemeData(
+        TSlider(
+          sliderThemeData: TSliderThemeData(
             activeTrackColor: Colors.red,
             inactiveTrackColor: Colors.green,
             context: context,
@@ -656,8 +656,8 @@ onThumbTextTap
           onChanged: (value) {},
         ),
         const SizedBox(height: 16),
-        TDRangeSlider(
-          sliderThemeData: TDSliderThemeData.capsule(
+        TRangeSlider(
+          sliderThemeData: TSliderThemeData.capsule(
             activeTrackColor: Colors.green,
             inactiveTrackColor: Colors.red,
             context: context,
@@ -675,17 +675,36 @@ onThumbTextTap
 
 ## API
 
-1. [TDSlider](#tdslider)
-2. [TDRangeSlider](#tdrangeslider)
+1. [TSlider](#tslider)
+2. [TRangeSlider](#trangeslider)
+3. [Position](#position)
 
-#### TDSlider
+#### TSlider
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | boxDecoration | Decoration? | - | 自定义盒子样式 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| leftLabel | String? | - | 左侧标签 |
+| onChanged | ValueChanged? | - | 滑动变化监听 |
+| onChangeEnd | ValueChanged? | - | 滑动结束监听 |
+| onChangeStart | ValueChanged? | - | 滑动开始监听 |
+| onTap | Function(Offset offset, double value)? | - | Thumb 点击事件 坐标、当前值 |
+| onThumbTextTap | Function(Offset offset, double value)? | - | Thumb 点击浮标文字 坐标、当前值 |
+| rightLabel | String? | - | 右侧标签 |
+| sliderThemeData | TSliderThemeData? | - | 样式 |
+| value | double | - | 默认值 |
+
+#### TRangeSlider
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| boxDecoration | Decoration? | - | 自定义盒子样式 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | leftLabel | String? | - | 左侧标签 |
 | onChanged | ValueChanged? | - | 滑动变化监听 |
 | onChangeEnd | ValueChanged? | - | 滑动结束监听 |
@@ -693,26 +712,17 @@ onThumbTextTap
 | onTap | Function(Position position, Offset offset, double value)? | - | Thumb 点击事件 位置、坐标、当前值 |
 | onThumbTextTap | Function(Position position, Offset offset, double value)? | - | Thumb 点击浮标文字 位置、坐标、当前值 |
 | rightLabel | String? | - | 右侧标签 |
-| sliderThemeData | TDSliderThemeData? | - | 样式 |
+| sliderThemeData | TSliderThemeData? | - | 样式 |
 | value | RangeValues | - | 默认值 |
 
-#### TDRangeSlider
+#### Position
 
-##### 默认构造方法
+##### 枚举值
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| boxDecoration | Decoration? | - | 自定义盒子样式 |
-| key |  | - |  |
-| leftLabel | String? | - | 左侧标签 |
-| onChanged | ValueChanged? | - | 滑动变化监听 |
-| onChangeEnd | ValueChanged? | - | 滑动结束监听 |
-| onChangeStart | ValueChanged? | - | 滑动开始监听 |
-| onTap | Function(Position position, Offset offset, double value)? | - | Thumb 点击事件 位置、坐标、当前值 |
-| onThumbTextTap | Function(Position position, Offset offset, double value)? | - | Thumb 点击浮标文字 位置、坐标、当前值 |
-| rightLabel | String? | - | 右侧标签 |
-| sliderThemeData | TDSliderThemeData? | - | 样式 |
-| value | RangeValues | - | 默认值 |
+| 名称 | 说明 |
+| --- | --- |
+| start | - |
+| end | - |
 
 ## 设计指南
 

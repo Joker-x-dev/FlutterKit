@@ -66,7 +66,7 @@ Widget previewGoodsListCard() {
 }
 ```
 
-组件不应为了预览增加无意义的点击回调参数；只有组件真实业务需要回调时才传入。对于依赖主题的组件，预览注解提供的应用壳会建立主题上下文，组件仍应从 `AppTheme.of(context)` 或 TDesign Theme 读取语义色。
+组件不应为了预览增加无意义的点击回调参数；只有组件真实业务需要回调时才传入。对于依赖主题的组件，预览注解提供的应用壳会建立主题上下文，组件直接使用顶层 `appTheme` getter 或 TDesign Theme 读取语义色。
 
 ## 从零补 Preview 的流程
 

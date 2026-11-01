@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base_tab/base_tab_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/base_tab_demo_logic.dart';
 
@@ -25,17 +25,17 @@ class BaseTabDemoView extends BaseTabView<BaseTabDemoLogic> {
   @override
   List<Widget> pageViewChildren() {
     return [
-      TDText(
+      TText(
         DemoKeys.baseTabPageOne.tr,
-        textColor: appTheme.error,
+        style: TextStyle(color: appTheme.error),
       ).center().backgroundColor(appTheme.errorLight),
-      TDText(
+      TText(
         DemoKeys.baseTabPageTwo.tr,
-        textColor: appTheme.success,
+        style: TextStyle(color: appTheme.success),
       ).center().backgroundColor(appTheme.successLight),
-      TDText(
+      TText(
         DemoKeys.baseTabPageThree.tr,
-        textColor: appTheme.primary,
+        style: TextStyle(color: appTheme.primary),
       ).center().backgroundColor(appTheme.primaryLight),
     ];
   }

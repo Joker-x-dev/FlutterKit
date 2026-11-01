@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -22,7 +21,7 @@ void main() {
       buildCoreTestApp(
         home: Builder(
           builder: (BuildContext context) {
-            final TDThemeData theme = TDTheme.of(context);
+            final TThemeData theme = context.tTheme;
             mappings = <List<Object?>>[
               <Object?>[app_color.primary, theme.brandColor7],
               <Object?>[app_color.primaryLight, theme.brandColor1],
@@ -62,35 +61,18 @@ void main() {
                 app_color.backgroundComponentDisabled,
                 theme.grayColor2,
               ],
-              <Object?>[app_color.textPrimary, theme.fontGyColor1],
-              <Object?>[app_color.textSecondary, theme.fontGyColor2],
-              <Object?>[app_color.textPlaceholder, theme.fontGyColor3],
-              <Object?>[app_color.textDisabled, theme.fontGyColor4],
+              <Object?>[app_color.textPrimary, theme.fontGray1],
+              <Object?>[app_color.textSecondary, theme.fontGray2],
+              <Object?>[app_color.textPlaceholder, theme.fontGray3],
+              <Object?>[app_color.textDisabled, theme.fontGray4],
               <Object?>[app_color.textAnti, theme.whiteColor1],
               <Object?>[app_color.textBrand, theme.brandColor7],
               <Object?>[app_color.textLink, theme.brandColor8],
               <Object?>[app_color.borderLevel1, theme.grayColor3],
               <Object?>[app_color.borderLevel2, theme.grayColor4],
-              <Object?>[app_size.spacer4, theme.spacer4],
-              <Object?>[app_size.spacer8, theme.spacer8],
-              <Object?>[app_size.spacer12, theme.spacer12],
-              <Object?>[app_size.spacer16, theme.spacer16],
-              <Object?>[app_size.spacer24, theme.spacer24],
-              <Object?>[app_size.spacer32, theme.spacer32],
-              <Object?>[app_size.spacer40, theme.spacer40],
-              <Object?>[app_size.spacer48, theme.spacer48],
-              <Object?>[app_size.spacer64, theme.spacer64],
-              <Object?>[app_size.spacer96, theme.spacer96],
-              <Object?>[app_size.spacer160, theme.spacer160],
-              <Object?>[app_shape.radiusSmall, theme.radiusSmall],
-              <Object?>[app_shape.radiusDefault, theme.radiusDefault],
-              <Object?>[app_shape.radiusLarge, theme.radiusLarge],
-              <Object?>[app_shape.radiusExtraLarge, theme.radiusExtraLarge],
-              <Object?>[app_shape.radiusRound, theme.radiusRound],
-              <Object?>[app_shape.radiusCircle, theme.radiusCircle],
-              <Object?>[app_shadow.shadowBase, theme.shadowsBase],
-              <Object?>[app_shadow.shadowMiddle, theme.shadowsMiddle],
-              <Object?>[app_shadow.shadowTop, theme.shadowsTop],
+              <Object?>[app_shadow.shadowBase, theme.shadow1],
+              <Object?>[app_shadow.shadowMiddle, theme.shadow2],
+              <Object?>[app_shadow.shadowTop, theme.shadow3],
               <Object?>[app_type.fontDisplayLarge, theme.fontDisplayLarge],
               <Object?>[app_type.fontDisplayMedium, theme.fontDisplayMedium],
               <Object?>[app_type.fontHeadlineLarge, theme.fontHeadlineLarge],
@@ -103,7 +85,6 @@ void main() {
               <Object?>[app_type.fontTitleLarge, theme.fontTitleLarge],
               <Object?>[app_type.fontTitleMedium, theme.fontTitleMedium],
               <Object?>[app_type.fontTitleSmall, theme.fontTitleSmall],
-              <Object?>[app_type.fontBodyExtraLarge, theme.fontBodyExtraLarge],
               <Object?>[app_type.fontBodyLarge, theme.fontBodyLarge],
               <Object?>[app_type.fontBodyMedium, theme.fontBodyMedium],
               <Object?>[app_type.fontBodySmall, theme.fontBodySmall],

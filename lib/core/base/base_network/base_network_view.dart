@@ -1,5 +1,4 @@
 import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -14,8 +13,9 @@ import 'base_network_state.dart';
 /// 网络状态内容构建器
 ///
 /// [logic] 当前网络请求 Logic。
-typedef BodyBuilder<T extends BaseNetworkLogic<dynamic>> =
-    Widget Function(T logic);
+typedef BodyBuilder<T extends BaseNetworkLogic<dynamic>> = Widget Function(
+  T logic,
+);
 
 /// 基础网络状态页面
 ///
@@ -107,24 +107,20 @@ abstract class BaseNetworkView<T extends BaseNetworkLogic<dynamic>>
   /// [emptyText] 缺省状态提示文本。
   /// [imgPath] 缺省状态图片资源路径。
   Widget empty(String emptyText, String imgPath) {
-    return TDEmpty(
-      onTapEvent: () {
-        logic.loadData();
-        logic.setStatusLoad();
-      },
-      operationText: CommonKeys.baseNetworkReload.tr,
-      type: TDEmptyType.operation,
+    return TEmpty(
       emptyText: emptyText,
       image: SvgPicture.asset(imgPath).tight(height: 220, width: 200),
+      operation: TButton(
+        variant: TButtonVariant.text,
+        onPressed: () {
+          logic.loadData();
+          logic.setStatusLoad();
+        },
+        child: TText(CommonKeys.baseNetworkReload.tr),
+      ),
     );
   }
 
   /// 加载视图 子类可重写
-  Widget loadWidget() {
-    return TDLoading(
-      text: CommonKeys.baseNetworkLoading.tr,
-      size: TDLoadingSize.large,
-      icon: TDLoadingIcon.circle,
-    ).center();
-  }
+  Widget loadWidget() => TLoading(icon: TLoadingIcon.circle).center();
 }

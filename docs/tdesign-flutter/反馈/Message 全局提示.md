@@ -2,8 +2,8 @@
 
 > 用于轻量级反馈或提示，不会打断用户操作。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/message)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Message 全局提示](https://tdesign.tencent.com/flutter/components/message)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,14 +27,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildPlainTextMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
       isBlock: true,
       text: '纯文字的通知',
-      size: TDButtonSize.large,
-      type: TDButtonType.outline,
-      theme: TDButtonTheme.primary,
+      size: TButtonSize.large,
+      type: TButtonType.outline,
+      theme: TButtonTheme.primary,
       onTap: () {
-        TDMessage.showMessage(
+        TMessage.showMessage(
           context: context,
           content: _commonContent,
           visible: true,
@@ -54,14 +54,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildIconTextMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
         isBlock: true,
         text: '带图标的通知',
-        size: TDButtonSize.large,
-        type: TDButtonType.outline,
-        theme: TDButtonTheme.primary,
+        size: TButtonSize.large,
+        type: TButtonType.outline,
+        theme: TButtonTheme.primary,
         onTap: () {
-          TDMessage.showMessage(
+          TMessage.showMessage(
             context: context,
             content: _commonContent,
             visible: true,
@@ -77,14 +77,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildMessageWithCloseButton(BuildContext context) {
-    return TDButton(
+    return TButton(
         isBlock: true,
         text: '带关闭的通知',
-        size: TDButtonSize.large,
-        type: TDButtonType.outline,
-        theme: TDButtonTheme.primary,
+        size: TButtonSize.large,
+        type: TButtonType.outline,
+        theme: TButtonTheme.primary,
         onTap: () {
-          TDMessage.showMessage(
+          TMessage.showMessage(
             context: context,
             visible: true,
             icon: true,
@@ -105,14 +105,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildRollingMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
         isBlock: true,
         text: '可滚动的通知',
-        size: TDButtonSize.large,
-        type: TDButtonType.outline,
-        theme: TDButtonTheme.primary,
+        size: TButtonSize.large,
+        type: TButtonType.outline,
+        theme: TButtonTheme.primary,
         onTap: () {
-          TDMessage.showMessage(
+          TMessage.showMessage(
               context: context,
               visible: true,
               icon: false,
@@ -131,14 +131,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildLinkMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
         isBlock: true,
         text: '带按钮的通知',
-        size: TDButtonSize.large,
-        type: TDButtonType.outline,
-        theme: TDButtonTheme.primary,
+        size: TButtonSize.large,
+        type: TButtonType.outline,
+        theme: TButtonTheme.primary,
         onTap: () {
-          TDMessage.showMessage(
+          TMessage.showMessage(
               context: context,
               visible: true,
               icon: true,
@@ -162,14 +162,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildInfoMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
       isBlock: true,
       text: '普通通知',
-      size: TDButtonSize.large,
-      type: TDButtonType.outline,
-      theme: TDButtonTheme.primary,
+      size: TButtonSize.large,
+      type: TButtonType.outline,
+      theme: TButtonTheme.primary,
       onTap: () {
-        TDMessage.showMessage(
+        TMessage.showMessage(
           context: context,
           visible: true,
           icon: true,
@@ -186,14 +186,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSuccessMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
       isBlock: true,
       text: '成功通知',
-      size: TDButtonSize.large,
-      type: TDButtonType.outline,
-      theme: TDButtonTheme.primary,
+      size: TButtonSize.large,
+      type: TButtonType.outline,
+      theme: TButtonTheme.primary,
       onTap: () {
-        TDMessage.showMessage(
+        TMessage.showMessage(
           context: context,
           visible: true,
           icon: true,
@@ -210,14 +210,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildWarningMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
         isBlock: true,
         text: '警示通知',
-        size: TDButtonSize.large,
-        type: TDButtonType.outline,
-        theme: TDButtonTheme.primary,
+        size: TButtonSize.large,
+        type: TButtonType.outline,
+        theme: TButtonTheme.primary,
         onTap: () {
-          TDMessage.showMessage(
+          TMessage.showMessage(
             context: context,
             visible: true,
             icon: true,
@@ -233,14 +233,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildErrorMessage(BuildContext context) {
-    return TDButton(
+    return TButton(
         isBlock: true,
         text: '错误通知',
-        size: TDButtonSize.large,
-        type: TDButtonType.outline,
-        theme: TDButtonTheme.primary,
+        size: TButtonSize.large,
+        type: TButtonType.outline,
+        theme: TButtonTheme.primary,
         onTap: () {
-          TDMessage.showMessage(
+          TMessage.showMessage(
             context: context,
             visible: true,
             icon: true,
@@ -254,19 +254,52 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [MessageLink](#messagelink)
+1. [TMessage](#tmessage)
 2. [MessageMarquee](#messagemarquee)
-3. [TDMessage](#tdmessage)
+3. [MessageLink](#messagelink)
+4. [MessageTheme](#messagetheme)
 
-#### MessageLink
+#### TMessage
+
+##### 静态方法
+
+###### TMessage.showMessage
+
+返回类型：`void`
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | - |
+| content | String? | - | 通知内容 |
+| visible | bool? | - | 是否显示 |
+| duration | int? | - | 消息内置计时器 |
+| closeBtn | dynamic | - | 关闭按钮 |
+| icon | dynamic | - | 自定义消息前面的图标 |
+| link | dynamic | - | 链接名称 |
+| marquee | MessageMarquee? | - | 跑马灯效果 |
+| offset | List? | - | 相对于 placement 的偏移量 |
+| theme | MessageTheme? | - | 消息组件风格 info/success/warning/error |
+| onCloseBtnClick | VoidCallback? | - | 点击关闭按钮触发 |
+| onDurationEnd | VoidCallback? | - | 计时结束后触发 |
+| onLinkClick | VoidCallback? | - | 点击链接文本时触发 |
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| color | Color? | - | 颜色 |
-| name | String | - | 名称 |
-| uri | Uri? | - | 资源链接 |
+| closeBtn | dynamic | - | 关闭按钮 |
+| content | String? | - | 通知内容 |
+| duration | int? | 3000 | 消息内置计时器 |
+| icon | dynamic | true | 自定义消息前面的图标 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| link | dynamic | - | 链接名称 |
+| marquee | MessageMarquee? | - | 跑马灯效果 |
+| offset | List? | - | 相对于 placement 的偏移量 |
+| onCloseBtnClick | VoidCallback? | - | 点击关闭按钮触发 |
+| onDurationEnd | VoidCallback? | - | 计时结束后触发 |
+| onLinkClick | VoidCallback? | - | 点击链接文本时触发 |
+| theme | MessageTheme? | MessageTheme.info | 消息组件风格 info/success/warning/error |
+| visible | bool? | true | 是否显示 |
 
 #### MessageMarquee
 
@@ -278,53 +311,26 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | loop | int? | - | 循环次数 |
 | speed | int? | - | 速度 |
 
-#### TDMessage
+#### MessageLink
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| closeBtn | dynamic | - | 关闭按钮 |
-| content | String? | - | 通知内容 |
-| duration | int? | 3000 | 消息内置计时器 |
-| icon | dynamic | true | 自定义消息前面的图标 |
-| key |  | - |  |
-| link | dynamic | - | 链接名称 |
-| marquee | MessageMarquee? | - | 跑马灯效果 |
-| offset | List? | - | 相对于 placement 的偏移量 |
-| onCloseBtnClick | VoidCallback? | - | 点击关闭按钮触发 |
-| onDurationEnd | VoidCallback? | - | 计时结束后触发 |
-| onLinkClick | VoidCallback? | - | 点击链接文本时触发 |
-| theme | MessageTheme? | MessageTheme.info | 消息组件风格 info/success/warning/error |
-| visible | bool? | true | 是否显示 |
+| color | Color? | - | 颜色 |
+| name | String | - | 名称 |
+| uri | Uri? | - | 资源链接 |
 
-##### 静态方法
+#### MessageTheme
 
-| 名称 | 返回类型 | 说明 |
-| --- | --- | --- |
-| `showMessage` | `void` | 显示全局消息。 |
+##### 枚举值
 
-###### `showMessage`
-
-显示全局消息。
-
-```dart
-static void showMessage({
-  required BuildContext context,
-  String? content,
-  bool? visible,
-  int? duration,
-  dynamic closeBtn,
-  dynamic icon,
-  dynamic link,
-  MessageMarquee? marquee,
-  List<double>? offset,
-  MessageTheme? theme,
-  VoidCallback? onCloseBtnClick,
-  VoidCallback? onDurationEnd,
-  VoidCallback? onLinkClick,
-});
-```
+| 名称 | 说明 |
+| --- | --- |
+| info | 普通通知 |
+| success | 成功通知 |
+| warning | 警示通知 |
+| error | 错误通知 |
 
 ## 设计指南
 

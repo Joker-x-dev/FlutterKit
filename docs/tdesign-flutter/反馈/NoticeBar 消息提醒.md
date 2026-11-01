@@ -2,8 +2,8 @@
 
 > 在导航栏下方，用于给用户显示提示消息。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/notice-bar)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[NoticeBar 消息提醒](https://tdesign.tencent.com/flutter/components/notice-bar)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,7 +27,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
 Widget _textNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条普通的通知信息',
   );
 }
@@ -37,7 +37,7 @@ Widget _textNoticeBar(BuildContext context) {
 
 ```
 Widget _scrollNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '提示文字描述提示文字描述提示文字描述提示文字描述提示文字',
     marquee: true,
     speed: 50,
@@ -48,10 +48,10 @@ Widget _scrollNoticeBar(BuildContext context) {
 
 ```
 Widget _scrollIconNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '提示文字描述提示文字描述提示文字描述提示文字描述提示文字',
     speed: 50,
-    prefixIcon: TDIcons.sound,
+    prefixIcon: TIcons.sound,
     marquee: true,
   );
 }
@@ -61,9 +61,9 @@ Widget _scrollIconNoticeBar(BuildContext context) {
 
 ```
 Widget _iconNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条普通的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
+    prefixIcon: TIcons.error_circle_filled,
   );
 }
 ```
@@ -72,10 +72,10 @@ Widget _iconNoticeBar(BuildContext context) {
 
 ```
 Widget _closeNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条普通的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
-    suffixIcon: TDIcons.close,
+    prefixIcon: TIcons.error_circle_filled,
+    suffixIcon: TIcons.close,
   );
 }
 ```
@@ -84,14 +84,14 @@ Widget _closeNoticeBar(BuildContext context) {
 
 ```
 Widget _entranceNoticeBar1(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条普通的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
-    right: TDButton(
+    prefixIcon: TIcons.error_circle_filled,
+    right: TButton(
       text: '文字按钮',
-      type: TDButtonType.text,
-      theme: TDButtonTheme.primary,
-      size: TDButtonSize.extraSmall,
+      type: TButtonType.text,
+      theme: TButtonTheme.primary,
+      size: TButtonSize.extraSmall,
       height: 22,
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
     ),
@@ -102,10 +102,10 @@ Widget _entranceNoticeBar1(BuildContext context) {
 
 ```
 Widget _entranceNoticeBar2(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条普通的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
-    suffixIcon: TDIcons.chevron_right,
+    prefixIcon: TIcons.error_circle_filled,
+    suffixIcon: TIcons.chevron_right,
   );
 }
 ```
@@ -114,12 +114,12 @@ Widget _entranceNoticeBar2(BuildContext context) {
 
 ```
 Widget _customNoticeBar(BuildContext context) {
-  return TDNoticeBar(
+  return TNoticeBar(
     content: '这是一条普通的通知信息',
-    prefixIcon: TDIcons.notification,
-    suffixIcon: TDIcons.chevron_right,
-    style: TDNoticeBarStyle.generateTheme(context, theme: TDNoticeBarTheme.info)
-      ..backgroundColor = TDTheme.of(context).bgColorComponent,
+    prefixIcon: TIcons.notification,
+    suffixIcon: TIcons.chevron_right,
+    style: TNoticeBarStyle.generateTheme(context, theme: TNoticeBarTheme.info)
+      ..backgroundColor = TTheme.of(context).bgColorComponent,
   );
 }
 ```
@@ -130,10 +130,10 @@ Widget _customNoticeBar(BuildContext context) {
 
 ```
 Widget _normalNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条普通的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
-    theme: TDNoticeBarTheme.info,
+    prefixIcon: TIcons.error_circle_filled,
+    theme: TNoticeBarTheme.info,
   );
 }
 ```
@@ -142,10 +142,10 @@ Widget _normalNoticeBar(BuildContext context) {
 
 ```
 Widget _successNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条成功的通知信息',
-    prefixIcon: TDIcons.check_circle_filled,
-    theme: TDNoticeBarTheme.success,
+    prefixIcon: TIcons.check_circle_filled,
+    theme: TNoticeBarTheme.success,
   );
 }
 ```
@@ -154,10 +154,10 @@ Widget _successNoticeBar(BuildContext context) {
 
 ```
 Widget _warningNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条警示的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
-    theme: TDNoticeBarTheme.warning,
+    prefixIcon: TIcons.error_circle_filled,
+    theme: TNoticeBarTheme.warning,
   );
 }
 ```
@@ -166,10 +166,10 @@ Widget _warningNoticeBar(BuildContext context) {
 
 ```
 Widget _errorNoticeBar(BuildContext context) {
-  return const TDNoticeBar(
+  return const TNoticeBar(
     content: '这是一条错误的通知信息',
-    prefixIcon: TDIcons.error_circle_filled,
-    theme: TDNoticeBarTheme.error,
+    prefixIcon: TIcons.error_circle_filled,
+    theme: TNoticeBarTheme.error,
   );
 }
 ```
@@ -184,7 +184,7 @@ Widget _cardNoticeBar(BuildContext context) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),
     decoration: BoxDecoration(
-      color: TDNoticeBarStyle.generateTheme(context).backgroundColor,
+      color: TNoticeBarStyle.generateTheme(context).backgroundColor,
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       boxShadow: const [
         BoxShadow(
@@ -215,16 +215,16 @@ Widget _cardNoticeBar(BuildContext context) {
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           clipBehavior: Clip.hardEdge,
-          child: const TDNoticeBar(
+          child: const TNoticeBar(
             content: '这是一条普通的通知信息',
-            prefixIcon: TDIcons.error_circle_filled,
-            suffixIcon: TDIcons.chevron_right,
+            prefixIcon: TIcons.error_circle_filled,
+            suffixIcon: TIcons.chevron_right,
           ),
         ),
         Container(
           height: 150,
           decoration: BoxDecoration(
-            color: TDTheme.of(context).bgColorContainer,
+            color: TTheme.of(context).bgColorContainer,
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
         )
@@ -236,12 +236,12 @@ Widget _cardNoticeBar(BuildContext context) {
 
 ## API
 
-1. [TDNoticeBar](#tdnoticebar)
-2. [TDNoticeBarStyle](#tdnoticebarstyle)
+1. [TNoticeBar](#tnoticebar)
+2. [TNoticeBarStyle](#tnoticebarstyle)
+3. [TNoticeBarType](#tnoticebartype)
+4. [TNoticeBarTheme](#tnoticebartheme)
 
-#### TDNoticeBar
-
-##### 简介
+#### TNoticeBar
 
 ##### 默认构造方法
 
@@ -252,7 +252,7 @@ Widget _cardNoticeBar(BuildContext context) {
 | direction | Axis? | Axis.horizontal | 滚动方向 |
 | height | double | 22 | 文字高度 (当使用prefixIcon或suffixIcon时，icon大小值等于该属性） |
 | interval | int? | 3000 | 步进滚动间隔时间（毫秒） |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | left | Widget? | - | 左侧内容（自定义左侧内容，优先级高于prefixIcon） |
 | marquee | bool? | false | 跑马灯效果 |
 | maxLines | int? | 1 | 文本行数（仅静态有效） |
@@ -260,15 +260,26 @@ Widget _cardNoticeBar(BuildContext context) {
 | prefixIcon | IconData? | - | 左侧图标 |
 | right | Widget? | - | 右侧内容（自定义右侧内容，优先级高于suffixIcon） |
 | speed | double? | 50 | 滚动速度 |
-| style | TDNoticeBarStyle? | - | 公告栏样式 [TDNoticeBarStyle] |
+| style | TNoticeBarStyle? | - | 公告栏样式 `TNoticeBarStyle` |
 | suffixIcon | IconData? | - | 右侧图标 |
-| theme | TDNoticeBarTheme? | TDNoticeBarTheme.info | 主题 |
+| theme | TNoticeBarTheme? | TNoticeBarTheme.info | 主题 |
 
-#### TDNoticeBarStyle
+#### TNoticeBarStyle
 
 ##### 简介
 
 公告栏样式
+
+##### 工厂构造方法
+
+###### TNoticeBarStyle.generateTheme
+
+根据主题生成样式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | 上下文 |
+| theme | TNoticeBarTheme? | TNoticeBarTheme.info | - |
 
 ##### 默认构造方法
 
@@ -281,11 +292,34 @@ Widget _cardNoticeBar(BuildContext context) {
 | rightIconColor | Color? | - | 公告栏右侧图标颜色 |
 | textStyle | TextStyle? | - | 公告栏内容样式 |
 
-##### 工厂构造方法
+#### TNoticeBarType
+
+##### 简介
+
+公告栏类型
+
+##### 枚举值
 
 | 名称 | 说明 |
 | --- | --- |
-| TDNoticeBarStyle.generateTheme | 根据主题生成样式 |
+| none | 静止（默认） |
+| scroll | 滚动 |
+| step | 步进 |
+
+#### TNoticeBarTheme
+
+##### 简介
+
+公告栏主题
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| info | 信息（默认） |
+| success | 成功 |
+| warning | 警告 |
+| error | 错误 |
 
 ## 设计指南
 

@@ -1,26 +1,24 @@
 # TDesign Flutter 官方文档
 
 > 来源：[https://tdesign.tencent.com/flutter/getting-started](https://tdesign.tencent.com/flutter/getting-started)
-> 归档时间：2026-07-16T07:37:59.655Z
-
-## FlutterKit 使用约定
-
-- 本目录用于查询当前归档版本的 TDesign Flutter 组件参数、示例和全局配置；具体组件优先从下方分类索引进入。
-- FlutterKit 的页面结构、语义颜色、间距、圆角、深色模式和链式扩展不由官方组件文档决定。编写布局先阅读[完整布局规范与扩展](../../lib/core/design_system/README.md)，再查阅[设计系统](../flutter-kit/框架核心/design-system.md)、[主题系统](../flutter-kit/框架核心/theme.md)、[深色模式](../flutter-kit/框架核心/dark-mode.md)与[Widget 链式扩展](../flutter-kit/框架核心/widget-extensions.md)。
-- 业务页面优先组合现有 `TD*` 组件，不根据 TDesign Web、Vue、React 或其他版本文档猜测 Dart API。
-- 本地归档与当前依赖源码不一致时，以 `pubspec.lock` 锁定版本的 Dart 声明为准，并同步更新归档文档。
+> 归档时间：2026-10-30T16:00:00+08:00
+> 当前最新正式版：v1.1.0（2026-10-28）
+> 最低要求：Flutter ≥ 3.32.0、Dart ≥ 3.8.0
 
 ## 开始
 
 - [快速开始](<开始/快速开始.md>)
-- [贡献指南](<开始/贡献指南.md>)
+- [迁移指南（0.2.7 → 1.0）](<开始/迁移指南.md>)
+- [组件概览](<开始/组件概览.md>)
 - [常见问题](<开始/常见问题.md>)
 - [更新日志](<开始/更新日志.md>)
-- [组件概览](<开始/组件概览.md>)
+- [贡献指南](<开始/贡献指南.md>)
 
 ## 全局配置
 
-- [深色模式](<全局配置/深色模式.md>)
+- [Theme 主题](<全局配置/Theme 主题.md>)
+- [自定义主题](<全局配置/自定义主题.md>)
+- [国际化](<全局配置/国际化.md>)
 
 ## 基础
 
@@ -67,7 +65,6 @@
 - [Badge 徽标](<数据展示/Badge 徽标.md>)
 - [Cell 单元格](<数据展示/Cell 单元格.md>)
 - [Collapse 折叠面板](<数据展示/Collapse 折叠面板.md>)
-- [TimeCounter 计时器](<数据展示/TimeCounter 计时器.md>)
 - [Empty 空状态](<数据展示/Empty 空状态.md>)
 - [Footer 页脚](<数据展示/Footer 页脚.md>)
 - [Image 图片](<数据展示/Image 图片.md>)
@@ -78,6 +75,7 @@
 - [Swiper 轮播图](<数据展示/Swiper 轮播图.md>)
 - [Table 表格](<数据展示/Table 表格.md>)
 - [Tag 标签](<数据展示/Tag 标签.md>)
+- [TimeCounter 计时器](<数据展示/TimeCounter 计时器.md>)
 
 ## 反馈
 

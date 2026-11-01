@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -22,10 +21,10 @@ class UserInfoView extends BaseView<UserInfoLogic> {
   /// 构建退出登录操作按钮
   @override
   Widget body() {
-    return TDButton(
-      text: UserKeys.logoutButton.tr,
-      theme: TDButtonTheme.danger,
-      onTap: logic.logout,
+    return TButton(
+      colorPreset: TButtonColorPreset.danger,
+      onPressed: logic.logout,
+      child: Text(UserKeys.logoutButton.tr),
     ).center();
   }
 }

@@ -2,8 +2,8 @@
 
 > 用于快速刷新页面信息，刷新可以是整页刷新也可以是页面的局部刷新。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/pull-down-refresh)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[PullDownRefresh 下拉刷新](https://tdesign.tencent.com/flutter/components/pull-down-refresh)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -26,7 +26,7 @@ import 'package:easy_refresh/easy_refresh.dart';
   Widget _buildRefresh(BuildContext context) {
     return EasyRefresh(
       // 下拉样式
-      header: TDRefreshHeader(),
+      header: TRefreshHeader(),
       child: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(16),
@@ -37,13 +37,13 @@ import 'package:easy_refresh/easy_refresh.dart';
               height: 171,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: TDTheme.of(context).bgColorContainer,
+                  color: TTheme.of(context).bgColorContainer,
                   borderRadius: BorderRadius.all(
-                      Radius.circular(TDTheme.of(context).radiusLarge))),
-              child: TDText(
+                      Radius.circular(TTheme.of(context).radiusLarge))),
+              child: TText(
                 PlatformUtil.isWeb ? 'Web暂不支持下拉，请下载安装apk体验' : '拖拽该区域演示 顶部下拉刷新',
-                font: TDTheme.of(context).fontBodyLarge,
-                textColor: TDTheme.of(context).textColorPlaceholder,
+                font: TTheme.of(context).fontBodyLarge,
+                textColor: TTheme.of(context).textColorPlaceholder,
               ),
             ),
             const SizedBox(height: 16),
@@ -51,13 +51,13 @@ import 'package:easy_refresh/easy_refresh.dart';
               height: 70,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: TDTheme.of(context).bgColorContainer,
+                  color: TTheme.of(context).bgColorContainer,
                   borderRadius: BorderRadius.all(
-                      Radius.circular(TDTheme.of(context).radiusLarge))),
-              child: TDText(
+                      Radius.circular(TTheme.of(context).radiusLarge))),
+              child: TText(
                 '下拉刷新次数：${count}',
-                font: TDTheme.of(context).fontBodyLarge,
-                textColor: TDTheme.of(context).textColorPlaceholder,
+                font: TTheme.of(context).fontBodyLarge,
+                textColor: TTheme.of(context).textColorPlaceholder,
               ),
             ),
             const SizedBox(height: 500),
@@ -78,9 +78,9 @@ import 'package:easy_refresh/easy_refresh.dart';
 
 ## API
 
-1. [TDRefreshHeader](#tdrefreshheader)
+1. [TRefreshHeader](#trefreshheader)
 
-#### TDRefreshHeader
+#### TRefreshHeader
 
 ##### 简介
 
@@ -92,41 +92,41 @@ TDesign刷新头部
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | backgroundColor | Color? | - | 背景颜色 |
-| clamping |  | - |  |
+| clamping | bool? | - | - |
 | completeDuration | Duration? | - | 完成延时 |
 | enableHapticFeedback | bool | true | 开启震动反馈 |
 | enableInfiniteRefresh | bool | false | 是否开启无限刷新 |
 | extent | double? | 48.0 | Header容器高度 |
 | float | bool | false | 是否悬浮 |
-| frictionFactor |  | - |  |
-| hapticFeedback |  | - |  |
-| hitOver |  | - |  |
-| horizontalFrictionFactor |  | - |  |
-| horizontalReadySpringBuilder |  | - |  |
-| horizontalSpring |  | - |  |
-| infiniteHitOver |  | - |  |
+| frictionFactor | - | - | - |
+| hapticFeedback | bool? | - | - |
+| hitOver | - | - | - |
+| horizontalFrictionFactor | - | - | - |
+| horizontalReadySpringBuilder | - | - | - |
+| horizontalSpring | - | - | - |
+| infiniteHitOver | bool? | - | - |
 | infiniteOffset | double? | - | 无限刷新偏移量 |
 | key | Key? | - | Key |
-| listenable |  | - |  |
-| loadingIcon | TDLoadingIcon | TDLoadingIcon.circle | loading样式 |
-| maxOverOffset |  | - |  |
-| notifyWhenInvisible |  | - |  |
-| overScroll | bool | true | 越界滚动([enableInfiniteRefresh]为true或[infiniteOffset]有值时生效) |
-| position |  | - |  |
-| processedDuration |  | - |  |
-| readySpringBuilder |  | - |  |
-| safeArea |  | false |  |
-| secondaryCloseTriggerOffset |  | - |  |
-| secondaryDimension |  | - |  |
-| secondaryTriggerOffset |  | - |  |
-| secondaryVelocity |  | - |  |
-| spring |  | - |  |
-| springRebound |  | - |  |
-| triggerDistance | double | 48.0 | 触发刷新任务的偏移量，同[triggerOffset] |
-| triggerOffset |  | - |  |
-| triggerWhenReach |  | - |  |
-| triggerWhenRelease |  | - |  |
-| triggerWhenReleaseNoWait |  | - |  |
+| listenable | - | - | - |
+| loadingIcon | TLoadingIcon | TLoadingIcon.circle | loading样式 |
+| maxOverOffset | - | - | - |
+| notifyWhenInvisible | - | - | - |
+| overScroll | bool | true | 越界滚动(`enableInfiniteRefresh`为true或`infiniteOffset`有值时生效) |
+| position | - | - | - |
+| processedDuration | Duration? | - | - |
+| readySpringBuilder | - | - | - |
+| safeArea | - | false | - |
+| secondaryCloseTriggerOffset | - | - | - |
+| secondaryDimension | - | - | - |
+| secondaryTriggerOffset | - | - | - |
+| secondaryVelocity | - | - | - |
+| spring | - | - | - |
+| springRebound | - | - | - |
+| triggerDistance | double | 48.0 | 触发刷新任务的偏移量，同`triggerOffset` |
+| triggerOffset | double? | - | - |
+| triggerWhenReach | - | - | - |
+| triggerWhenRelease | - | - | - |
+| triggerWhenReleaseNoWait | - | - | - |
 
 ## 设计指南
 
@@ -147,7 +147,7 @@ TDesign刷新头部
 
 ![](https://tdesign.gtimg.com/site/design/mobile-guide/pull-downre-fresh/pull-downre-fresh-2.png)
 
-![](https://tdesign.gtimg.com/site/design/mobile-guide/pull-downre-fresh/pull-downre-fresh--3.png)
+![](https://tdesign.gtimg.com/site/design/mobile-guide/pull-downre-fresh/pull-downre-fresh-3.png)
 
 #### 常见用法
 

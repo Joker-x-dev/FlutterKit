@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_kit/core/ui/adaptive/adaptive_extension.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/screen_adapt_demo_logic.dart';
 
@@ -77,7 +77,7 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
           _buildSectionTitle(DemoKeys.adaptSizeSection.tr),
           _buildSizeAdaptCard(sampleBoxSize),
         ].toListViewSeparated(
-          padding: pagePadding,
+          padding: pagePaddingWithInset,
           itemBuilder: (context, index, item) => item,
           separatorBuilder: (context, index) => const SpaceVerticalLarge(),
         );
@@ -89,11 +89,13 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
   ///
   /// [title] 区块标题。
   Widget _buildSectionTitle(String title) {
-    return TDText(
+    return TText(
       title,
       font: appTheme.fontTitleLarge,
-      textColor: appTheme.textPrimary,
-      fontWeight: appTheme.fontWeightBold,
+      style: TextStyle(
+        color: appTheme.textPrimary,
+        fontWeight: appTheme.fontWeightBold,
+      ),
     );
   }
 
@@ -104,14 +106,16 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
     return _buildAdaptiveCard(<Widget>[
       _buildCardTitle(DemoKeys.adaptBreakpoint.tr),
       const SpaceVerticalSmall(),
-      TDText(
+      TText(
         breakpointCode,
         font: appTheme.fontTitleLarge,
-        textColor: appTheme.primary,
-        fontWeight: appTheme.fontWeightBold,
-        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: appTheme.textPrimary,
+          fontWeight: appTheme.fontWeightBold,
+        ),
+        textAlign: .center,
       ),
-    ], crossAxisAlignment: CrossAxisAlignment.center);
+    ], crossAxisAlignment: .center);
   }
 
   /// 构建响应式网格内容
@@ -141,9 +145,9 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
             const SpaceVerticalSmall(),
             _buildCardDescription(description),
           ],
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: .center,
+          crossAxisAlignment: .center,
+          mainAxisSize: .max,
         );
       },
     );
@@ -156,17 +160,17 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
     return _buildAdaptiveCard(<Widget>[
       <Widget>[
         _buildCardDescription(DemoKeys.adaptTextLabel.tr),
-        TDText(
+        TText(
           DemoKeys.adaptTextSample.tr,
           font: appTheme.fontBodyLarge?.withSize(sampleTextSize),
-          textColor: appTheme.textPrimary,
-          textAlign: TextAlign.center,
+          style: TextStyle(color: appTheme.textPrimary),
+          textAlign: .center,
         ),
       ].toCenteredWrap(
         spacing: spaceHorizontalSmall,
         runSpacing: spaceVerticalSmall,
       ),
-    ], crossAxisAlignment: CrossAxisAlignment.center);
+    ], crossAxisAlignment: .center);
   }
 
   /// 构建尺寸适配卡片
@@ -176,10 +180,7 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
     return _buildAdaptiveCard(<Widget>[
       _buildCardTitle(DemoKeys.adaptSizeTitle.tr),
       const SpaceVerticalSmall(),
-      _buildCardDescription(
-        DemoKeys.adaptSizeDesc.tr,
-        textAlign: TextAlign.center,
-      ),
+      _buildCardDescription(DemoKeys.adaptSizeDesc.tr, textAlign: .center),
       const SpaceVerticalLarge(),
       <Widget>[
         _buildCardDescription(
@@ -191,11 +192,8 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
             .square(sampleBoxSize)
             .backgroundColor(appTheme.primary.withValues(alpha: 0.2))
             .clipRadius(radiusSmall),
-      ].toRow(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: spaceHorizontalSmall,
-      ),
-    ], crossAxisAlignment: CrossAxisAlignment.stretch);
+      ].toRow(crossAxisAlignment: .center, spacing: spaceHorizontalSmall),
+    ], crossAxisAlignment: .stretch);
   }
 
   /// 构建通用适配卡片
@@ -225,12 +223,14 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
   ///
   /// [title] 卡片标题。
   Widget _buildCardTitle(String title) {
-    return TDText(
+    return TText(
       title,
       font: appTheme.fontBodyLarge,
-      textColor: appTheme.textPrimary,
-      fontWeight: appTheme.fontWeightMedium,
-      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: appTheme.textSecondary,
+        fontWeight: appTheme.fontWeightMedium,
+      ),
+      textAlign: .center,
     );
   }
 
@@ -242,10 +242,10 @@ class ScreenAdaptDemoView extends BaseView<ScreenAdaptDemoLogic> {
     String text, {
     TextAlign textAlign = TextAlign.start,
   }) {
-    return TDText(
+    return TText(
       text,
       font: appTheme.fontBodyMedium,
-      textColor: appTheme.textSecondary,
+      style: TextStyle(color: appTheme.textSecondary),
       textAlign: textAlign,
     );
   }

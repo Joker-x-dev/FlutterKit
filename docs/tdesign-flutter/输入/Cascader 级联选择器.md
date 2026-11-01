@@ -2,8 +2,8 @@
 
 > 用于多层级数据的逐级选择
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/cascader)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Cascader 级联选择器](https://tdesign.tencent.com/flutter/components/cascader)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -28,12 +28,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildVerticalCascader(BuildContext context) {
     const title = '选择地址';
-    return TDCell(
+    return TCell(
         title: title,
         note: _selected_1,
         arrow: true,
         onClick: (click) {
-          TDCascader.showMultiCascader(context,
+          TCascader.showMultiCascader(context,
               title: title,
               data: _data,
               initialData: _initData,
@@ -59,12 +59,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildVerticalLetterCascader(BuildContext context) {
     const title = '选择地址';
-    return TDCell(
+    return TCell(
         title: title,
         note: _selected_2,
         arrow: true,
         onClick: (click) {
-          TDCascader.showMultiCascader(context,
+          TCascader.showMultiCascader(context,
               title: title,
               data: _data_2,
               initialData: _initData_2,
@@ -90,12 +90,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildHorizontalCascader(BuildContext context) {
     const title = '选择地址';
-    return TDCell(
+    return TCell(
         title: title,
         note: _selected_1,
         arrow: true,
         onClick: (click) {
-          TDCascader.showMultiCascader(context,
+          TCascader.showMultiCascader(context,
               title: title,
               subTitles: ['请选择省份', '请选择城市', '请选择区/县'],
               data: _data,
@@ -122,12 +122,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildHorizontalLetterCascader(BuildContext context) {
     const title = '选择地址';
-    return TDCell(
+    return TCell(
         title: title,
         note: _selected_2,
         arrow: true,
         onClick: (click) {
-          TDCascader.showMultiCascader(context,
+          TCascader.showMultiCascader(context,
               title: title,
               data: _data_2,
               initialData: _initData_2,
@@ -154,12 +154,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildHorizontalCompanyCascader(BuildContext context) {
     const title = '选择部门人员';
-    return TDCell(
+    return TCell(
         title: title,
         note: _selected_3,
         arrow: true,
         onClick: (click) {
-          TDCascader.showMultiCascader(context,
+          TCascader.showMultiCascader(context,
               title: title,
               data: _data_3,
               isLetterSort: true,
@@ -186,12 +186,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildVerticalCompanyCascader(BuildContext context) {
     const title = '选择部门人员';
-    return TDCell(
+    return TCell(
         title: title,
         note: _selected_3,
         arrow: true,
         onClick: (click) {
-          TDCascader.showMultiCascader(context,
+          TCascader.showMultiCascader(context,
               title: title,
               data: _data_3,
               isLetterSort: true,
@@ -215,15 +215,16 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDMultiCascader](#tdmulticascader)
+1. [TMultiCascader](#tmulticascader)
+2. [MultiCascaderCallback](#multicascadercallback)
 
-#### TDMultiCascader
+#### TMultiCascader
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| action | TDCascaderAction? | - | 自定义选择器右上角按钮 |
+| action | TCascaderAction? | - | 自定义选择器右上角按钮 |
 | backgroundColor | Color? | - | 背景颜色 |
 | cascaderHeight | double | - | 选择器List的视窗高度，默认200 |
 | closeText | String? | - | 关闭按钮文本 |
@@ -231,7 +232,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | initialData | String? | - | 初始化数据 |
 | initialIndexes | List? | - | 若为null表示全部从零开始 |
 | isLetterSort | bool | false | 是否开启字母排序 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | onChange | MultiCascaderCallback | - | 值发生变更时触发 |
 | onClose | Function? | - | 选择器关闭按钮回调 |
 | subTitles | List? | - | 每级展示的次标题 |
@@ -239,6 +240,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | title | String? | - | 选择器标题 |
 | titleStyle | TextStyle? | - | 标题样式 |
 | topRadius | double? | - | 顶部圆角 |
+
+#### MultiCascaderCallback
+
+##### 类型定义
+
+```dart
+typedef MultiCascaderCallback = void Function(List<MultiCascaderListModel> selected);
+```
 
 ## 设计指南
 

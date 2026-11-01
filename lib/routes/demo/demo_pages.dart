@@ -7,6 +7,7 @@ import '../../feature/demo/bindings/local_storage_demo_binding.dart';
 import '../../feature/demo/bindings/state_management_demo_binding.dart';
 import '../../feature/demo/bindings/network_request_demo_binding.dart';
 import '../../feature/demo/bindings/screen_adapt_demo_binding.dart';
+import '../../feature/demo/bindings/nested_scroll_demo_binding.dart';
 import '../../feature/demo/bindings/navigation_with_args_binding.dart';
 import '../../feature/demo/bindings/navigation_result_binding.dart';
 import '../../feature/demo/bindings/base_demo_binding.dart';
@@ -20,6 +21,7 @@ import '../../feature/demo/views/local_storage_demo_view.dart';
 import '../../feature/demo/views/state_management_demo_view.dart';
 import '../../feature/demo/views/network_request_demo_view.dart';
 import '../../feature/demo/views/screen_adapt_demo_view.dart';
+import '../../feature/demo/views/nested_scroll_demo_view.dart';
 import '../../feature/demo/views/navigation_with_args_view.dart';
 import '../../feature/demo/views/navigation_result_view.dart';
 import '../../feature/demo/views/base_demo_view.dart';
@@ -65,6 +67,11 @@ abstract final class DemoPages {
       name: DemoRoutes.screenAdaptDemo,
       page: () => ScreenAdaptDemoView(),
       binding: ScreenAdaptDemoBinding(),
+    ),
+    GetPage(
+      name: DemoRoutes.nestedScrollDemo,
+      page: () => NestedScrollDemoView(),
+      binding: NestedScrollDemoBinding(),
     ),
     GetPage(
       name: DemoRoutes.navigationWithArgs,

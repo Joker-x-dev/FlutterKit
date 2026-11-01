@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/design_system/theme/size.dart';
 import '../../../core/ui/preview/app_preview_annotations.dart';
 import '../localization/main_keys.dart';

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -14,26 +13,26 @@ class MainState {
       <MainNavigationItem>[
         MainNavigationItem(
           label: MainKeys.tabCore,
-          icon: TDIcons.layers,
-          selectedIcon: TDIcons.layers_filled,
+          icon: TIcons.layers,
+          selectedIcon: TIcons.layers_filled,
           index: 0,
         ),
         MainNavigationItem(
           label: MainKeys.tabNavigation,
-          icon: TDIcons.share,
-          selectedIcon: TDIcons.share_filled,
+          icon: TIcons.share,
+          selectedIcon: TIcons.share_filled,
           index: 1,
         ),
         MainNavigationItem(
           label: MainKeys.tabExpand,
-          icon: TDIcons.desktop,
-          selectedIcon: TDIcons.desktop_filled,
+          icon: TIcons.desktop,
+          selectedIcon: TIcons.desktop_filled,
           index: 2,
         ),
         MainNavigationItem(
           label: MainKeys.tabAbout,
-          icon: TDIcons.info_circle,
-          selectedIcon: TDIcons.info_circle_filled,
+          icon: TIcons.info_circle,
+          selectedIcon: TIcons.info_circle_filled,
           index: 3,
         ),
       ];

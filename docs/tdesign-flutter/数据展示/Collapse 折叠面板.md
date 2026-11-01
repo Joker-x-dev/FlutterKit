@@ -2,8 +2,8 @@
 
 > 可以折叠/展开的内容区域。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/collapse)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Collapse 折叠面板](https://tdesign.tencent.com/flutter/components/collapse)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,15 +27,14 @@ Basic 基础折叠面板
 
 ```
   Widget _buildBasicCollapse(BuildContext context) {
-    return TDCollapse(
-      style: TDCollapseStyle.block,
-      expansionCallback: (int index, bool isExpanded) {
+    return TCollapse(
+      onExpansionChanged: (int index, bool isExpanded) {
         setState(() {
           _basicData[index].isExpanded = !isExpanded;
         });
       },
       children: _basicData.map((CollapseDataItem item) {
-        return TDCollapsePanel(
+        return TCollapsePanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Text(item.headerValue);
           },
@@ -51,15 +50,14 @@ with Operation Instructions 带操作说明
 
 ```
   Widget _buildCollapseWithOperationText(BuildContext context) {
-    return TDCollapse(
-      style: TDCollapseStyle.block,
-      expansionCallback: (int index, bool isExpanded) {
+    return TCollapse(
+      onExpansionChanged: (int index, bool isExpanded) {
         setState(() {
           _blockStyleWithOpText[index].isExpanded = !isExpanded;
         });
       },
       children: _blockStyleWithOpText.map((CollapseDataItem item) {
-        return TDCollapsePanel(
+        return TCollapsePanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Text(item.headerValue);
           },
@@ -78,15 +76,12 @@ Accordion 手风琴式
 
 ```
   Widget _buildAccordionCollapse(BuildContext context) {
-    return TDCollapse.accordion(
-      style: TDCollapseStyle.block,
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          _accordionData[index].isExpanded = !isExpanded;
-        });
-      },
+    return TCollapse<String>(
+      mode: TCollapseMode.accordion,
+      value: _accordionValue,
+      onChanged: (value) => setState(() => _accordionValue = value),
       children: _accordionData.map((CollapseDataItem item) {
-        return TDCollapsePanel(
+        return TCollapsePanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Text(item.headerValue);
           },
@@ -105,15 +100,14 @@ Block Style 通栏样式
 
 ```
   Widget _buildBlockStyleCollapse(BuildContext context) {
-    return TDCollapse(
-      style: TDCollapseStyle.block,
-      expansionCallback: (int index, bool isExpanded) {
+    return TCollapse(
+      onExpansionChanged: (int index, bool isExpanded) {
         setState(() {
           _blockStyleData[index].isExpanded = !isExpanded;
         });
       },
       children: _blockStyleData.map((CollapseDataItem item) {
-        return TDCollapsePanel(
+        return TCollapsePanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Text(item.headerValue);
           },
@@ -129,15 +123,15 @@ Card Style 卡片样式
 
 ```
   Widget _buildCardCollapse(BuildContext context) {
-    return TDCollapse(
-      style: TDCollapseStyle.card,
-      expansionCallback: (int index, bool isExpanded) {
+    return TCollapse(
+      variant: TCollapseVariant.card,
+      onExpansionChanged: (int index, bool isExpanded) {
         setState(() {
           _cardStyleData[index].isExpanded = !isExpanded;
         });
       },
       children: _cardStyleData.map((CollapseDataItem item) {
-        return TDCollapsePanel(
+        return TCollapsePanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Text(item.headerValue);
           },
@@ -151,30 +145,41 @@ Card Style 卡片样式
 
 ## API
 
-1. [TDCollapse](#tdcollapse)
+1. [TCollapse](#tcollapse)
+2. [TCollapsePanel](#tcollapsepanel)
 
-#### TDCollapse
+#### TCollapse
 
 ##### 简介
 
-折叠面板列表组件，需配合 [TDCollapsePanel] 使用
-
-##### 默认构造方法
+折叠面板列表组件，需配合 `TCollapsePanel` 使用
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| animationDuration | Duration | kThemeAnimationDuration | 折叠面板列表的动画时长 |
-| children | List | - | 折叠面板列表的子组件 |
-| elevation | double | 0 | 折叠面板列表的阴影 |
-| expansionCallback | ExpansionPanelCallback? | - | 折叠面板列表的回调函数； |
-| key |  | - |  |
-| style | TDCollapseStyle | TDCollapseStyle.block | 折叠面板列表的样式 |
+| children | List<TCollapsePanel<T>> | - | 折叠面板列表 |
+| mode | TCollapseMode | TCollapseMode.multiple | 多面板或手风琴模式 |
+| variant | TCollapseVariant? | - | 通栏或卡片样式；未设置时读取组件 Theme |
+| onExpansionChanged | ExpansionPanelCallback? | - | 点击面板时回调当前索引和点击前的展开状态 |
+| animationDuration | Duration? | - | 动画时长；未设置时读取组件 Theme |
+| elevation | double? | - | 阴影；未设置时读取组件 Theme |
+| value | T? | - | 手风琴模式下当前展开面板的值 |
+| onChanged | ValueChanged<T?>? | - | 手风琴模式下目标值变更回调 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 
-##### 工厂构造方法
+#### TCollapsePanel
 
-| 名称 | 说明 |
-| --- | --- |
-| TDCollapse.accordion |  |
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| headerBuilder | ExpansionPanelHeaderBuilder | - | 标题构建器 |
+| body | Widget | - | 面板内容 |
+| key | Key? | - | 面板稳定标识 |
+| isExpanded | bool | false | multiple 模式下是否展开 |
+| disabled | bool | false | 是否禁用交互 |
+| placement | TCollapsePlacement | TCollapsePlacement.bottom | 内容向上或向下展开 |
+| semanticsLabel | String? | - | 复杂自定义标题的无障碍标签 |
+| expandIconTextBuilder | TCollapseIconTextBuilder? | - | 展开图标旁说明文案 |
+| value | T? | - | 手风琴模式下的唯一标识 |
+| backgroundColor | Color? | - | 面板背景色 |
 
 ## 设计指南
 

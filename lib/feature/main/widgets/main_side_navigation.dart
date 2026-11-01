@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/application.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
-import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/design_system/theme/size.dart';
 import '../../../core/ui/preview/app_preview_annotations.dart';
 import '../models/main_navigation_item.dart';
@@ -40,22 +38,17 @@ class MainSideNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final String localeTag = Application.locale.value.toLanguageTag();
-      final AppTheme appTheme = AppTheme.of(context);
-      return TDSideBar(
+      return TSideBar(
         key: ValueKey<String>('main-side-$localeTag-$currentIndex'),
         value: currentIndex,
-        selectedColor: appTheme.primary,
-        unSelectedColor: appTheme.textSecondary,
-        selectedBgColor: appTheme.backgroundContainer,
-        unSelectedBgColor: appTheme.backgroundContainer,
         children: items.map((MainNavigationItem item) {
-          return TDSideBarItem(
+          return TSideBarItem(
             icon: currentIndex == item.index ? item.selectedIcon : item.icon,
             label: item.localizedLabel,
             value: item.index,
           );
         }).toList(),
-        onSelected: onSelected,
+        onChanged: onSelected,
       );
     });
   }

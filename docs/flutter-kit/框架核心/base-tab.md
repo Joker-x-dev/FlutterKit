@@ -1,6 +1,6 @@
 # Tab 父类
 
-`BaseTabLogic`、`BaseTabState` 与 `BaseTabView<T>` 位于 `lib/core/base/base_tab/`。它使用 `TDTabBar` 展示分类，用 `PageView` 承载内容，并让点击标签与左右滑动保持同步。
+`BaseTabLogic`、`BaseTabState` 与 `BaseTabView<T>` 位于 `lib/core/base/base_tab/`。它使用 `TTabsBar` 展示分类，用 `PageView` 承载内容，并让点击标签与左右滑动保持同步。
 
 ## 初始化与释放
 

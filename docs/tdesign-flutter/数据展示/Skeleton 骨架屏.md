@@ -2,16 +2,12 @@
 
 > 当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/skeleton)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Skeleton 骨架屏](https://tdesign.tencent.com/flutter/components/skeleton)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
-![](https://img.shields.io/badge/coverages%3A%20lines-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20functions-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20statements-100%25-blue)![](https://img.shields.io/badge/coverages%3A%20branches-83%25-blue)
-
 ### 引入
-
-在tdesign_flutter/tdesign_flutter.dart中有所有组件的路径。
 
 ```dart
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -19,248 +15,57 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ### 代码演示
 
-[td_skeleton_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/td_skeleton_page.dart)
+[t_skeleton_page.dart](https://github.com/Tencent/tdesign-flutter/blob/main/tdesign-component/example/lib/page/t_skeleton_page.dart)
 
-#### 1 类型
-
-头像骨架屏
-
-```
-  Widget _buildAvatarSkeleton(BuildContext context) {
-    return TDSkeleton(theme: TDSkeletonTheme.avatar);
-  }
-```
-
-图片骨架屏
-
-```
-  Widget _buildImageSkeleton(BuildContext context) {
-    return TDSkeleton(theme: TDSkeletonTheme.image);
-  }
-```
-
-文本骨架屏
-
-```
-  Widget _buildTextSkeleton(BuildContext context) {
-    return TDSkeleton(theme: TDSkeletonTheme.text);
-  }
-```
-
-段落骨架屏
-
-```
-  Widget _buildParagraphSkeleton(BuildContext context) {
-    return TDSkeleton(theme: TDSkeletonTheme.paragraph);
-  }
-```
-
-单元格骨架屏
-
-```
-  Widget _buildCellSkeleton(BuildContext context) {
-    var rowColsAvatar = TDSkeleton(theme: TDSkeletonTheme.avatar);
-    var rowColsImage = TDSkeleton.fromRowCol(
-      rowCol: TDSkeletonRowCol(objects: const [
-        [TDSkeletonRowColObj.rect(width: 48, height: 48, flex: null)]
-      ]),
-    );
-    var rowColsContent = TDSkeleton.fromRowCol(
-      rowCol: TDSkeletonRowCol(
-        objects: const [
-          [TDSkeletonRowColObj(), TDSkeletonRowColObj.spacer(flex: 1)],
-          [TDSkeletonRowColObj()]
-        ],
-      ),
-    );
-
-    return Column(
-      children: [
-        Row(
-          children: [
-            rowColsAvatar,
-            const SizedBox(width: 12),
-            rowColsContent,
-          ],
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            rowColsImage,
-            const SizedBox(width: 12),
-            rowColsContent,
-          ],
-        ),
-      ],
-    );
-  }
-```
-
-宫格骨架屏
-
-```
-  Widget _buildGridSkeleton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        for (var i = 0; i < 5; i++)
-          TDSkeleton.fromRowCol(
-            rowCol: TDSkeletonRowCol(objects: const [
-              [TDSkeletonRowColObj.rect(width: 48, height: 48, flex: null)],
-              [TDSkeletonRowColObj.text(width: 48, flex: null)],
-            ]),
-          ),
-      ],
-    );
-  }
-```
-
-图文组合骨架屏
-
-```
-  Widget _buildCombineSkeleton(BuildContext context) {
-    var rowCols = Flexible(
-        child: LayoutBuilder(
-            builder: (context, constraints) => Row(children: [
-                  TDSkeleton.fromRowCol(
-                    rowCol: TDSkeletonRowCol(
-                      objects: [
-                        [
-                          TDSkeletonRowColObj(
-                              width: constraints.maxWidth*0.96,
-                              height: constraints.maxWidth,
-                              flex: null,
-                              style: TDSkeletonRowColObjStyle(
-                                  borderRadius: (context) =>
-                                      TDTheme.of(context).radiusExtraLarge))
-                        ],
-                        [TDSkeletonRowColObj.text(
-                          width: constraints.maxWidth*0.96,
-                        )],
-                        const [
-                          TDSkeletonRowColObj.text(),
-                          TDSkeletonRowColObj.spacer(flex: 1),
-                        ],
-                      ],
-                    ),
-                  )
-                ])));
-
-    return Row(
-      children: [
-        rowCols,
-        SizedBox(width: TDTheme.of(context).spacer4),
-        rowCols,
-      ],
-    );
-  }
-```
-
-#### 1 组件动效
-
-渐变加载效果
-
-```
-  Widget _buildGradientSkeleton(BuildContext context) {
-    return TDSkeleton(
-      animation: TDSkeletonAnimation.gradient,
-      theme: TDSkeletonTheme.paragraph,
-    );
-  }
-```
-
-闪烁加载效果
-
-```
-  Widget _buildFlashedSkeleton(BuildContext context) {
-    return TDSkeleton(
-      animation: TDSkeletonAnimation.flashed,
-      theme: TDSkeletonTheme.paragraph,
-    );
-  }
-```
+示例页中的 `@ExampleCode(group: 'skeleton')` 是本页代码片段的唯一来源，覆盖预设形态、自定义布局和两种动画效果。
 
 ## API
 
-1. [TDSkeleton](#tdskeleton)
-2. [TDSkeletonRowColStyle](#tdskeletonrowcolstyle)
-3. [TDSkeletonRowCol](#tdskeletonrowcol)
-4. [TDSkeletonRowColObjStyle](#tdskeletonrowcolobjstyle)
-5. [TDSkeletonRowColObj](#tdskeletonrowcolobj)
+1. [TSkeleton](#tskeleton)
+2. [TSkeleton.custom](#tskeleton-custom)
+3. [TSkeletonLayout](#tskeletonlayout)
+4. [TSkeletonBlock](#tskeletonblock)
+5. [TSkeletonBlockStyle](#tskeletonblockstyle)
+6. [TSkeletonThemeData](#tskeletonthemedata)
 
-#### TDSkeleton
-
-##### 默认构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| key |  | - |  |
-| animation | TDSkeletonAnimation? | null | 动画效果 |
-| delay | int | 0 | 延迟显示加载时间 |
-| theme | TDSkeletonTheme | TDSkeletonTheme.text | 风格 |
-
-##### 命名构造方法
+#### TSkeleton
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| key |  | - |  |
-| animation | TDSkeletonAnimation? | null | 动画效果 |
-| delay | int | 0 | 延迟显示加载时间 |
-| rowCol | TDSkeletonRowCol | - | 自定义行列数量、宽度高度、间距等 |
+| variant | TSkeletonVariant | TSkeletonVariant.text | 预设骨架形态：avatar、image、text、paragraph |
+| animation | TSkeletonAnimation? | null | 动画效果；null 为静态 |
+| delay | Duration | Duration.zero | 延迟展示时间 |
 
-#### TDSkeletonRowColStyle
+#### TSkeleton.custom
 
-##### 默认构造方法
+| 参数 | 类型 | 说明 |
+| --- | --- | --- |
+| layout | TSkeletonLayout | 自定义骨架的行列布局 |
+| animation | TSkeletonAnimation? | 动画效果；null 为静态 |
+| delay | Duration | 延迟展示时间 |
+
+#### TSkeletonLayout
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- |
+| rows | List<List> | - | 每个内层列表表示一行骨架块 |
+| rowSpacing | double? | null | 行间距；未设置时读取主题和 Token |
+
+#### TSkeletonBlock
+
+`line`、`circle`、`rectangle` 与 `spacer` 分别创建文本行、圆形、直角矩形和透明间隔块。通用参数为 `width`、`height`、`flex`、`margin`、`style`；`flex` 为 null 时使用固定宽度。
+
+#### TSkeletonBlockStyle
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| rowSpacing | double Function(BuildContext) | (context) => TDTheme.of(context).spacer16 | 行间距 |
+| color | Color? | null | 块颜色；优先于组件主题 |
+| borderRadius | double? | null | 圆角；优先于 shape 和组件主题 |
+| shape | TSkeletonBlockShape | rounded | rounded、circle 或 rectangle |
 
-#### TDSkeletonRowCol
+#### TSkeletonThemeData
 
-##### 默认构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| objects | List<List> | - | 行列对象 |
-| style | TDSkeletonRowColStyle | TDSkeletonRowColStyle() | 样式 |
-
-#### TDSkeletonRowColObjStyle
-
-##### 默认构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| background | double Function(BuildContext) | (context) => TDTheme.of(context).grayColor1 | 背景颜色 |
-| borderRadius | double Function(BuildContext) | (context) => TDTheme.of(context).radiusSmall | 圆角 |
-
-##### 工厂构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| background | double Function(BuildContext) | (context) => TDTheme.of(context).grayColor1 | 背景颜色 |
-
-#### TDSkeletonRowColObj
-
-##### 默认构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| width | double? | null | 宽度 |
-| height | double? | 16 | 高度 |
-| flex | int? | 1 | 弹性因子 |
-| margin | EdgeInsets | EdgeInsets.zero | 间距 |
-| style | TDSkeletonRowColObjStyle | TDSkeletonRowColObjStyle() | 样式 |
-
-##### 工厂构造方法
-
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| width | double? | 48 / null | 宽度 |
-| height | double? | 48 / 16 / null | 高度 |
-| flex | int? | null / 1 | 弹性因子 |
-| margin | EdgeInsets | EdgeInsets.zero | 间距 |
-| style | TDSkeletonRowColObjStyle | TDSkeletonRowColObjStyle.circle() / TDSkeletonRowColObjStyle.rect() / TDSkeletonRowColObjStyle.text() / TDSkeletonRowColObjStyle.spacer() | 样式 |
+`blockColor`、`highlightColor`、`borderRadius`、`rowSpacing` 用于设置子树默认视觉与布局。优先级为：Block 显式值 > `TSkeletonThemeData` > TDesign token。
 
 ## 设计指南
 

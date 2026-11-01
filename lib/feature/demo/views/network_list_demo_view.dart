@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base_list/base_list_view.dart';
 
 import '../../../core/data/preview/goods_preview_data.dart';
+import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/model/entity/goods/goods.dart';
 import '../../../core/ui/preview/app_preview_annotations.dart';
 import '../../../core/ui/widgets/goods_list_card.dart';

@@ -16,22 +16,25 @@ class ToastUtil {
   /// 展示基础通知
   ///
   /// [message] 通知文本。
-  /// [theme] 通知主题。
+  /// [variant] 通知语义类型。
   static void _showBase(
     String message, {
-    TDNoticeBarTheme theme = TDNoticeBarTheme.info,
+    TNoticeBarStatus variant = TNoticeBarStatus.info,
   }) {
     _cancelFunc = BotToast.showCustomNotification(
       toastBuilder: (cancelFunc) {
-        return TDNoticeBar(
-              context: message,
-              theme: theme,
-              prefixIcon: TDIcons.error_circle_filled,
-              suffixIcon: TDIcons.close,
-              onTap: (trigger) => hide(),
-            )
-            .clipRadius(radiusDefault)
-            .marginSymmetric(horizontal: spaceHorizontalLarge);
+        return Builder(
+          builder: (BuildContext context) {
+            return TNoticeBar(
+                    content: message,
+                    status: variant,
+                    suffixIcon: TIcons.close,
+                    onTargetTap: (_) => hide(),
+                  )
+                .clipRadius(radiusDefault)
+                .marginSymmetric(horizontal: spaceHorizontalLarge);
+          },
+        );
       },
     );
   }
@@ -40,28 +43,28 @@ class ToastUtil {
   ///
   /// [message] 通知文本。
   static void show(String message) {
-    _showBase(message, theme: TDNoticeBarTheme.info);
+    _showBase(message);
   }
 
   /// 成功通知
   ///
   /// [message] 通知文本。
   static void success(String message) {
-    _showBase(message, theme: TDNoticeBarTheme.success);
+    _showBase(message, variant: TNoticeBarStatus.success);
   }
 
   /// 警告通知
   ///
   /// [message] 通知文本。
   static void warning(String message) {
-    _showBase(message, theme: TDNoticeBarTheme.warning);
+    _showBase(message, variant: TNoticeBarStatus.warning);
   }
 
   /// 错误通知
   ///
   /// [message] 通知文本。
   static void error(String message) {
-    _showBase(message, theme: TDNoticeBarTheme.error);
+    _showBase(message, variant: TNoticeBarStatus.error);
   }
 
   /// 关闭当前通知

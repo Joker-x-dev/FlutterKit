@@ -1,4 +1,3 @@
-import "package:flutter/material.dart";
 import "package:flutter/widget_previews.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:get/get.dart";
@@ -14,15 +13,46 @@ import "../../localization/app_translations.dart";
 /// 为组件和页面预览提供应用主题、国际化、屏幕适配与 GetX 依赖环境。
 ///
 /// 返回包含 TDesign 与应用语义色扩展的明暗主题配置。
+///
+/// Flutter 3.47 起 PreviewThemeData 变为纯接口，此处实现自定义类以支持明暗双主题预览。
 PreviewThemeData buildAppPreviewTheme() {
-  final TDThemeData themeData = TDThemeData.defaultData();
-  final TDThemeData lightTheme = themeData.light;
-  final TDThemeData darkTheme = themeData.dark ?? lightTheme;
+  final TThemeData themeData = TThemeData.defaultData();
+  final TThemeData lightTheme = themeData.light;
+  final TThemeData darkTheme = themeData.dark ?? lightTheme;
 
-  return PreviewThemeData(
-    materialLight: AppTheme.buildMaterialTheme(lightTheme, Brightness.light),
-    materialDark: AppTheme.buildMaterialTheme(darkTheme, Brightness.dark),
+  return _AppPreviewThemeData(
+    light: AppTheme.buildMaterialTheme(lightTheme, Brightness.light),
+    dark: AppTheme.buildMaterialTheme(darkTheme, Brightness.dark),
   );
+}
+
+/// 应用预览主题数据
+///
+/// 封装 Material 明暗主题，实现 [PreviewThemeData] 接口供 Widget Preview 使用。
+final class _AppPreviewThemeData extends PreviewThemeData {
+  /// 创建应用预览主题数据
+  ///
+  /// [light] Material 明亮主题。
+  /// [dark] Material 深色主题。
+  const _AppPreviewThemeData({
+    required this.light,
+    required this.dark,
+  });
+
+  /// 明亮主题
+  final ThemeData light;
+
+  /// 深色主题
+  final ThemeData dark;
+
+  @override
+  Widget apply(BuildContext context, Widget child) {
+    final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+    return Theme(
+      data: brightness == Brightness.dark ? dark : light,
+      child: child,
+    );
+  }
 }
 
 /// 包装应用组件预览
@@ -108,7 +138,7 @@ class AppPreviewScope extends StatefulWidget {
 /// 应用预览作用域状态
 class _AppPreviewScopeState extends State<AppPreviewScope> {
   /// 项目主题数据加载任务
-  Future<TDThemeData>? _themeDataFuture;
+  Future<TThemeData>? _themeDataFuture;
 
   /// 初始化项目预览主题
   @override
@@ -122,16 +152,15 @@ class _AppPreviewScopeState extends State<AppPreviewScope> {
   /// [bundle] Widget Preview 提供的项目资源包。
   ///
   /// 返回项目主题数据；解析失败时回退到 TDesign 默认主题。
-  Future<TDThemeData> _loadThemeData(AssetBundle bundle) async {
-    TDTheme.needMultiTheme();
+  Future<TThemeData> _loadThemeData(AssetBundle bundle) async {
     try {
       final String jsonString = await bundle.loadString(
         'assets/json/theme.json',
       );
-      return TDThemeData.fromJson('theme', jsonString, darkName: 'themeDark') ??
-          TDThemeData.defaultData();
+      return TThemeData.fromJson('theme', jsonString, darkName: 'themeDark') ??
+          TThemeData.defaultData();
     } on Object {
-      return TDThemeData.defaultData();
+      return TThemeData.defaultData();
     }
   }
 
@@ -152,12 +181,11 @@ class _AppPreviewScopeState extends State<AppPreviewScope> {
     );
     final Brightness brightness = MediaQuery.platformBrightnessOf(context);
 
-    return FutureBuilder<TDThemeData>(
+    return FutureBuilder<TThemeData>(
       future: _themeDataFuture,
-      builder: (BuildContext context, AsyncSnapshot<TDThemeData> snapshot) {
-        final TDThemeData themeData =
-            snapshot.data ?? TDThemeData.defaultData();
-        final TDThemeData activeTheme = brightness == Brightness.dark
+      builder: (BuildContext context, AsyncSnapshot<TThemeData> snapshot) {
+        final TThemeData themeData = snapshot.data ?? TThemeData.defaultData();
+        final TThemeData activeTheme = brightness == Brightness.dark
             ? themeData.dark ?? themeData.light
             : themeData.light;
         return Theme(

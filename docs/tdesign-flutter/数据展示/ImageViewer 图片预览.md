@@ -2,8 +2,8 @@
 
 > 用于图片内容的缩略展示与查看。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/image-viewer)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[ImageViewer 图片预览](https://tdesign.tencent.com/flutter/components/image-viewer)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,14 +27,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _basicImageViewer(BuildContext context) {
-    return TDButton(
-      type: TDButtonType.ghost,
-      theme: TDButtonTheme.primary,
+    return TButton(
+      type: TButtonType.ghost,
+      theme: TButtonTheme.primary,
       isBlock: true,
-      size: TDButtonSize.large,
+      size: TButtonSize.large,
       text: '基础图片预览',
       onTap: () {
-        TDImageViewer.showImageViewer(context: context, images: images);
+        TImageViewer.showImageViewer(context: context, images: images);
       },
     );
   }
@@ -44,14 +44,14 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _actionImageViewer(BuildContext context) {
-    return TDButton(
-      type: TDButtonType.ghost,
-      theme: TDButtonTheme.primary,
+    return TButton(
+      type: TButtonType.ghost,
+      theme: TButtonTheme.primary,
       isBlock: true,
-      size: TDButtonSize.large,
+      size: TButtonSize.large,
       text: '带操作图片预览',
       onTap: () {
-        TDImageViewer.showImageViewer(
+        TImageViewer.showImageViewer(
           context: context,
           images: images,
           showIndex: true,
@@ -64,10 +64,57 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDImageViewerWidget](#tdimageviewerwidget)
-2. [TDImageViewer](#tdimageviewer)
+1. [TImageViewer](#timageviewer)
+2. [TImageViewerWidget](#timageviewerwidget)
+3. [OnIndexChange](#onindexchange)
+4. [OnClose](#onclose)
+5. [OnDelete](#ondelete)
+6. [OnImageTap](#onimagetap)
+7. [OnLongPress](#onlongpress)
+8. [LeftItemBuilder](#leftitembuilder)
+9. [RightItemBuilder](#rightitembuilder)
 
-#### TDImageViewerWidget
+#### TImageViewer
+
+##### 静态方法
+
+###### TImageViewer.showImageViewer
+
+显示图片预览
+
+返回类型：`void`
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | - |
+| images | List | - | 图片数组 |
+| labels | List? | - | 图片描述 |
+| closeBtn | bool? | true | 是否展示关闭按钮 |
+| deleteBtn | bool? | false | 是否显示删除操作 |
+| showIndex | bool? | false | 是否显示页码 |
+| loop | bool? | false | 图片是否循环 |
+| autoplay | bool? | false | 图片轮播是否自动播放 |
+| duration | int? | - | 自动播放间隔 |
+| bgColor | Color? | - | 背景色 |
+| navBarBgColor | Color? | - | 导航栏背景色 |
+| iconColor | Color? | - | 图标颜色 |
+| labelStyle | TextStyle? | - | label文字样式 |
+| indexStyle | TextStyle? | - | 页码样式 |
+| modalBarrierColor | Color? | - | - |
+| barrierDismissible | bool? | - | - |
+| defaultIndex | int? | - | 默认预览图片所在的下标 |
+| width | double? | - | 图片宽度 |
+| height | double? | - | 图片高度 |
+| onIndexChange | OnIndexChange? | - | 预览图片切换回调 |
+| onClose | OnClose? | - | 关闭点击 |
+| onDelete | OnDelete? | - | 删除点击 |
+| ignoreDeleteError | bool? | - | 是否忽略单张图片删除错误提示 |
+| onTap | OnImageTap? | - | 点击图片 |
+| onLongPress | OnLongPress? | - | 长按图片 |
+| leftItemBuilder | LeftItemBuilder? | - | 左侧自定义操作 |
+| rightItemBuilder | RightItemBuilder? | - | 右侧自定义操作 |
+
+#### TImageViewerWidget
 
 ##### 默认构造方法
 
@@ -84,7 +131,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | ignoreDeleteError | bool? | false | 是否忽略单张图片删除错误提示 |
 | images | List | - | 图片数组 |
 | indexStyle | TextStyle? | - | 页码样式 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | labels | List? | - | 图片描述 |
 | labelStyle | TextStyle? | - | label文字样式 |
 | leftItemBuilder | LeftItemBuilder? | - | 左侧自定义操作 |
@@ -99,48 +146,60 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | showIndex | bool? | - | 是否显示页码 |
 | width | double? | - | 图片宽度 |
 
-#### TDImageViewer
+#### OnIndexChange
 
-##### 静态方法
-
-| 名称 | 返回类型 | 说明 |
-| --- | --- | --- |
-| `showImageViewer` | `void` | 显示图片预览。 |
-
-###### `showImageViewer`
-
-显示图片预览。
+##### 类型定义
 
 ```dart
-static void showImageViewer({
-  required BuildContext context,
-  required List<dynamic> images,
-  List<String>? labels,
-  bool? closeBtn = true,
-  bool? deleteBtn = false,
-  bool? showIndex = false,
-  bool? loop = false,
-  bool? autoplay = false,
-  int? duration,
-  Color? bgColor,
-  Color? navBarBgColor,
-  Color? iconColor,
-  TextStyle? labelStyle,
-  TextStyle? indexStyle,
-  Color? modalBarrierColor,
-  bool? barrierDismissible,
-  int? defaultIndex,
-  double? width,
-  double? height,
-  OnIndexChange? onIndexChange,
-  OnClose? onClose,
-  OnDelete? onDelete,
-  bool? ignoreDeleteError,
-  OnImageTap? onTap,
-  OnLongPress? onLongPress,
-  LeftItemBuilder? leftItemBuilder,
-  RightItemBuilder? rightItemBuilder,
-});
+typedef OnIndexChange =  Function(int index);
+```
+
+#### OnClose
+
+##### 类型定义
+
+```dart
+typedef OnClose =  Function(int index);
+```
+
+#### OnDelete
+
+##### 类型定义
+
+```dart
+typedef OnDelete =  Function(int index);
+```
+
+#### OnImageTap
+
+##### 类型定义
+
+```dart
+typedef OnImageTap =  Function(int index);
+```
+
+#### OnLongPress
+
+##### 类型定义
+
+```dart
+typedef OnLongPress =  Function(int index);
+```
+
+#### LeftItemBuilder
+
+##### 类型定义
+
+```dart
+typedef LeftItemBuilder = Widget Function(BuildContext context, int index);
+```
+
+#### RightItemBuilder
+
+##### 类型定义
+
+```dart
+typedef RightItemBuilder = Widget Function(BuildContext context, int index);
 ```
 
 ## 设计指南

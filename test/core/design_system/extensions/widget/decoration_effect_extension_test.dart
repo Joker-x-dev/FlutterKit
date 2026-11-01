@@ -22,8 +22,8 @@ void main() {
 
     final linearBox = _box(
       child.backgroundLinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: .topLeft,
+        end: .bottomRight,
         colors: const <Color>[Colors.red, Colors.green],
         stops: const <double>[0, 1],
         tileMode: TileMode.mirror,
@@ -32,10 +32,10 @@ void main() {
     expect(linearBox.gradient, isA<LinearGradient>());
     final radialBox = _box(
       child.backgroundRadialGradient(
-        center: Alignment.topCenter,
+        center: .topCenter,
         radius: 0.8,
         colors: const <Color>[Colors.white, Colors.black],
-        focal: Alignment.center,
+        focal: .center,
         focalRadius: 0.1,
       ),
     );
@@ -75,25 +75,21 @@ void main() {
 
     const shadows = <BoxShadow>[BoxShadow(color: Colors.black, blurRadius: 4)];
     expect(_box(child.boxShadow(shadows)).boxShadow, shadows);
-    final material =
-        child.elevation(
-              5,
-              borderRadius: BorderRadius.circular(8),
-              shadowColor: Colors.purple,
-            )
-            as Material;
+    final material = child.elevation(
+      5,
+      borderRadius: BorderRadius.circular(8),
+      shadowColor: Colors.purple,
+    ) as Material;
     expect(material.elevation, 5);
     expect(material.shadowColor, Colors.purple);
 
-    final decorated =
-        child.decorated(
-              color: Colors.orange,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: shadows,
-              backgroundBlendMode: BlendMode.screen,
-              position: DecorationPosition.foreground,
-            )
-            as DecoratedBox;
+    final decorated = child.decorated(
+      color: Colors.orange,
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: shadows,
+      backgroundBlendMode: BlendMode.screen,
+      position: .foreground,
+    ) as DecoratedBox;
     expect((decorated.decoration as BoxDecoration).color, Colors.orange);
     expect(decorated.position, DecorationPosition.foreground);
   });
@@ -101,13 +97,11 @@ void main() {
   test('拟物效果覆盖颜色通道上限、下限和常规分支', () {
     const Widget child = SizedBox();
     for (final curve in <double>[-10, 0, 10]) {
-      final box =
-          child.neumorphism(
-                elevation: -8,
-                backgroundColor: const Color(0xFF808080),
-                curve: curve,
-              )
-              as DecoratedBox;
+      final box = child.neumorphism(
+        elevation: -8,
+        backgroundColor: const Color(0xFF808080),
+        curve: curve,
+      ) as DecoratedBox;
       final decoration = box.decoration as BoxDecoration;
       expect(decoration.gradient, isA<LinearGradient>());
       expect(decoration.boxShadow, hasLength(2));
@@ -128,28 +122,22 @@ void main() {
     );
     expect(child.blur(sigmaX: 5, sigmaY: 6), isA<ImageFiltered>());
 
-    final glow =
-        child.glow(
-              color: Colors.blue,
-              blurRadius: 7,
-              spreadRadius: 2,
-              offset: const Offset(1, 2),
-            )
-            as Container;
+    final glow = child.glow(
+      color: Colors.blue,
+      blurRadius: 7,
+      spreadRadius: 2,
+      offset: const Offset(1, 2),
+    ) as Container;
     expect((glow.decoration as BoxDecoration).boxShadow?.single.blurRadius, 7);
-    final multi =
-        child.multiGlow(
-              colors: const <Color>[Colors.red, Colors.green, Colors.blue],
-            )
-            as Container;
+    final multi = child.multiGlow(
+      colors: const <Color>[Colors.red, Colors.green, Colors.blue],
+    ) as Container;
     expect((multi.decoration as BoxDecoration).boxShadow, hasLength(3));
     expect((child.neon(strokeWidth: 3) as Stack).children, hasLength(2));
     expect(
       (child.gradientMask(
-                const LinearGradient(colors: <Color>[Colors.red, Colors.blue]),
-              )
-              as ShaderMask)
-          .blendMode,
+        const LinearGradient(colors: <Color>[Colors.red, Colors.blue]),
+      ) as ShaderMask).blendMode,
       BlendMode.srcIn,
     );
     expect(child.rainbowMask(blendMode: BlendMode.modulate), isA<ShaderMask>());
@@ -202,13 +190,12 @@ void main() {
         minOpacity: 0.3,
         maxOpacity: 0.9,
       ),
-      const Text(
-        '抖动',
-      ).shake(duration: const Duration(milliseconds: 100), offset: 6),
+      const Text('抖动')
+          .shake(duration: const Duration(milliseconds: 100), offset: 6),
     ];
     await pumpExtensionTestApp(
       tester,
-      Column(mainAxisSize: MainAxisSize.min, children: effects),
+      Column(mainAxisSize: .min, children: effects),
     );
     await tester.pump(const Duration(milliseconds: 50));
     expect(

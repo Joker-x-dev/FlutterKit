@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -7,22 +6,22 @@ BuildContext get _context => Get.context!;
 
 //==================== 圆角 ====================
 /// 小圆角，用于小型组件、标签等
-double get radiusSmall => TDTheme.of(_context).radiusSmall;
+double get radiusSmall => _context.tTheme.radiusSmall;
 
 /// 默认圆角，用于按钮、卡片等常规组件
-double get radiusDefault => TDTheme.of(_context).radiusDefault;
+double get radiusDefault => _context.tTheme.radiusDefault;
 
 /// 大圆角，用于大型组件、对话框等
-double get radiusLarge => TDTheme.of(_context).radiusLarge;
+double get radiusLarge => _context.tTheme.radiusLarge;
 
 /// 特大圆角，用于需要明显圆角的设计元素
-double get radiusExtraLarge => TDTheme.of(_context).radiusExtraLarge;
+double get radiusExtraLarge => _context.tTheme.radiusExtraLarge;
 
 /// 胶囊形圆角，数值设置较大，适用于胶囊按钮、药丸形状标签等
-double get radiusRound => TDTheme.of(_context).radiusRound;
+double get radiusRound => _context.tTheme.radiusRound;
 
 /// 圆形圆角，等同于胶囊形圆角，当宽高相等时呈现为圆形
-double get radiusCircle => TDTheme.of(_context).radiusCircle;
+double get radiusCircle => _context.tTheme.radiusCircle;
 
 //==================== 常用形状 ====================
 /// 小圆角形状，适用于小型组件

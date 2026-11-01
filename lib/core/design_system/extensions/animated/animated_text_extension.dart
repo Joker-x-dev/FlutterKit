@@ -194,13 +194,11 @@ class _AnimatedExtensionTextState
   /// 更新文本样式补间。
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _style =
-        visitor(
-              _style,
-              widget.targetStyle,
-              (dynamic value) => TextStyleTween(begin: value as TextStyle),
-            )
-            as TextStyleTween?;
+    _style = visitor(
+      _style,
+      widget.targetStyle,
+      (dynamic value) => TextStyleTween(begin: value as TextStyle),
+    ) as TextStyleTween?;
   }
 
   /// 构建当前补间值对应的文本。

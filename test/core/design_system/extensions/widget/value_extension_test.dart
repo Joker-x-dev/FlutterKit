@@ -17,15 +17,15 @@ void main() {
       '原文',
       style: TextStyle(color: Colors.red, fontSize: 12),
       strutStyle: StrutStyle(fontSize: 11),
-      textAlign: TextAlign.left,
+      textAlign: .left,
       textDirection: TextDirection.ltr,
       locale: Locale('zh', 'CN'),
       softWrap: true,
-      overflow: TextOverflow.clip,
+      overflow: .clip,
       textScaler: TextScaler.linear(1.1),
       maxLines: 1,
       semanticsLabel: '原语义',
-      textWidthBasis: TextWidthBasis.parent,
+      textWidthBasis: .parent,
     );
 
     final unchanged = source.copyWith();
@@ -44,15 +44,15 @@ void main() {
 
     final changed = source.copyWith(
       data: '新文',
-      textAlign: TextAlign.end,
+      textAlign: .end,
       textDirection: TextDirection.rtl,
       locale: const Locale('en', 'US'),
       softWrap: false,
-      overflow: TextOverflow.ellipsis,
+      overflow: .ellipsis,
       textScaler: const TextScaler.linear(2),
       maxLines: 2,
       semanticsLabel: '新语义',
-      textWidthBasis: TextWidthBasis.longestLine,
+      textWidthBasis: .longestLine,
     );
     expect(changed.data, '新文');
     expect(changed.textAlign, TextAlign.end);
@@ -70,7 +70,7 @@ void main() {
         color: Colors.blue,
         backgroundColor: Colors.yellow,
         fontSize: 18,
-        fontWeight: FontWeight.w600,
+        fontWeight: .w600,
         fontStyle: FontStyle.italic,
         letterSpacing: 2,
         wordSpacing: 3,
@@ -83,22 +83,42 @@ void main() {
     expect(style.style?.fontSize, 18);
     expect(style.style?.fontWeight, FontWeight.w600);
 
-    expect(source.textScale(const TextScaler.linear(1.5)).textScaler, const TextScaler.linear(1.5));
+    expect(
+      source.textScale(const TextScaler.linear(1.5)).textScaler,
+      const TextScaler.linear(1.5),
+    );
     expect(source.bold().style?.fontWeight, FontWeight.bold);
     expect(source.italic().style?.fontStyle, FontStyle.italic);
-    expect(source.fontWeight(FontWeight.w300).style?.fontWeight, FontWeight.w300);
+    expect(
+      source.fontWeight(FontWeight.w300).style?.fontWeight,
+      FontWeight.w300,
+    );
     expect(source.fontSize(20).style?.fontSize, 20);
     expect(source.fontFamily('Roboto').style?.fontFamily, 'Roboto');
     expect(source.letterSpacing(4).style?.letterSpacing, 4);
     expect(source.wordSpacing(5).style?.wordSpacing, 5);
     expect(source.textColor(Colors.green).style?.color, Colors.green);
     expect(source.textAlignment(TextAlign.center).textAlign, TextAlign.center);
-    expect(source.withTextDirection(TextDirection.rtl).textDirection, TextDirection.rtl);
-    expect(TextExtension(source).textDirection(TextDirection.rtl).textDirection, TextDirection.rtl);
-    expect(source.textBaseline(TextBaseline.ideographic).style?.textBaseline, TextBaseline.ideographic);
-    expect(source.withTextWidthBasis(TextWidthBasis.longestLine).textWidthBasis, TextWidthBasis.longestLine);
     expect(
-      TextExtension(source).textWidthBasis(TextWidthBasis.longestLine).textWidthBasis,
+      source.withTextDirection(TextDirection.rtl).textDirection,
+      TextDirection.rtl,
+    );
+    expect(
+      TextExtension(source).textDirection(TextDirection.rtl).textDirection,
+      TextDirection.rtl,
+    );
+    expect(
+      source.textBaseline(TextBaseline.ideographic).style?.textBaseline,
+      TextBaseline.ideographic,
+    );
+    expect(
+      source.withTextWidthBasis(TextWidthBasis.longestLine).textWidthBasis,
+      TextWidthBasis.longestLine,
+    );
+    expect(
+      TextExtension(source)
+          .textWidthBasis(TextWidthBasis.longestLine)
+          .textWidthBasis,
       TextWidthBasis.longestLine,
     );
 
@@ -109,7 +129,11 @@ void main() {
     );
     expect(shadow.style?.shadows?.single.color, Colors.purple);
     expect(shadow.style?.shadows?.single.blurRadius, 6);
-    final elevation = source.textElevation(8, angle: math.pi / 2, opacityRatio: 0.5);
+    final elevation = source.textElevation(
+      8,
+      angle: math.pi / 2,
+      opacityRatio: 0.5,
+    );
     expect(elevation.style?.shadows?.single.blurRadius, 8);
     expect(elevation.style?.shadows?.single.offset.dx, closeTo(8, 0.0001));
   });
@@ -131,17 +155,32 @@ void main() {
     expect(copied.semanticsLabel, '语义');
 
     expect(source.textStyle(const TextStyle(fontSize: 18)).style?.fontSize, 18);
-    expect(const TextSpan(text: '空').textStyle(const TextStyle(fontSize: 16)).style?.fontSize, 16);
+    expect(
+      const TextSpan(text: '空')
+          .textStyle(const TextStyle(fontSize: 16))
+          .style
+          ?.fontSize,
+      16,
+    );
     expect(source.bold().style?.fontWeight, FontWeight.bold);
     expect(source.italic().style?.fontStyle, FontStyle.italic);
-    expect(source.fontWeight(FontWeight.w500).style?.fontWeight, FontWeight.w500);
+    expect(
+      source.fontWeight(FontWeight.w500).style?.fontWeight,
+      FontWeight.w500,
+    );
     expect(source.fontSize(22).style?.fontSize, 22);
     expect(source.fontFamily('Mono').style?.fontFamily, 'Mono');
     expect(source.letterSpacing(2).style?.letterSpacing, 2);
     expect(source.wordSpacing(3).style?.wordSpacing, 3);
     expect(source.textColor(Colors.orange).style?.color, Colors.orange);
-    expect(source.textBaseline(TextBaseline.alphabetic).style?.textBaseline, TextBaseline.alphabetic);
-    expect(source.textShadow(blurRadius: 4).style?.shadows?.single.blurRadius, 4);
+    expect(
+      source.textBaseline(TextBaseline.alphabetic).style?.textBaseline,
+      TextBaseline.alphabetic,
+    );
+    expect(
+      source.textShadow(blurRadius: 4).style?.shadows?.single.blurRadius,
+      4,
+    );
     expect(source.textElevation(5).style?.shadows?.single.blurRadius, 5);
   });
 
@@ -158,7 +197,10 @@ void main() {
     expect(resized.color, Colors.red);
     expect(source.iconColor(Colors.blue).color, Colors.blue);
     expect(source.withSemanticLabel('下一步').semanticLabel, '下一步');
-    expect(source.withTextDirection(TextDirection.rtl).textDirection, TextDirection.rtl);
+    expect(
+      source.withTextDirection(TextDirection.rtl).textDirection,
+      TextDirection.rtl,
+    );
     final copied = source.copyWith(
       size: 24,
       color: Colors.green,
@@ -189,7 +231,10 @@ void main() {
     expect(scaledXY.transform.storage[0], 2);
     expect(scaledXY.transform.storage[5], 3);
 
-    expect((child.translate(const Offset(4, 5)) as Transform).transform.storage[12], 4);
+    expect(
+      (child.translate(const Offset(4, 5)) as Transform).transform.storage[12],
+      4,
+    );
     expect((child.translateXY(6, 7) as Transform).transform.storage[13], 7);
     expect((child.translateX(8) as Transform).transform.storage[12], 8);
     expect((child.translateY(9) as Transform).transform.storage[13], 9);
@@ -202,8 +247,11 @@ void main() {
 
     final first = Matrix4.translationValues(10, 0, 0);
     final second = Matrix4.diagonal3Values(2, 3, 1);
-    final combined = child.multiTransform(<Matrix4>[first, second]) as Transform;
-    final expected = Matrix4.identity()..multiply(first)..multiply(second);
+    final combined =
+        child.multiTransform(<Matrix4>[first, second]) as Transform;
+    final expected = Matrix4.identity()
+      ..multiply(first)
+      ..multiply(second);
     expect(combined.transform.storage, orderedEquals(expected.storage));
   });
 }

@@ -13,9 +13,9 @@ void main() {
         duration: const Duration(milliseconds: 120),
         curve: Curves.easeIn,
         style: const TextStyle(color: Colors.red, fontSize: 18),
-        textAlign: TextAlign.end,
+        textAlign: .end,
         maxLines: 2,
-        overflow: TextOverflow.ellipsis,
+        overflow: .ellipsis,
         semanticsLabel: '语义文本',
       );
 
@@ -33,7 +33,7 @@ void main() {
 
     testWidgets('颜色、字号和样式链式调用合并目标样式', (tester) async {
       final Widget child =
-          const Text('链式文本', style: TextStyle(fontWeight: FontWeight.w400))
+          const Text('链式文本', style: TextStyle(fontWeight: .w400))
               .animatedTextColor(Colors.blue)
               .animatedTextSize(24)
               .animatedTextStyle(
@@ -95,16 +95,16 @@ void main() {
           children: <InlineSpan>[TextSpan(text: '内容')],
         ),
         strutStyle: StrutStyle(height: 1.2),
-        textAlign: TextAlign.center,
+        textAlign: .center,
         textDirection: TextDirection.rtl,
         locale: Locale('zh', 'CN'),
         softWrap: false,
-        overflow: TextOverflow.fade,
+        overflow: .fade,
         textScaler: TextScaler.linear(1.2),
         maxLines: 3,
         semanticsLabel: '富文本语义',
         semanticsIdentifier: 'rich-text',
-        textWidthBasis: TextWidthBasis.longestLine,
+        textWidthBasis: .longestLine,
         selectionColor: Colors.yellow,
       );
       final Widget child = source.animatedTextStyle(
@@ -134,9 +134,9 @@ void main() {
 
     test('颜色与字号覆盖直接入口和反向链式入口', () {
       final Widget directSize = const Text('直接字号').animatedTextSize(18);
-      final Widget chainedColor = const Text(
-        '链式颜色',
-      ).animatedTextSize(18).animatedTextColor(Colors.red);
+      final Widget chainedColor = const Text('链式颜色')
+          .animatedTextSize(18)
+          .animatedTextColor(Colors.red);
       final Widget generatedChain = const SizedBox()
           .animatedText('生成文本')
           .animatedTextColor(Colors.blue);
@@ -183,7 +183,7 @@ void main() {
         textDirection: TextDirection.rtl,
         applyTextScaling: true,
         blendMode: BlendMode.srcIn,
-        fontWeight: FontWeight.w600,
+        fontWeight: .w600,
       );
       final Widget child = source
           .animatedIconColor(Colors.blue)
@@ -240,9 +240,8 @@ void main() {
     });
 
     testWidgets('可空颜色尺寸覆盖无补间分支', (tester) async {
-      final Widget child = const Icon(
-        Icons.info,
-      ).animatedIcon(Icons.info, color: null, size: null);
+      final Widget child = const Icon(Icons.info)
+          .animatedIcon(Icons.info, color: null, size: null);
 
       await pumpExtensionTestApp(tester, child);
 
@@ -259,9 +258,9 @@ void main() {
 
     test('颜色与尺寸覆盖直接入口和反向链式入口', () {
       final Widget directSize = const Icon(Icons.add).animatedIconSize(18);
-      final Widget chainedColor = const Icon(
-        Icons.add,
-      ).animatedIconSize(18).animatedIconColor(Colors.red);
+      final Widget chainedColor = const Icon(Icons.add)
+          .animatedIconSize(18)
+          .animatedIconColor(Colors.red);
 
       expect(directSize, isA<ImplicitlyAnimatedWidget>());
       expect(chainedColor, isA<ImplicitlyAnimatedWidget>());

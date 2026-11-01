@@ -15,21 +15,58 @@ void main() {
   test('Utility 基础包装完整传递参数', () {
     const Widget child = SizedBox();
     expect((child.offstage(true) as Offstage).offstage, isTrue);
-    expect((child.visibility(false, maintainState: true) as Visibility).maintainState, isTrue);
-    expect((child.card(color: Colors.red, elevation: 4) as Card).color, Colors.red);
-    expect((child.fittedBox(fit: BoxFit.cover) as FittedBox).fit, BoxFit.cover);
-    expect((child.fractionallySizedBox(widthFactor: 0.5) as FractionallySizedBox).widthFactor, 0.5);
+    expect(
+      (child.visibility(
+        false,
+        maintainState: true,
+      ) as Visibility).maintainState,
+      isTrue,
+    );
+    expect(
+      (child.card(color: Colors.red, elevation: 4) as Card).color,
+      Colors.red,
+    );
+    expect((child.fittedBox(fit: .cover) as FittedBox).fit, BoxFit.cover);
+    expect(
+      (child.fractionallySizedBox(
+        widthFactor: 0.5,
+      ) as FractionallySizedBox).widthFactor,
+      0.5,
+    );
     expect((child.limitedBox(maxWidth: 10) as LimitedBox).maxWidth, 10);
     expect((child.overflowBox(maxHeight: 20) as OverflowBox).maxHeight, 20);
-    expect((child.excludeSemantics(excluding: false) as ExcludeSemantics).excluding, isFalse);
+    expect(
+      (child.excludeSemantics(excluding: false) as ExcludeSemantics).excluding,
+      isFalse,
+    );
     expect(child.mergeSemantics(), isA<MergeSemantics>());
-    expect((child.blockSemantics(blocking: false) as BlockSemantics).blocking, isFalse);
-    expect((child.ignorePointer(ignoring: false) as IgnorePointer).ignoring, isFalse);
-    expect((child.absorbPointer(absorbing: false) as AbsorbPointer).absorbing, isFalse);
-    expect((child.reorderableDelayedDragStartListener(textDirection: TextDirection.rtl) as Directionality).textDirection, TextDirection.rtl);
+    expect(
+      (child.blockSemantics(blocking: false) as BlockSemantics).blocking,
+      isFalse,
+    );
+    expect(
+      (child.ignorePointer(ignoring: false) as IgnorePointer).ignoring,
+      isFalse,
+    );
+    expect(
+      (child.absorbPointer(absorbing: false) as AbsorbPointer).absorbing,
+      isFalse,
+    );
+    expect(
+      (child.reorderableDelayedDragStartListener(
+        textDirection: TextDirection.rtl,
+      ) as Directionality).textDirection,
+      TextDirection.rtl,
+    );
     expect((child.tooltip(message: '说明') as Tooltip).message, '说明');
-    expect((child.hero('hero', transitionOnUserGestures: true) as Hero).tag, 'hero');
-    expect(child.autofill(autofillHints: const <String>[AutofillHints.email]), isA<AutofillGroup>());
+    expect(
+      (child.hero('hero', transitionOnUserGestures: true) as Hero).tag,
+      'hero',
+    );
+    expect(
+      child.autofill(autofillHints: const <String>[AutofillHints.email]),
+      isA<AutofillGroup>(),
+    );
   });
 
   test('Utility Semantics 覆盖全部动作和状态字段', () {
@@ -117,7 +154,7 @@ void main() {
           onPointerDown: (_) => pointerDown++,
           onPointerMove: (_) => pointerMove++,
           onPointerUp: (_) => pointerUp++,
-          behavior: HitTestBehavior.opaque,
+          behavior: .opaque,
         )
         .mouseRegion(
           onEnter: (_) => enters++,
@@ -133,7 +170,9 @@ void main() {
         );
     await pumpExtensionTestApp(tester, widget);
 
-    final gesture = await tester.startGesture(tester.getCenter(find.byType(SizedBox).last));
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.byType(SizedBox).last),
+    );
     await gesture.moveBy(const Offset(5, 0));
     await gesture.up();
     final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
@@ -163,7 +202,9 @@ void main() {
         builder: (_, value, _) => const Text('状态').keepAlive(value),
       ),
     );
-    var wrapper = tester.widget<KeepAliveWrapper>(find.byType(KeepAliveWrapper));
+    var wrapper = tester.widget<KeepAliveWrapper>(
+      find.byType(KeepAliveWrapper),
+    );
     expect(wrapper.keepAlive, isTrue);
     expect(find.text('状态'), findsOneWidget);
 

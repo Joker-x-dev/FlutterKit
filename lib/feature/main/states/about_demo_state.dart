@@ -26,7 +26,7 @@ class AboutDemoState {
     AboutLinkItem(
       title: MainKeys.aboutLinkDemo,
       url: 'https://www.pgyer.com/FlutterKit',
-    )
+    ),
   ];
 
   /// 创建关于示例页状态

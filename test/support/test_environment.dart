@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -44,8 +43,8 @@ Widget buildCoreTestApp({
   Locale locale = const Locale('zh', 'CN'),
   Brightness brightness = Brightness.light,
 }) {
-  final TDThemeData tdTheme = TDThemeData.defaultData();
-  final TDThemeData activeTheme = brightness == Brightness.dark
+  final TThemeData tdTheme = TThemeData.defaultData();
+  final TThemeData activeTheme = brightness == Brightness.dark
       ? tdTheme.dark ?? tdTheme.light
       : tdTheme.light;
   final ThemeData theme = AppTheme.buildMaterialTheme(activeTheme, brightness);

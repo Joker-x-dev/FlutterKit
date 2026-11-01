@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -48,64 +47,58 @@ class DemoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return buildCell(
-      context,
       title: title,
       description: description,
       icon: icon,
       onTap: onTap,
       trailing: trailing,
-      bordered: false,
     ).clipRadius(radiusExtraLarge);
   }
 
   /// 构建 TDesign 示例单元格
   ///
-  /// [context] 构建上下文。
   /// [title] 示例标题。
   /// [description] 示例说明。
   /// [icon] 示例图标。
   /// [onTap] 点击回调。
   /// [trailing] 右侧自定义组件。
-  /// [bordered] 是否显示组内分割线。
   ///
-  /// 返回可直接放入 [TDCellGroup] 的单元格。
-  static TDCell buildCell(
-    BuildContext context, {
+  /// 返回可直接放入 [TCellGroup] 的单元格。
+  static TCell buildCell({
     required String title,
     required String description,
     required IconData icon,
     VoidCallback? onTap,
     Widget? trailing,
-    bool bordered = true,
   }) {
-    final appTheme = AppTheme.of(context);
-    return TDCell(
-      bordered: bordered,
-      leftIconWidget: Icon(icon, color: appTheme.primary, size: spacer24)
+    return TCell(
+      prefix: Icon(icon, color: appTheme.primary, size: spacer24)
           .tight(height: spacer40, width: spacer40)
           .backgroundColor(appTheme.primary.withValues(alpha: 0.08))
           .clipRadius(radiusDefault),
-      titleWidget: TDText(
+      title: TText(
         title,
         font: appTheme.fontBodyLarge,
-        textColor: appTheme.textPrimary,
-        fontWeight: appTheme.fontWeightMedium,
+        style: TextStyle(
+          color: appTheme.textPrimary,
+          fontWeight: appTheme.fontWeightMedium,
+        ),
       ),
-      descriptionWidget: TDText(
+      subtitle: TText(
         description,
         font: appTheme.fontBodySmall,
-        textColor: appTheme.textSecondary,
+        style: TextStyle(color: appTheme.textPrimary),
         maxLines: 2,
-        overflow: TextOverflow.ellipsis,
+        overflow: .ellipsis,
       ),
-      rightIconWidget:
+      trailing:
           trailing ??
           Icon(
-            TDIcons.chevron_right,
+            TIcons.chevron_right,
             color: appTheme.textPlaceholder,
             size: spacer24,
           ),
-      onClick: onTap == null ? null : (_) => onTap(),
+      onTap: onTap,
     );
   }
 }
@@ -120,6 +113,6 @@ Widget previewDemoCard() {
   return DemoCard(
     title: '网络分页列表示例',
     description: '展示分页加载、下拉刷新与加载更多状态',
-    icon: TDIcons.list,
+    icon: TIcons.root_list,
   );
 }

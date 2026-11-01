@@ -4,6 +4,7 @@ import 'package:flutter_kit/core/base/base_refresh/base_refresh_view.dart';
 import 'package:flutter_kit/core/data/preview/goods_preview_data.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/model/entity/goods/goods.dart';
 import '../../../core/ui/widgets/goods_detail_content.dart';
 import '../localization/demo_keys.dart';

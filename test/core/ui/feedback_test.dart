@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -24,7 +23,7 @@ void main() {
     ToastUtil.success('保存成功');
     await tester.pumpAndSettle();
     expect(find.text('保存成功'), findsOneWidget);
-    expect(find.byType(TDNoticeBar), findsOneWidget);
+    expect(find.byType(TNoticeBar), findsOneWidget);
 
     ToastUtil.hide();
     await tester.pumpAndSettle();
@@ -57,9 +56,9 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
     expect(
       () => tester
-          .widget<TDNoticeBar>(find.byType(TDNoticeBar))
-          .onTap
-          ?.call('suffix-icon'),
+          .widget<TNoticeBar>(find.byType(TNoticeBar))
+          .onTargetTap
+          ?.call(TNoticeBarTapTarget.suffix),
       returnsNormally,
     );
     await tester.pumpAndSettle();
@@ -101,9 +100,9 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
     expect(find.text('统一错误'), findsWidgets);
-    expect(find.byType(TDConfirmDialog), findsOneWidget);
+    expect(find.byType(TConfirmDialog), findsOneWidget);
     ToastUtil.hide();
-    Navigator.of(tester.element(find.byType(TDConfirmDialog))).pop();
+    Navigator.of(tester.element(find.byType(TConfirmDialog))).pop();
     await tester.pump(const Duration(milliseconds: 300));
   });
 
@@ -123,11 +122,11 @@ void main() {
     await tester.pump();
     await tester.pump();
     await tester.pump();
-    expect(find.byType(TDLoading), findsOneWidget);
+    expect(find.byType(TLoading), findsOneWidget);
 
     LoadingDialog.hide();
     await tester.pumpAndSettle();
-    expect(find.byType(TDLoading), findsNothing);
+    expect(find.byType(TLoading), findsNothing);
   });
 
   testWidgets('反馈和确认对话框展示传入文案', (WidgetTester tester) async {

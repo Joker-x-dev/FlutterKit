@@ -1,8 +1,8 @@
 # 主题系统
 
-FlutterKit 同时维护 TDesign、Material 与项目语义主题。主题并非页面自己切换几组颜色：启动时从 JSON 资源解析 `TDThemeData`，恢复用户的颜色和模式，`main.dart` 通过 `Obx` 重建 `GetMaterialApp`，`AppTheme` 再将当前 TDesign token 暴露给项目业务代码。
+FlutterKit 同时维护 TDesign、Material 与项目语义主题。主题并非页面自己切换几组颜色：启动时从 JSON 资源解析 `TThemeData`，恢复用户的颜色和模式，`main.dart` 通过 `Obx` 重建 `GetMaterialApp`，`AppTheme` 再将当前 TDesign token 暴露给项目业务代码。
 
-TDesign 组件主题 API 与 JSON token 以仓库 `docs/tdesign-flutter/开始/快速开始.md` 为本地参考；深色主题配置、`TDTheme.needMultiTheme()` 与 Flutter `ThemeMode` 的官方说明见 `docs/tdesign-flutter/全局配置/深色模式.md`。本章只说明 FlutterKit 的项目级接入，深色模式的完整流程见 [深色模式](./dark-mode.md)。
+TDesign 组件主题 API 与 JSON token 以仓库 `docs/tdesign-flutter/开始/快速开始.md` 为本地参考；当前包的应用主题入口是 `TThemeBuilder.light/dark`，组件树内通过 `context.tTheme` 读取 token。深色模式的完整流程见 [深色模式](./dark-mode.md)。
 
 ## 完整链路
 
@@ -12,10 +12,11 @@ assets/json/theme.json、blue.json、green.json、red.json
   → ThemeInitializer（启动解析并恢复持久化选择）
   → Application.themeData / themeMode / themeColorName
   → main.dart 中 Obx
-  → TDThemeData.light / TDThemeData.dark
+  → TThemeData.light / TThemeData.dark
   → AppTheme.buildMaterialTheme()
-  → ThemeData.extensions: TDThemeData + AppTheme
-  → BaseView.appTheme / AppTheme.of(context) / TDesign 组件
+  → TThemeBuilder.light / TThemeBuilder.dark
+  → ThemeData.extensions: TThemeData + AppTheme
+  → 顶层 appTheme getter / TDesign 组件
 ```
 
 ## 资源与预设
@@ -36,15 +37,13 @@ assets/json/theme.json、blue.json、green.json、red.json
 class ThemeInitializer implements AppInitializer {
   @override
   Future<void> init() async {
-    // 启用 TDesign 的多主题能力，必须在读取主题数据前执行。
-    TDTheme.needMultiTheme();
     final repository = ThemeStoreRepository();
 
     // 无效或缺失的名称会由 fromName 回退到 defaultTheme。
     final preset = ThemeColorPreset.fromName(
       await repository.getThemeColorName(),
     );
-    final TDThemeData? themeData = await preset.loadThemeData();
+    final TThemeData? themeData = await preset.loadThemeData();
     if (themeData != null) {
       // 写入响应式全局状态，main.dart 的 Obx 会读取它。
       Application.updateTheme(themeData, colorName: preset.name);
@@ -61,29 +60,26 @@ class ThemeInitializer implements AppInitializer {
 
 ## 深色模式
 
-`Application.themeMode` 默认 `ThemeMode.system`；`main.dart` 根据系统亮度选择浅色或深色 `TDThemeData`，并同步 Material 主题与系统栏。深色 JSON、回退、跟随系统、持久化和 ThemeDemo 的完整行为集中在 [深色模式](./dark-mode.md)，避免与主题总览重复。
+`Application.themeMode` 默认 `ThemeMode.system`；`main.dart` 根据系统亮度选择浅色或深色 `TThemeData`，并同步 Material 主题与系统栏。深色 JSON、回退、跟随系统、持久化和 ThemeDemo 的完整行为集中在 [深色模式](./dark-mode.md)，避免与主题总览重复。
 
 ## 业务代码如何读取主题
 
 ```dart
 /// 主题感知的卡片内容。
-Widget buildProfileCard(BuildContext context) {
-  // AppTheme 是 ThemeExtension；可在任意拥有 context 的组件中获取。
-  final AppTheme theme = AppTheme.of(context);
-
-  return TDText(
+Widget buildProfileCard() {
+  return TText(
     '个人资料',
     // 字体和颜色均来自当前深浅主题。
-    font: theme.fontTitleMedium,
-    textColor: theme.textPrimary,
+    font: appTheme.fontTitleMedium,
+    textColor: appTheme.textPrimary,
   )
       .padAll(spacePaddingLarge)
-      .backgroundColor(theme.backgroundContainer)
+      .backgroundColor(appTheme.backgroundContainer)
       .clipRadius(radiusLarge);
 }
 ```
 
-`BaseView` 已提供 `appTheme` getter；普通子组件使用 `AppTheme.of(context)`。不要直接解析 JSON，也不要在页面中判断 `Brightness` 后写两套色值。
+页面和普通子组件统一导入 `theme/app_theme.dart` 并直接使用顶层 `appTheme` getter。`BaseView` 不再声明同名成员；业务代码不声明局部主题变量，不调用 `AppTheme.of(context)`，也不通过构造参数或私有方法参数传递主题。该 getter 会在每次读取时通过 GetX 当前构建上下文获取主题，不得将结果缓存到全局或静态字段。`AppTheme.of(context)` 仅保留给主题基础设施或必须读取指定局部 `Theme` 作用域的底层实现。不要直接解析 JSON，也不要在页面中判断 `Brightness` 后写两套色值。
 
 ## 用户切换主题
 
@@ -92,7 +88,7 @@ Widget buildProfileCard(BuildContext context) {
 Future<void> updateThemeColor(ThemeColorPreset preset) async {
   try {
     // 读取选中预设的明暗主题数据。
-    final TDThemeData? themeData = await preset.loadThemeData();
+    final TThemeData? themeData = await preset.loadThemeData();
     if (themeData == null) return;
 
     // 更新内存状态并将颜色名称写入本地存储。
@@ -111,7 +107,7 @@ Future<void> updateThemeMode(ThemeMode mode) async {
 
 ## Material、TDesign 与系统栏
 
-`AppTheme.buildMaterialTheme()` 创建 `ThemeData`：使用 TDesign 品牌色构建 `ColorScheme`，注入 `TDThemeData` 与 `AppTheme` 两个 `ThemeExtension`，并同步普通图标、AppBar 前景与容器背景。`AppTheme.buildSystemUiOverlayStyle()` 为 `AnnotatedRegion<SystemUiOverlayStyle>` 提供状态栏、导航栏和图标亮度，确保系统栏与当前页面主题一致。
+`AppTheme.buildMaterialTheme()` 先通过 `TThemeBuilder.light/dark` 创建 TDesign `ThemeData`，再注入 `AppTheme` 扩展并同步普通图标、AppBar 前景与容器背景。`AppTheme.buildSystemUiOverlayStyle()` 为 `AnnotatedRegion<SystemUiOverlayStyle>` 提供状态栏、导航栏和图标亮度，确保系统栏与当前页面主题一致。
 
 ## 主题与国际化
 
@@ -121,7 +117,7 @@ Future<void> updateThemeMode(ThemeMode mode) async {
 
 - 不要使用 `--dart-define` 控制主题；当前项目的主题切换完全由 Dart 运行时状态与本地存储实现。
 - 主题 JSON 改动后需检查浅色、深色、跟随系统、所有颜色预设，以及系统状态栏。
-- 主题数据读取失败时 `ThemeInitializer` 保留默认 `TDThemeData.defaultData()`，页面仍能启动。
+- 主题数据读取失败时 `ThemeInitializer` 保留默认 `TThemeData.defaultData()`，页面仍能启动。
 
 ## 关联阅读
 

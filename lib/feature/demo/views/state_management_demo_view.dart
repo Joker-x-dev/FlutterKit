@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
-import 'package:flutter_kit/core/design_system/theme/shape.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/design_system/widgets/space.dart';
 import 'package:flutter_kit/core/service/demo_counter_service.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/state_management_demo_logic.dart';
 
@@ -33,35 +32,34 @@ class StateManagementDemoView extends BaseView<StateManagementDemoLogic> {
   @override
   Widget body() {
     return Obx(
-      () =>
-          [
-                TDText(
-                  '${logic.count.value}',
-                  font: appTheme.fontDisplayLarge,
-                  textColor: appTheme.primary,
-                  fontWeight: appTheme.fontWeightBold,
-                ),
-                const SpaceVerticalLarge(),
-                [
-                  TDButton(
-                    text: DemoKeys.counterIncrement.tr,
-                    theme: TDButtonTheme.primary,
-                    onTap: logic.increment,
-                  ),
-                  TDButton(
-                    text: DemoKeys.counterDecrement.tr,
-                    theme: TDButtonTheme.defaultTheme,
-                    onTap: logic.decrement,
-                  ),
-                  TDButton(
-                    text: DemoKeys.counterReset.tr,
-                    theme: TDButtonTheme.danger,
-                    onTap: logic.reset,
-                  ),
-                ].toRowCenter(spacing: spaceHorizontalMedium),
-              ]
-              .toColumnCenter(spacing: spaceVerticalXLarge)
-              .center(),
+      () => [
+        TText(
+          '${logic.count.value}',
+          font: appTheme.fontDisplayLarge,
+          style: TextStyle(
+            color: appTheme.primary,
+            fontWeight: appTheme.fontWeightBold,
+          ),
+        ),
+        const SpaceVerticalLarge(),
+        [
+          TButton(
+            colorPreset: TButtonColorPreset.primary,
+            onPressed: logic.increment,
+            child: Text(DemoKeys.counterIncrement.tr),
+          ),
+          TButton(
+            colorPreset: TButtonColorPreset.defaultTheme,
+            onPressed: logic.decrement,
+            child: Text(DemoKeys.counterDecrement.tr),
+          ),
+          TButton(
+            colorPreset: TButtonColorPreset.danger,
+            onPressed: logic.reset,
+            child: Text(DemoKeys.counterReset.tr),
+          ),
+        ].toRowCenter(spacing: spaceHorizontalMedium),
+      ].toColumnCenter(spacing: spaceVerticalXLarge).center(),
     );
   }
 }

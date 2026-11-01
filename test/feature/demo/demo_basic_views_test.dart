@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -44,12 +43,13 @@ void main() {
     expect(find.text('全部产品'), findsOneWidget);
     expect(find.text('页面主视图内容\n对 Scaffold 做了封装，减少样板代码'), findsOneWidget);
     expect(find.text('悬浮按钮'), findsOneWidget);
-    expect(find.byType(TDDropdownMenu), findsOneWidget);
-    expect(find.byType(TDBottomTabBar), findsOneWidget);
+    expect(find.byType(TDropdownMenu), findsOneWidget);
+    expect(find.byType(TTabBar), findsOneWidget);
     expect(find.text('消息'), findsOneWidget);
     expect(find.text('我的'), findsOneWidget);
 
-    final tabBar = tester.widget<TDBottomTabBar>(find.byType(TDBottomTabBar));
+    final tabBar = tester.widget<TTabBar>(find.byType(TTabBar));
+    expect(tabBar.type, TTabBarType.iconText);
     expect(tabBar.navigationTabs, hasLength(5));
     for (final tab in tabBar.navigationTabs) {
       expect(tab.onTap, returnsNormally);

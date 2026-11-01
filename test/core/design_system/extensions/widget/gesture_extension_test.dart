@@ -26,7 +26,7 @@ void main() {
     ];
     await pumpExtensionTestApp(
       tester,
-      Column(mainAxisSize: MainAxisSize.min, children: widgets),
+      Column(mainAxisSize: .min, children: widgets),
     );
 
     await tester.tap(find.text('tap'));
@@ -40,7 +40,9 @@ void main() {
     await tester.tap(find.text('down'));
     await tester.tap(find.text('up'));
 
-    final cancelGesture = await tester.startGesture(tester.getCenter(find.text('cancel')));
+    final cancelGesture = await tester.startGesture(
+      tester.getCenter(find.text('cancel')),
+    );
     await cancelGesture.moveBy(const Offset(200, 0));
     await cancelGesture.up();
     await tester.pumpAndSettle();
@@ -65,10 +67,15 @@ void main() {
         onPanStart: (_) => starts++,
         onPanUpdate: (_) => updates++,
         onPanEnd: (_) => ends++,
-        behavior: HitTestBehavior.translucent,
+        behavior: .translucent,
       ),
     );
-    expect(tester.widget<GestureDetector>(find.byType(GestureDetector).last).behavior, HitTestBehavior.translucent);
+    expect(
+      tester
+          .widget<GestureDetector>(find.byType(GestureDetector).last)
+          .behavior,
+      HitTestBehavior.translucent,
+    );
     await tester.tap(find.text('综合'));
     await tester.drag(find.text('综合'), const Offset(40, 30));
     await tester.pumpAndSettle();
@@ -87,13 +94,15 @@ void main() {
     await pumpExtensionTestApp(
       tester,
       Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: <Widget>[
           _target('纵向').onVerticalDrag(
-            onVerticalDragUpdate: (details) => verticalDelta += details.delta.dy,
+            onVerticalDragUpdate: (details) =>
+                verticalDelta += details.delta.dy,
           ),
           _target('横向').onHorizontalDrag(
-            onHorizontalDragUpdate: (details) => horizontalDelta += details.delta.dx,
+            onHorizontalDragUpdate: (details) =>
+                horizontalDelta += details.delta.dx,
           ),
           _target('缩放').onScale(
             onScaleStart: (_) => scaleStarts++,
@@ -141,8 +150,15 @@ void main() {
       tester,
       SingleChildScrollView(child: Column(children: widgets)),
     );
-    final detectors = tester.widgetList<GestureDetector>(find.byType(GestureDetector));
-    expect(detectors.every((detector) => detector.behavior == HitTestBehavior.opaque), isTrue);
+    final detectors = tester.widgetList<GestureDetector>(
+      find.byType(GestureDetector),
+    );
+    expect(
+      detectors.every(
+        (detector) => detector.behavior == HitTestBehavior.opaque,
+      ),
+      isTrue,
+    );
     expect(tester.takeException(), isNull);
   });
 }

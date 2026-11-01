@@ -18,7 +18,7 @@ Future<void> submit() async {
 }
 ```
 
-页面首次网络加载使用 `BaseNetworkView`，不应以全局 LoadingDialog 替代内容态。组件通过数据和回调进行通信，不能 `Get.find` 某个页面 Logic；需要主题时使用 `AppTheme.of(context)`。
+页面首次网络加载使用 `BaseNetworkView`，不应以全局 LoadingDialog 替代内容态。组件通过数据和回调进行通信，不能 `Get.find` 某个页面 Logic；需要主题时直接使用顶层 `appTheme` getter，不传递 `BuildContext` 或 `AppTheme`。
 
 ## 关联阅读
 

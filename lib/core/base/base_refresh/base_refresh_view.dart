@@ -42,7 +42,7 @@ abstract class BaseRefreshView<T extends BaseRefreshLogic<dynamic>>
         dragText: CommonKeys.refreshHeaderDrag.tr,
       ),
       child: pageContent(logic).toListView(
-        padding: listItemPadding,
+        padding: listItemPaddingWithInset,
         itemBuilder: (context, index, item) => item,
       ),
     );

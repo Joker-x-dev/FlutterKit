@@ -2,8 +2,8 @@
 
 > 适用于选择树形的数据结构
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/tree-select)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[TreeSelect 树形选择](https://tdesign.tencent.com/flutter/components/tree-select)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -30,10 +30,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
     var options = [];
 
     for (var i = 1; i <= 10; i++) {
-      options.add(TDSelectOption(label: '选项$i', value: i, children: []));
+      options.add(TSelectOption(label: '选项$i', value: i, children: []));
 
       for (var j = 1; j <= 10; j++) {
-        options[i - 1].children.add(TDSelectOption(
+        options[i - 1].children.add(TSelectOption(
               label: '选项$i.$j',
               value: i * 10 + j,
               children: [],
@@ -41,7 +41,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
       }
     }
 
-    return TDTreeSelect(
+    return TTreeSelect(
       options: options,
       defaultValue: values1,
       onChange: (val, level) {
@@ -58,15 +58,15 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
     var options = [];
 
     for (var i = 1; i <= 10; i++) {
-      options.add(TDSelectOption(label: '选项$i', value: i, children: []));
+      options.add(TSelectOption(label: '选项$i', value: i, children: []));
 
       for (var j = 1; j <= 10; j++) {
         options[i - 1].children.add(
-            TDSelectOption(label: '选项$i.$j', value: i * 10 + j, children: []));
+            TSelectOption(label: '选项$i.$j', value: i * 10 + j, children: []));
       }
     }
 
-    return TDTreeSelect(
+    return TTreeSelect(
       options: options,
       defaultValue: values2,
       multiple: true,
@@ -81,7 +81,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildAsyncTreeSelect(BuildContext context) {
-    return TDTreeSelect(
+    return TTreeSelect(
       options: asyncOptions,
       defaultValue: asyncValues,
       onChange: (val, level) {
@@ -95,8 +95,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
                if(mounted) {
                  setState(() {
                    asyncOptions[index].children = [
-                     TDSelectOption(label: '异步加载二级-1', value: 101),
-                     TDSelectOption(label: '异步加载二级-2', value: 102),
+                     TSelectOption(label: '异步加载二级-1', value: 101),
+                     TSelectOption(label: '异步加载二级-2', value: 102),
                    ];
                  });
                }
@@ -112,7 +112,7 @@ String类型ID(问题3)
 
 ```
   Widget _buildStringValueTreeSelect(BuildContext context) {
-    return TDTreeSelect(
+    return TTreeSelect(
       options: stringOptions,
       defaultValue: stringValues,
       onChange: (val, level) {
@@ -130,7 +130,7 @@ String类型ID(问题3)
   Widget _buildThirdTreeSelect(BuildContext context) {
     var options = [];
     for (var i = 1; i <= 3; i++) {
-      options.add(TDSelectOption(
+      options.add(TSelectOption(
         label: '${i == 1 ? '超长一级选项名称超长一级选项名称' : '选项$i'}',
         value: i,
         maxLines: 2,
@@ -139,7 +139,7 @@ String类型ID(问题3)
       ));
 
       for (var j = 1; j <= 3; j++) {
-        options[i - 1].children.add(TDSelectOption(
+        options[i - 1].children.add(TSelectOption(
               label: '${j == 1 ? '特别长的二级选项特别长的二级选项特别长的二级选项' : '选项$i.$j'}',
               value: i * 10 + j,
               maxLines: 2,
@@ -148,7 +148,7 @@ String类型ID(问题3)
             ));
 
         for (var k = 1; k <= 3; k++) {
-          options[i - 1].children[j - 1].children.add(TDSelectOption(
+          options[i - 1].children[j - 1].children.add(TSelectOption(
                 label:
                     '${k == 1 ? '非常长的三级选项名称非常长的三级选项名称非常长的三级选项名称' : '选项$i.$j.$k'}',
                 value: i * 100 + j * 10 + k,
@@ -158,7 +158,7 @@ String类型ID(问题3)
         }
       }
     }
-    return TDTreeSelect(
+    return TTreeSelect(
       options: options,
       defaultValue: values3,
       onChange: (val, level) {
@@ -170,10 +170,27 @@ String类型ID(问题3)
 
 ## API
 
-1. [TDSelectOption](#tdselectoption)
-2. [TDTreeSelect](#tdtreeselect)
+1. [TTreeSelect](#ttreeselect)
+2. [TSelectOption](#tselectoption)
+3. [TTreeSelectStyle](#ttreeselectstyle)
+4. [TTreeSelectChangeEvent](#ttreeselectchangeevent)
 
-#### TDSelectOption
+#### TTreeSelect
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| defaultValue | List | const [] | 初始值，对应options中的value值 |
+| height | double | 336 | 高度 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| multiple | bool | false | 支持多选 |
+| onChange | TTreeSelectChangeEvent? | - | 选中值发生变化 |
+| options | List | const [] | 展示的选项列表 |
+| outwardCornerRadius | double | 9 | 一级菜单选中项的外弯折圆角半径，默认为 9 |
+| style | TTreeSelectStyle | TTreeSelectStyle.normal | 一级菜单样式 |
+
+#### TSelectOption
 
 ##### 默认构造方法
 
@@ -186,20 +203,22 @@ String类型ID(问题3)
 | multiple | bool | false | 当前子项支持多选 |
 | value | dynamic | - | 值 |
 
-#### TDTreeSelect
+#### TTreeSelectStyle
 
-##### 默认构造方法
+##### 枚举值
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| defaultValue | List | const [] | 初始值，对应options中的value值 |
-| height | double | 336 | 高度 |
-| key |  | - |  |
-| multiple | bool | false | 支持多选 |
-| onChange | TDTreeSelectChangeEvent? | - | 选中值发生变化 |
-| options | List | const [] | 展示的选项列表 |
-| outwardCornerRadius | double | 9 | 一级菜单选中项的外弯折圆角半径，默认为 9 |
-| style | TDTreeSelectStyle | TDTreeSelectStyle.normal | 一级菜单样式 |
+| 名称 | 说明 |
+| --- | --- |
+| normal | - |
+| outline | - |
+
+#### TTreeSelectChangeEvent
+
+##### 类型定义
+
+```dart
+typedef TTreeSelectChangeEvent = void Function(List<dynamic>, int level);
+```
 
 ## 设计指南
 

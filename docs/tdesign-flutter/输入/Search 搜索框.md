@@ -2,8 +2,8 @@
 
 > 用于一组预设数据中的选择。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/search)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Search 搜索框](https://tdesign.tencent.com/flutter/components/search)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,7 +27,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDefaultSearchBar(BuildContext context) {
-    return TDSearchBar(
+    return TSearchBar(
       placeHolder: '搜索预设文案',
       onTextChanged: (String text) {
         setState(() {
@@ -42,7 +42,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildFocusSearchBar(BuildContext context) {
-    return const TDSearchBar(
+    return const TSearchBar(
       placeHolder: '搜索预设文案',
       needCancel: true,
       autoFocus: true,
@@ -59,10 +59,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
     return Column(
       // spacing: 16,
       children: [
-        TDSearchBar(
+        TSearchBar(
           placeHolder: '搜索预设文案',
           // 方形
-          style: TDSearchStyle.square,
+          style: TSearchStyle.square,
           onTextChanged: (String text) {
             setState(() {
               inputText = text;
@@ -70,10 +70,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
           },
         ),
         const SizedBox(height: 16),
-        TDSearchBar(
+        TSearchBar(
           placeHolder: '搜索预设文案',
           // 圆形
-          style: TDSearchStyle.round,
+          style: TSearchStyle.round,
           onTextChanged: (String text) {
             setState(() {
               inputText = text;
@@ -89,9 +89,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCenterSearchBar(BuildContext context) {
-    return TDSearchBar(
+    return TSearchBar(
       placeHolder: '搜索预设文案',
-      alignment: TDSearchAlignment.center,
+      alignment: TSearchAlignment.center,
       onTextChanged: (String text) {
         setState(() {
           inputText = text;
@@ -103,16 +103,21 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDSearchBar](#tdsearchbar)
+1. [TSearchBar](#tsearchbar)
+2. [TSearchStyle](#tsearchstyle)
+3. [TSearchAlignment](#tsearchalignment)
+4. [TSearchBarEvent](#tsearchbarevent)
+5. [TSearchBarClearEvent](#tsearchbarclearevent)
+6. [TSearchBarCallBack](#tsearchbarcallback)
 
-#### TDSearchBar
+#### TSearchBar
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | action | String | '' | 自定义操作文字 |
-| alignment | TDSearchAlignment? | TDSearchAlignment.left | 对齐方式，居中或这头部对齐 |
+| alignment | TSearchAlignment? | TSearchAlignment.left | 对齐方式，居中或这头部对齐 |
 | autoFocus | bool | false | 是否自动获取焦点 |
 | autoHeight | bool | false | 是否自动计算高度 |
 | backgroundColor | Color? | - | 背景颜色 |
@@ -121,20 +126,62 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | enabled | bool? | - | 是否禁用 |
 | focusNode | FocusNode? | - | 自定义焦点 |
 | inputAction | TextInputAction? | - | 键盘动作类型 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | mediumStyle | bool | false | 是否在导航栏中的样式 |
 | needCancel | bool | false | 是否需要取消按钮 |
-| onActionClick | TDSearchBarEvent? | - | 自定义操作回调 |
-| onClearClick | TDSearchBarClearEvent? | - | 自定义操作回调 |
-| onEditComplete | TDSearchBarCallBack? | - | 编辑完成回调 |
+| onActionClick | TSearchBarEvent? | - | 自定义操作回调 |
+| onClearClick | TSearchBarClearEvent? | - | 自定义操作回调 |
+| onEditComplete | TSearchBarCallBack? | - | 编辑完成回调 |
 | onInputClick | GestureTapCallback? | - | 输入框点击事件 |
-| onSubmitted | TDSearchBarEvent? | - | 提交回调 |
+| onSubmitted | TSearchBarEvent? | - | 提交回调 |
 | onTapOutside | TapRegionCallback? | - | 点击输入框外部回调 |
-| onTextChanged | TDSearchBarEvent? | - | 文字改变回调 |
+| onTextChanged | TSearchBarEvent? | - | 文字改变回调 |
 | padding | EdgeInsets | const EdgeInsets.symmetric(horizontal: 16, vertical: 8) | 内部填充 |
 | placeHolder | String? | - | 预设文案 |
 | readOnly | bool? | - | 是否只读 |
-| style | TDSearchStyle? | TDSearchStyle.square | 样式 |
+| style | TSearchStyle? | TSearchStyle.square | 样式 |
+
+#### TSearchStyle
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| square | 方形 |
+| round | 圆形 |
+
+#### TSearchAlignment
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| left | 默认头部对齐 |
+| center | 居中 |
+
+#### TSearchBarEvent
+
+##### 类型定义
+
+```dart
+typedef TSearchBarEvent = void Function(String value);
+```
+
+#### TSearchBarClearEvent
+
+##### 类型定义
+
+```dart
+typedef TSearchBarClearEvent = bool? Function(String value);
+```
+
+#### TSearchBarCallBack
+
+##### 类型定义
+
+```dart
+typedef TSearchBarCallBack = void Function();
+```
 
 ## 设计指南
 

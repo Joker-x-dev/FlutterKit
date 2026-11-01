@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -8,9 +7,11 @@ import 'package:flutter_kit/core/design_system/theme/shape.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/design_system/widgets/space.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
+import 'package:flutter_kit/core/ui/widgets/rounded_cell_group.dart';
 import 'package:flutter_kit/generated/assets.gen.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/main_keys.dart';
 import '../logics/about_demo_logic.dart';
 import '../models/about_link_item.dart';
@@ -54,19 +55,21 @@ class AboutDemoView extends BaseView<AboutDemoLogic> {
               .image(semanticLabel: MainKeys.aboutAppName.tr)
               .square(spacer64 + spacer8),
           const SpaceVerticalSmall(),
-          TDText(
+          TText(
             MainKeys.aboutAppName.tr,
             font: appTheme.fontHeadlineMedium,
-            textColor: appTheme.textPrimary,
-            fontWeight: appTheme.fontWeightBold,
-            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: appTheme.textPrimary,
+              fontWeight: appTheme.fontWeightBold,
+            ),
+            textAlign: .center,
           ),
           const SpaceVerticalSmall(),
-          TDText(
+          TText(
             MainKeys.aboutDescription.tr,
             font: appTheme.fontBodyMedium,
-            textColor: appTheme.textSecondary,
-            textAlign: TextAlign.center,
+            style: TextStyle(color: appTheme.textSecondary),
+            textAlign: .center,
           ),
         ]
         .toColumnCenter()
@@ -78,16 +81,14 @@ class AboutDemoView extends BaseView<AboutDemoLogic> {
 
   /// 构建关于页面链接列表
   Widget _buildLinks() {
-    return TDCellGroup(
-      theme: TDCellGroupTheme.cardTheme,
-      cells: List<TDCell>.generate(logic.links.length, (int index) {
+    return RoundedCellGroup(
+      cells: List<TCell>.generate(logic.links.length, (int index) {
         final AboutLinkItem item = logic.links[index];
-        return TDCell(
-          title: item.localizedTitle,
-          description: item.url,
+        return TCell(
+          title: Text(item.localizedTitle),
+          subtitle: Text(item.url),
           arrow: true,
-          bordered: index != logic.links.length - 1,
-          onClick: (_) => unawaited(logic.openLink(item)),
+          onTap: () => unawaited(logic.openLink(item)),
         );
       }),
     );

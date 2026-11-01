@@ -98,7 +98,7 @@ void main() {
         const SizedBox().animatedRotate(
           math.pi,
           origin: const Offset(1, 2),
-          alignment: Alignment.topLeft,
+          alignment: .topLeft,
           transformHitTests: false,
           filterQuality: FilterQuality.low,
         ),
@@ -169,7 +169,7 @@ void main() {
           skewX: 0.2,
           skewY: 0.3,
           origin: const Offset(1, 1),
-          alignment: Alignment.bottomRight,
+          alignment: .bottomRight,
           transformHitTests: false,
           filterQuality: FilterQuality.high,
         ),

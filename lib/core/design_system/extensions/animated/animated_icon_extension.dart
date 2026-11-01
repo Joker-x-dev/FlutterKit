@@ -157,20 +157,16 @@ class _AnimatedExtensionIconState
   /// 更新颜色与尺寸补间。
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _color =
-        visitor(
-              _color,
-              widget.targetColor,
-              (dynamic value) => ColorTween(begin: value as Color),
-            )
-            as ColorTween?;
-    _size =
-        visitor(
-              _size,
-              widget.targetSize,
-              (dynamic value) => Tween<double>(begin: value as double),
-            )
-            as Tween<double>?;
+    _color = visitor(
+      _color,
+      widget.targetColor,
+      (dynamic value) => ColorTween(begin: value as Color),
+    ) as ColorTween?;
+    _size = visitor(
+      _size,
+      widget.targetSize,
+      (dynamic value) => Tween<double>(begin: value as double),
+    ) as Tween<double>?;
   }
 
   /// 构建当前补间值对应的图标。

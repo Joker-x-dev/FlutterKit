@@ -6,6 +6,7 @@ import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 
 import '../../../core/design_system/extensions/widget/scroll_extension.dart';
+import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/ui/widgets/goods_detail_content.dart';
 import '../localization/demo_keys.dart';
 import '../logics/network_demo_logic.dart';
@@ -36,7 +37,7 @@ class NetworkDemoView extends BaseNetworkView<NetworkDemoLogic> {
       final goods = logic.networkDemoState.goods.value;
       return GoodsDetailContent(
         goods: goods,
-      ).scrollable(padding: listItemPadding);
+      ).scrollable(padding: listItemPaddingWithInset);
     });
   }
 }

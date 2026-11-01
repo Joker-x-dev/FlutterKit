@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 import 'package:flutter_kit/routes/demo/demo_params.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/navigation_with_args_logic.dart';
 
@@ -32,22 +32,21 @@ class NavigationWithArgsView extends BaseView<NavigationWithArgsLogic> {
   @override
   Widget body() {
     return [
-          TDText(
+          TText(
             '${DemoKeys.receivedGoodsId.tr}:',
             font: appTheme.fontBodyLarge,
-            textColor: appTheme.textSecondary,
+            style: TextStyle(color: appTheme.textSecondary),
           ),
-          TDText(
+          TText(
             '${logic.params.goodsId}',
             font: appTheme.fontDisplayMedium,
-            textColor: appTheme.primary,
-            fontWeight: appTheme.fontWeightBold,
+            style: TextStyle(
+              color: appTheme.textPrimary,
+              fontWeight: appTheme.fontWeightBold,
+            ),
           ),
         ]
-        .toColumnCenter(
-          spacing: spaceVerticalMedium,
-          mainAxisSize: MainAxisSize.min,
-        )
+        .toColumnCenter(spacing: spaceVerticalMedium, mainAxisSize: .min)
         .padAll(spacePaddingLarge)
         .backgroundColor(appTheme.backgroundContainer)
         .clipRadius(radiusExtraLarge)

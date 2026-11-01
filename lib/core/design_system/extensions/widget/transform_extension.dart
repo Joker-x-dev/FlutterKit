@@ -1,17 +1,18 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// Widget 变换相关扩展
 /// 提供旋转、缩放、平移等变换方法
 extension TransformExtension on Widget {
   /// 旋转 Widget
-  /// 
+  ///
   /// [angle] 旋转角度（弧度）
   /// [origin] 旋转中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().rotate(math.pi / 4) // 旋转 45 度
@@ -34,13 +35,13 @@ extension TransformExtension on Widget {
   }
 
   /// 按度数旋转 Widget
-  /// 
+  ///
   /// [degrees] 旋转度数
   /// [origin] 旋转中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().rotateDegrees(45) // 旋转 45 度
@@ -62,13 +63,13 @@ extension TransformExtension on Widget {
   }
 
   /// 缩放 Widget
-  /// 
+  ///
   /// [scale] 缩放比例
   /// [origin] 缩放中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().scale(1.5) // 放大 1.5 倍
@@ -91,14 +92,14 @@ extension TransformExtension on Widget {
   }
 
   /// 按 X、Y 轴分别缩放 Widget
-  /// 
+  ///
   /// [scaleX] X 轴缩放比例
   /// [scaleY] Y 轴缩放比例
   /// [origin] 缩放中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().scaleXY(1.5, 0.8) // X 轴放大 1.5 倍，Y 轴缩小到 0.8 倍
@@ -122,11 +123,11 @@ extension TransformExtension on Widget {
   }
 
   /// 平移 Widget
-  /// 
+  ///
   /// [offset] 平移偏移量
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().translate(Offset(10, 20))
@@ -145,12 +146,12 @@ extension TransformExtension on Widget {
   }
 
   /// 按 X、Y 坐标平移 Widget
-  /// 
+  ///
   /// [x] X 轴平移距离
   /// [y] Y 轴平移距离
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().translateXY(10, 20)
@@ -169,11 +170,11 @@ extension TransformExtension on Widget {
   }
 
   /// 沿 X 轴平移 Widget
-  /// 
+  ///
   /// [x] X 轴平移距离
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().translateX(10)
@@ -192,11 +193,11 @@ extension TransformExtension on Widget {
   }
 
   /// 沿 Y 轴平移 Widget
-  /// 
+  ///
   /// [y] Y 轴平移距离
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().translateY(20)
@@ -215,13 +216,13 @@ extension TransformExtension on Widget {
   }
 
   /// 应用自定义变换矩阵
-  /// 
+  ///
   /// [transform] 变换矩阵
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().transform(Matrix4.skewX(0.2))
@@ -244,14 +245,14 @@ extension TransformExtension on Widget {
   }
 
   /// 倾斜 Widget
-  /// 
+  ///
   /// [skewX] X 轴倾斜角度（弧度）
   /// [skewY] Y 轴倾斜角度（弧度）
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().skew(0.2, 0.1)
@@ -274,13 +275,13 @@ extension TransformExtension on Widget {
   }
 
   /// 沿 X 轴倾斜 Widget
-  /// 
+  ///
   /// [skew] X 轴倾斜角度（弧度）
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().skewX(0.2)
@@ -302,13 +303,13 @@ extension TransformExtension on Widget {
   }
 
   /// 沿 Y 轴倾斜 Widget
-  /// 
+  ///
   /// [skew] Y 轴倾斜角度（弧度）
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().skewY(0.1)
@@ -330,12 +331,12 @@ extension TransformExtension on Widget {
   }
 
   /// 翻转 Widget（水平翻转）
-  /// 
+  ///
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().flipHorizontal()
@@ -357,12 +358,12 @@ extension TransformExtension on Widget {
   }
 
   /// 翻转 Widget（垂直翻转）
-  /// 
+  ///
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().flipVertical()
@@ -384,13 +385,13 @@ extension TransformExtension on Widget {
   }
 
   /// 组合多种变换
-  /// 
+  ///
   /// [transforms] 变换列表
   /// [origin] 变换中心点
   /// [alignment] 对齐方式
   /// [transformHitTests] 是否变换命中测试
   /// [filterQuality] 过滤质量
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().multiTransform([
@@ -410,7 +411,7 @@ extension TransformExtension on Widget {
       // 按声明顺序在当前矩阵上累积变换，避免乘法运算符返回 dynamic。
       combinedTransform.multiply(transform);
     }
-    
+
     return transform(
       combinedTransform,
       origin: origin,

@@ -13,6 +13,23 @@ final Map<String, String> demoEn = {
   DemoKeys.titleNavigationWithArgs: 'Navigation With Args',
   DemoKeys.titleNavigationResult: 'Navigation Result',
 
+  // 嵌套滚动示例
+  DemoKeys.titleNestedScrollDemo: 'Nested Scroll Demo',
+  DemoKeys.nestedScrollDemoDesc: 'A RedNote-inspired nested scrolling example',
+  DemoKeys.nestedScrollDemoName: 'Joker.X',
+  DemoKeys.nestedScrollDemoId: 'Account: Joker.X',
+  DemoKeys.nestedScrollDemoBio:
+      'Sharing Flutter ideas and everyday inspiration',
+  DemoKeys.nestedScrollFollowing: 'Following',
+  DemoKeys.nestedScrollFollowers: 'Followers',
+  DemoKeys.nestedScrollLikesAndSaves: 'Likes & Saves',
+  DemoKeys.nestedScrollNotes: 'Notes',
+  DemoKeys.nestedScrollCollections: 'Collections',
+  DemoKeys.nestedScrollLiked: 'Liked',
+  DemoKeys.nestedScrollShare: 'Share',
+  DemoKeys.nestedScrollBack: 'Back',
+  DemoKeys.nestedScrollPostTitle: 'Flutter inspiration note @index',
+
   // 网络请求示例
   DemoKeys.goodsTitle: 'Title',
   DemoKeys.goodsSubtitle: 'Subtitle',

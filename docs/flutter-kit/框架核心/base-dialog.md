@@ -11,7 +11,7 @@
 | `isDismissible` | `true` | 点击遮罩是否关闭 |
 | `enableDrag` | `true` | 是否允许向下拖拽关闭 |
 | `enablePhysicalBack` | `true` | Android 物理返回键是否关闭 |
-| `head()` | `TDNavBar` | 顶部栏；返回 `null` 可隐藏 |
+| `head()` | `TNavBar` | 顶部栏；返回 `null` 可隐藏 |
 | `body(context)` | 必须实现 | 返回内容区 Widget 列表 |
 | `bottom(context)` | `null` | 底部操作区 |
 | `init()` | 空实现 | 展示时的轻量初始化入口 |

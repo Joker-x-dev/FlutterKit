@@ -9,14 +9,14 @@ TDesign 深色模式的原始说明已归档在仓库：
 - `docs/tdesign-flutter/全局配置/深色模式.md`
 - `docs/tdesign-flutter/开始/快速开始.md`
 
-官方文档说明如何生成 JSON、开启 `TDTheme.needMultiTheme()` 和配置 Flutter 的 `theme / darkTheme / themeMode`。FlutterKit 在此基础上增加颜色预设、GetX 响应状态、持久化、`AppTheme` 语义色与系统栏同步。
+官方文档说明如何生成 JSON 并配置 Flutter 的 `theme / darkTheme / themeMode`。FlutterKit 使用 `TThemeBuilder.light/dark` 构建明暗主题，并增加颜色预设、GetX 响应状态、持久化、`AppTheme` 语义色与系统栏同步。
 
 ## 当前主题链路
 
 ```text
 assets/json/<preset>.json
   → ThemeColorPreset(name, assetPath, darkName)
-  → TDThemeData.fromJson(name, json, darkName: darkName)
+  → TThemeData.fromJson(name, json, darkName: darkName)
   → Application.themeData / themeMode / themeColorName
   → main.dart Obx
   → GetMaterialApp.theme / darkTheme / themeMode
@@ -30,11 +30,11 @@ assets/json/<preset>.json
 | 红色 | `red` | `redDark` | `assets/json/red.json` |
 | 蓝色 | `blue` | `blueDark` | `assets/json/blue.json` |
 
-`darkName` 必须与 JSON 内的深色主题 key 一致；仅有浅色 token 时，`TDThemeData.dark` 会为空。
+`darkName` 必须与 JSON 内的深色主题 key 一致；仅有浅色 token 时，`TThemeData.dark` 会为空。
 
 ## 初始化与深色主题回退
 
-`ThemeInitializer` 在应用启动时先调用 `TDTheme.needMultiTheme()`，读取上次保存的颜色预设，再按保存的 `ThemeMode.index` 恢复显示模式。无效颜色名称回退到默认预设；无效模式下标不更新默认的 `ThemeMode.system`。
+`ThemeInitializer` 在应用启动时读取上次保存的颜色预设，再按保存的 `ThemeMode.index` 恢复显示模式。无效颜色名称回退到默认预设；无效模式下标不更新默认的 `ThemeMode.system`。
 
 在 `main.dart` 中：
 
@@ -46,8 +46,8 @@ final bool isDark =
         MediaQuery.platformBrightnessOf(context) == Brightness.dark);
 
 // 深色 token 缺失时以浅色数据兜底，保证应用仍可启动。
-final TDThemeData darkTheme = themeData.dark ?? themeData.light;
-final TDThemeData activeTheme = isDark ? darkTheme : themeData.light;
+final TThemeData darkTheme = themeData.dark ?? themeData.light;
+final TThemeData activeTheme = isDark ? darkTheme : themeData.light;
 ```
 
 回退只是一层运行时保护，不是完整深色主题。正式预设必须在 JSON 内提供完整深色 token；否则深色系统下会显示浅色背景、文字或组件状态。
@@ -64,14 +64,14 @@ final TDThemeData activeTheme = isDark ? darkTheme : themeData.light;
 
 ## Material、TDesign 与系统栏
 
-`AppTheme.buildMaterialTheme()` 将当前 `TDThemeData` 转为 Material `ThemeData`：
+`AppTheme.buildMaterialTheme()` 将当前 `TThemeData` 转为 Material `ThemeData`：
 
 - `ColorScheme` 使用 TDesign 品牌色；
-- `ThemeData.extensions` 同时注入 `TDThemeData` 与 `AppTheme`；
+- `TThemeBuilder.light/dark` 先将 `TThemeData` 投影为 Material 主题，再注入 `AppTheme`；
 - AppBar、IconTheme、页面背景使用当前 token；
 - `AppTheme.buildSystemUiOverlayStyle()` 让状态栏和导航栏图标亮度随当前深浅主题变化。
 
-业务页面读取 `appTheme.textPrimary`、`appTheme.backgroundContainer` 等语义色，而不是自行判断深色模式。TDesign 组件通过当前 `TDThemeData` 读取 token；两者由同一 `Obx` 重建过程更新。
+业务页面读取 `appTheme.textPrimary`、`appTheme.backgroundContainer` 等语义色，而不是自行判断深色模式。TDesign 组件通过当前 `TThemeData` 读取 token；两者由同一 `Obx` 重建过程更新。
 
 ## 切换与持久化
 
@@ -82,7 +82,7 @@ final TDThemeData activeTheme = isDark ? darkTheme : themeData.light;
 await Application.updateThemeMode(ThemeMode.dark);
 
 // 加载预设 JSON 后切换品牌颜色并持久化名称。
-final TDThemeData? themeData = await ThemeColorPreset.green.loadThemeData();
+final TThemeData? themeData = await ThemeColorPreset.green.loadThemeData();
 if (themeData != null) {
   await Application.updateThemeColor(themeData, ThemeColorPreset.green.name);
 }
@@ -100,7 +100,7 @@ if (themeData != null) {
 
 - 深色模式仍是浅色：JSON 没有对应 `darkName`，或名称与 `ThemeColorPreset.darkName` 不一致。
 - 自定义 Widget 不变色：页面写死 `Colors.*`，应改用 `AppTheme` 语义色。
-- TDesign 组件与自定义组件颜色不一致：确认 JSON token、`TDThemeData` 和 `AppTheme` 来自同一个预设。
+- TDesign 组件与自定义组件颜色不一致：确认 JSON token、`TThemeData` 和 `AppTheme` 来自同一个预设。
 - 系统栏图标看不清：确认根节点仍使用 `AppTheme.buildSystemUiOverlayStyle()`。
 
 ## 关联阅读

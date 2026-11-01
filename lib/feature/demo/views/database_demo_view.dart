@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/data/preview/demo_entity_preview_data.dart';
@@ -6,8 +5,10 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/design_system/widgets/space.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
+import 'package:flutter_kit/core/ui/widgets/rounded_cell_group.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../../../../core/localization/common/common_keys.dart';
 import '../logics/database_demo_logic.dart';
@@ -36,37 +37,35 @@ class DatabaseDemoView extends BaseView<DatabaseDemoLogic> {
       () =>
           [
                 [
-                      TDButton(
-                        text: DemoKeys.dbAdd.tr,
-                        theme: TDButtonTheme.primary,
-                        onTap: logic.addItem,
+                      TButton(
+                        colorPreset: TButtonColorPreset.primary,
+                        onPressed: logic.addItem,
+                        child: Text(DemoKeys.dbAdd.tr),
                       ),
-                      TDButton(
-                        text: DemoKeys.dbClear.tr,
-                        theme: TDButtonTheme.danger,
-                        onTap: logic.clearAll,
+                      TButton(
+                        colorPreset: TButtonColorPreset.danger,
+                        onPressed: logic.clearAll,
+                        child: Text(DemoKeys.dbClear.tr),
                       ),
                     ]
                     .toRowCenter(spacing: spaceHorizontalMedium)
                     .padHorizontal(spaceHorizontalLarge),
                 const SpaceVerticalLarge(),
                 if (logic.items.isEmpty)
-                  TDEmpty(emptyText: DemoKeys.dbEmpty.tr)
+                  TEmpty(emptyText: DemoKeys.dbEmpty.tr)
                 else
-                  TDCellGroup(
-                    theme: TDCellGroupTheme.cardTheme,
+                  RoundedCellGroup(
                     cells: logic.items
                         .map(
-                          (item) => TDCell(
-                            title: item.title,
-                            description: item.description,
-                            bordered: true,
-                            rightIconWidget: TDButton(
-                              text: CommonKeys.delete.tr,
-                              theme: TDButtonTheme.danger,
-                              size: TDButtonSize.small,
-                              type: TDButtonType.text,
-                              onTap: () => logic.deleteItem(item.id!),
+                          (item) => TCell(
+                            title: Text(item.title),
+                            subtitle: Text(item.description ?? ''),
+                            trailing: TButton(
+                              colorPreset: TButtonColorPreset.danger,
+                              size: TButtonSize.small,
+                              variant: TButtonVariant.text,
+                              onPressed: () => logic.deleteItem(item.id!),
+                              child: Text(CommonKeys.delete.tr),
                             ),
                           ),
                         )
@@ -74,7 +73,7 @@ class DatabaseDemoView extends BaseView<DatabaseDemoLogic> {
                   ),
               ]
               .toColumnStart(spacing: spaceVerticalMedium)
-              .scrollable(padding: pageVerticalPadding),
+              .scrollable(padding: pageVerticalPaddingWithInset),
     );
   }
 }

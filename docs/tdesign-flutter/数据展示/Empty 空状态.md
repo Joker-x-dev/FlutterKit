@@ -2,8 +2,8 @@
 
 > 用于空状态时的占位提示。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/empty)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Empty 空状态](https://tdesign.tencent.com/flutter/components/empty)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,8 +27,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _iconEmpty(BuildContext context) {
-    return const TDEmpty(
-      type: TDEmptyType.plain,
+    return const TEmpty(
+      type: TEmptyType.plain,
       emptyText: '描述文字',
     );
   }
@@ -38,8 +38,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _iconEmptyCustom(BuildContext context) {
-    return const TDEmpty(
-      type: TDEmptyType.plain,
+    return const TEmpty(
+      type: TEmptyType.plain,
       icon: Icons.hourglass_empty_sharp,
       emptyText: '描述文字',
     );
@@ -50,18 +50,18 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _imageEmpty(BuildContext context) {
-    return TDEmpty(
-      type: TDEmptyType.plain,
+    return TEmpty(
+      type: TEmptyType.plain,
       emptyText: '描述文字',
       image: Container(
         decoration: BoxDecoration(
-          color: TDTheme.of(context).bgColorComponent,
+          color: TTheme.of(context).bgColorComponent,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: const TDImage(
+        child: const TImage(
           width: 120,
           assetUrl: 'assets/img/empty.png',
-          type: TDImageType.fitWidth,
+          type: TImageType.fitWidth,
         ),
       ),
     );
@@ -72,8 +72,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _operationEmpty(BuildContext context) {
-    return const TDEmpty(
-      type: TDEmptyType.operation,
+    return const TEmpty(
+      type: TEmptyType.operation,
       operationText: '操作按钮',
       emptyText: '描述文字',
     );
@@ -84,15 +84,15 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _operationCustomEmpty(BuildContext context) {
-    return TDEmpty(
-      type: TDEmptyType.operation,
+    return TEmpty(
+      type: TEmptyType.operation,
       emptyText: '描述文字',
       customOperationWidget: Padding(
         padding: const EdgeInsets.only(top: 32),
-        child: TDButton(
+        child: TButton(
           text: '自定义操作按钮',
-          size: TDButtonSize.medium,
-          theme: TDButtonTheme.danger,
+          size: TButtonSize.medium,
+          theme: TButtonTheme.danger,
           width: 160,
           onTap: () {},
         ),
@@ -103,9 +103,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDEmpty](#tdempty)
+1. [TEmpty](#tempty)
+2. [TEmptyType](#temptytype)
+3. [TTapEvent](#ttapevent)
 
-#### TDEmpty
+#### TEmpty
 
 ##### 默认构造方法
 
@@ -115,13 +117,30 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | emptyText | String? | - | 描述文字 |
 | emptyTextColor | Color? | - | 描述文字颜色 |
 | emptyTextFont | Font? | - | 描述文字大小 |
-| icon | IconData? | TDIcons.info_circle_filled | 图标 |
+| icon | IconData? | TIcons.info_circle_filled | 图标 |
 | image | Widget? | - | 展示图片 |
-| key |  | - |  |
-| onTapEvent | TDTapEvent? | - | 点击事件 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| onTapEvent | TTapEvent? | - | 点击事件 |
 | operationText | String? | - | 操作按钮文案 |
-| operationTheme | TDButtonTheme? | - | 操作按钮文案主题色 |
-| type | TDEmptyType | TDEmptyType.plain | 类型，为operation有操作按钮，plain无按钮 |
+| operationTheme | TButtonTheme? | - | 操作按钮文案主题色 |
+| type | TEmptyType | TEmptyType.plain | 类型，为operation有操作按钮，plain无按钮 |
+
+#### TEmptyType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| plain | - |
+| operation | - |
+
+#### TTapEvent
+
+##### 类型定义
+
+```dart
+typedef TTapEvent = void Function();
+```
 
 ## 设计指南
 

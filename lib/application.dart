@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -21,7 +20,7 @@ class Application {
   Application._();
 
   /// 主题 - 使用响应式变量
-  static final Rx<TDThemeData> themeData = TDThemeData.defaultData().obs;
+  static final Rx<TThemeData> themeData = TThemeData.defaultData().obs;
 
   /// 主题模式 - 默认跟随系统
   static final Rx<ThemeMode> themeMode = ThemeMode.system.obs;
@@ -57,7 +56,7 @@ class Application {
   ///
   /// [newTheme] 目标主题配置。
   /// [colorName] 可选主题颜色名称。
-  static void updateTheme(TDThemeData newTheme, {String? colorName}) {
+  static void updateTheme(TThemeData newTheme, {String? colorName}) {
     themeData.value = newTheme;
     if (colorName != null) {
       themeColorName.value = colorName;
@@ -69,7 +68,7 @@ class Application {
   /// [newTheme] 目标主题配置。
   /// [colorName] 主题颜色预设名称。
   static Future<void> updateThemeColor(
-    TDThemeData newTheme,
+    TThemeData newTheme,
     String colorName,
   ) async {
     updateTheme(newTheme, colorName: colorName);

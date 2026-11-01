@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 /// Widget 装饰扩展
@@ -32,7 +33,7 @@ extension DecorationExtension on Widget {
   /// Text('Hello').backgroundImage(
   ///   DecorationImage(
   ///     image: AssetImage('assets/bg.jpg'),
-  ///     fit: BoxFit.cover,
+  ///     fit: .cover,
   ///   ),
   /// )
   /// ```
@@ -79,8 +80,8 @@ extension DecorationExtension on Widget {
   /// ```dart
   /// Text('Hello').backgroundLinearGradient(
   ///   colors: [Colors.red, Colors.blue],
-  ///   begin: Alignment.topLeft,
-  ///   end: Alignment.bottomRight,
+  ///   begin: .topLeft,
+  ///   end: .bottomRight,
   /// )
   /// ```
   Widget backgroundLinearGradient({
@@ -124,7 +125,7 @@ extension DecorationExtension on Widget {
   /// ```dart
   /// Text('Hello').backgroundRadialGradient(
   ///   colors: [Colors.red, Colors.blue],
-  ///   center: Alignment.center,
+  ///   center: .center,
   ///   radius: 0.8,
   /// )
   /// ```
@@ -172,7 +173,7 @@ extension DecorationExtension on Widget {
   /// ```dart
   /// Text('Hello').backgroundSweepGradient(
   ///   colors: [Colors.red, Colors.blue, Colors.green],
-  ///   center: Alignment.center,
+  ///   center: .center,
   /// )
   /// ```
   Widget backgroundSweepGradient({
@@ -453,8 +454,8 @@ extension DecorationExtension on Widget {
       key: key,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: .topLeft,
+          end: .bottomRight,
           colors: [
             Color.fromRGBO(
               adjustColor(

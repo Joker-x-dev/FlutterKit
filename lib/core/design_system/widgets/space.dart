@@ -7,9 +7,9 @@ import '../theme/size.dart';
 /// 使用示例：
 /// ```dart
 /// [
-///   TDText('第一行', font: fontBodyLarge),
+///   TText('第一行', font: fontBodyLarge),
 ///   const SpaceVerticalMedium(),
-///   TDText('第二行', font: fontBodyLarge),
+///   TText('第二行', font: fontBodyLarge),
 /// ].toColumnStart()
 /// ```
 

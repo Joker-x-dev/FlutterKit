@@ -2,8 +2,8 @@
 
 > 用于表明主体的类目，属性或状态
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/tag)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Tag 标签](https://tdesign.tencent.com/flutter/components/tag)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -26,15 +26,15 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 基础标签
 
 ```
-  TDTag _buildSimpleFillTag(BuildContext context) {
-    return const TDTag('标签文字');
+  TTag _buildSimpleFillTag(BuildContext context) {
+    return const TTag('标签文字');
   }
 ```
 
 
 ```
-  TDTag _buildSimpleOutlineTag(BuildContext context) {
-    return const TDTag(
+  TTag _buildSimpleOutlineTag(BuildContext context) {
+    return const TTag(
       '标签文字',
       isOutline: true,
     );
@@ -45,9 +45,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCircleFillTag(BuildContext context) {
-    return const TDTag(
+    return const TTag(
       '标签文字',
-      shape: TDTagShape.round,
+      shape: TTagShape.round,
     );
   }
 ```
@@ -55,9 +55,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCircleOutlineTag(BuildContext context) {
-    return const TDTag(
+    return const TTag(
       '标签文字',
-      shape: TDTagShape.round,
+      shape: TTagShape.round,
       isOutline: true,
     );
   }
@@ -67,9 +67,9 @@ Mark标签
 
 ```
   Widget _buildMarkFillTag(BuildContext context) {
-    return const TDTag(
+    return const TTag(
       '标签文字',
-      shape: TDTagShape.mark,
+      shape: TTagShape.mark,
     );
   }
 ```
@@ -77,9 +77,9 @@ Mark标签
 
 ```
   Widget _buildMarkOutlineTag(BuildContext context) {
-    return const TDTag(
+    return const TTag(
       '标签文字',
-      shape: TDTagShape.mark,
+      shape: TTagShape.mark,
       isOutline: true,
     );
   }
@@ -89,9 +89,9 @@ Mark标签
 
 ```
   Widget _buildIconFillTag(BuildContext context) {
-    return const TDTag(
+    return const TTag(
       '标签文字',
-      icon: TDIcons.discount,
+      icon: TIcons.discount,
     );
   }
 ```
@@ -99,9 +99,9 @@ Mark标签
 
 ```
   Widget _buildIconOutlineTag(BuildContext context) {
-    return const TDTag(
+    return const TTag(
       '标签文字',
-      icon: TDIcons.discount,
+      icon: TIcons.discount,
       isOutline: true,
     );
   }
@@ -111,11 +111,11 @@ Mark标签
 
 ```
   Widget _buildCloseFillTag(BuildContext context) {
-    return TDTag(
+    return TTag(
       '标签文字',
       needCloseIcon: true,
       onCloseTap: () {
-        TDToast.showText('点击关闭', context: context);
+        TToast.showText('点击关闭', context: context);
       },
     );
   }
@@ -124,8 +124,8 @@ Mark标签
 
 ```
   Widget _buildCloseOutlineTag(BuildContext context) {
-    return TDTag('标签文字', needCloseIcon: true, isOutline: true, onCloseTap: () {
-      TDToast.showText('点击关闭', context: context);
+    return TTag('标签文字', needCloseIcon: true, isOutline: true, onCloseTap: () {
+      TToast.showText('点击关闭', context: context);
     });
   }
 ```
@@ -135,18 +135,18 @@ Mark标签
 ```
   Widget _buildDarkSelectTags(BuildContext context) {
     return const Wrap(spacing: 8, children: [
-      TDSelectTag(
+      TSelectTag(
         '未选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
       ),
-      TDSelectTag(
+      TSelectTag(
         '已选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isSelected: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '不可选态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         disableSelect: true,
       ),
     ]);
@@ -157,20 +157,20 @@ Mark标签
 ```
   Widget _buildLightSelectTags(BuildContext context) {
     return const Wrap(spacing: 8, children: [
-      TDSelectTag(
+      TSelectTag(
         '未选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isLight: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '已选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isLight: true,
         isSelected: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '不可选态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isLight: true,
         disableSelect: true,
       ),
@@ -182,20 +182,20 @@ Mark标签
 ```
   Widget _buildOutlineSelectTags(BuildContext context) {
     return const Wrap(spacing: 8, children: [
-      TDSelectTag(
+      TSelectTag(
         '未选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isOutline: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '已选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isOutline: true,
         isSelected: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '不可选态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isOutline: true,
         disableSelect: true,
       ),
@@ -207,22 +207,22 @@ Mark标签
 ```
   Widget _buildLightOutlineSelectTags(BuildContext context) {
     return const Wrap(spacing: 8, children: [
-      TDSelectTag(
+      TSelectTag(
         '未选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isOutline: true,
         isLight: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '已选中态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isOutline: true,
         isLight: true,
         isSelected: true,
       ),
-      TDSelectTag(
+      TSelectTag(
         '不可选态',
-        theme: TDTagTheme.primary,
+        theme: TTagTheme.primary,
         isOutline: true,
         isLight: true,
         disableSelect: true,
@@ -240,26 +240,26 @@ Mark标签
     return const Wrap(
       spacing: 8,
       children: [
-        TDTag('默认', isLight: true),
-        TDTag(
+        TTag('默认', isLight: true),
+        TTag(
           '主要',
           isLight: true,
-          theme: TDTagTheme.primary,
+          theme: TTagTheme.primary,
         ),
-        TDTag(
+        TTag(
           '警告',
           isLight: true,
-          theme: TDTagTheme.warning,
+          theme: TTagTheme.warning,
         ),
-        TDTag(
+        TTag(
           '危险',
           isLight: true,
-          theme: TDTagTheme.danger,
+          theme: TTagTheme.danger,
         ),
-        TDTag(
+        TTag(
           '成功',
           isLight: true,
-          theme: TDTagTheme.success,
+          theme: TTagTheme.success,
         ),
       ],
     );
@@ -272,22 +272,22 @@ Mark标签
     return const Wrap(
       spacing: 8,
       children: [
-        TDTag('默认'),
-        TDTag(
+        TTag('默认'),
+        TTag(
           '主要',
-          theme: TDTagTheme.primary,
+          theme: TTagTheme.primary,
         ),
-        TDTag(
+        TTag(
           '警告',
-          theme: TDTagTheme.warning,
+          theme: TTagTheme.warning,
         ),
-        TDTag(
+        TTag(
           '危险',
-          theme: TDTagTheme.danger,
+          theme: TTagTheme.danger,
         ),
-        TDTag(
+        TTag(
           '成功',
-          theme: TDTagTheme.success,
+          theme: TTagTheme.success,
         ),
       ],
     );
@@ -300,26 +300,26 @@ Mark标签
     return const Wrap(
       spacing: 8,
       children: [
-        TDTag('默认', isOutline: true),
-        TDTag(
+        TTag('默认', isOutline: true),
+        TTag(
           '主要',
           isOutline: true,
-          theme: TDTagTheme.primary,
+          theme: TTagTheme.primary,
         ),
-        TDTag(
+        TTag(
           '警告',
           isOutline: true,
-          theme: TDTagTheme.warning,
+          theme: TTagTheme.warning,
         ),
-        TDTag(
+        TTag(
           '危险',
           isOutline: true,
-          theme: TDTagTheme.danger,
+          theme: TTagTheme.danger,
         ),
-        TDTag(
+        TTag(
           '成功',
           isOutline: true,
-          theme: TDTagTheme.success,
+          theme: TTagTheme.success,
         ),
       ],
     );
@@ -332,30 +332,30 @@ Mark标签
     return const Wrap(
       spacing: 8,
       children: [
-        TDTag('默认', isOutline: true, isLight: true),
-        TDTag(
+        TTag('默认', isOutline: true, isLight: true),
+        TTag(
           '主要',
           isOutline: true,
           isLight: true,
-          theme: TDTagTheme.primary,
+          theme: TTagTheme.primary,
         ),
-        TDTag(
+        TTag(
           '警告',
           isOutline: true,
           isLight: true,
-          theme: TDTagTheme.warning,
+          theme: TTagTheme.warning,
         ),
-        TDTag(
+        TTag(
           '危险',
           isOutline: true,
           isLight: true,
-          theme: TDTagTheme.danger,
+          theme: TTagTheme.danger,
         ),
-        TDTag(
+        TTag(
           '成功',
           isOutline: true,
           isLight: true,
-          theme: TDTagTheme.success,
+          theme: TTagTheme.success,
         ),
       ],
     );
@@ -367,21 +367,21 @@ Mark标签
 ```
   Widget _buildAllSizeTags(BuildContext context) {
     return const Wrap(spacing: 8, children: [
-      TDTag(
+      TTag(
         '加大尺寸',
-        size: TDTagSize.extraLarge,
+        size: TTagSize.extraLarge,
       ),
-      TDTag(
+      TTag(
         '大尺寸',
-        size: TDTagSize.large,
+        size: TTagSize.large,
       ),
-      TDTag(
+      TTag(
         '中尺寸',
-        size: TDTagSize.medium,
+        size: TTagSize.medium,
       ),
-      TDTag(
+      TTag(
         '小尺寸',
-        size: TDTagSize.small,
+        size: TTagSize.small,
       ),
     ]);
   }
@@ -391,25 +391,25 @@ Mark标签
 ```
   Widget _buildAllSizeCloseTags(BuildContext context) {
     return const Wrap(spacing: 8, children: [
-      TDTag(
+      TTag(
         '加大尺寸',
         needCloseIcon: true,
-        size: TDTagSize.extraLarge,
+        size: TTagSize.extraLarge,
       ),
-      TDTag(
+      TTag(
         '大尺寸',
         needCloseIcon: true,
-        size: TDTagSize.large,
+        size: TTagSize.large,
       ),
-      TDTag(
+      TTag(
         '中尺寸',
         needCloseIcon: true,
-        size: TDTagSize.medium,
+        size: TTagSize.medium,
       ),
-      TDTag(
+      TTag(
         '小尺寸',
         needCloseIcon: true,
-        size: TDTagSize.small,
+        size: TTagSize.small,
       ),
     ]);
   }
@@ -417,11 +417,104 @@ Mark标签
 
 ## API
 
-1. [TDTagStyle](#tdtagstyle)
-2. [TDSelectTag](#tdselecttag)
-3. [TDTag](#tdtag)
+1. [TTag](#ttag)
+2. [TSelectTag](#tselecttag)
+3. [TTagStyle](#ttagstyle)
+4. [TTagTheme](#ttagtheme)
+5. [TTagSize](#ttagsize)
+6. [TTagShape](#ttagshape)
 
-#### TDTagStyle
+#### TTag
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| text | String | - | 标签内容 |
+| backgroundColor | Color? | - | 背景颜色，优先级高于style的backgroundColor |
+| disable | bool | false | 是否为禁用状态 |
+| fixedWidth | double? | - | 标签的固定宽度 |
+| font | Font? | - | 字体尺寸，优先级高于style的font |
+| fontWeight | FontWeight? | - | 字体粗细，优先级高于style的fontWeight |
+| forceVerticalCenter | bool | true | 是否强制中文文字居中 |
+| icon | IconData? | - | 图标内容，可随状态改变颜色 |
+| iconWidget | Widget? | - | 自定义图标内容，需自处理颜色 |
+| isLight | bool | false | 是否为浅色 |
+| isOutline | bool | false | 是否为描边类型，默认不是 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| needCloseIcon | bool | false | 关闭图标 |
+| onCloseTap | GestureTapCallback? | - | 关闭图标点击事件 |
+| overflow | TextOverflow? | - | 文字溢出处理 |
+| padding | EdgeInsets? | - | 自定义模式下的间距 |
+| shape | TTagShape | TTagShape.square | 标签形状 |
+| size | TTagSize | TTagSize.medium | 标签大小 |
+| style | TTagStyle? | - | 标签样式 |
+| textColor | Color? | - | 文字颜色，优先级高于style的textColor |
+| theme | TTagTheme? | - | 主题 |
+
+#### TSelectTag
+
+##### 默认构造方法
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| text | String | - | 标签内容 |
+| disableSelect | bool | false | 是否禁用选择 |
+| disableSelectStyle | TTagStyle? | - | 不可选标签样式 |
+| fixedWidth | double? | - | 标签的固定宽度 |
+| forceVerticalCenter | bool | true | 是否强制中文文字居中 |
+| icon | IconData? | - | 图标内容，可随状态改变颜色 |
+| iconWidget | Widget? | - | 自定义图标内容，需自处理颜色 |
+| isLight | bool | false | 是否为浅色 |
+| isOutline | bool | false | 是否为描边类型，默认不是 |
+| isSelected | bool | false | 是否选中 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| needCloseIcon | bool | false | 关闭图标 |
+| onCloseTap | GestureTapCallback? | - | 关闭图标点击事件 |
+| onSelectChanged | ValueChanged? | - | 标签点击，选中状态改变时的回调 |
+| padding | EdgeInsets? | - | 自定义模式下的间距 |
+| selectStyle | TTagStyle? | - | 选中的标签样式 |
+| shape | TTagShape | TTagShape.square | 标签形状 |
+| size | TTagSize | TTagSize.medium | 标签大小 |
+| theme | TTagTheme? | - | 主题 |
+| unSelectStyle | TTagStyle? | - | 未选中标签样式 |
+
+#### TTagStyle
+
+##### 工厂构造方法
+
+###### TTagStyle.generateDisableSelectStyle
+
+根据主题生成禁用Tag样式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | 上下文，方便获取主题内容 |
+| isLight | bool | - | - |
+| isOutline | bool | - | - |
+| shape | TTagShape | - | - |
+
+###### TTagStyle.generateFillStyleByTheme
+
+根据主题生成填充Tag样式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | 上下文，方便获取主题内容 |
+| theme | TTagTheme? | - | - |
+| light | bool | - | - |
+| shape | TTagShape | - | - |
+
+###### TTagStyle.generateOutlineStyleByTheme
+
+根据主题生成描边Tag样式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | 上下文，方便获取主题内容 |
+| theme | TTagTheme? | - | - |
+| light | bool | - | - |
+| shape | TTagShape | - | - |
 
 ##### 默认构造方法
 
@@ -436,68 +529,45 @@ Mark标签
 | fontWeight | FontWeight? | - | 字体粗细 |
 | textColor | Color? | - | 文字颜色 |
 
-##### 工厂构造方法
+##### 公开属性
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| closeIconColor | Color? | - | 关闭图标颜色 |
+
+#### TTagTheme
+
+##### 枚举值
 
 | 名称 | 说明 |
 | --- | --- |
-| TDTagStyle.generateDisableSelectStyle | 根据主题生成禁用Tag样式 |
-| TDTagStyle.generateFillStyleByTheme | 根据主题生成填充Tag样式 |
-| TDTagStyle.generateOutlineStyleByTheme | 根据主题生成描边Tag样式 |
+| defaultTheme | 默认 |
+| primary | 常规 |
+| warning | 警告 |
+| danger | 危险 |
+| success | 成功 |
 
-#### TDSelectTag
+#### TTagSize
 
-##### 默认构造方法
+##### 枚举值
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| disableSelect | bool | false | 是否禁用选择 |
-| disableSelectStyle | TDTagStyle? | - | 不可选标签样式 |
-| fixedWidth | double? | - | 标签的固定宽度 |
-| forceVerticalCenter | bool | true | 是否强制中文文字居中 |
-| icon | IconData? | - | 图标内容，可随状态改变颜色 |
-| iconWidget | Widget? | - | 自定义图标内容，需自处理颜色 |
-| isLight | bool | false | 是否为浅色 |
-| isOutline | bool | false | 是否为描边类型，默认不是 |
-| isSelected | bool | false | 是否选中 |
-| key |  | - |  |
-| needCloseIcon | bool | false | 关闭图标 |
-| onCloseTap | GestureTapCallback? | - | 关闭图标点击事件 |
-| onSelectChanged | ValueChanged? | - | 标签点击，选中状态改变时的回调 |
-| padding | EdgeInsets? | - | 自定义模式下的间距 |
-| selectStyle | TDTagStyle? | - | 选中的标签样式 |
-| shape | TDTagShape | TDTagShape.square | 标签形状 |
-| size | TDTagSize | TDTagSize.medium | 标签大小 |
-| text | String | text | 标签内容 |
-| theme | TDTagTheme? | - | 主题 |
-| unSelectStyle | TDTagStyle? | - | 未选中标签样式 |
+| 名称 | 说明 |
+| --- | --- |
+| extraLarge | - |
+| large | - |
+| medium | - |
+| small | - |
+| custom | - |
 
-#### TDTag
+#### TTagShape
 
-##### 默认构造方法
+##### 枚举值
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| backgroundColor | Color? | - | 背景颜色，优先级高于style的backgroundColor |
-| disable | bool | false | 是否为禁用状态 |
-| fixedWidth | double? | - | 标签的固定宽度 |
-| font | Font? | - | 字体尺寸，优先级高于style的font |
-| fontWeight | FontWeight? | - | 字体粗细，优先级高于style的fontWeight |
-| forceVerticalCenter | bool | true | 是否强制中文文字居中 |
-| icon | IconData? | - | 图标内容，可随状态改变颜色 |
-| iconWidget | Widget? | - | 自定义图标内容，需自处理颜色 |
-| isLight | bool | false | 是否为浅色 |
-| isOutline | bool | false | 是否为描边类型，默认不是 |
-| key |  | - |  |
-| needCloseIcon | bool | false | 关闭图标 |
-| onCloseTap | GestureTapCallback? | - | 关闭图标点击事件 |
-| overflow | TextOverflow? | - | 文字溢出处理 |
-| padding | EdgeInsets? | - | 自定义模式下的间距 |
-| shape | TDTagShape | TDTagShape.square | 标签形状 |
-| size | TDTagSize | TDTagSize.medium | 标签大小 |
-| style | TDTagStyle? | - | 标签样式 |
-| text | String | text | 标签内容 |
-| textColor | Color? | - | 文字颜色，优先级高于style的textColor |
-| theme | TDTagTheme? | - | 主题 |
+| 名称 | 说明 |
+| --- | --- |
+| square | - |
+| round | - |
+| mark | - |
 
 ## 设计指南
 

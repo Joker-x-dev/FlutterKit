@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../design_system/theme/app_theme.dart';
 import '../base/base_view.dart';
 import 'base_tab_logic.dart';
 
@@ -26,14 +26,13 @@ abstract class BaseTabView<T extends BaseTabLogic> extends BaseView<T> {
 
   /// tabsWidget
   Widget tabsWidget() {
-    return TDTabBar(
-      tabs: controller.tabList.map((title) => TDTab(text: title)).toList(),
-      indicatorColor: tabColor,
-      labelColor: tabColor,
-      controller: controller.tabState.tabController,
-      dividerHeight: 0,
-      onTap: (int index) => controller.tabChange(index),
-      showIndicator: true,
+    return Container(
+      color: appTheme.backgroundContainer,
+      child: TTabsBar(
+        tabs: controller.tabList.map((title) => TTab(text: title)).toList(),
+        controller: controller.tabState.tabController,
+        onTap: (int index) => controller.tabChange(index),
+      ),
     );
   }
 

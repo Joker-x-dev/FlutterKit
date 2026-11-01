@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/model/entity/goods/goods.dart';
@@ -28,18 +27,17 @@ class GoodsDetailContent extends StatelessWidget {
   /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
-    final appTheme = AppTheme.of(context);
     final images = _resolvePreviewImages();
     final contentImages = goods.contentPics ?? const <String>[];
 
     return [
-      _GoodsImageCarousel(
-        images: images,
-      ).height(340).clipRadius(radiusExtraLarge),
+      _GoodsImageCarousel(images: images)
+          .height(340)
+          .clipRadius(radiusExtraLarge),
       const SpaceVerticalLarge(),
-      _buildSummaryCard(appTheme),
+      _buildSummaryCard(),
       const SpaceVerticalLarge(),
-      _buildDetailCard(appTheme, contentImages),
+      _buildDetailCard(contentImages),
     ].toColumnStretch();
   }
 
@@ -60,42 +58,44 @@ class GoodsDetailContent extends StatelessWidget {
   }
 
   /// 构建商品摘要卡片
-  ///
-  /// [appTheme] 当前应用主题。
-  Widget _buildSummaryCard(AppTheme appTheme) {
+  Widget _buildSummaryCard() {
     return <Widget>[
-          TDText(
+          TText(
             goods.title,
             font: appTheme.fontTitleLarge,
-            textColor: appTheme.textPrimary,
-            fontWeight: appTheme.fontWeightBold,
+            style: TextStyle(
+              color: appTheme.textPrimary,
+              fontWeight: appTheme.fontWeightBold,
+            ),
             maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            overflow: .ellipsis,
           ),
           if (goods.subTitle?.isNotEmpty == true) ...[
             const SpaceVerticalSmall(),
-            TDText(
-              goods.subTitle,
+            TText(
+              goods.subTitle ?? '',
               font: appTheme.fontBodyMedium,
-              textColor: appTheme.textSecondary,
+              style: TextStyle(color: appTheme.textSecondary),
               maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              overflow: .ellipsis,
             ),
           ],
           const SpaceVerticalLarge(),
           [
-            TDText(
+            TText(
               '¥${goods.price.toStringAsFixed(2)}',
               font: appTheme.fontTitleLarge,
-              textColor: appTheme.error,
-              fontWeight: appTheme.fontWeightBold,
+              style: TextStyle(
+                color: appTheme.error,
+                fontWeight: appTheme.fontWeightBold,
+              ),
             ),
-            TDText(
+            TText(
               CommonKeys.goodsSold.trArgs([goods.sold.toString()]),
               font: appTheme.fontBodyMedium,
-              textColor: appTheme.textSecondary,
+              style: TextStyle(color: appTheme.textSecondary),
             ),
-          ].toRowBetween(crossAxisAlignment: CrossAxisAlignment.end),
+          ].toRowBetween(crossAxisAlignment: .end),
         ]
         .toColumnStart()
         .padAll(spacePaddingLarge)
@@ -105,21 +105,24 @@ class GoodsDetailContent extends StatelessWidget {
 
   /// 构建商品详情卡片
   ///
-  /// [appTheme] 当前应用主题。
   /// [contentImages] 商品详情图片列表。
-  Widget _buildDetailCard(AppTheme appTheme, List<String> contentImages) {
+  Widget _buildDetailCard(List<String> contentImages) {
     return <Widget>[
-          TDText(
+          TText(
             CommonKeys.goodsDetail.tr,
             font: appTheme.fontTitleMedium,
-            textColor: appTheme.textPrimary,
-            fontWeight: appTheme.fontWeightBold,
+            style: TextStyle(
+              color: appTheme.textPrimary,
+              fontWeight: appTheme.fontWeightBold,
+            ),
           ).pad(horizontal: spacePaddingLarge, vertical: spacePaddingMedium),
+          // 宽度占满内容区，高度按图片自身比例自适应
           ...contentImages.map(
-            (imageUrl) => TDImage(
-              imgUrl: imageUrl,
-              type: TDImageType.fitWidth,
+            (imageUrl) => Image.network(
+              imageUrl,
               width: double.infinity,
+              fit: .fitWidth,
+              errorBuilder: (_, _, _) => const SizedBox.shrink(),
             ),
           ),
         ]
@@ -166,7 +169,6 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
   /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
-    final appTheme = AppTheme.of(context);
     if (widget.images.isEmpty) {
       return Icon(
         Icons.image_outlined,
@@ -181,7 +183,7 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
         itemCount: widget.images.length,
         onPageChanged: (index) => setState(() => _currentIndex = index),
         itemBuilder: (context, index) {
-          return TDImage(imgUrl: widget.images[index], fit: BoxFit.cover);
+          return TImage(src: widget.images[index], fit: .cover);
         },
       ),
       if (widget.images.length > 1)
@@ -204,6 +206,6 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
           left: 0,
           right: 0,
         ),
-    ].toStack(fit: StackFit.expand);
+    ].toStack(fit: .expand);
   }
 }

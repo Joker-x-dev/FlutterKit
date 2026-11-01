@@ -13,6 +13,22 @@ final Map<String, String> demoZh = {
   DemoKeys.titleNavigationWithArgs: '带参跳转示例',
   DemoKeys.titleNavigationResult: '结果回传示例',
 
+  // 嵌套滚动示例
+  DemoKeys.titleNestedScrollDemo: '嵌套滚动示例',
+  DemoKeys.nestedScrollDemoDesc: '仿小红书写一个嵌套滚动示例',
+  DemoKeys.nestedScrollDemoName: 'Joker.X',
+  DemoKeys.nestedScrollDemoId: '账号：Joker.X',
+  DemoKeys.nestedScrollDemoBio: '用 Flutter 记录每一次灵感与成长',
+  DemoKeys.nestedScrollFollowing: '关注',
+  DemoKeys.nestedScrollFollowers: '粉丝',
+  DemoKeys.nestedScrollLikesAndSaves: '获赞与收藏',
+  DemoKeys.nestedScrollNotes: '笔记',
+  DemoKeys.nestedScrollCollections: '收藏',
+  DemoKeys.nestedScrollLiked: '赞过',
+  DemoKeys.nestedScrollShare: '分享',
+  DemoKeys.nestedScrollBack: '返回',
+  DemoKeys.nestedScrollPostTitle: '第 @index 篇 Flutter 灵感笔记',
+
   // 网络请求示例
   DemoKeys.goodsTitle: '商品标题',
   DemoKeys.goodsSubtitle: '商品副标题',

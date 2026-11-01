@@ -14,10 +14,12 @@ import 'package:flutter_kit/feature/demo/bindings/navigation_with_args_binding.d
 import 'package:flutter_kit/feature/demo/bindings/network_demo_binding.dart';
 import 'package:flutter_kit/feature/demo/bindings/network_list_demo_binding.dart';
 import 'package:flutter_kit/feature/demo/bindings/network_request_demo_binding.dart';
+import 'package:flutter_kit/feature/demo/bindings/nested_scroll_demo_binding.dart';
 import 'package:flutter_kit/feature/demo/bindings/screen_adapt_demo_binding.dart';
 import 'package:flutter_kit/feature/demo/bindings/state_management_demo_binding.dart';
 import 'package:flutter_kit/feature/demo/bindings/theme_demo_binding.dart';
 import 'package:flutter_kit/feature/demo/localization/demo_en.dart';
+import 'package:flutter_kit/feature/demo/localization/demo_keys.dart';
 import 'package:flutter_kit/feature/demo/localization/demo_zh.dart';
 import 'package:flutter_kit/feature/demo/logics/base_demo_logic.dart';
 import 'package:flutter_kit/feature/demo/logics/base_refresh_demo_logic.dart';
@@ -29,6 +31,7 @@ import 'package:flutter_kit/feature/demo/logics/navigation_with_args_logic.dart'
 import 'package:flutter_kit/feature/demo/logics/network_demo_logic.dart';
 import 'package:flutter_kit/feature/demo/logics/network_list_demo_logic.dart';
 import 'package:flutter_kit/feature/demo/logics/network_request_demo_logic.dart';
+import 'package:flutter_kit/feature/demo/logics/nested_scroll_demo_logic.dart';
 import 'package:flutter_kit/feature/demo/logics/screen_adapt_demo_logic.dart';
 import 'package:flutter_kit/feature/demo/logics/state_management_demo_logic.dart';
 import 'package:flutter_kit/feature/demo/logics/theme_demo_logic.dart';
@@ -42,9 +45,14 @@ import 'package:flutter_kit/feature/demo/views/navigation_with_args_view.dart';
 import 'package:flutter_kit/feature/demo/views/network_demo_view.dart';
 import 'package:flutter_kit/feature/demo/views/network_list_demo_view.dart';
 import 'package:flutter_kit/feature/demo/views/network_request_demo_view.dart';
+import 'package:flutter_kit/feature/demo/views/nested_scroll_demo_view.dart';
 import 'package:flutter_kit/feature/demo/views/screen_adapt_demo_view.dart';
 import 'package:flutter_kit/feature/demo/views/state_management_demo_view.dart';
 import 'package:flutter_kit/feature/demo/views/theme_demo_view.dart';
+import 'package:flutter_kit/feature/main/logics/expand_demo_logic.dart';
+import 'package:flutter_kit/feature/main/models/demo_action.dart';
+import 'package:flutter_kit/feature/main/models/demo_item.dart';
+import 'package:flutter_kit/feature/main/states/expand_demo_state.dart';
 import 'package:flutter_kit/routes/demo/demo_navigator.dart';
 import 'package:flutter_kit/routes/demo/demo_pages.dart';
 import 'package:flutter_kit/routes/demo/demo_params.dart';
@@ -70,6 +78,7 @@ void main() {
       NetworkDemoBinding(),
       NetworkListDemoBinding(),
       NetworkRequestDemoBinding(),
+      NestedScrollDemoBinding(),
       ScreenAdaptDemoBinding(),
       StateManagementDemoBinding(),
       ThemeDemoBinding(),
@@ -89,6 +98,7 @@ void main() {
     expect(Get.isRegistered<NetworkDemoLogic>(), isTrue);
     expect(Get.isRegistered<NetworkListDemoLogic>(), isTrue);
     expect(Get.isRegistered<NetworkRequestDemoLogic>(), isTrue);
+    expect(Get.isRegistered<NestedScrollDemoLogic>(), isTrue);
     expect(Get.isRegistered<ScreenAdaptDemoLogic>(), isTrue);
     expect(Get.isRegistered<StateManagementDemoLogic>(), isTrue);
     expect(Get.isRegistered<ThemeDemoLogic>(), isTrue);
@@ -108,6 +118,7 @@ void main() {
     networkListLogic.setStatusSuccess();
     expect(networkListLogic, isA<NetworkListDemoLogic>());
     expect(Get.find<NetworkRequestDemoLogic>(), isA<NetworkRequestDemoLogic>());
+    expect(Get.find<NestedScrollDemoLogic>(), isA<NestedScrollDemoLogic>());
     expect(Get.find<ScreenAdaptDemoLogic>(), isA<ScreenAdaptDemoLogic>());
     expect(
       Get.find<StateManagementDemoLogic>(),
@@ -147,6 +158,10 @@ void main() {
         NetworkRequestDemoBinding,
       ),
       DemoRoutes.screenAdaptDemo: (ScreenAdaptDemoView, ScreenAdaptDemoBinding),
+      DemoRoutes.nestedScrollDemo: (
+        NestedScrollDemoView,
+        NestedScrollDemoBinding,
+      ),
       DemoRoutes.navigationWithArgs: (
         NavigationWithArgsView,
         NavigationWithArgsBinding,
@@ -189,6 +204,7 @@ void main() {
       ),
       (DemoRoutes.networkRequestDemo, DemoNavigator.toNetworkRequestDemo<void>),
       (DemoRoutes.screenAdaptDemo, DemoNavigator.toScreenAdaptDemo<void>),
+      (DemoRoutes.nestedScrollDemo, DemoNavigator.toNestedScrollDemo<void>),
       (DemoRoutes.baseDemo, DemoNavigator.toBaseDemo<void>),
       (DemoRoutes.baseRefreshDemo, DemoNavigator.toBaseRefreshDemo<void>),
       (DemoRoutes.baseTabDemo, DemoNavigator.toBaseTabDemo<void>),
@@ -203,6 +219,32 @@ void main() {
       await tester.pumpAndSettle();
       await navigationFuture;
     }
+  });
+
+  testWidgets('扩展菜单声明嵌套滚动入口并由 Logic 分发到对应路由', (tester) async {
+    await tester.pumpWidget(
+      buildCoreTestApp(
+        home: const Scaffold(body: Text('扩展示例首页')),
+        routes: _localDemoRoutes,
+      ),
+    );
+
+    expect(ExpandDemoState.defaultDemoItems, hasLength(3));
+    final DemoItem nestedScrollItem = ExpandDemoState.defaultDemoItems
+        .singleWhere(
+          (DemoItem item) => item.action == DemoAction.nestedScrollDemo,
+        );
+    expect(nestedScrollItem.title, DemoKeys.titleNestedScrollDemo);
+    expect(nestedScrollItem.description, DemoKeys.nestedScrollDemoDesc);
+    expect(demoZh[nestedScrollItem.title], '嵌套滚动示例');
+    expect(demoZh[nestedScrollItem.description], '仿小红书写一个嵌套滚动示例');
+    expect(demoEn[nestedScrollItem.title], 'Nested Scroll Demo');
+    final ExpandDemoLogic logic = ExpandDemoLogic();
+
+    logic.onItemTap(nestedScrollItem);
+    await tester.pumpAndSettle();
+
+    expect(Get.currentRoute, DemoRoutes.nestedScrollDemo);
   });
 
   testWidgets('带参 Navigator 传递类型安全参数', (tester) async {
@@ -270,6 +312,7 @@ const List<String> _demoRouteNames = <String>[
   DemoRoutes.stateManagementDemo,
   DemoRoutes.networkRequestDemo,
   DemoRoutes.screenAdaptDemo,
+  DemoRoutes.nestedScrollDemo,
   DemoRoutes.navigationWithArgs,
   DemoRoutes.navigationResult,
   DemoRoutes.baseDemo,

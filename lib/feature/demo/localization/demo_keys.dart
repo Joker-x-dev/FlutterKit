@@ -31,6 +31,51 @@ abstract final class DemoKeys {
   /// 结果回传示例
   static const String titleNavigationResult = 'demoTitleNavigationResult';
 
+  //==================== 嵌套滚动示例 ====================
+
+  /// 嵌套滚动示例标题
+  static const String titleNestedScrollDemo = 'demoTitleNestedScrollDemo';
+
+  /// 嵌套滚动示例说明
+  static const String nestedScrollDemoDesc = 'demoNestedScrollDemoDesc';
+
+  /// 个人主页用户名
+  static const String nestedScrollDemoName = 'demoNestedScrollDemoName';
+
+  /// 个人主页账号
+  static const String nestedScrollDemoId = 'demoNestedScrollDemoId';
+
+  /// 个人主页简介
+  static const String nestedScrollDemoBio = 'demoNestedScrollDemoBio';
+
+  /// 关注数量标签
+  static const String nestedScrollFollowing = 'demoNestedScrollFollowing';
+
+  /// 粉丝数量标签
+  static const String nestedScrollFollowers = 'demoNestedScrollFollowers';
+
+  /// 获赞与收藏数量标签
+  static const String nestedScrollLikesAndSaves =
+      'demoNestedScrollLikesAndSaves';
+
+  /// 笔记标签
+  static const String nestedScrollNotes = 'demoNestedScrollNotes';
+
+  /// 收藏标签
+  static const String nestedScrollCollections = 'demoNestedScrollCollections';
+
+  /// 赞过标签
+  static const String nestedScrollLiked = 'demoNestedScrollLiked';
+
+  /// 分享操作
+  static const String nestedScrollShare = 'demoNestedScrollShare';
+
+  /// 返回操作
+  static const String nestedScrollBack = 'demoNestedScrollBack';
+
+  /// 帖子标题模板
+  static const String nestedScrollPostTitle = 'demoNestedScrollPostTitle';
+
   //==================== 网络请求示例 ====================
 
   /// 商品标题

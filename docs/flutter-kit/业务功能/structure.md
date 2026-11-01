@@ -66,7 +66,7 @@
 
 ### Skeleton 与 Mixin
 
-- `BaseNetworkView` 默认显示 `TDLoading`；只有固定布局需要更平滑的首屏反馈时才创建 Skeleton 并覆盖 `loadWidget()`。
+- `BaseNetworkView` 默认显示 `TLoading`；只有固定布局需要更平滑的首屏反馈时才创建 Skeleton 并覆盖 `loadWidget()`。
 - 同模块可复用的骨架屏放 `skeletons/`，单页小骨架紧贴页面。
 - 同模块可复用的横向行为放 `mixins/`；跨模块、无业务依赖的行为放 `core/mixin/`。
 - Mixin 不保存页面专属状态，也不能代替 Logic。

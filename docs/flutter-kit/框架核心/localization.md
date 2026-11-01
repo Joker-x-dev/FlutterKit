@@ -121,7 +121,7 @@ await Application.updateLocale(const Locale('en', 'US'));
 
 ## TDesign 组件文案
 
-TDesign Flutter 的组件内部文案不由 GetX `Translations` 自动翻译。TDesign 官方本地文档 `docs/tdesign-flutter/开始/快速开始.md` 说明可通过 `TDResourceDelegate` 与 `TDTheme.setResourceBuilder` 注入资源代理。当前 FlutterKit 尚未实现该代理；新增第三种语言或需要统一翻译 TDesign 内置文案时，应先在 Core 封装该能力，不能在业务页面逐个覆盖组件内部文本。
+TDesign Flutter 的组件内部文案不由 GetX `Translations` 自动翻译。当前版本通过 `TResourceDelegate` 与顶层 `setTResourceBuilder` 注入资源代理。当前 FlutterKit 尚未实现该代理；新增第三种语言或需要统一翻译 TDesign 内置文案时，应先在 Core 封装该能力，不能在业务页面逐个覆盖组件内部文本。
 
 ## 注意事项
 

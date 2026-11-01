@@ -30,11 +30,20 @@ class $AssetsIconGen {
 class $AssetsImageGen {
   const $AssetsImageGen();
 
+  /// File path: assets/image/avatar.jpg
+  AssetGenImage get avatar => const AssetGenImage('assets/image/avatar.jpg');
+
+  /// File path: assets/image/background.svg
+  SvgGenImage get background => const SvgGenImage('assets/image/background.svg');
+
+  /// File path: assets/image/grid.svg
+  SvgGenImage get grid => const SvgGenImage('assets/image/grid.svg');
+
   /// File path: assets/image/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/image/logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  List<dynamic> get values => [avatar, background, grid, logo];
 }
 
 class $AssetsJsonGen {
@@ -56,9 +65,7 @@ class $AssetsJsonGen {
   List<String> get values => [blue, green, red, theme];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const $AssetsIconGen icon = $AssetsIconGen();
   static const $AssetsImageGen image = $AssetsImageGen();
   static const $AssetsJsonGen json = $AssetsJsonGen();

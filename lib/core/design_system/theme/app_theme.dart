@@ -1,11 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+
+/// 当前应用主题。
+///
+/// 通过 GetX 当前构建上下文动态读取主题。
+AppTheme get appTheme => AppTheme.of(Get.context!);
 
 /// 应用主题扩展
 ///
 /// 将 TDesign 主题数据封装为 Flutter [ThemeExtension]，
-/// 通过 [Theme.of(context).extension<AppTheme>()] 或 [AppTheme.of(context)] 获取，
+/// 业务组件通过顶层 [appTheme] getter 读取当前主题，局部主题作用域可使用
+/// [AppTheme.of] 显式读取指定上下文，
 /// 符合 Flutter 设计规范，同时便于 Widget 测试注入 mock 主题。
 @immutable
 class AppTheme extends ThemeExtension<AppTheme> {
@@ -104,7 +110,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   });
 
   /// 底层 TDesign 主题数据
-  final TDThemeData tdTheme;
+  final TThemeData tdTheme;
 
   //==================== 主色 ====================
   /// 品牌主色，用于主要按钮、主要图标、重点文字等
@@ -313,34 +319,29 @@ class AppTheme extends ThemeExtension<AppTheme> {
   ///
   /// 返回保持品牌色、普通图标色和导航前景色职责分离的主题配置。
   static ThemeData buildMaterialTheme(
-    TDThemeData tdTheme,
+    TThemeData tdTheme,
     Brightness brightness,
   ) {
-    final isDark = brightness == Brightness.dark;
-    final colorScheme = isDark
-        ? ColorScheme.dark(
-            primary: tdTheme.brandNormalColor,
-            secondary: tdTheme.brandNormalColor,
-          )
-        : ColorScheme.light(primary: tdTheme.brandNormalColor);
+    final ThemeData baseTheme = brightness == Brightness.dark
+        ? TThemeBuilder.dark(tdTheme)
+        : TThemeBuilder.light(tdTheme);
     final foregroundColor = tdTheme.textColorPrimary;
     final iconTheme = IconThemeData(color: foregroundColor);
 
-    return ThemeData(
-      brightness: brightness,
-      colorScheme: colorScheme,
-      scaffoldBackgroundColor: tdTheme.bgColorPage,
-      iconTheme: iconTheme,
-      primaryIconTheme: iconTheme,
-      appBarTheme: AppBarTheme(
-        backgroundColor: tdTheme.bgColorContainer,
-        foregroundColor: foregroundColor,
-        iconTheme: iconTheme,
-        actionsIconTheme: iconTheme,
-        surfaceTintColor: Colors.transparent,
-      ),
-      extensions: [tdTheme, AppTheme.fromTdTheme(tdTheme)],
-    );
+    return baseTheme
+        .copyWith(
+          scaffoldBackgroundColor: tdTheme.bgColorPage,
+          iconTheme: iconTheme,
+          primaryIconTheme: iconTheme,
+          appBarTheme: AppBarTheme(
+            backgroundColor: tdTheme.bgColorContainer,
+            foregroundColor: foregroundColor,
+            iconTheme: iconTheme,
+            actionsIconTheme: iconTheme,
+            surfaceTintColor: Colors.transparent,
+          ),
+        )
+        .mergeExtension(AppTheme.fromTdTheme(tdTheme));
   }
 
   /// 构建系统状态栏与导航栏样式
@@ -350,7 +351,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   ///
   /// 返回与页面容器背景一致的系统栏样式。
   static SystemUiOverlayStyle buildSystemUiOverlayStyle(
-    TDThemeData tdTheme,
+    TThemeData tdTheme,
     Brightness brightness,
   ) {
     final isDark = brightness == Brightness.dark;
@@ -367,8 +368,8 @@ class AppTheme extends ThemeExtension<AppTheme> {
     );
   }
 
-  /// 从 [TDThemeData] 构建 [AppTheme]
-  factory AppTheme.fromTdTheme(TDThemeData tdTheme) {
+  /// 从 [TThemeData] 构建 [AppTheme]
+  factory AppTheme.fromTdTheme(TThemeData tdTheme) {
     return AppTheme(
       tdTheme: tdTheme,
       // 主色
@@ -410,13 +411,13 @@ class AppTheme extends ThemeExtension<AppTheme> {
       textPrimary: tdTheme.textColorPrimary,
       textSecondary: tdTheme.textColorSecondary,
       textPlaceholder: tdTheme.textColorPlaceholder,
-      textDisabled: tdTheme.textDisabledColor,
+      textDisabled: tdTheme.textColorDisabled,
       textAnti: tdTheme.textColorAnti,
       textBrand: tdTheme.textColorBrand,
       textLink: tdTheme.textColorLink,
       // 边框色
-      borderLevel1: tdTheme.componentStrokeColor,
-      borderLevel2: tdTheme.componentBorderColor,
+      borderLevel1: tdTheme.componentStroke,
+      borderLevel2: tdTheme.componentBorder,
       // 字体
       fontDisplayLarge: tdTheme.fontDisplayLarge,
       fontDisplayMedium: tdTheme.fontDisplayMedium,
@@ -427,7 +428,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
       fontTitleLarge: tdTheme.fontTitleLarge,
       fontTitleMedium: tdTheme.fontTitleMedium,
       fontTitleSmall: tdTheme.fontTitleSmall,
-      fontBodyExtraLarge: tdTheme.fontBodyExtraLarge,
+      fontBodyExtraLarge: null,
       fontBodyLarge: tdTheme.fontBodyLarge,
       fontBodyMedium: tdTheme.fontBodyMedium,
       fontBodySmall: tdTheme.fontBodySmall,
@@ -440,9 +441,9 @@ class AppTheme extends ThemeExtension<AppTheme> {
       fontLinkMedium: tdTheme.fontLinkMedium,
       fontLinkSmall: tdTheme.fontLinkSmall,
       // 字重
-      fontWeightRegular: FontWeight.normal,
-      fontWeightMedium: FontWeight.w500,
-      fontWeightBold: FontWeight.w600,
+      fontWeightRegular: .normal,
+      fontWeightMedium: .w500,
+      fontWeightBold: .w600,
     );
   }
 
@@ -453,7 +454,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   /// 返回合并后的 [AppTheme]。
   @override
   ThemeExtension<AppTheme> copyWith({
-    TDThemeData? tdTheme,
+    TThemeData? tdTheme,
     Color? primary,
     Color? primaryLight,
     Color? primaryDark,

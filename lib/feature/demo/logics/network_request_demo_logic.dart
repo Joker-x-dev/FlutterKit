@@ -32,9 +32,7 @@ class NetworkRequestDemoLogic extends BaseLogic {
     goods.value = null;
     errorMessage.value = null;
 
-    return RequestHelper.repository<Goods>(
-          _goodsRepository.getGoodsInfo(1),
-        )
+    return RequestHelper.repository<Goods>(_goodsRepository.getGoodsInfo(1))
         .error((message, error) {
           // RequestHelper 已完成异常文案格式化。
           errorMessage.value = message;

@@ -32,9 +32,9 @@ class ProfileState {
 /// 仅按钮区域响应 saving 变化。
 Widget buildSaveButton(ProfileLogic logic) {
   return Obx(
-    () => TDButton(
-      text: logic.state.saving.value ? '保存中' : '保存',
-      onTap: logic.state.saving.value ? null : logic.save,
+    () => TButton(
+      onPressed: logic.state.saving.value ? null : logic.save,
+      child: Text(logic.state.saving.value ? '保存中' : '保存'),
     ),
   );
 }

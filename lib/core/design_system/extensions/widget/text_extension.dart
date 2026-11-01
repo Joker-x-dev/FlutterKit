@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 /// Text Widget 的扩展方法
@@ -96,9 +97,7 @@ extension TextExtension on Text {
   /// 返回粗体样式的 Text Widget
   Text bold() {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontWeight: .bold),
     );
   }
 
@@ -107,9 +106,7 @@ extension TextExtension on Text {
   /// 返回斜体样式的 Text Widget
   Text italic() {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontStyle: FontStyle.italic,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontStyle: FontStyle.italic),
     );
   }
 
@@ -119,9 +116,7 @@ extension TextExtension on Text {
   /// 返回应用了字体粗细的 Text Widget
   Text fontWeight(FontWeight? fontWeight) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontWeight: fontWeight,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontWeight: fontWeight),
     );
   }
 
@@ -131,9 +126,7 @@ extension TextExtension on Text {
   /// 返回应用了字体大小的 Text Widget
   Text fontSize(double? size) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontSize: size,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontSize: size),
     );
   }
 
@@ -143,9 +136,7 @@ extension TextExtension on Text {
   /// 返回应用了字体家族的 Text Widget
   Text fontFamily(String? font) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        fontFamily: font,
-      ),
+      style: (style ?? const TextStyle()).copyWith(fontFamily: font),
     );
   }
 
@@ -155,9 +146,7 @@ extension TextExtension on Text {
   /// 返回应用了字母间距的 Text Widget
   Text letterSpacing(double? space) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        letterSpacing: space,
-      ),
+      style: (style ?? const TextStyle()).copyWith(letterSpacing: space),
     );
   }
 
@@ -167,9 +156,7 @@ extension TextExtension on Text {
   /// 返回应用了单词间距的 Text Widget
   Text wordSpacing(double? space) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        wordSpacing: space,
-      ),
+      style: (style ?? const TextStyle()).copyWith(wordSpacing: space),
     );
   }
 
@@ -186,13 +173,7 @@ extension TextExtension on Text {
   }) {
     return copyWith(
       style: (style ?? const TextStyle()).copyWith(
-        shadows: [
-          Shadow(
-            color: color,
-            blurRadius: blurRadius,
-            offset: offset,
-          ),
-        ],
+        shadows: [Shadow(color: color, blurRadius: blurRadius, offset: offset)],
       ),
     );
   }
@@ -225,11 +206,9 @@ extension TextExtension on Text {
       blurRadius: elevation,
       offset: Offset(sin(angle) * elevation, cos(angle) * elevation),
     );
-    
+
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        shadows: [shadow],
-      ),
+      style: (style ?? const TextStyle()).copyWith(shadows: [shadow]),
     );
   }
 
@@ -238,11 +217,7 @@ extension TextExtension on Text {
   /// [color] 文本颜色
   /// 返回应用了颜色的 Text Widget
   Text textColor(Color? color) {
-    return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        color: color,
-      ),
-    );
+    return copyWith(style: (style ?? const TextStyle()).copyWith(color: color));
   }
 
   /// 设置文本对齐方式
@@ -274,9 +249,7 @@ extension TextExtension on Text {
   /// 返回应用了文本基线的 Text Widget
   Text textBaseline(TextBaseline? textBaseline) {
     return copyWith(
-      style: (style ?? const TextStyle()).copyWith(
-        textBaseline: textBaseline,
-      ),
+      style: (style ?? const TextStyle()).copyWith(textBaseline: textBaseline),
     );
   }
 

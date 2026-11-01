@@ -2,8 +2,8 @@
 
 > 用于数量的增减。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/stepper)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Stepper 步进器](https://tdesign.tencent.com/flutter/components/stepper)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -28,8 +28,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildStepperWithBase(BuildContext context) {
     return _buildRow(context, [
-      const TDStepper(
-        theme: TDStepperTheme.filled,
+      const TStepper(
+        theme: TStepperTheme.filled,
       )
     ]);
   }
@@ -42,8 +42,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildStepperWithMaxMinStatus(BuildContext context) {
     return _buildRow(context, [
-      const TDStepper(theme: TDStepperTheme.filled, value: 0, min: 0),
-      const TDStepper(theme: TDStepperTheme.filled, value: 999, max: 999),
+      const TStepper(theme: TStepperTheme.filled, value: 0, min: 0),
+      const TStepper(theme: TStepperTheme.filled, value: 999, max: 999),
     ]);
   }
 ```
@@ -53,16 +53,16 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildStepperWithDisableStatus(BuildContext context) {
     return _buildRow(context, [
-      const TDStepper(
-        theme: TDStepperTheme.filled,
+      const TStepper(
+        theme: TStepperTheme.filled,
         disabled: true,
       ),
-      const TDStepper(
-        theme: TDStepperTheme.outline,
+      const TStepper(
+        theme: TStepperTheme.outline,
         disabled: true,
       ),
-      const TDStepper(
-        theme: TDStepperTheme.normal,
+      const TStepper(
+        theme: TStepperTheme.normal,
         disabled: true,
       ),
     ]);
@@ -76,9 +76,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildStepperWithTheme(BuildContext context) {
     return _buildRow(context, [
-      const TDStepper(theme: TDStepperTheme.filled, value: 3),
-      const TDStepper(theme: TDStepperTheme.outline, value: 3),
-      const TDStepper(theme: TDStepperTheme.normal, value: 3),
+      const TStepper(theme: TStepperTheme.filled, value: 3),
+      const TStepper(theme: TStepperTheme.outline, value: 3),
+      const TStepper(theme: TStepperTheme.normal, value: 3),
     ]);
   }
 ```
@@ -88,42 +88,111 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 ```
   Widget _buildStepperWithSize(BuildContext context) {
     return _buildRow(context, [
-      const TDStepper(
-          size: TDStepperSize.large, theme: TDStepperTheme.filled, value: 3),
-      const TDStepper(
-          size: TDStepperSize.medium, theme: TDStepperTheme.filled, value: 3),
-      const TDStepper(
-          size: TDStepperSize.small, theme: TDStepperTheme.filled, value: 3),
+      const TStepper(
+          size: TStepperSize.large, theme: TStepperTheme.filled, value: 3),
+      const TStepper(
+          size: TStepperSize.medium, theme: TStepperTheme.filled, value: 3),
+      const TStepper(
+          size: TStepperSize.small, theme: TStepperTheme.filled, value: 3),
     ]);
   }
 ```
 
 ## API
 
-1. [TDStepper](#tdstepper)
+1. [TStepper](#tstepper)
+2. [TStepperSize](#tsteppersize)
+3. [TStepperTheme](#tsteppertheme)
+4. [TStepperIconType](#tsteppericontype)
+5. [TStepperOverlimitType](#tstepperoverlimittype)
+6. [TStepperEventType](#tsteppereventtype)
+7. [TStepperOverlimitFunction](#tstepperoverlimitfunction)
+8. [TTapFunction](#ttapfunction)
 
-#### TDStepper
+#### TStepper
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| controller | TDStepperController? | - | Stepper控制器 |
+| controller | TStepperController? | - | Stepper控制器 |
 | defaultValue | int? | 0 | 默认值 |
 | disabled | bool | false | 禁用全部操作 |
 | disableInput | bool | false | 禁用输入框 |
 | eventController | StreamController? | - | 事件控制器 |
 | inputWidth | double? | - | 禁用全部操作 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | max | int | 100 | 最大值 |
 | min | int | 0 | 最小值 |
 | onBlur | VoidCallback? | - | 输入框失去焦点时触发 |
 | onChange | ValueChanged? | - | 数值发生变更时触发 |
-| onOverlimit | TDStepperOverlimitFunction? | - | 数值超出限制时触发 |
-| size | TDStepperSize | TDStepperSize.medium | 组件尺寸 |
+| onOverlimit | TStepperOverlimitFunction? | - | 数值超出限制时触发 |
+| size | TStepperSize | TStepperSize.medium | 组件尺寸 |
 | step | int | 1 | 步长 |
-| theme | TDStepperTheme | TDStepperTheme.normal | 组件风格 |
+| theme | TStepperTheme | TStepperTheme.normal | 组件风格 |
 | value | int? | 0 | 值 |
+
+#### TStepperSize
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| small | - |
+| medium | - |
+| large | - |
+
+#### TStepperTheme
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| normal | - |
+| filled | - |
+| outline | - |
+
+#### TStepperIconType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| remove | - |
+| add | - |
+
+#### TStepperOverlimitType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| minus | - |
+| plus | - |
+
+#### TStepperEventType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| cleanValue | - |
+
+#### TStepperOverlimitFunction
+
+##### 类型定义
+
+```dart
+typedef TStepperOverlimitFunction = void Function(TStepperOverlimitType type);
+```
+
+#### TTapFunction
+
+##### 类型定义
+
+```dart
+typedef TTapFunction = void Function();
+```
 
 ## 设计指南
 

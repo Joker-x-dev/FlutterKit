@@ -18,11 +18,11 @@ void main() {
         tester,
         children.toRow(
           key: const ValueKey<String>('row'),
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: .end,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           textDirection: TextDirection.rtl,
-          verticalDirection: VerticalDirection.up,
+          verticalDirection: .up,
           spacing: 12,
         ),
       );
@@ -58,10 +58,8 @@ void main() {
       await tester.pumpWidget(
         Directionality(
           textDirection: TextDirection.ltr,
-          child: <Widget>[const Text('唯一')].toRow(
-            spacing: 8,
-            separator: const Divider(),
-          ),
+          child: <Widget>[const Text('唯一')]
+              .toRow(spacing: 8, separator: const Divider()),
         ),
       );
       expect(tester.widget<Row>(find.byType(Row)).children, hasLength(1));
@@ -98,7 +96,10 @@ void main() {
 
       for (var index = 0; index < cases.length; index++) {
         await tester.pumpWidget(
-          Directionality(textDirection: TextDirection.ltr, child: cases[index]()),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: cases[index](),
+          ),
         );
         final row = tester.widget<Row>(find.byType(Row));
         expect(row.mainAxisAlignment, mainAlignments[index]);
@@ -144,7 +145,10 @@ void main() {
       ];
       for (var index = 0; index < cases.length; index++) {
         await tester.pumpWidget(
-          Directionality(textDirection: TextDirection.ltr, child: cases[index]()),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: cases[index](),
+          ),
         );
         final value = tester.widget<Column>(find.byType(Column));
         expect(value.mainAxisAlignment, mainAlignments[index]);
@@ -172,8 +176,8 @@ void main() {
       const children = <Widget>[Text('甲'), Text('乙')];
       final widgets = <Widget>[
         children.toWrap(
-          direction: Axis.vertical,
-          alignment: WrapAlignment.end,
+          direction: .vertical,
+          alignment: .end,
           spacing: 7,
           runSpacing: 9,
         ),
@@ -189,7 +193,10 @@ void main() {
       ];
       for (var index = 0; index < widgets.length; index++) {
         await tester.pumpWidget(
-          Directionality(textDirection: TextDirection.ltr, child: widgets[index]),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: widgets[index],
+          ),
         );
         final wrap = tester.widget<Wrap>(find.byType(Wrap));
         expect(wrap.direction, expectedDirections[index]);
@@ -201,13 +208,13 @@ void main() {
       const children = <Widget>[SizedBox(width: 10, height: 10)];
       final widgets = <Widget>[
         children.toStack(
-          alignment: Alignment.bottomRight,
-          fit: StackFit.loose,
-          clipBehavior: Clip.none,
+          alignment: .bottomRight,
+          fit: .loose,
+          clipBehavior: .none,
         ),
         children.toCenterStack(),
         children.toExpandedStack(),
-        children.toClippedStack(clipBehavior: Clip.antiAlias),
+        children.toClippedStack(clipBehavior: .antiAlias),
       ];
       for (final widget in widgets) {
         await tester.pumpWidget(
@@ -218,7 +225,10 @@ void main() {
       await tester.pumpWidget(
         Directionality(textDirection: TextDirection.ltr, child: widgets.last),
       );
-      expect(tester.widget<Stack>(find.byType(Stack)).clipBehavior, Clip.antiAlias);
+      expect(
+        tester.widget<Stack>(find.byType(Stack)).clipBehavior,
+        Clip.antiAlias,
+      );
     });
   });
 }

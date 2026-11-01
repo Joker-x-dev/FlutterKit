@@ -56,26 +56,21 @@ class RequestHelper<T> {
   /// 创建网络请求链式辅助类
   ///
   /// [_promise] 待执行的网络请求。
-  /// [loading] 是否显示加载提示。
-  /// [toast] 是否使用 Toast 展示错误。
-  /// [dialog] 是否使用对话框展示错误。
-  /// [errorMsg] 自定义错误提示信息。
-  /// [onStart] 请求开始回调。
-  /// [onError] 请求失败回调。
+  /// [_loading] 是否显示加载提示。
+  /// [_toast] 是否使用 Toast 展示错误。
+  /// [_dialog] 是否使用对话框展示错误。
+  /// [_errorMsg] 自定义错误提示信息。
+  /// [_onStart] 请求开始回调。
+  /// [_onError] 请求失败回调。
   const RequestHelper._(
     this._promise, {
-    bool loading = false,
-    bool toast = false,
-    bool dialog = false,
-    String? errorMsg,
-    VoidCallback? onStart,
-    void Function(String message, dynamic error)? onError,
-  }) : _loading = loading,
-       _toast = toast,
-       _dialog = dialog,
-       _errorMsg = errorMsg,
-       _onStart = onStart,
-       _onError = onError;
+    this._loading = false,
+    this._toast = false,
+    this._dialog = false,
+    this._errorMsg,
+    this._onStart,
+    this._onError,
+  });
 
   /// 从仓库返回的 [Future<BaseResponse<T>>] 创建请求辅助类
   ///

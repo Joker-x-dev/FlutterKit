@@ -27,15 +27,18 @@ class ProfileView extends BaseView<ProfileLogic> {
     return Obx(() {
       // View 只读取 State；空值、加载和提交逻辑由 Logic 处理。
       final User? user = logic.state.user.value;
-      return TDCellGroup(
-        theme: TDCellGroupTheme.cardTheme,
+      return TCellGroup(
+        variant: TCellGroupVariant.card,
         cells: [
-          TDCell(title: '昵称', note: user?.nickName ?? '未设置'),
-          TDCell(
-            title: '编辑资料',
+          TCell(
+            title: const Text('昵称'),
+            note: Text(user?.nickName ?? '未设置'),
+          ),
+          TCell(
+            title: const Text('编辑资料'),
             arrow: true,
             // 用户事件只委托给 Logic。
-            onClick: (_) => logic.openEditPage(),
+            onTap: logic.openEditPage,
           ),
         ],
       ).scrollable(padding: pageVerticalPadding);
@@ -52,10 +55,10 @@ class ProfileView extends BaseView<ProfileLogic> {
 /// 静态页面骨架无需重建，只有按钮状态订阅 saving。
 Widget buildSaveButton(ProfileLogic logic) {
   return Obx(
-    () => TDButton(
-      text: logic.state.saving.value ? '保存中' : '保存',
+    () => TButton(
       // 进行中时禁用重复提交。
-      onTap: logic.state.saving.value ? null : logic.save,
+      onPressed: logic.state.saving.value ? null : logic.save,
+      child: Text(logic.state.saving.value ? '保存中' : '保存'),
     ),
   );
 }

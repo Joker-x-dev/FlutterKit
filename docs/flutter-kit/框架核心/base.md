@@ -52,14 +52,13 @@ BaseDialog (StatelessWidget)
 
 ## BaseView
 
-`BaseView<T>` 基于 `GetView<T>`，统一页面 `Scaffold`、TDesign 导航栏、底部区域、悬浮按钮、保活与主题访问。正常路由由 Binding 注册 Logic；Preview 和测试可以通过构造参数注入 Logic。
+`BaseView<T>` 基于 `GetView<T>`，统一页面 `Scaffold`、TDesign 导航栏、底部区域、悬浮按钮与保活。正常路由由 Binding 注册 Logic；Preview 和测试可以通过构造参数注入 Logic。主题不由 `BaseView` 声明成员，页面与普通 Widget 均直接使用顶层 `appTheme` getter。
 
 | 重写点或成员 | 默认值 | 用途 |
 | --- | --- | --- |
 | `logic` 构造参数 | `null` | 非空时优先使用注入实例；否则从 GetX 查找 Controller |
 | `logic` getter | `controller` | 页面业务代码读取当前 Logic 的推荐名称 |
-| `appTheme` | 当前 `AppTheme` | 获取语义色、字体和尺寸 |
-| `navTitle` | `null` | `TDNavBar` 标题 |
+| `navTitle` | `null` | `TNavBar` 标题 |
 | `navBackBtn` / `useDefaultBack` | `true` / `true` | 返回按钮显示与默认行为 |
 | `navHeight` | `44` | 导航栏高度 |
 | `rightBarItems` / `navBottomWidget` | `null` | 右侧操作与导航栏下方内容 |

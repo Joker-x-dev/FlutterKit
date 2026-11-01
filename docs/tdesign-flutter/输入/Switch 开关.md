@@ -2,8 +2,8 @@
 
 > 用于控制某个功能的开启和关闭。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/switch)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Switch 开关](https://tdesign.tencent.com/flutter/components/switch)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,9 +27,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithBase(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '基础开关',
-      noteWidget: TDSwitch(),
+      noteWidget: TSwitch(),
     );
   }
 ```
@@ -38,11 +38,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithText(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '带文字开关',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         isOn: true,
-        type: TDSwitchType.text,
+        type: TSwitchType.text,
       ),
     );
   }
@@ -51,11 +51,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithIcon(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '带图标开关',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         isOn: true,
-        type: TDSwitchType.icon,
+        type: TSwitchType.icon,
       ),
     );
   }
@@ -65,9 +65,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithColor(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '自定义颜色开关',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         isOn: true,
         trackOnColor: Colors.green,
       ),
@@ -81,11 +81,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithLoadingOff(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '加载状态',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         isOn: false,
-        type: TDSwitchType.loading,
+        type: TSwitchType.loading,
       ),
     );
   }
@@ -94,11 +94,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithLoadingOn(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '加载状态',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         isOn: true,
-        type: TDSwitchType.loading,
+        type: TSwitchType.loading,
       ),
     );
   }
@@ -108,9 +108,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithDisableOff(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '禁用状态',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         enable: false,
         isOn: false,
       ),
@@ -121,9 +121,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithDisableOn(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '禁用状态',
-      noteWidget: TDSwitch(
+      noteWidget: TSwitch(
         enable: false,
         isOn: true,
       ),
@@ -137,10 +137,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithSizeLarge(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '大尺寸32',
-      noteWidget: TDSwitch(
-        size: TDSwitchSize.large,
+      noteWidget: TSwitch(
+        size: TSwitchSize.large,
         isOn: true,
       ),
     );
@@ -150,10 +150,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithSizeMed(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '中尺寸28',
-      noteWidget: TDSwitch(
-        size: TDSwitchSize.medium,
+      noteWidget: TSwitch(
+        size: TSwitchSize.medium,
         isOn: true,
       ),
     );
@@ -163,10 +163,10 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSwitchWithSizeSmall(BuildContext context) {
-    return const TDCell(
+    return const TCell(
       title: '小尺寸24',
-      noteWidget: TDSwitch(
-        size: TDSwitchSize.small,
+      noteWidget: TSwitch(
+        size: TSwitchSize.small,
         isOn: true,
       ),
     );
@@ -175,9 +175,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDSwitch](#tdswitch)
+1. [TSwitch](#tswitch)
+2. [TSwitchSize](#tswitchsize)
+3. [TSwitchType](#tswitchtype)
+4. [OnSwitchChanged](#onswitchchanged)
 
-#### TDSwitch
+#### TSwitch
 
 ##### 默认构造方法
 
@@ -186,17 +189,46 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 | closeText | String? | - | 关闭文案 |
 | enable | bool | true | 是否可点击 |
 | isOn | bool | false | 是否打开 |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | onChanged | OnSwitchChanged? | - | 改变事件 |
 | openText | String? | - | 打开文案 |
-| size | TDSwitchSize? | TDSwitchSize.medium | 尺寸：大、中、小 |
+| size | TSwitchSize? | TSwitchSize.medium | 尺寸：大、中、小 |
 | thumbContentOffColor | Color? | - | 关闭时ThumbView的颜色 |
 | thumbContentOffFont | TextStyle? | - | 关闭时ThumbView的字体样式 |
 | thumbContentOnColor | Color? | - | 开启时ThumbView的颜色 |
 | thumbContentOnFont | TextStyle? | - | 开启时ThumbView的字体样式 |
 | trackOffColor | Color? | - | 关闭时轨道颜色 |
 | trackOnColor | Color? | - | 开启时轨道颜色 |
-| type | TDSwitchType? | TDSwitchType.fill | 类型：填充、文本、加载 |
+| type | TSwitchType? | TSwitchType.fill | 类型：填充、文本、加载 |
+
+#### TSwitchSize
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| large | - |
+| medium | - |
+| small | - |
+
+#### TSwitchType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| fill | - |
+| text | - |
+| loading | - |
+| icon | - |
+
+#### OnSwitchChanged
+
+##### 类型定义
+
+```dart
+typedef OnSwitchChanged = bool Function(bool value);
+```
 
 ## 设计指南
 

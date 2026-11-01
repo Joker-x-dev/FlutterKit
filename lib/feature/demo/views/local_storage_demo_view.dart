@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/data/preview/user_preview_data.dart';
@@ -6,8 +5,10 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/design_system/widgets/space.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
+import 'package:flutter_kit/core/ui/widgets/rounded_cell_group.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/local_storage_demo_logic.dart';
 
@@ -37,10 +38,9 @@ class LocalStorageDemoView extends BaseView<LocalStorageDemoLogic> {
                 _buildActionButtons(),
                 const SpaceVerticalLarge(),
                 if (logic.user.value == null)
-                  TDEmpty(emptyText: DemoKeys.storageNoData.tr)
+                  TEmpty(emptyText: DemoKeys.storageNoData.tr)
                 else
-                  TDCellGroup(
-                    theme: TDCellGroupTheme.cardTheme,
+                  RoundedCellGroup(
                     cells: [
                       _infoCell(
                         DemoKeys.storageUserId.tr,
@@ -58,7 +58,7 @@ class LocalStorageDemoView extends BaseView<LocalStorageDemoLogic> {
                   ),
               ]
               .toColumnStart(spacing: spaceVerticalMedium)
-              .scrollable(padding: pageVerticalPadding),
+              .scrollable(padding: pageVerticalPaddingWithInset),
     );
   }
 
@@ -69,20 +69,20 @@ class LocalStorageDemoView extends BaseView<LocalStorageDemoLogic> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final buttons = <Widget>[
-          TDButton(
-            text: DemoKeys.storageSave.tr,
-            theme: TDButtonTheme.primary,
-            onTap: logic.saveUser,
+          TButton(
+            colorPreset: TButtonColorPreset.primary,
+            onPressed: logic.saveUser,
+            child: Text(DemoKeys.storageSave.tr),
           ),
-          TDButton(
-            text: DemoKeys.storageRead.tr,
-            theme: TDButtonTheme.defaultTheme,
-            onTap: logic.readUser,
+          TButton(
+            colorPreset: TButtonColorPreset.defaultTheme,
+            onPressed: logic.readUser,
+            child: Text(DemoKeys.storageRead.tr),
           ),
-          TDButton(
-            text: DemoKeys.storageClear.tr,
-            theme: TDButtonTheme.danger,
-            onTap: logic.clearUser,
+          TButton(
+            colorPreset: TButtonColorPreset.danger,
+            onPressed: logic.clearUser,
+            child: Text(DemoKeys.storageClear.tr),
           ),
         ];
 
@@ -111,8 +111,8 @@ class LocalStorageDemoView extends BaseView<LocalStorageDemoLogic> {
   /// [value] 字段值。
   ///
   /// 返回 TDesign 单元格。
-  TDCell _infoCell(String label, String value) {
-    return TDCell(title: label, note: value);
+  TCell _infoCell(String label, String value) {
+    return TCell(title: Text(label), note: Text(value));
   }
 }
 

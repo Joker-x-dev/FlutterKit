@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/data/preview/goods_preview_data.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -28,72 +27,66 @@ class GoodsListCard extends StatelessWidget {
   /// [context] 当前构建上下文。
   @override
   Widget build(BuildContext context) {
-    return TDCell(
-      align: TDCellAlign.top,
-      bordered: false,
-      imageWidget: _buildProductImage(),
-      titleWidget: _buildTitle(context),
-      descriptionWidget: _buildProductDescription(context),
+    return TCell(
+      align: TCellAlign.top,
+      image: _buildProductImage(),
+      title: _buildTitle(),
+      subtitle: _buildProductDescription(),
     ).clipRadius(radiusLarge);
   }
 
   /// 构建商品图片
   Widget _buildProductImage() {
     // 如果有主图，显示图片
-    return TDImage(imgUrl: goods.mainPic, width: spacer96, height: spacer96);
+    return TImage(src: goods.mainPic, width: spacer96, height: spacer96);
   }
 
   /// 构建商品描述
-  ///
-  /// [context] 当前构建上下文。
-  Widget _buildProductDescription(BuildContext context) {
+  Widget _buildProductDescription() {
     return [
       // 副标题（如果有）
       if (goods.subTitle?.isNotEmpty == true) ...[
-        TDText(
-          goods.subTitle,
-          font: AppTheme.of(context).fontBodySmall,
-          textColor: AppTheme.of(context).textSecondary,
+        TText(
+          goods.subTitle ?? '',
+          font: appTheme.fontBodySmall,
+          style: TextStyle(color: appTheme.textSecondary),
           maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          overflow: .ellipsis,
         ),
         const SpaceVerticalXSmall(),
       ],
 
       [
-        _buildPriceInfo(context),
-        TDText(
+        _buildPriceInfo(),
+        TText(
           CommonKeys.goodsSold.trArgs([goods.sold.toString()]),
-          font: AppTheme.of(context).fontMarkSmall,
-          textColor: AppTheme.of(context).textPlaceholder,
+          font: appTheme.fontMarkSmall,
+          style: TextStyle(color: appTheme.textPlaceholder),
         ),
       ].toRowBetween(),
     ].toColumnStart();
   }
 
   /// 构建商品标题
-  ///
-  /// [context] 当前构建上下文。
-  Widget _buildTitle(BuildContext context) {
-    return TDText(
+  Widget _buildTitle() {
+    return TText(
       goods.title,
-      font: AppTheme.of(context).fontTitleMedium,
-      textColor: AppTheme.of(context).textPrimary,
-      fontWeight: AppTheme.of(context).fontWeightBold,
+      font: appTheme.fontTitleMedium,
+      style: TextStyle(color: appTheme.textPrimary),
       maxLines: 2,
-      overflow: TextOverflow.ellipsis,
+      overflow: .ellipsis,
     );
   }
 
   /// 构建价格信息
-  ///
-  /// [context] 当前构建上下文。
-  Widget _buildPriceInfo(BuildContext context) {
-    return TDText(
+  Widget _buildPriceInfo() {
+    return TText(
       '¥${(goods.price).toStringAsFixed(2)}',
-      font: AppTheme.of(context).fontTitleLarge,
-      textColor: AppTheme.of(context).error,
-      fontWeight: AppTheme.of(context).fontWeightBold,
+      font: appTheme.fontTitleLarge,
+      style: TextStyle(
+        color: appTheme.error,
+        fontWeight: appTheme.fontWeightBold,
+      ),
     );
   }
 }

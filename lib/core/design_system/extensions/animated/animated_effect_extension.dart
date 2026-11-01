@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'animation_context.dart';
 
@@ -154,7 +153,7 @@ extension AnimatedEffectExtension on Widget {
               ? minHeight + (maxHeight - minHeight) * value
               : maxHeight,
           alignment: alignment,
-          fit: OverflowBoxFit.deferToChild,
+          fit: .deferToChild,
           child: animatedChild,
         ),
         child: child,

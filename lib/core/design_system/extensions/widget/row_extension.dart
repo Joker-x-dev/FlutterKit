@@ -38,7 +38,7 @@ extension RowExtension on List<Widget> {
     Widget? separator,
   }) {
     List<Widget> finalChildren = this;
-    
+
     // 处理间距
     if (spacing != null && spacing > 0 && length > 1) {
       finalChildren = [];
@@ -49,7 +49,7 @@ extension RowExtension on List<Widget> {
         }
       }
     }
-    
+
     // 处理自定义分隔符
     if (separator != null && length > 1) {
       finalChildren = [];
@@ -63,7 +63,7 @@ extension RowExtension on List<Widget> {
         }
       }
     }
-    
+
     return Row(
       key: key,
       mainAxisAlignment: mainAxisAlignment,
@@ -105,9 +105,9 @@ extension RowExtension on List<Widget> {
   }) {
     return toRow(
       key: key,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       mainAxisSize: mainAxisSize,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: .center,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
@@ -146,7 +146,7 @@ extension RowExtension on List<Widget> {
   }) {
     return toRow(
       key: key,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: .spaceBetween,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       textDirection: textDirection,
@@ -188,7 +188,7 @@ extension RowExtension on List<Widget> {
   }) {
     return toRow(
       key: key,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: .spaceAround,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       textDirection: textDirection,
@@ -230,7 +230,7 @@ extension RowExtension on List<Widget> {
   }) {
     return toRow(
       key: key,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: .spaceEvenly,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       textDirection: textDirection,
@@ -274,7 +274,7 @@ extension RowExtension on List<Widget> {
       key: key,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
@@ -316,7 +316,7 @@ extension RowExtension on List<Widget> {
       key: key,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: .end,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
@@ -358,7 +358,7 @@ extension RowExtension on List<Widget> {
       key: key,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: .stretch,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,

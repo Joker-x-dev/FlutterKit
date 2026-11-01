@@ -41,6 +41,9 @@ enum DemoAction {
   /// 屏幕适配示例
   screenAdapt,
 
+  /// 嵌套滚动示例
+  nestedScrollDemo,
+
   /// 语言与主题示例
   theme,
 }

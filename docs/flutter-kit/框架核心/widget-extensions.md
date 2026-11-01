@@ -18,12 +18,13 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 | 间距 | `padding_extension.dart` | `pad`、`padAll`、`padSymmetric`、`padHorizontal`、`padVertical` | `Padding` |
 | 装饰 | `decoration_extension.dart` | `backgroundColor`、`backgroundGradient`、`border`、`boxShadow`、`elevation` | `DecoratedBox`、`Material` |
 | 裁剪 | `clip_extension.dart` | `clipRRect`、`clipRadius`、`clipCircle`、`clipPath` | `ClipRRect`、`ClipOval`、`ClipPath` |
-| 滚动 | `scroll_extension.dart` | `scrollable`、`verticalScroll`、`horizontalScroll`、`bouncingScroll` | `SingleChildScrollView` |
+| 滚动 | `scroll_extension.dart` | `scrollable`、`singleScroll`、`verticalScroll`、`horizontalScroll`、`customScroll`、`nestedScroll` | `SingleChildScrollView`、`CustomScrollView`、`NestedScrollView` |
+| Sliver 包装 | `sliver_extension.dart` | `sliverToBoxAdapter`、`sliverPadding`、`sliverOverlapAbsorber` | `SliverToBoxAdapter`、`SliverPadding`、`SliverOverlapAbsorber` |
 | 手势 | `gesture_extension.dart` | `onTap`、`onLongPress`、`gestures`、`onScale` | `GestureDetector` |
 | 列表与网格 | `list_view_extension.dart`、`grid_view_extension.dart` | `toListView`、`toListViewSeparated`、`toGridView` | `ListView`、`GridView` |
 | 文本 | `text_extension.dart`、`text_span_extension.dart` | `bold`、`fontSize`、`textColor`、`textStyle` | `Text.copyWith` |
 | 变换与效果 | `transform_extension.dart`、`effect_extension.dart` | `rotate`、`scale`、`translate`、`opacity`、`blur`、`ripple` | `Transform`、`Opacity`、`ImageFiltered`、`InkWell` |
-| 语义与工具 | `utility_extension.dart`、`icon_extension.dart`、`keep_alive_extension.dart` | `visibility`、`semantics`、图标样式、`keepAlive` | Flutter 对应组件与 KeepAlive 包装 |
+| 语义与工具 | `utility_extension.dart`、`icon_extension.dart`、`keep_alive_extension.dart` | `repaintBoundary`、`keyed`、`visibility`、`semantics`、图标样式、`keepAlive` | Flutter 对应组件与 KeepAlive 包装 |
 
 ## 链式顺序决定 Widget 树
 
@@ -31,12 +32,12 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 
 ```dart
 /// 圆角背景卡片，背景本身被裁剪。
-Widget buildClippedCard(AppTheme theme) {
+Widget buildClippedCard() {
   return const Text('内容')
       // 第一步：文字外层加内边距。
       .padAll(spacePaddingLarge)
       // 第二步：Padding 外层绘制容器背景。
-      .backgroundColor(theme.backgroundContainer)
+      .backgroundColor(appTheme.backgroundContainer)
       // 第三步：裁剪最外层背景和内容，圆角真正生效。
       .clipRadius(radiusLarge);
 }
@@ -50,9 +51,9 @@ Widget buildClippedCard(AppTheme theme) {
 
 ```dart
 /// 使用 List<Widget> 扩展构建标准纵向页面。
-Widget buildPage(AppTheme theme) {
+Widget buildPage() {
   return <Widget>[
-    TDText('标题', font: theme.fontTitleLarge),
+    TText('标题', font: appTheme.fontTitleLarge),
     const SpaceVerticalLarge(),
     const Text('正文内容'),
   ]
@@ -60,7 +61,7 @@ Widget buildPage(AppTheme theme) {
       .toColumnStretch()
       // 可滚动容器统一补页面边距。
       .scrollable(padding: pagePadding)
-      .backgroundColor(theme.backgroundPage);
+      .backgroundColor(appTheme.backgroundPage);
 }
 ```
 
@@ -68,10 +69,10 @@ Widget buildPage(AppTheme theme) {
 
 ```dart
 /// 点击区域包住完整卡片，不只包住文本。
-Widget buildActionCard(AppTheme theme, VoidCallback onTap) {
+Widget buildActionCard(VoidCallback onTap) {
   return const Text('打开详情')
       .padAll(spacePaddingLarge)
-      .backgroundColor(theme.backgroundContainer)
+      .backgroundColor(appTheme.backgroundContainer)
       .clipRadius(radiusDefault)
       // GestureDetector 放在最外层，整张卡片都可响应点击。
       .onTap(onTap);
@@ -93,7 +94,7 @@ Widget buildGoodsGrid(List<Goods> goods) {
 
 ## 何时使用原生 Widget
 
-- 父子约束需要一眼可见，例如复杂 `CustomScrollView`、Sliver、嵌套滚动和 `LayoutBuilder`。
+- 依赖 builder、delegate 或共享 handle 驱动构建且当前对象不是直接子组件，例如 `ValueListenableBuilder`、`SliverPersistentHeader`、`SliverOverlapInjector` 和 `SliverGrid`。
 - 需要精确管理 `Key`、`RenderObject`、动画状态或调试 Widget 树。
 - 链条超过三到四层且阅读负担大时，拆成有变量名的原生 Widget 树。
 - 团队 API 未覆盖的 Flutter 能力，直接使用官方 Widget，不要临时在页面复制扩展实现。

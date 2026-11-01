@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/application.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
+import 'package:flutter_kit/core/ui/widgets/rounded_cell_group.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../models/demo_item.dart';
@@ -16,7 +16,7 @@ class DemoListGroup extends StatelessWidget {
   final List<DemoItem> items;
 
   /// 列表头部附加单元格
-  final List<TDCell> leadingCells;
+  final List<TCell> leadingCells;
 
   /// 右侧组件构建器
   final Widget? Function(BuildContext context, int index, DemoItem item)?
@@ -39,23 +39,19 @@ class DemoListGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final localeTag = Application.locale.value.toLanguageTag();
-      final itemCells = List<TDCell>.generate(items.length, (index) {
+      final itemCells = List<TCell>.generate(items.length, (index) {
         final item = items[index];
-        final isLastItem = index == items.length - 1;
         return DemoCard.buildCell(
-          context,
           title: item.localizedTitle,
           description: item.localizedDescription,
           icon: item.icon,
           onTap: onItemTap == null ? null : () => onItemTap!(item),
           trailing: trailingBuilder?.call(context, index, item),
-          bordered: !isLastItem,
         );
       });
 
-      return TDCellGroup(
+      return RoundedCellGroup(
         key: ValueKey<String>(localeTag),
-        theme: TDCellGroupTheme.cardTheme,
         cells: [...leadingCells, ...itemCells],
       );
     });

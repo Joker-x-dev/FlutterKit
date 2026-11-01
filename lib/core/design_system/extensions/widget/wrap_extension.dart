@@ -42,7 +42,7 @@ extension WrapExtension on List<Widget> {
   ///   Container(width: 50, height: 60, color: Colors.green),
   /// ].toWrap(
   ///   direction: Axis.vertical,
-  ///   alignment: WrapAlignment.center,
+  ///   alignment: .center,
   ///   spacing: 10.0,
   /// )
   ///
@@ -52,8 +52,8 @@ extension WrapExtension on List<Widget> {
   ///   ElevatedButton(onPressed: () {}, child: Text('按钮2')),
   ///   ElevatedButton(onPressed: () {}, child: Text('按钮3')),
   /// ].toWrap(
-  ///   alignment: WrapAlignment.center,
-  ///   runAlignment: WrapAlignment.center,
+  ///   alignment: .center,
+  ///   runAlignment: .center,
   ///   spacing: 12.0,
   ///   runSpacing: 8.0,
   /// )
@@ -201,9 +201,9 @@ extension WrapExtension on List<Widget> {
     return Wrap(
       key: key,
       direction: direction,
-      alignment: WrapAlignment.center,
+      alignment: .center,
       spacing: spacing,
-      runAlignment: WrapAlignment.center,
+      runAlignment: .center,
       runSpacing: runSpacing,
       crossAxisAlignment: crossAxisAlignment,
       children: this,
@@ -242,7 +242,7 @@ extension WrapExtension on List<Widget> {
   /// ].toVerticalWrap(
   ///   spacing: 12.0,
   ///   runSpacing: 16.0,
-  ///   alignment: WrapAlignment.center,
+  ///   alignment: .center,
   /// )
   ///
   /// // 垂直的按钮列表
@@ -252,7 +252,7 @@ extension WrapExtension on List<Widget> {
   ///   ElevatedButton(onPressed: () {}, child: Text('操作3')),
   /// ].toVerticalWrap(
   ///   spacing: 8.0,
-  ///   crossAxisAlignment: WrapCrossAlignment.center,
+  ///   crossAxisAlignment: .center,
   /// )
   /// ```
   Widget toVerticalWrap({
@@ -265,7 +265,7 @@ extension WrapExtension on List<Widget> {
   }) {
     return Wrap(
       key: key,
-      direction: Axis.vertical,
+      direction: .vertical,
       alignment: alignment,
       spacing: spacing,
       runAlignment: runAlignment,

@@ -6,7 +6,7 @@ FlutterKit 的设计系统位于 `lib/core/design_system/`。它不是另一个�
 
 | 位置 | 提供内容 | 页面使用方式 |
 | --- | --- | --- |
-| `theme/app_theme.dart` | 主题语义色、字体、Material 主题适配 | `appTheme.textPrimary`、`AppTheme.of(context)` |
+| `theme/app_theme.dart` | 主题语义色、字体、Material 主题适配 | 顶层 `appTheme.textPrimary` |
 | `theme/size.dart` | TDesign 间距与语义化 `EdgeInsets` | `pagePadding`、`listItemPadding` |
 | `theme/shape.dart` | 圆角与 `RoundedRectangleBorder` | `radiusLarge`、`largeRoundedShape` |
 | `theme/shadows.dart` | TDesign 阴影与常用 `BoxDecoration` | `shadowBase`、`cardShadow` |
@@ -14,7 +14,7 @@ FlutterKit 的设计系统位于 `lib/core/design_system/`。它不是另一个�
 | `widgets/space.dart` | 固定水平/垂直留白 Widget | `SpaceVerticalLarge()` |
 | `extensions/` | Widget、列表和动画链式包装 | `.padAll()`、`.scrollable()` |
 
-所有大小和形状 getter 都通过 `TDTheme.of(Get.context!)` 读取当前主题。因此页面应在 build 过程中读取它们，不能在静态字段或应用启动前缓存。
+所有大小和形状 getter 都通过 `Get.context!.tTheme` 读取当前主题。因此页面应在 build 过程中读取它们，不能在静态字段或应用启动前缓存。
 
 ## 资源和语义选择
 
@@ -33,14 +33,14 @@ FlutterKit 的设计系统位于 `lib/core/design_system/`。它不是另一个�
 
 ```dart
 /// 设置页面内容区，组合项目语义色、间距与链式布局。
-Widget buildSettingsBody(AppTheme appTheme) {
+Widget buildSettingsBody() {
   return <Widget>[
-    TDText('账号设置', font: appTheme.fontTitleLarge),
+    TText('账号设置', font: appTheme.fontTitleLarge),
     // 固定模块内间距使用语义化 Space 组件。
     const SpaceVerticalLarge(),
-    TDCellGroup(
-      theme: TDCellGroupTheme.cardTheme,
-      cells: const [TDCell(title: '个人资料', arrow: true)],
+    TCellGroup(
+      variant: TCellGroupVariant.card,
+      cells: const [TCell(title: Text('个人资料'), arrow: true)],
     ),
   ]
       // List<Widget> 扩展负责 Column，不需要手写 children。
@@ -65,7 +65,7 @@ Widget buildLabel() => <Widget>[
 
 ## 设计系统与 TDesign 的边界
 
-- TDesign 负责标准业务组件，如 `TDCell`、`TDButton`、`TDNavBar` 和 `TDEmpty`。
+- TDesign 负责标准业务组件，如 `TCell`、`TButton`、`TNavBar` 和 `TEmpty`。
 - FlutterKit 负责将这些组件接入主题、父类和页面规范，并提供项目通用扩展。
 - 业务组件的固定结构放在对应 Feature 的 `widgets/`；不要为了一个页面专用结构新增 core 组件。
 

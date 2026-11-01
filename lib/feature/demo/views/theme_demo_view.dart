@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/application.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
@@ -8,8 +7,10 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/design_system/theme/theme_color_preset.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
+import 'package:flutter_kit/core/ui/widgets/rounded_cell_group.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/theme_demo_logic.dart';
 
@@ -41,7 +42,7 @@ class ThemeDemoView extends BaseView<ThemeDemoLogic> {
         _buildLanguageGroup(locale),
         _buildThemeModeGroup(themeMode, systemBrightness),
         _buildThemeColorGroup(themeColorName),
-      ].toColumnStretch().scrollable(padding: pageVerticalPadding);
+      ].toColumnStretch().scrollable(padding: pageVerticalPaddingWithInset);
     });
   }
 
@@ -52,15 +53,14 @@ class ThemeDemoView extends BaseView<ThemeDemoLogic> {
     final languageName = locale.languageCode == 'zh'
         ? DemoKeys.languageChinese.tr
         : DemoKeys.languageEnglish.tr;
-    return TDCellGroup(
-      title: DemoKeys.languageSettingTitle.tr,
-      theme: TDCellGroupTheme.cardTheme,
+    return RoundedCellGroup(
+      title: Text(DemoKeys.languageSettingTitle.tr),
       cells: [
-        TDCell(
-          title: DemoKeys.currentLanguage.tr,
-          note: languageName,
+        TCell(
+          title: Text(DemoKeys.currentLanguage.tr),
+          note: Text(languageName),
           arrow: true,
-          onClick: (_) => unawaited(logic.toggleLocale()),
+          onTap: () => unawaited(logic.toggleLocale()),
         ),
       ],
     );
@@ -74,40 +74,34 @@ class ThemeDemoView extends BaseView<ThemeDemoLogic> {
     ThemeMode themeMode,
     Brightness systemBrightness,
   ) {
-    return TDCellGroup(
-      title: DemoKeys.darkModeSettingTitle.tr,
-      theme: TDCellGroupTheme.cardTheme,
+    return RoundedCellGroup(
+      title: Text(DemoKeys.darkModeSettingTitle.tr),
       cells: [
-        TDCell(
-          title: DemoKeys.themeModeSystem.tr,
-          description: DemoKeys.themeModeSystemDesc.tr,
-          rightIconWidget: TDSwitch(
-            isOn: themeMode == ThemeMode.system,
+        TCell(
+          title: Text(DemoKeys.themeModeSystem.tr),
+          subtitle: Text(DemoKeys.themeModeSystemDesc.tr),
+          trailing: TSwitch(
+            value: themeMode == ThemeMode.system,
             onChanged: (isOn) {
               unawaited(logic.updateFollowSystem(isOn, systemBrightness));
-              return true;
             },
           ),
         ),
-        TDCell(
-          title: DemoKeys.themeModeLight.tr,
-          leftIcon: TDIcons.mode_light,
-          rightIcon: _enabledModeCheckIcon(
-            themeMode,
-            ThemeMode.light,
-            systemBrightness,
+        TCell(
+          title: Text(DemoKeys.themeModeLight.tr),
+          prefix: const Icon(TIcons.mode_light),
+          trailing: _buildModeCheckIcon(
+            _enabledModeCheckIcon(themeMode, ThemeMode.light, systemBrightness),
           ),
-          onClick: (_) => unawaited(logic.updateThemeMode(ThemeMode.light)),
+          onTap: () => unawaited(logic.updateThemeMode(ThemeMode.light)),
         ),
-        TDCell(
-          title: DemoKeys.themeModeDark.tr,
-          leftIcon: TDIcons.mode_dark,
-          rightIcon: _enabledModeCheckIcon(
-            themeMode,
-            ThemeMode.dark,
-            systemBrightness,
+        TCell(
+          title: Text(DemoKeys.themeModeDark.tr),
+          prefix: const Icon(TIcons.mode_dark),
+          trailing: _buildModeCheckIcon(
+            _enabledModeCheckIcon(themeMode, ThemeMode.dark, systemBrightness),
           ),
-          onClick: (_) => unawaited(logic.updateThemeMode(ThemeMode.dark)),
+          onTap: () => unawaited(logic.updateThemeMode(ThemeMode.dark)),
         ),
       ],
     );
@@ -117,16 +111,17 @@ class ThemeDemoView extends BaseView<ThemeDemoLogic> {
   ///
   /// [selectedColorName] 当前主题颜色名称。
   Widget _buildThemeColorGroup(String selectedColorName) {
-    return TDCellGroup(
-      title: DemoKeys.themeColorSettingTitle.tr,
-      theme: TDCellGroupTheme.cardTheme,
+    return RoundedCellGroup(
+      title: Text(DemoKeys.themeColorSettingTitle.tr),
       cells: logic.themeDemoState.themeColors.map((preset) {
-        return TDCell(
-          title: _themeColorTitle(preset).tr,
-          description: _themeColorDescription(preset).tr,
-          leftIconWidget: _buildThemeColorPreview(preset.previewColor),
-          rightIcon: selectedColorName == preset.name ? TDIcons.check : null,
-          onClick: (_) => unawaited(logic.updateThemeColor(preset)),
+        return TCell(
+          title: Text(_themeColorTitle(preset).tr),
+          subtitle: Text(_themeColorDescription(preset).tr),
+          prefix: _buildThemeColorPreview(preset.previewColor),
+          trailing: selectedColorName == preset.name
+              ? const Icon(TIcons.check)
+              : null,
+          onTap: () => unawaited(logic.updateThemeColor(preset)),
         );
       }).toList(),
     );
@@ -178,7 +173,14 @@ class ThemeDemoView extends BaseView<ThemeDemoLogic> {
               ? ThemeMode.dark
               : ThemeMode.light
         : themeMode;
-    return effectiveMode == targetMode ? TDIcons.check : null;
+    return effectiveMode == targetMode ? TIcons.check : null;
+  }
+
+  /// 构建主题模式选中图标。
+  ///
+  /// [icon] 当前模式对应的图标数据。
+  Widget? _buildModeCheckIcon(IconData? icon) {
+    return icon == null ? null : Icon(icon);
   }
 }
 

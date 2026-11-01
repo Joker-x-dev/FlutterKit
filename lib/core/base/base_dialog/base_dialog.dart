@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
@@ -36,20 +35,19 @@ abstract class BaseDialog extends StatelessWidget {
 
   /// 顶部导航栏内容 子类可根据需求重写
   Widget? head() {
-    return TDNavBar(
-      title: title,
-      screenAdaptation: false,
+    return TNavBar(
+      title: TText(title),
       useDefaultBack: false,
       height: spacer48,
-      belowTitleWidget: const TDDivider(),
-      rightBarItems: close
+      belowTitleWidget: const TDivider(),
+      actions: close
           ? [
-              TDNavBarItem(
-                iconWidget:
+              TNavBarItem(
+                customWidget:
                     Icon(
                           Icons.close,
                           size: spacer24,
-                          color: AppTheme.of(Get.context!).textPrimary,
+                          color: appTheme.textPrimary,
                         )
                         .ripple()
                         .clipRadius(radiusSmall)
@@ -75,7 +73,6 @@ abstract class BaseDialog extends StatelessWidget {
 
   /// 展示dialog
   Future<void> show() {
-    final appTheme = AppTheme.of(Get.context!);
     return Get.bottomSheet(
       // 设置是否可通过点击外部关闭
       isDismissible: isDismissible,
@@ -89,7 +86,7 @@ abstract class BaseDialog extends StatelessWidget {
           top: Radius.circular(radiusExtraLarge),
         ),
       ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: .antiAliasWithSaveLayer,
       this,
     );
   }
@@ -123,18 +120,12 @@ abstract class BaseDialog extends StatelessWidget {
     final bodyWidgets = body(context);
     final bottomWidget = bottom(context);
 
-    Widget dialogContent =
-        [
-              if (CommonUtil.isNotNull(headWidget)) headWidget!,
-              bodyWidgets
-                  .toColumn()
-                  .scrollable(padding: pagePadding)
-                  .flexible(),
-              if (CommonUtil.isNotNull(bottomWidget))
-                bottomWidget!.pad(bottom: bottomPadding),
-            ]
-            .toColumn(mainAxisSize: MainAxisSize.min)
-            .constrained(maxHeight: maxHeight);
+    Widget dialogContent = [
+      if (CommonUtil.isNotNull(headWidget)) headWidget!,
+      bodyWidgets.toColumn().scrollable(padding: pagePadding).flexible(),
+      if (CommonUtil.isNotNull(bottomWidget))
+        bottomWidget!.pad(bottom: bottomPadding),
+    ].toColumn(mainAxisSize: .min).constrained(maxHeight: maxHeight);
 
     // 使用PopScope包装对话框内容，控制物理返回键行为
     return PopScope(canPop: enablePhysicalBack, child: dialogContent);

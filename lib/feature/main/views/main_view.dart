@@ -6,6 +6,7 @@ import 'package:flutter_kit/core/service/demo_counter_service.dart';
 import 'package:flutter_kit/core/service/user_service.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/design_system/theme/size.dart';
 import '../logics/about_demo_logic.dart';
 import '../logics/core_demo_logic.dart';

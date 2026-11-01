@@ -15,19 +15,19 @@ class NavigationDemoState {
     DemoItem(
       title: MainKeys.demoNavigationWithArgs,
       description: MainKeys.demoNavigationWithArgsDesc,
-      icon: TDIcons.share,
+      icon: TIcons.share,
       action: DemoAction.navigationWithParams,
     ),
     DemoItem(
       title: MainKeys.demoNavigationResult,
       description: MainKeys.demoNavigationResultDesc,
-      icon: TDIcons.swap,
+      icon: TIcons.swap,
       action: DemoAction.navigationResult,
     ),
     DemoItem(
       title: MainKeys.demoRouteInterceptor,
       description: MainKeys.demoRouteInterceptorDesc,
-      icon: TDIcons.lock_on,
+      icon: TIcons.lock_on,
       action: DemoAction.routeInterceptor,
     ),
   ];

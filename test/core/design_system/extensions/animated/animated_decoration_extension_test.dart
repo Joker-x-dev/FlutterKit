@@ -64,7 +64,7 @@ void main() {
 
     testWidgets('圆形完整装饰支持 shape 分支', (tester) async {
       final Widget child = const SizedBox()
-          .animatedDecoration(color: Colors.red, shape: BoxShape.circle)
+          .animatedDecoration(color: Colors.red, shape: .circle)
           .animate();
 
       await pumpExtensionTestApp(tester, child);
@@ -83,16 +83,16 @@ void main() {
       final Widget child = const SizedBox(key: ValueKey<String>('裁剪内容'))
           .animatedClipRRect(
             borderRadius: BorderRadius.circular(12),
-            clipBehavior: Clip.hardEdge,
+            clipBehavior: .hardEdge,
           )
           .animatedClipRect(
             clipper: rectClipper,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
+            clipBehavior: .antiAliasWithSaveLayer,
           )
-          .animatedClipOval(clipper: rectClipper, clipBehavior: Clip.hardEdge)
+          .animatedClipOval(clipper: rectClipper, clipBehavior: .hardEdge)
           .animatedClipPath(
             clipper: pathClipper,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
+            clipBehavior: .antiAliasWithSaveLayer,
           )
           .animate(duration: const Duration(milliseconds: 100));
 

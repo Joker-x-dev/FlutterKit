@@ -41,7 +41,7 @@
 - `keepAlive`: 是否保持页面状态（默认 true）
 
 状态组件：
-- `loadWidget`: 加载状态组件（使用 TDLoading）
+- `loadWidget`: 加载状态组件（使用 TLoading）
 - `emptyWidget`: 空数据状态组件
 - `failWidget`: 错误状态组件
 
@@ -84,13 +84,13 @@ class MyNetworkView extends BaseCommonView<MyNetworkController> {
   @override
   Widget emptyWidget() {
     // 自定义空数据展示
-    return TDEmpty(...);
+    return TEmpty(...);
   }
 
   @override
   Widget failWidget(MyNetworkController controller) {
     // 自定义错误状态展示
-    return TDEmpty(...);
+    return TEmpty(...);
   }
 }
 ```

@@ -23,7 +23,7 @@ class ${PAGE_NAME}View extends BaseView<${PAGE_NAME}Logic> {
   /// 构建页面主体，只订阅真正会变化的 State 字段。
   @override
   Widget body() {
-    return Obx(() => Center(child: TDText(logic.state.title.value)));
+    return Obx(() => Center(child: TText(logic.state.title.value)));
   }
 }
 

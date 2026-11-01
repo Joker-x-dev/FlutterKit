@@ -42,6 +42,11 @@ abstract final class DemoNavigator {
     return toPage<T>(DemoRoutes.screenAdaptDemo);
   }
 
+  /// 跳转到嵌套滚动示例页面
+  static Future<T?>? toNestedScrollDemo<T>() {
+    return toPage<T>(DemoRoutes.nestedScrollDemo);
+  }
+
   /// 跳转到带参导航示例页面
   static Future<T?>? toNavigationWithArgs<T>(int goodsId) {
     return toPage<T>(

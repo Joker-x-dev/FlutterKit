@@ -17,7 +17,7 @@ BaseNetworkView.commonView()
   → loading / error / emptyData / dataSuccess
 ```
 
-失败页与空页由 `TDEmpty` 统一提供重新加载操作；默认有 `FadeThroughTransition` 状态切换动画。
+失败页与空页由 `TEmpty` 统一提供重新加载操作；默认有 `FadeThroughTransition` 状态切换动画。
 
 ## BaseNetworkState API
 
@@ -27,7 +27,7 @@ BaseNetworkView.commonView()
 | `requestErrorToast` | `true` | `RequestHelper` 失败时是否显示 Toast，业务 State 可重写 |
 | `firstLoad` | `true` | 初次 `initData()` 是否自动执行请求，业务 State 可重写 |
 | `requestSetStatus` | `true` | 每次请求前是否先置为 loading，列表/刷新 State 已重写为 `false` |
-| `NetState.loading` | — | 展示 `TDLoading` |
+| `NetState.loading` | — | 展示 `TLoading` |
 | `NetState.error` | — | 展示错误缺省页与重试按钮 |
 | `NetState.emptyData` | — | 展示空数据缺省页 |
 | `NetState.dataSuccess` | — | 调用 `bodyContent()` |
@@ -49,9 +49,9 @@ BaseNetworkView.commonView()
 | 重写点 | 默认行为 | 用途 |
 | --- | --- | --- |
 | `bodyContent(T logic)` | 必须实现 | `dataSuccess` 时的内容 |
-| `loadWidget()` | 大号 `TDLoading` | 自定义加载页 |
-| `emptyWidget()` | 默认空数据 `TDEmpty` | 自定义空数据页 |
-| `failWidget(T logic)` | 默认错误 `TDEmpty` | 自定义错误页 |
+| `loadWidget()` | 大号 `TLoading` | 自定义加载页 |
+| `emptyWidget()` | 默认空数据 `TEmpty` | 自定义空数据页 |
+| `failWidget(T logic)` | 默认错误 `TEmpty` | 自定义错误页 |
 | `showAnimation` | `true` | 关闭状态切换动画 |
 
 ## 基于 NetworkDemo 的完整示例

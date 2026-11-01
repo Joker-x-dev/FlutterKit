@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart' hide ErrorFormatter;
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -222,12 +221,12 @@ void main() {
 
       await tester.pump();
       await tester.pump();
-      expect(find.byType(TDLoading), findsOneWidget);
+      expect(find.byType(TLoading), findsOneWidget);
 
       completer.complete(BaseResponse<int>(data: 9));
       expect(await future, 9);
       await tester.pumpAndSettle();
-      expect(find.byType(TDLoading), findsNothing);
+      expect(find.byType(TLoading), findsNothing);
     });
 
     testWidgets('loading 在类型错误后仍关闭并执行 finally 清理', (WidgetTester tester) async {
@@ -246,13 +245,13 @@ void main() {
 
       await tester.pump();
       await tester.pump();
-      expect(find.byType(TDLoading), findsOneWidget);
+      expect(find.byType(TLoading), findsOneWidget);
 
       completer.completeError(source, StackTrace.current);
       await expectLater(future, throwsA(isA<Exception>()));
       await tester.pumpAndSettle();
       expect(capturedError, same(source));
-      expect(find.byType(TDLoading), findsNothing);
+      expect(find.byType(TLoading), findsNothing);
     });
 
     testWidgets('业务失败按配置展示 Toast 和 Dialog', (WidgetTester tester) async {
@@ -266,8 +265,8 @@ void main() {
       await expectLater(future, throwsA(isA<Error>()));
       await tester.pumpAndSettle();
       expect(find.text('提交失败'), findsWidgets);
-      expect(find.byType(TDNoticeBar), findsOneWidget);
-      expect(find.byType(TDConfirmDialog), findsOneWidget);
+      expect(find.byType(TNoticeBar), findsOneWidget);
+      expect(find.byType(TConfirmDialog), findsOneWidget);
     });
   });
 }

@@ -28,7 +28,7 @@ void main() {
         itemExtent: 30,
         scrollCacheExtent: const ScrollCacheExtent.pixels(120),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        clipBehavior: Clip.antiAlias,
+        clipBehavior: .antiAlias,
       ),
     );
     expect(find.text('0:甲'), findsOneWidget);
@@ -37,7 +37,10 @@ void main() {
     expect(list.controller, same(controller));
     expect(list.physics, isA<ClampingScrollPhysics>());
     expect(list.scrollCacheExtent, const ScrollCacheExtent.pixels(120));
-    expect(list.keyboardDismissBehavior, ScrollViewKeyboardDismissBehavior.onDrag);
+    expect(
+      list.keyboardDismissBehavior,
+      ScrollViewKeyboardDismissBehavior.onDrag,
+    );
     expect(list.clipBehavior, Clip.antiAlias);
     final legacyCache = data.toListView(
       itemBuilder: (_, index, item) => Text('$index$item'),
@@ -80,7 +83,10 @@ void main() {
     expect(find.text('索引0'), findsOneWidget);
     expect(find.text('索引1'), findsOneWidget);
     expect(find.text('索引2'), findsNothing);
-    expect(tester.widget<ListView>(find.byType(ListView)).semanticChildCount, 2);
+    expect(
+      tester.widget<ListView>(find.byType(ListView)).semanticChildCount,
+      2,
+    );
 
     await tester.pumpWidget(
       Directionality(
@@ -155,7 +161,8 @@ void main() {
     expect(find.text('0A'), findsOneWidget);
     expect(find.text('2C'), findsOneWidget);
     final grid = tester.widget<GridView>(find.byType(GridView));
-    final delegate = grid.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
+    final delegate =
+        grid.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
     expect(delegate.crossAxisCount, 2);
     expect(delegate.mainAxisSpacing, 6);
     expect(delegate.crossAxisSpacing, 8);
@@ -168,23 +175,120 @@ void main() {
     const Widget child = SizedBox();
     final controller = ScrollController();
     addTearDown(controller.dispose);
-    expect((child.scrollable(scrollDirection: Axis.horizontal, reverse: true) as SingleChildScrollView).scrollDirection, Axis.horizontal);
-    expect((child.verticalScroll() as SingleChildScrollView).scrollDirection, Axis.vertical);
-    expect((child.horizontalScroll() as SingleChildScrollView).scrollDirection, Axis.horizontal);
-    expect((child.scrollPhysics(const ClampingScrollPhysics()) as SingleChildScrollView).physics, isA<ClampingScrollPhysics>());
-    expect((child.scrollController(controller) as SingleChildScrollView).controller, same(controller));
-    expect((child.bouncingScroll() as SingleChildScrollView).physics, isA<BouncingScrollPhysics>());
-    expect((child.clampingScroll() as SingleChildScrollView).physics, isA<ClampingScrollPhysics>());
-    expect((child.neverScroll() as SingleChildScrollView).physics, isA<NeverScrollableScrollPhysics>());
-    final custom = child.customScroll(
-      scrollDirection: Axis.horizontal,
+    expect(
+      (child.scrollable(
+        scrollDirection: .horizontal,
+        reverse: true,
+      ) as SingleChildScrollView).scrollDirection,
+      Axis.horizontal,
+    );
+    expect(
+      (child.verticalScroll() as SingleChildScrollView).scrollDirection,
+      Axis.vertical,
+    );
+    expect(
+      (child.horizontalScroll() as SingleChildScrollView).scrollDirection,
+      Axis.horizontal,
+    );
+    expect(
+      (child.scrollPhysics(
+        const ClampingScrollPhysics(),
+      ) as SingleChildScrollView).physics,
+      isA<ClampingScrollPhysics>(),
+    );
+    expect(
+      (child.scrollController(controller) as SingleChildScrollView).controller,
+      same(controller),
+    );
+    expect(
+      (child.bouncingScroll() as SingleChildScrollView).physics,
+      isA<BouncingScrollPhysics>(),
+    );
+    expect(
+      (child.clampingScroll() as SingleChildScrollView).physics,
+      isA<ClampingScrollPhysics>(),
+    );
+    expect(
+      (child.neverScroll() as SingleChildScrollView).physics,
+      isA<NeverScrollableScrollPhysics>(),
+    );
+    final single = child.singleScroll(
+      scrollDirection: .horizontal,
       dragStartBehavior: DragStartBehavior.down,
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: .antiAlias,
       restorationId: 'scroll',
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
     ) as SingleChildScrollView;
+    expect(single.dragStartBehavior, DragStartBehavior.down);
+    expect(single.clipBehavior, Clip.antiAlias);
+    expect(single.restorationId, 'scroll');
+
+    const Key centerKey = ValueKey<String>('center');
+    const ScrollCacheExtent scrollCacheExtent = ScrollCacheExtent.pixels(48);
+    final List<Widget> slivers = <Widget>[
+      const SliverToBoxAdapter(key: centerKey, child: SizedBox()),
+    ];
+    final custom = slivers.customScroll(
+      key: const ValueKey<String>('custom-scroll'),
+      scrollDirection: .horizontal,
+      reverse: true,
+      controller: controller,
+      primary: false,
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: false,
+      center: centerKey,
+      anchor: 0.25,
+      scrollCacheExtent: scrollCacheExtent,
+      paintOrder: SliverPaintOrder.lastIsTop,
+      semanticChildCount: 1,
+      dragStartBehavior: DragStartBehavior.down,
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      restorationId: 'custom-scroll',
+      clipBehavior: .antiAlias,
+      hitTestBehavior: .translucent,
+    ) as CustomScrollView;
+    expect(custom.slivers, same(slivers));
+    expect(custom.scrollDirection, Axis.horizontal);
+    expect(custom.reverse, isTrue);
+    expect(custom.controller, same(controller));
+    expect(custom.physics, isA<BouncingScrollPhysics>());
+    expect(custom.center, centerKey);
+    expect(custom.anchor, 0.25);
+    expect(custom.scrollCacheExtent, scrollCacheExtent);
+    expect(custom.paintOrder, SliverPaintOrder.lastIsTop);
+    expect(custom.semanticChildCount, 1);
     expect(custom.dragStartBehavior, DragStartBehavior.down);
+    expect(
+      custom.keyboardDismissBehavior,
+      ScrollViewKeyboardDismissBehavior.onDrag,
+    );
+    expect(custom.restorationId, 'custom-scroll');
     expect(custom.clipBehavior, Clip.antiAlias);
-    expect(custom.restorationId, 'scroll');
+    expect(custom.hitTestBehavior, HitTestBehavior.translucent);
+
+    const Widget nestedBody = SizedBox(key: ValueKey<String>('nested-body'));
+    final NestedScrollView nested = nestedBody.nestedScroll(
+      key: const ValueKey<String>('nested-scroll'),
+      controller: controller,
+      scrollDirection: .horizontal,
+      reverse: true,
+      physics: const ClampingScrollPhysics(),
+      headerSliverBuilder: (_, _) => const <Widget>[],
+      dragStartBehavior: DragStartBehavior.down,
+      floatHeaderSlivers: true,
+      clipBehavior: .antiAlias,
+      hitTestBehavior: .translucent,
+      restorationId: 'nested-scroll',
+    ) as NestedScrollView;
+    expect(nested.body, same(nestedBody));
+    expect(nested.controller, same(controller));
+    expect(nested.scrollDirection, Axis.horizontal);
+    expect(nested.reverse, isTrue);
+    expect(nested.physics, isA<ClampingScrollPhysics>());
+    expect(nested.dragStartBehavior, DragStartBehavior.down);
+    expect(nested.floatHeaderSlivers, isTrue);
+    expect(nested.clipBehavior, Clip.antiAlias);
+    expect(nested.hitTestBehavior, HitTestBehavior.translucent);
+    expect(nested.restorationId, 'nested-scroll');
   });
 }

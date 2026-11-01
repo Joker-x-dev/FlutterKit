@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/application.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/service/demo_counter_service.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../../../core/design_system/theme/size.dart';
 import '../../../core/ui/preview/app_preview_annotations.dart';
 import '../localization/main_keys.dart';
@@ -44,15 +44,16 @@ class CoreDemoView extends BaseView<CoreDemoLogic> {
       final int count = logic.count.value;
       return DemoListGroup(
         items: logic.coreDemoState.demoItems,
-        leadingCells: <TDCell>[
+        leadingCells: <TCell>[
           if (count > 1)
-            TDCell(
+            TCell(
               key: ValueKey<String>('global-counter-$localeTag-$count'),
-              bordered: true,
-              leftIcon: TDIcons.dashboard,
-              title: MainKeys.globalCounter.trParams(<String, String>{
-                'count': '$count',
-              }),
+              prefix: const Icon(TIcons.dashboard),
+              title: Text(
+                MainKeys.globalCounter.trParams(<String, String>{
+                  'count': '$count',
+                }),
+              ),
             ),
         ],
         onItemTap: logic.onItemTap,

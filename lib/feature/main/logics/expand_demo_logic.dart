@@ -20,6 +20,9 @@ class ExpandDemoLogic extends BaseLogic {
       case DemoAction.screenAdapt:
         _onScreenAdaptTap();
         return;
+      case DemoAction.nestedScrollDemo:
+        _onNestedScrollDemoTap();
+        return;
       case DemoAction.theme:
         _onThemeTap();
         return;
@@ -31,6 +34,11 @@ class ExpandDemoLogic extends BaseLogic {
   /// 屏幕适配示例点击
   void _onScreenAdaptTap() {
     DemoNavigator.toScreenAdaptDemo<void>();
+  }
+
+  /// 嵌套滚动示例点击
+  void _onNestedScrollDemoTap() {
+    DemoNavigator.toNestedScrollDemo<void>();
   }
 
   /// 语言与主题示例点击

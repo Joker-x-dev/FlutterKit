@@ -2,8 +2,8 @@
 
 > 用于实时展示计时数值。
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/time-counter)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[TimeCounter 计时器](https://tdesign.tencent.com/flutter/components/time-counter)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -26,16 +26,16 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 时分秒
 
 ```
-TDTimeCounter _buildSimple(BuildContext context) {
-  return const TDTimeCounter(time: 60 * 60 * 1000);
+TTimeCounter _buildSimple(BuildContext context) {
+  return const TTimeCounter(time: 60 * 60 * 1000);
 }
 ```
 
 带毫秒
 
 ```
-TDTimeCounter _buildMillisecondSimple(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildMillisecondSimple(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
     millisecond: true,
   );
@@ -45,11 +45,11 @@ TDTimeCounter _buildMillisecondSimple(BuildContext context) {
 正向计时
 
 ```
-TDTimeCounter _buildUpSimple(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUpSimple(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
     millisecond: true,
-    direction: TDTimeCounterDirection.up,
+    direction: TTimeCounterDirection.up,
   );
 }
 ```
@@ -57,10 +57,10 @@ TDTimeCounter _buildUpSimple(BuildContext context) {
 带方形底
 
 ```
-TDTimeCounter _buildSquareSimple(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareSimple(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    theme: TDTimeCounterTheme.square,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
@@ -68,10 +68,10 @@ TDTimeCounter _buildSquareSimple(BuildContext context) {
 带圆形底
 
 ```
-TDTimeCounter _buildRoundSimple(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundSimple(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    theme: TDTimeCounterTheme.round,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
@@ -79,10 +79,10 @@ TDTimeCounter _buildRoundSimple(BuildContext context) {
 带单位
 
 ```
-TDTimeCounter _buildUnitSimple(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitSimple(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    theme: TDTimeCounterTheme.square,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -91,10 +91,10 @@ TDTimeCounter _buildUnitSimple(BuildContext context) {
 无底色带单位
 
 ```
-TDTimeCounter _buildCustomUnitSimple(BuildContext context) {
-  var style = TDTimeCounterStyle.generateStyle(context);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+TTimeCounter _buildCustomUnitSimple(BuildContext context) {
+  var style = TTimeCounterStyle.generateStyle(context);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -107,60 +107,60 @@ TDTimeCounter _buildCustomUnitSimple(BuildContext context) {
 纯数字
 
 ```
-TDTimeCounter _buildSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
+    size: TTimeCounterSize.small,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
+    size: TTimeCounterSize.medium,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
+    size: TTimeCounterSize.large,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
+    size: TTimeCounterSize.small,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
+    size: TTimeCounterSize.medium,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
+    size: TTimeCounterSize.large,
   );
 }
 ```
@@ -168,66 +168,66 @@ TDTimeCounter _buildLargeSize(BuildContext context) {
 带方形底
 
 ```
-TDTimeCounter _buildSquareSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.small,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildSquareMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.medium,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildSquareLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.large,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildSquareSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.small,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildSquareMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.medium,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildSquareLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildSquareLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.large,
+    theme: TTimeCounterTheme.square,
   );
 }
 ```
@@ -235,66 +235,66 @@ TDTimeCounter _buildSquareLargeSize(BuildContext context) {
 带圆形底
 
 ```
-TDTimeCounter _buildRoundSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
-    theme: TDTimeCounterTheme.round,
+    size: TTimeCounterSize.small,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildRoundMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
-    theme: TDTimeCounterTheme.round,
+    size: TTimeCounterSize.medium,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildRoundLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
-    theme: TDTimeCounterTheme.round,
+    size: TTimeCounterSize.large,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildRoundSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
-    theme: TDTimeCounterTheme.round,
+    size: TTimeCounterSize.small,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildRoundMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
-    theme: TDTimeCounterTheme.round,
+    size: TTimeCounterSize.medium,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
 
 
 ```
-TDTimeCounter _buildRoundLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildRoundLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
-    theme: TDTimeCounterTheme.round,
+    size: TTimeCounterSize.large,
+    theme: TTimeCounterTheme.round,
   );
 }
 ```
@@ -302,11 +302,11 @@ TDTimeCounter _buildRoundLargeSize(BuildContext context) {
 带单位
 
 ```
-TDTimeCounter _buildUnitSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.small,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -314,11 +314,11 @@ TDTimeCounter _buildUnitSmallSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildUnitMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.medium,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -326,11 +326,11 @@ TDTimeCounter _buildUnitMediumSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildUnitLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.large,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -338,11 +338,11 @@ TDTimeCounter _buildUnitLargeSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildUnitSmallSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitSmallSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.small,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.small,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -350,11 +350,11 @@ TDTimeCounter _buildUnitSmallSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildUnitMediumSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitMediumSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.medium,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.medium,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -362,11 +362,11 @@ TDTimeCounter _buildUnitMediumSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildUnitLargeSize(BuildContext context) {
-  return const TDTimeCounter(
+TTimeCounter _buildUnitLargeSize(BuildContext context) {
+  return const TTimeCounter(
     time: 60 * 60 * 1000,
-    size: TDTimeCounterSize.large,
-    theme: TDTimeCounterTheme.square,
+    size: TTimeCounterSize.large,
+    theme: TTimeCounterTheme.square,
     splitWithUnit: true,
   );
 }
@@ -375,11 +375,11 @@ TDTimeCounter _buildUnitLargeSize(BuildContext context) {
 无底色带单位
 
 ```
-TDTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
+TTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
   var style =
-      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.small);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+      TTimeCounterStyle.generateStyle(context, size: TTimeCounterSize.small);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -389,11 +389,11 @@ TDTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
+TTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
   var style =
-      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.medium);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+      TTimeCounterStyle.generateStyle(context, size: TTimeCounterSize.medium);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -403,11 +403,11 @@ TDTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
+TTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
   var style =
-      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.large);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+      TTimeCounterStyle.generateStyle(context, size: TTimeCounterSize.large);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -417,11 +417,11 @@ TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
+TTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
   var style =
-      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.small);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+      TTimeCounterStyle.generateStyle(context, size: TTimeCounterSize.small);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -431,11 +431,11 @@ TDTimeCounter _buildCustomUnitSmallSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
+TTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
   var style =
-      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.medium);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+      TTimeCounterStyle.generateStyle(context, size: TTimeCounterSize.medium);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -445,11 +445,11 @@ TDTimeCounter _buildCustomUnitMediumSize(BuildContext context) {
 
 
 ```
-TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
+TTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
   var style =
-      TDTimeCounterStyle.generateStyle(context, size: TDTimeCounterSize.large);
-  style.timeColor = TDTheme.of(context).errorNormalColor;
-  return TDTimeCounter(
+      TTimeCounterStyle.generateStyle(context, size: TTimeCounterSize.large);
+  style.timeColor = TTheme.of(context).errorNormalColor;
+  return TTimeCounter(
     time: 60 * 60 * 1000,
     splitWithUnit: true,
     style: style,
@@ -459,11 +459,15 @@ TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
 
 ## API
 
-1. [TDTimeCounter](#tdtimecounter)
-2. [TDTimeCounterController](#tdtimecountercontroller)
-3. [TDTimeCounterStyle](#tdtimecounterstyle)
+1. [TTimeCounter](#ttimecounter)
+2. [TTimeCounterController](#ttimecountercontroller)
+3. [TTimeCounterStyle](#ttimecounterstyle)
+4. [TTimeCounterDirection](#ttimecounterdirection)
+5. [TTimeCounterSize](#ttimecountersize)
+6. [TTimeCounterTheme](#ttimecountertheme)
+7. [TTimeCounterStatus](#ttimecounterstatus)
 
-#### TDTimeCounter
+#### TTimeCounter
 
 ##### 简介
 
@@ -475,30 +479,43 @@ TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
 | --- | --- | --- | --- |
 | autoStart | bool | true | 是否自动开始倒计时 |
 | content | dynamic | 'default' | 'default' / Widget Function(int time) / Widget |
-| controller | TDTimeCounterController? | - | 控制器，可控制开始/暂停/继续/重置 |
-| direction | TDTimeCounterDirection | TDTimeCounterDirection.down | 计时方向，默认倒计时 |
+| controller | TTimeCounterController? | - | 控制器，可控制开始/暂停/继续/重置 |
+| direction | TTimeCounterDirection | TTimeCounterDirection.down | 计时方向，默认倒计时 |
 | format | String | 'HH:mm:ss' | 时间格式，DD-日，HH-时，mm-分，ss-秒，SSS-毫秒（分隔符必须为长度为1的非空格的字符） |
-| key |  | - |  |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
 | millisecond | bool | false | 是否开启毫秒级渲染 |
 | onChange | Function(int time)? | - | 时间变化时触发回调 |
 | onFinish | VoidCallback? | - | 计时结束时触发回调 |
-| size | TDTimeCounterSize | TDTimeCounterSize.medium | 尺寸 |
+| size | TTimeCounterSize | TTimeCounterSize.medium | 尺寸 |
 | splitWithUnit | bool | false | 使用时间单位分割 |
-| style | TDTimeCounterStyle? | - | 自定义样式，有则优先用它，没有则根据size和theme选取 |
-| theme | TDTimeCounterTheme | TDTimeCounterTheme.defaultTheme | 风格 |
+| style | TTimeCounterStyle? | - | 自定义样式，有则优先用它，没有则根据size和theme选取 |
+| theme | TTimeCounterTheme | TTimeCounterTheme.defaultTheme | 风格 |
 | time | int | - | 必需；计时时长，单位毫秒 |
 
-#### TDTimeCounterController
+#### TTimeCounterController
 
 ##### 简介
 
 倒计时组件控制器，可控制开始(`start()`)/暂停(`pause()`)/继续(`resume()`)/重置(`reset([int? time])`)
 
-#### TDTimeCounterStyle
+#### TTimeCounterStyle
 
 ##### 简介
 
 计时组件样式
+
+##### 工厂构造方法
+
+###### TTimeCounterStyle.generateStyle
+
+生成默认样式
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| context | BuildContext | - | - |
+| size | TTimeCounterSize? | - | - |
+| theme | TTimeCounterTheme? | - | - |
+| splitWithUnit | bool? | - | - |
 
 ##### 默认构造方法
 
@@ -520,8 +537,59 @@ TDTimeCounter _buildCustomUnitLargeSize(BuildContext context) {
 | timePadding | EdgeInsets? | - | 时间容器内边距 |
 | timeWidth | double? | - | 时间容器宽度 |
 
-##### 工厂构造方法
+#### TTimeCounterDirection
+
+##### 简介
+
+计时组件计时方向
+
+##### 枚举值
 
 | 名称 | 说明 |
 | --- | --- |
-| TDTimeCounterStyle.generateStyle | 生成默认样式 |
+| down | 倒计时 |
+| up | 正向计时 |
+
+#### TTimeCounterSize
+
+##### 简介
+
+计时组件尺寸
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| small | 小 |
+| medium | 中等 |
+| large | 大 |
+
+#### TTimeCounterTheme
+
+##### 简介
+
+计时组件风格
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| defaultTheme | 默认 |
+| round | 圆形 |
+| square | 方形 |
+
+#### TTimeCounterStatus
+
+##### 简介
+
+计时组件控制器转态
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| start | 开始 |
+| pause | 暂停 |
+| resume | 继续 |
+| reset | 重置 |
+| idle | 空，默认值 |

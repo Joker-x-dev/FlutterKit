@@ -41,8 +41,8 @@ extension StackExtension on List<Widget> {
   ///   Icon(Icons.star, size: 100, color: Colors.yellow),
   ///   Icon(Icons.favorite, size: 50, color: Colors.red),
   /// ].toStack(
-  ///   alignment: Alignment.center,
-  ///   fit: StackFit.expand,
+  ///   alignment: .center,
+  ///   fit: .expand,
   /// )
   /// ```
   Widget toStack({
@@ -101,7 +101,7 @@ extension StackExtension on List<Widget> {
   }) {
     return Stack(
       key: key,
-      alignment: Alignment.center,
+      alignment: .center,
       fit: fit,
       clipBehavior: clipBehavior,
       children: this,
@@ -123,7 +123,7 @@ extension StackExtension on List<Widget> {
   /// ```dart
   /// // 创建全屏背景和内容
   /// [
-  ///   Image.asset('assets/background.jpg', fit: BoxFit.cover),
+  ///   Image.asset('assets/background.jpg', fit: .cover),
   ///   Container(
   ///     color: Colors.black26,
   ///     child: Center(child: Text('内容')),
@@ -137,7 +137,7 @@ extension StackExtension on List<Widget> {
   ///     padding: EdgeInsets.all(16),
   ///     child: Column(children: [/* 内容 */]),
   ///   ),
-  /// ].toExpandedStack(alignment: Alignment.topLeft)
+  /// ].toExpandedStack(alignment: .topLeft)
   /// ```
   Widget toExpandedStack({
     Key? key,
@@ -147,7 +147,7 @@ extension StackExtension on List<Widget> {
     return Stack(
       key: key,
       alignment: alignment,
-      fit: StackFit.expand,
+      fit: .expand,
       clipBehavior: clipBehavior,
       children: this,
     );
@@ -177,7 +177,7 @@ extension StackExtension on List<Widget> {
   ///     height: 20,
   ///     decoration: BoxDecoration(
   ///       color: Colors.green,
-  ///       shape: BoxShape.circle,
+  ///       shape: .circle,
   ///     ),
   ///   ).positioned(
   ///     bottom: 0,

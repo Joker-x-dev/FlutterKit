@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/data/preview/goods_preview_data.dart';
@@ -6,8 +5,10 @@ import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:flutter_kit/core/design_system/theme/size.dart';
 import 'package:flutter_kit/core/design_system/widgets/space.dart';
 import 'package:flutter_kit/core/ui/preview/app_preview_annotations.dart';
+import 'package:flutter_kit/core/ui/widgets/rounded_cell_group.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import '../../../core/design_system/theme/app_theme.dart';
 import '../localization/demo_keys.dart';
 import '../logics/network_request_demo_logic.dart';
 
@@ -34,18 +35,18 @@ class NetworkRequestDemoView extends BaseView<NetworkRequestDemoLogic> {
     return Obx(
       () =>
           [
-                TDButton(
-                  text: logic.isLoading.value
-                      ? '${DemoKeys.requestStart.tr}...'
-                      : DemoKeys.requestStart.tr,
-                  theme: TDButtonTheme.primary,
-                  disabled: logic.isLoading.value,
-                  onTap: logic.request,
+                TButton(
+                  colorPreset: TButtonColorPreset.primary,
+                  onPressed: logic.isLoading.value ? null : logic.request,
+                  child: Text(
+                    logic.isLoading.value
+                        ? '${DemoKeys.requestStart.tr}...'
+                        : DemoKeys.requestStart.tr,
+                  ),
                 ),
                 const SpaceVerticalLarge(),
                 if (logic.goods.value != null)
-                  TDCellGroup(
-                    theme: TDCellGroupTheme.cardTheme,
+                  RoundedCellGroup(
                     cells: [
                       _infoCell(
                         DemoKeys.goodsTitle.tr,
@@ -66,13 +67,13 @@ class NetworkRequestDemoView extends BaseView<NetworkRequestDemoLogic> {
                     ],
                   )
                 else
-                  TDEmpty(
+                  TEmpty(
                     emptyText:
                         logic.errorMessage.value ?? DemoKeys.requestResult.tr,
                   ),
               ]
               .toColumnCenter(spacing: spaceVerticalLarge)
-              .scrollable(padding: pageVerticalPadding),
+              .scrollable(padding: pageVerticalPaddingWithInset),
     );
   }
 
@@ -82,8 +83,8 @@ class NetworkRequestDemoView extends BaseView<NetworkRequestDemoLogic> {
   /// [value] 字段值。
   ///
   /// 返回 TDesign 单元格。
-  TDCell _infoCell(String label, String value) {
-    return TDCell(title: label, note: value);
+  TCell _infoCell(String label, String value) {
+    return TCell(title: Text(label), note: Text(value));
   }
 }
 

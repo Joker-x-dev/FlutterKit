@@ -4,29 +4,40 @@ import 'package:flutter/services.dart';
 /// Widget 工具类扩展
 /// 提供各种实用的 Widget 包装和功能
 extension UtilityExtension on Widget {
+  /// 隔离当前子树的重绘。
+  ///
+  /// [key] 重绘边界标识。
+  Widget repaintBoundary({Key? key}) {
+    return RepaintBoundary(key: key, child: this);
+  }
+
+  /// 为当前子树附加稳定标识。
+  ///
+  /// [key] 子树标识。
+  Widget keyed(Key key) {
+    return KeyedSubtree(key: key, child: this);
+  }
+
   /// 离屏渲染控制
-  /// 
+  ///
   /// [offstage] 是否离屏（true 时不显示但占用布局空间）
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().offstage(true) // 隐藏但保留布局空间
   /// ```
   Widget offstage(bool offstage) {
-    return Offstage(
-      offstage: offstage,
-      child: this,
-    );
+    return Offstage(offstage: offstage, child: this);
   }
 
   /// 可见性控制
-  /// 
+  ///
   /// [visible] 是否可见
   /// [maintainSize] 隐藏时是否保持尺寸
   /// [maintainAnimation] 隐藏时是否保持动画
   /// [maintainState] 隐藏时是否保持状态
   /// [maintainInteractivity] 隐藏时是否保持交互性
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().visibility(
@@ -52,7 +63,7 @@ extension UtilityExtension on Widget {
   }
 
   /// 卡片包装
-  /// 
+  ///
   /// [color] 卡片颜色
   /// [shadowColor] 阴影颜色
   /// [surfaceTintColor] 表面着色
@@ -62,7 +73,7 @@ extension UtilityExtension on Widget {
   /// [margin] 外边距
   /// [clipBehavior] 裁剪行为
   /// [semanticContainer] 是否为语义容器
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().card(
@@ -96,16 +107,16 @@ extension UtilityExtension on Widget {
   }
 
   /// 适配盒子
-  /// 
+  ///
   /// [fit] 适配方式
   /// [alignment] 对齐方式
   /// [clipBehavior] 裁剪行为
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Image.asset('image.png').fittedBox(
-  ///   fit: BoxFit.cover,
-  ///   alignment: Alignment.center,
+  ///   fit: .cover,
+  ///   alignment: .center,
   /// )
   /// ```
   Widget fittedBox({
@@ -122,11 +133,11 @@ extension UtilityExtension on Widget {
   }
 
   /// 按比例占用空间
-  /// 
+  ///
   /// [widthFactor] 宽度因子
   /// [heightFactor] 高度因子
   /// [alignment] 对齐方式
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().fractionallySizedBox(
@@ -148,10 +159,10 @@ extension UtilityExtension on Widget {
   }
 
   /// 限制盒子
-  /// 
+  ///
   /// [maxWidth] 最大宽度
   /// [maxHeight] 最大高度
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().limitedBox(
@@ -163,21 +174,17 @@ extension UtilityExtension on Widget {
     double maxWidth = double.infinity,
     double maxHeight = double.infinity,
   }) {
-    return LimitedBox(
-      maxWidth: maxWidth,
-      maxHeight: maxHeight,
-      child: this,
-    );
+    return LimitedBox(maxWidth: maxWidth, maxHeight: maxHeight, child: this);
   }
 
   /// 溢出盒子
-  /// 
+  ///
   /// [alignment] 对齐方式
   /// [minWidth] 最小宽度
   /// [maxWidth] 最大宽度
   /// [minHeight] 最小高度
   /// [maxHeight] 最大高度
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().overflowBox(
@@ -202,10 +209,8 @@ extension UtilityExtension on Widget {
     );
   }
 
-
-
   /// 语义标签
-  /// 
+  ///
   /// [label] 语义标签文本
   /// [hint] 语义提示文本
   /// [value] 语义值
@@ -252,7 +257,7 @@ extension UtilityExtension on Widget {
   /// [maxValueLength] 最大值长度
   /// [currentValueLength] 当前值长度
   /// [textDirection] 文本方向
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().semantics(
@@ -308,7 +313,6 @@ extension UtilityExtension on Widget {
     int? maxValueLength,
     int? currentValueLength,
     TextDirection? textDirection,
-
   }) {
     return Semantics(
       label: label,
@@ -363,95 +367,77 @@ extension UtilityExtension on Widget {
   }
 
   /// 排除语义
-  /// 
+  ///
   /// [excluding] 是否排除
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().excludeSemantics(true)
   /// ```
   Widget excludeSemantics({bool excluding = true}) {
-    return ExcludeSemantics(
-      excluding: excluding,
-      child: this,
-    );
+    return ExcludeSemantics(excluding: excluding, child: this);
   }
 
   /// 合并语义
-  /// 
+  ///
   /// [merging] 是否合并
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Row(children: [...]).mergeSemantics(true)
   /// ```
   Widget mergeSemantics() {
-    return MergeSemantics(
-      child: this,
-    );
+    return MergeSemantics(child: this);
   }
 
   /// 阻塞语义
-  /// 
+  ///
   /// [blocking] 是否阻塞
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().blockSemantics(true)
   /// ```
   Widget blockSemantics({bool blocking = true}) {
-    return BlockSemantics(
-      blocking: blocking,
-      child: this,
-    );
+    return BlockSemantics(blocking: blocking, child: this);
   }
 
   /// 忽略指针事件
-  /// 
+  ///
   /// [ignoring] 是否忽略指针事件
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().ignorePointer(
   ///   ignoring: true,
   /// )
   /// ```
-  Widget ignorePointer({
-    bool ignoring = true,
-  }) {
-    return IgnorePointer(
-      ignoring: ignoring,
-      child: this,
-    );
+  Widget ignorePointer({bool ignoring = true}) {
+    return IgnorePointer(ignoring: ignoring, child: this);
   }
 
   /// 吸收指针事件
-  /// 
+  ///
   /// [absorbing] 是否吸收指针事件
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().absorbPointer(
   ///   absorbing: true,
   /// )
   /// ```
-  Widget absorbPointer({
-    bool absorbing = true,
-  }) {
-    return AbsorbPointer(
-      absorbing: absorbing,
-      child: this,
-    );
+  Widget absorbPointer({bool absorbing = true}) {
+    return AbsorbPointer(absorbing: absorbing, child: this);
   }
 
   /// 监听器
-  /// 
+  ///
   /// [onPointerDown] 指针按下回调
   /// [onPointerMove] 指针移动回调
   /// [onPointerUp] 指针抬起回调
   /// [onPointerCancel] 指针取消回调
   /// [behavior] 命中测试行为
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().listener(
@@ -478,14 +464,14 @@ extension UtilityExtension on Widget {
   }
 
   /// 鼠标区域
-  /// 
+  ///
   /// [onEnter] 鼠标进入回调
   /// [onExit] 鼠标退出回调
   /// [onHover] 鼠标悬停回调
   /// [cursor] 鼠标光标
   /// [opaque] 是否不透明
   /// [hitTestBehavior] 命中测试行为
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Container().mouseRegion(
@@ -514,18 +500,16 @@ extension UtilityExtension on Widget {
   }
 
   /// 重新排序
-  /// 
+  ///
   /// [textDirection] 文本方向
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Row(children: [...]).reorderableDelayedDragStartListener(
   ///   textDirection: TextDirection.ltr,
   /// )
   /// ```
-  Widget reorderableDelayedDragStartListener({
-    TextDirection? textDirection,
-  }) {
+  Widget reorderableDelayedDragStartListener({TextDirection? textDirection}) {
     return Directionality(
       textDirection: textDirection ?? TextDirection.ltr,
       child: this,
@@ -533,7 +517,7 @@ extension UtilityExtension on Widget {
   }
 
   /// 工具提示
-  /// 
+  ///
   /// [message] 提示消息
   /// [height] 高度
   /// [padding] 内边距
@@ -548,7 +532,7 @@ extension UtilityExtension on Widget {
   /// [showDuration] 显示时长
   /// [triggerMode] 触发模式
   /// [enableFeedback] 是否启用反馈
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// IconButton(
@@ -593,13 +577,13 @@ extension UtilityExtension on Widget {
   }
 
   /// 英雄动画
-  /// 
+  ///
   /// [tag] 英雄标签
   /// [createRectTween] 创建矩形补间
   /// [flightShuttleBuilder] 飞行穿梭构建器
   /// [placeholderBuilder] 占位符构建器
   /// [transitionOnUserGestures] 用户手势时是否过渡
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// Image.asset('image.png').hero(
@@ -625,25 +609,21 @@ extension UtilityExtension on Widget {
   }
 
   /// 自动完成
-  /// 
+  ///
   /// [autofillHints] 自动填充提示
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// TextField().autofill(
   ///   autofillHints: [AutofillHints.email],
   /// )
   /// ```
-  Widget autofill({
-    Iterable<String>? autofillHints,
-  }) {
-    return AutofillGroup(
-      child: this,
-    );
+  Widget autofill({Iterable<String>? autofillHints}) {
+    return AutofillGroup(child: this);
   }
 
   /// 焦点
-  /// 
+  ///
   /// [focusNode] 焦点节点
   /// [autofocus] 是否自动聚焦
   /// [onFocusChange] 焦点变化回调
@@ -653,7 +633,7 @@ extension UtilityExtension on Widget {
   /// [skipTraversal] 是否跳过遍历
   /// [includeSemantics] 是否包含语义
   /// [debugLabel] 调试标签
-  /// 
+  ///
   /// 示例:
   /// ```dart
   /// TextField().focus(

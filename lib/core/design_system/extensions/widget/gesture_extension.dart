@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Widget 手势扩展
 /// 提供各种手势事件的扩展方法，支持链式调用
 ///
-/// 
+///
 extension GestureExtension on Widget {
   /// 简单点击事件
   ///
@@ -14,13 +14,10 @@ extension GestureExtension on Widget {
   /// ```dart
   /// Container().onTap(() => print('点击了'));
   /// ```
-  Widget onTap(
-    VoidCallback? onTap, {
-    HitTestBehavior? behavior,
-  }) {
+  Widget onTap(VoidCallback? onTap, {HitTestBehavior? behavior}) {
     return GestureDetector(
       onTap: onTap,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -34,13 +31,10 @@ extension GestureExtension on Widget {
   /// ```dart
   /// Container().onDoubleTap(() => print('双击了'));
   /// ```
-  Widget onDoubleTap(
-    VoidCallback? onDoubleTap, {
-    HitTestBehavior? behavior,
-  }) {
+  Widget onDoubleTap(VoidCallback? onDoubleTap, {HitTestBehavior? behavior}) {
     return GestureDetector(
       onDoubleTap: onDoubleTap,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -54,13 +48,10 @@ extension GestureExtension on Widget {
   /// ```dart
   /// Container().onLongPress(() => print('长按了'));
   /// ```
-  Widget onLongPress(
-    VoidCallback? onLongPress, {
-    HitTestBehavior? behavior,
-  }) {
+  Widget onLongPress(VoidCallback? onLongPress, {HitTestBehavior? behavior}) {
     return GestureDetector(
       onLongPress: onLongPress,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -80,7 +71,7 @@ extension GestureExtension on Widget {
   }) {
     return GestureDetector(
       onTapDown: onTapDown,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -94,13 +85,10 @@ extension GestureExtension on Widget {
   /// ```dart
   /// Container().onTapUp((details) => print('抬起了: ${details.localPosition}'));
   /// ```
-  Widget onTapUp(
-    GestureTapUpCallback? onTapUp, {
-    HitTestBehavior? behavior,
-  }) {
+  Widget onTapUp(GestureTapUpCallback? onTapUp, {HitTestBehavior? behavior}) {
     return GestureDetector(
       onTapUp: onTapUp,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -114,13 +102,10 @@ extension GestureExtension on Widget {
   /// ```dart
   /// Container().onTapCancel(() => print('取消了'));
   /// ```
-  Widget onTapCancel(
-    VoidCallback? onTapCancel, {
-    HitTestBehavior? behavior,
-  }) {
+  Widget onTapCancel(VoidCallback? onTapCancel, {HitTestBehavior? behavior}) {
     return GestureDetector(
       onTapCancel: onTapCancel,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -170,7 +155,7 @@ extension GestureExtension on Widget {
       onPanStart: onPanStart,
       onPanUpdate: onPanUpdate,
       onPanEnd: onPanEnd,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -198,7 +183,7 @@ extension GestureExtension on Widget {
       onVerticalDragStart: onVerticalDragStart,
       onVerticalDragUpdate: onVerticalDragUpdate,
       onVerticalDragEnd: onVerticalDragEnd,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -226,7 +211,7 @@ extension GestureExtension on Widget {
       onHorizontalDragStart: onHorizontalDragStart,
       onHorizontalDragUpdate: onHorizontalDragUpdate,
       onHorizontalDragEnd: onHorizontalDragEnd,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }
@@ -254,7 +239,7 @@ extension GestureExtension on Widget {
       onScaleStart: onScaleStart,
       onScaleUpdate: onScaleUpdate,
       onScaleEnd: onScaleEnd,
-      behavior: behavior ?? HitTestBehavior.opaque,
+      behavior: behavior ?? .opaque,
       child: this,
     );
   }

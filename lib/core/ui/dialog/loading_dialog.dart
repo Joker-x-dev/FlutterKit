@@ -1,5 +1,4 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
@@ -14,10 +13,9 @@ class LoadingDialog {
       toastBuilder: (_) {
         return Builder(
           builder: (BuildContext context) {
-            final AppTheme appTheme = AppTheme.of(context);
-            return const TDLoading(
-                  size: TDLoadingSize.large,
-                  icon: TDLoadingIcon.circle,
+            return const TLoading(
+                  size: 48.0,
+                  icon: TLoadingIcon.circle,
                 )
                 .center()
                 .backgroundColor(appTheme.textPrimary.withValues(alpha: 0.3))

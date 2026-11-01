@@ -56,7 +56,7 @@ class MeView extends BaseView<MeLogic> {
   String? get navTitle => '我的';
 
   @override
-  Widget body() => TDText('我的页面', font: fontBodyExtraLarge).center();
+  Widget body() => TText('我的页面', font: fontBodyExtraLarge).center();
 }
 
 // logic 示例

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_kit/core/base/base/base_view.dart';
 import 'package:flutter_kit/core/design_system/extensions/extensions.dart';
@@ -20,10 +19,10 @@ class LoginView extends BaseView<LoginLogic> {
 
   /// 构建登录页面内容
   @override
-  Widget body() => TDButton(
-    text: AuthKeys.loginButton.tr,
-    theme: TDButtonTheme.primary,
-    onTap: logic.login,
+  Widget body() => TButton(
+    colorPreset: TButtonColorPreset.primary,
+    onPressed: logic.login,
+    child: Text(AuthKeys.loginButton.tr),
   ).center();
 }
 

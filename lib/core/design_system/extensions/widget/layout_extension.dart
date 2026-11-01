@@ -11,7 +11,7 @@ extension LayoutExtension on Widget {
   ///
   /// 示例:
   /// ```dart
-  /// Container().alignment(Alignment.center)
+  /// Container().alignment(.center)
   /// ```
   Widget alignment(
     AlignmentGeometry alignment, {
@@ -237,7 +237,7 @@ extension LayoutExtension on Widget {
   ///
   /// 示例:
   /// ```dart
-  /// Container().fittedBox(fit: BoxFit.contain)
+  /// Container().fittedBox(fit: .contain)
   /// ```
   Widget fittedBox({
     BoxFit fit = BoxFit.contain,

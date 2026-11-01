@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_kit/generated/assets.gen.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -83,8 +82,8 @@ class ThemeColorPreset {
   /// 从资源文件加载明暗主题配置
   ///
   /// 返回解析后的 TDesign 主题数据；资源内容无效时返回 `null`。
-  Future<TDThemeData?> loadThemeData() async {
+  Future<TThemeData?> loadThemeData() async {
     final jsonString = await rootBundle.loadString(assetPath);
-    return TDThemeData.fromJson(name, jsonString, darkName: darkName);
+    return TThemeData.fromJson(name, jsonString, darkName: darkName);
   }
 }

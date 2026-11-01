@@ -97,7 +97,7 @@ Service 也是按需目录，不能因为使用 GetX 就为每个模块创建 `s
 
 ## Loading 与骨架屏
 
-网络父类的初始状态默认显示 `TDLoading` 圆形加载动画；`BaseNetworkView.loadWidget()` 是唯一需要覆盖的入口。页面不需要骨架屏时不建立 `skeletons/`，直接复用该默认行为。
+网络父类的初始状态默认显示 `TLoading` 圆形加载动画；`BaseNetworkView.loadWidget()` 是唯一需要覆盖的入口。页面不需要骨架屏时不建立 `skeletons/`，直接复用该默认行为。
 
 当接口返回前的页面布局稳定、首屏等待明显且骨架可被同模块多个页面或多个状态复用时，再在 `feature/<module>/skeletons/` 定义骨架屏，并由对应 View 覆盖 `loadWidget()`：
 

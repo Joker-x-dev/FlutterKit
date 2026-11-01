@@ -21,6 +21,9 @@ abstract final class DemoRoutes {
   /// 屏幕适配示例页面
   static const String screenAdaptDemo = '/demo/screen-adapt';
 
+  /// 嵌套滚动示例页面
+  static const String nestedScrollDemo = '/demo/nested-scroll-demo';
+
   /// 带参数导航示例页面
   static const String navigationWithArgs = '/demo/navigation-with-args';
 

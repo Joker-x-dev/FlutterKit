@@ -20,7 +20,7 @@ Widget buildBottomAction(VoidCallback onSubmit) {
   return SafeArea(
     top: false,
     // 横向与内部间距由按钮区域自身的设计规范控制。
-    child: TDButton(text: '提交', onTap: onSubmit),
+    child: TButton(onPressed: onSubmit, child: const Text('提交')),
   );
 }
 ```

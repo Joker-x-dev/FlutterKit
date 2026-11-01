@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tdesign_flutter/tdesign_flutter.dart';
-
 import '../application.dart';
 import '../core/data/repository/theme_store_repository.dart';
 import '../core/design_system/theme/theme_color_preset.dart';
@@ -13,7 +11,6 @@ class ThemeInitializer implements AppInitializer {
   /// 初始化主题颜色与深浅模式
   @override
   Future<void> init() async {
-    TDTheme.needMultiTheme();
     final repository = ThemeStoreRepository();
     final savedColorName = await repository.getThemeColorName();
     final colorPreset = ThemeColorPreset.fromName(savedColorName);

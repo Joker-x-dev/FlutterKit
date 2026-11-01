@@ -2,8 +2,8 @@
 
 > 用于展示任务当前的进度
 
-> 来源：[TDesign Flutter 官方文档](https://tdesign.tencent.com/flutter/components/progress)
-> 归档时间：2026-07-16T07:37:59.655Z
+> 来源：[Progress 进度条](https://tdesign.tencent.com/flutter/components/progress)
+> 归档时间：2026-10-30T16:00:00+08:00
 
 ## 示例
 
@@ -27,11 +27,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildRightLabelLinear(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
+    return TProgress(
+      type: TProgressType.linear,
       value: value,
       strokeWidth: 6,
-      progressLabelPosition: TDProgressLabelPosition.right,
+      progressLabelPosition: TProgressLabelPosition.right,
     );
   }
 ```
@@ -40,7 +40,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildInsideLabelLinear(BuildContext context) {
-    return TDProgress(type: TDProgressType.linear, value: value);
+    return TProgress(type: TProgressType.linear, value: value);
   }
 ```
 
@@ -48,7 +48,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCircle(BuildContext context) {
-    return TDProgress(type: TDProgressType.circular, value: value);
+    return TProgress(type: TProgressType.circular, value: value);
   }
 ```
 
@@ -56,7 +56,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildMicro(BuildContext context) {
-    return TDProgress(type: TDProgressType.micro, value: value);
+    return TProgress(type: TProgressType.micro, value: value);
   }
 ```
 
@@ -64,8 +64,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildButton(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.button,
+    return TProgress(
+      type: TProgressType.button,
       onTap: _toggleProgress,
       onLongPress: _resetProgress,
       value: progressValue,
@@ -78,13 +78,13 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildMicroButton(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.micro,
+    return TProgress(
+      type: TProgressType.micro,
       value: microProgressValue,
       onTap: _toggleMicroProgress,
-      label: TDIconLabel(
+      label: TIconLabel(
         isPlaying ? Icons.pause : Icons.play_arrow,
-        color: TDTheme.of(context).brandNormalColor,
+        color: TTheme.of(context).brandNormalColor,
       ),
     );
   }
@@ -96,12 +96,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildPrimary(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.primary,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.primary,
       value: value,
       strokeWidth: 6,
-      progressLabelPosition: TDProgressLabelPosition.right,
+      progressLabelPosition: TProgressLabelPosition.right,
     );
   }
 ```
@@ -109,12 +109,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildWarning(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.warning,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.warning,
       value: value,
       strokeWidth: 6,
-      progressLabelPosition: TDProgressLabelPosition.right,
+      progressLabelPosition: TProgressLabelPosition.right,
     );
   }
 ```
@@ -122,12 +122,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDanger(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.danger,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.danger,
       value: value,
       strokeWidth: 6,
-      progressLabelPosition: TDProgressLabelPosition.right,
+      progressLabelPosition: TProgressLabelPosition.right,
     );
   }
 ```
@@ -135,12 +135,12 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSuccess(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.success,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.success,
       value: 1,
       strokeWidth: 6,
-      progressLabelPosition: TDProgressLabelPosition.right,
+      progressLabelPosition: TProgressLabelPosition.right,
     );
   }
 ```
@@ -148,11 +148,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildPrimaryInside(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.primary,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.primary,
       value: value,
-      progressLabelPosition: TDProgressLabelPosition.inside,
+      progressLabelPosition: TProgressLabelPosition.inside,
     );
   }
 ```
@@ -160,11 +160,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildWarningInside(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.warning,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.warning,
       value: value,
-      progressLabelPosition: TDProgressLabelPosition.inside,
+      progressLabelPosition: TProgressLabelPosition.inside,
     );
   }
 ```
@@ -172,11 +172,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildDangerInside(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.danger,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.danger,
       value: value,
-      progressLabelPosition: TDProgressLabelPosition.inside,
+      progressLabelPosition: TProgressLabelPosition.inside,
     );
   }
 ```
@@ -184,11 +184,11 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildSuccessInside(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.linear,
-      progressStatus: TDProgressStatus.success,
+    return TProgress(
+      type: TProgressType.linear,
+      progressStatus: TProgressStatus.success,
       value: 1,
-      progressLabelPosition: TDProgressLabelPosition.inside,
+      progressLabelPosition: TProgressLabelPosition.inside,
     );
   }
 ```
@@ -197,9 +197,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCirclePrimary(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.circular,
-      progressStatus: TDProgressStatus.primary,
+    return TProgress(
+      type: TProgressType.circular,
+      progressStatus: TProgressStatus.primary,
       value: value,
     );
   }
@@ -208,9 +208,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCircleWarning(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.circular,
-      progressStatus: TDProgressStatus.warning,
+    return TProgress(
+      type: TProgressType.circular,
+      progressStatus: TProgressStatus.warning,
       value: value,
     );
   }
@@ -219,9 +219,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCircleDanger(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.circular,
-      progressStatus: TDProgressStatus.danger,
+    return TProgress(
+      type: TProgressType.circular,
+      progressStatus: TProgressStatus.danger,
       value: value,
     );
   }
@@ -230,9 +230,9 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ```
   Widget _buildCircleSuccess(BuildContext context) {
-    return TDProgress(
-      type: TDProgressType.circular,
-      progressStatus: TDProgressStatus.success,
+    return TProgress(
+      type: TProgressType.circular,
+      progressStatus: TProgressStatus.success,
       value: 1,
     );
   }
@@ -240,32 +240,67 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 ## API
 
-1. [TDProgress](#tdprogress)
+1. [TProgress](#tprogress)
+2. [TProgressType](#tprogresstype)
+3. [TProgressLabelPosition](#tprogresslabelposition)
+4. [TProgressStatus](#tprogressstatus)
 
-#### TDProgress
+#### TProgress
 
 ##### 默认构造方法
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| animationDuration | int? | 300 | 动画持续时间（正整数，单位为毫秒） |
+| animationDuration | int | 300 | 动画持续时间（正整数，单位为毫秒） |
 | backgroundColor | Color? | - | 进度条背景颜色 |
 | circleRadius | double? | - | 环形进度条半径（正数） |
 | color | Color? | - | 进度条颜色 |
 | customProgressLabel | Widget? | - | 自定义标签 |
-| key |  | - |  |
-| label | TDLabelWidget? | - | 进度条标签 |
+| key | Key? | - | 组件标识，用于区分或保留组件状态。 |
+| label | TLabelWidget? | - | 进度条标签 |
 | labelWidgetAlignment | Alignment? | - | 自定义标签对齐方式 |
 | labelWidgetWidth | double? | - | 自定义标签宽度 |
 | linearBorderRadius | BorderRadiusGeometry? | - | 条形进度条末端形状 |
 | onLongPress | VoidCallback? | - | 长按事件 |
 | onTap | VoidCallback? | - | 点击事件 |
-| progressLabelPosition | TDProgressLabelPosition | TDProgressLabelPosition.inside | 标签显示位置 |
-| progressStatus | TDProgressStatus | TDProgressStatus.primary | 进度条状态 |
+| progressLabelPosition | TProgressLabelPosition | TProgressLabelPosition.inside | 标签显示位置 |
+| progressStatus | TProgressStatus | TProgressStatus.primary | 进度条状态 |
 | showLabel | bool | true | 是否显示标签 |
 | strokeWidth | double? | - | 进度条粗细（正数） |
-| type | TDProgressType | - | 进度条类型 |
+| type | TProgressType | - | 进度条类型 |
 | value | double? | - | 进度值（0.0 到 1.0 之间的正数） |
+
+#### TProgressType
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| linear | - |
+| circular | - |
+| micro | - |
+| button | - |
+
+#### TProgressLabelPosition
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| inside | - |
+| left | - |
+| right | - |
+
+#### TProgressStatus
+
+##### 枚举值
+
+| 名称 | 说明 |
+| --- | --- |
+| primary | - |
+| warning | - |
+| danger | - |
+| success | - |
 
 ## 设计指南
 
